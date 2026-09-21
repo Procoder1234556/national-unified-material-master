@@ -1,0 +1,63 @@
+{
+  "total_evaluated": 50,
+  "confusion_matrix": {
+    "true_positives": 25,
+    "false_positives": 0,
+    "true_negatives": 25,
+    "false_negatives": 0
+  },
+  "metrics": {
+    "accuracy": 1.0,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1_score": 1.0,
+    "specificity": 1.0,
+    "safety_critical_violations": 0,
+    "safety_compliance_rate": 1.0
+  },
+  "per_class": {
+    "BALL_VALVE": {
+      "tp": 6,
+      "fp": 0,
+      "tn": 6,
+      "fn": 0
+    },
+    "GATE_VALVE": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0
+    },
+    "GLOBE_VALVE": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 1,
+      "fn": 0
+    },
+    "CHECK_VALVE": {
+      "tp": 2,
+      "fp": 0,
+      "tn": 2,
+      "fn": 0
+    },
+    "WELD_NECK_FLANGE": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 5,
+      "fn": 0
+    },
+    "SPIRAL_WOUND_GASKET": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 4,
+      "fn": 0
+    },
+    "LINE_PIPE": {
+      "tp": 4,
+      "fp": 0,
+      "tn": 3,
+      "fn": 0
+    }
+  },
+  "failures": []
+}

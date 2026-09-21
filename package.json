@@ -1,0 +1,20 @@
+{
+  "name": "numm-framework",
+  "version": "2.2.0",
+  "description": "National Unified Material Master (NUMM) Framework - AI Standardization & Harmonization for CPSEs (SIH 26099)",
+  "private": true,
+  "scripts": {
+    "test": "python verify_poc_and_tests.py",
+    "eval": "python evals/evaluate_benchmark.py",
+    "lint:py": "ruff check .",
+    "format:py": "ruff format .",
+    "typecheck": "python -m py_compile verify_poc_and_tests.py evals/evaluate_benchmark.py",
+    "lint-staged": "lint-staged",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.2",
+    "prettier": "^3.9.8"
+  }
+}

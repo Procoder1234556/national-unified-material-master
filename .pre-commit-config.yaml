@@ -1,0 +1,31 @@
+# Pre-commit configuration for NUMM Framework
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+        args: [--fix]
+      - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: loop-engineering-tests
+        name: Loop Engineering Test Suite
+        entry: python verify_poc_and_tests.py
+        language: system
+        pass_filenames: false
+
+      - id: benchmark-eval
+        name: Benchmark Evaluation Verifier
+        entry: python evals/evaluate_benchmark.py
+        language: system
+        pass_filenames: false

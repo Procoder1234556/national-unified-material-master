@@ -1,0 +1,505 @@
+[
+  {
+    "id": "PAIR-01",
+    "item_class": "BALL_VALVE",
+    "item_a": "VALVE, BALL, 2\", CL150, FLG RF, ASTM A105, API 6D",
+    "org_a": "IOCL",
+    "item_b": "VLV BL FLGD 50MM NB 150# CS BODY A105 LEVER OP",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-02",
+    "item_class": "BALL_VALVE",
+    "item_a": "2IN 150LB BALL VALVE FLANGED WCB/A105 TRIM 316",
+    "org_a": "BPCL",
+    "item_b": "VALVE BALL FLG 2INCH 150# CS ASTM A-105",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-03",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VLV, 2 IN, ASME 150, FLANGED, CS BODY",
+    "org_a": "GAIL",
+    "item_b": "2\" NB BALL VALVE 150 CLASS FLANGED CS A105",
+    "org_b": "OIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-04",
+    "item_class": "GATE_VALVE",
+    "item_a": "VALVE, GATE, 4\", CL300, FLG RF, ASTM A216 WCB",
+    "org_a": "IOCL",
+    "item_b": "VLV GT FLGD 100MM NB 300# WCB OS&Y API 600",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-05",
+    "item_class": "GATE_VALVE",
+    "item_a": "4IN 300LB GATE VALVE FLANGED CAST CS A216",
+    "org_a": "BPCL",
+    "item_b": "GATE VLV 4 INCH 300# CS BODY ASTM A216 WCB",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-06",
+    "item_class": "GLOBE_VALVE",
+    "item_a": "VALVE, GLOBE, 3\", CL150, FLG RF, WCB, BS 1873",
+    "org_a": "IOCL",
+    "item_b": "3IN 150LB GLOBE VALVE FLANGED BODY A216-WCB",
+    "org_b": "BPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-07",
+    "item_class": "CHECK_VALVE",
+    "item_a": "VLV CHK FLGD 50MM 150# CS A105 DUAL PLATE",
+    "org_a": "ONGC",
+    "item_b": "NON RETURN VALVE 2 INCH 150# FLANGED CS BODY",
+    "org_b": "GAIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-08",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLG, WNRF, 6\", CL150, SCH 40, ASTM A105, ASME B16.5",
+    "org_a": "IOCL",
+    "item_b": "WELD NECK FLANGE 150MM NB 150# SCH40 CS A105",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-09",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "6IN 150LB WNRF FLANGE SCH 40 ASTM A-105",
+    "org_a": "BPCL",
+    "item_b": "FLANGE WN RF 6\" 150 CLASS SCH 40 CS BODY",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-10",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "GASKET, SPWD, 2\", CL150, SS316/GRAFOIL, ASME B16.20",
+    "org_a": "IOCL",
+    "item_b": "SPIRAL WOUND GASKET 50MM 150# 316SS WITH GRAPHITE",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-11",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "2IN 150# SPWD GASKET SS 316 / GRAPHITE FILLER",
+    "org_a": "BPCL",
+    "item_b": "GASKET SPIRAL WOUND 2 INCH CLASS 150 SS316",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-12",
+    "item_class": "LINE_PIPE",
+    "item_a": "PIPE, SMLS, 4\", SCH 40, ASTM A106 GR B, BE, API 5L",
+    "org_a": "IOCL",
+    "item_b": "4 INCH SCH 40 SEAMLESS LINE PIPE ASTM A106-B",
+    "org_b": "GAIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-13",
+    "item_class": "LINE_PIPE",
+    "item_a": "LINE PIPE SMLS 100MM NB SCH40 CS ASTM A106 GR B",
+    "org_a": "NRL",
+    "item_b": "4\" NB SMLS CS PIPE ASTM A106 GRADE B SCH 40",
+    "org_b": "OIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-14",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 1 INCH 150# CS A105 FLANGED",
+    "org_a": "IOCL",
+    "item_b": "VLV BL FLGD 25MM NB 150# CS A105",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-15",
+    "item_class": "BALL_VALVE",
+    "item_a": "3\" 300# BALL VALVE FLANGED ASTM A216 WCB",
+    "org_a": "BPCL",
+    "item_b": "VALVE BALL 80MM NB 300 LB WCB FLG RF",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-16",
+    "item_class": "GATE_VALVE",
+    "item_a": "GATE VALVE 2\" 150# FLG CS A105",
+    "org_a": "IOCL",
+    "item_b": "VLV GT 50MM 150 CLASS FLANGED CS BODY A-105",
+    "org_b": "GAIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-17",
+    "item_class": "GATE_VALVE",
+    "item_a": "6 INCH 150# GATE VALVE FLANGED WCB",
+    "org_a": "ONGC",
+    "item_b": "VLV GT FLGD 150MM NB 150# ASTM A216 WCB",
+    "org_b": "OIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-18",
+    "item_class": "CHECK_VALVE",
+    "item_a": "CHECK VALVE 3 INCH 150# FLANGED WCB",
+    "org_a": "BPCL",
+    "item_b": "NON RETURN VALVE 80MM 150# CS A216 WCB",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-19",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLANGE WNRF 2\" 300# SCH 80 ASTM A105",
+    "org_a": "IOCL",
+    "item_b": "WELD NECK FLG 50MM NB 300 CLASS SCH80 CS A105",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-20",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "4IN 150# WNRF FLANGE SCH 40 CS A105",
+    "org_a": "GAIL",
+    "item_b": "FLG WN RF 100MM NB 150 LB SCH40 ASTM A-105",
+    "org_b": "NRL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-21",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "GASKET SPWD 3\" 150# SS316 GRAPHITE",
+    "org_a": "IOCL",
+    "item_b": "SPIRAL WOUND GASKET 80MM NB 150# 316SS",
+    "org_b": "BPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-22",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "4IN 300# SPWD GASKET SS 316",
+    "org_a": "ONGC",
+    "item_b": "GASKET SPWD 100MM 300 LB SS316 GRAFOIL",
+    "org_b": "HPCL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-23",
+    "item_class": "LINE_PIPE",
+    "item_a": "PIPE SMLS 2\" SCH 40 ASTM A106 GR B",
+    "org_a": "IOCL",
+    "item_b": "2 INCH SCH 40 SEAMLESS PIPE A106-B",
+    "org_b": "GAIL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-24",
+    "item_class": "LINE_PIPE",
+    "item_a": "6\" SMLS LINE PIPE SCH 40 ASTM A106 GR B",
+    "org_a": "BPCL",
+    "item_b": "150MM NB SEAMLESS PIPE SCH 40 CS A106-B",
+    "org_b": "NRL",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+  {
+    "id": "PAIR-25",
+    "item_class": "BALL_VALVE",
+    "item_a": "4\" 150# BALL VALVE FLG CS A105",
+    "org_a": "OIL",
+    "item_b": "100MM NB 150 CLASS BALL VLV FLANGED A105",
+    "org_b": "ONGC",
+    "ground_truth": "MATCH",
+    "category": "EQUIVALENCE"
+  },
+
+  {
+    "id": "PAIR-26",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 2\" 150# A105 FLANGED",
+    "org_a": "IOCL",
+    "item_b": "BALL VALVE 2\" 300# A105 FLANGED",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-27",
+    "item_class": "GATE_VALVE",
+    "item_a": "GATE VALVE 4\" 150# WCB FLANGED",
+    "org_a": "BPCL",
+    "item_b": "GATE VALVE 4\" 300# WCB FLANGED",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-28",
+    "item_class": "GATE_VALVE",
+    "item_a": "VLV GT FLGD 100MM 300# WCB",
+    "org_a": "ONGC",
+    "item_b": "VLV GT FLGD 100MM 600# WCB",
+    "org_b": "GAIL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-29",
+    "item_class": "GLOBE_VALVE",
+    "item_a": "GLOBE VALVE 3\" 150# WCB",
+    "org_a": "IOCL",
+    "item_b": "GLOBE VALVE 3\" 300# WCB",
+    "org_b": "BPCL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-30",
+    "item_class": "CHECK_VALVE",
+    "item_a": "CHECK VALVE 2\" 150# CS A105",
+    "org_a": "ONGC",
+    "item_b": "CHECK VALVE 2\" 300# CS A105",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-31",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLG WNRF 6\" 150# SCH40 A105",
+    "org_a": "IOCL",
+    "item_b": "FLG WNRF 6\" 300# SCH40 A105",
+    "org_b": "BPCL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-32",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLANGE WNRF 2\" 150# CS A105",
+    "org_a": "GAIL",
+    "item_b": "FLANGE WNRF 2\" 600# CS A105",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-33",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "GASKET SPWD 2\" 150# SS316",
+    "org_a": "IOCL",
+    "item_b": "GASKET SPWD 2\" 300# SS316",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-34",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "SPWD GASKET 4\" 150# SS316",
+    "org_a": "BPCL",
+    "item_b": "SPWD GASKET 4\" 600# SS316",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+  {
+    "id": "PAIR-35",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 4\" 150# CS A105",
+    "org_a": "OIL",
+    "item_b": "BALL VALVE 4\" 600# CS A105",
+    "org_b": "NRL",
+    "ground_truth": "REJECT",
+    "category": "PRESSURE_CONFLICT"
+  },
+
+  {
+    "id": "PAIR-36",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 2\" 150# A105 FLANGED",
+    "org_a": "IOCL",
+    "item_b": "BALL VALVE 3\" 150# A105 FLANGED",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-37",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VLV 50MM NB 150# CS A105",
+    "org_a": "BPCL",
+    "item_b": "BALL VLV 80MM NB 150# CS A105",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-38",
+    "item_class": "GATE_VALVE",
+    "item_a": "GATE VALVE 4\" 300# WCB FLANGED",
+    "org_a": "IOCL",
+    "item_b": "GATE VALVE 6\" 300# WCB FLANGED",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-39",
+    "item_class": "CHECK_VALVE",
+    "item_a": "CHECK VALVE 2\" 150# CS A105",
+    "org_a": "GAIL",
+    "item_b": "CHECK VALVE 4\" 150# CS A105",
+    "org_b": "BPCL",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-40",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLG WNRF 4\" 150# SCH40 A105",
+    "org_a": "IOCL",
+    "item_b": "FLG WNRF 6\" 150# SCH40 A105",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-41",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "GASKET SPWD 2\" 150# SS316",
+    "org_a": "BPCL",
+    "item_b": "GASKET SPWD 3\" 150# SS316",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-42",
+    "item_class": "LINE_PIPE",
+    "item_a": "PIPE SMLS 4\" SCH40 A106-B",
+    "org_a": "IOCL",
+    "item_b": "PIPE SMLS 6\" SCH40 A106-B",
+    "org_b": "GAIL",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+  {
+    "id": "PAIR-43",
+    "item_class": "LINE_PIPE",
+    "item_a": "LINE PIPE 50MM NB SCH40 CS A106-B",
+    "org_a": "NRL",
+    "item_b": "LINE PIPE 100MM NB SCH40 CS A106-B",
+    "org_b": "OIL",
+    "ground_truth": "REJECT",
+    "category": "SIZE_CONFLICT"
+  },
+
+  {
+    "id": "PAIR-44",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 2\" 150# CS A105 FLANGED",
+    "org_a": "IOCL",
+    "item_b": "BALL VALVE 2\" 150# SS316 FLANGED",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "METALLURGY_CONFLICT"
+  },
+  {
+    "id": "PAIR-45",
+    "item_class": "BALL_VALVE",
+    "item_a": "BALL VALVE 2\" 150# A105 FLANGED",
+    "org_a": "IOCL",
+    "item_b": "GATE VALVE 2\" 150# A105 FLANGED",
+    "org_b": "BPCL",
+    "ground_truth": "REJECT",
+    "category": "CLASS_CONFLICT"
+  },
+  {
+    "id": "PAIR-46",
+    "item_class": "GATE_VALVE",
+    "item_a": "GATE VALVE 4\" 300# WCB FLANGED",
+    "org_a": "ONGC",
+    "item_b": "GLOBE VALVE 4\" 300# WCB FLANGED",
+    "org_b": "HPCL",
+    "ground_truth": "REJECT",
+    "category": "CLASS_CONFLICT"
+  },
+  {
+    "id": "PAIR-47",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLG WNRF 6\" 150# SCH40 A105",
+    "org_a": "IOCL",
+    "item_b": "FLG WNRF 6\" 150# SCH40 SS316",
+    "org_b": "GAIL",
+    "ground_truth": "REJECT",
+    "category": "METALLURGY_CONFLICT"
+  },
+  {
+    "id": "PAIR-48",
+    "item_class": "WELD_NECK_FLANGE",
+    "item_a": "FLANGE WNRF 2\" 150# CS A105",
+    "org_a": "BPCL",
+    "item_b": "BALL VALVE 2\" 150# CS A105",
+    "org_b": "ONGC",
+    "ground_truth": "REJECT",
+    "category": "CLASS_CONFLICT"
+  },
+  {
+    "id": "PAIR-49",
+    "item_class": "SPIRAL_WOUND_GASKET",
+    "item_a": "GASKET SPWD 2\" 150# SS316",
+    "org_a": "HPCL",
+    "item_b": "WELD NECK FLANGE 2\" 150# CS A105",
+    "org_b": "IOCL",
+    "ground_truth": "REJECT",
+    "category": "CLASS_CONFLICT"
+  },
+  {
+    "id": "PAIR-50",
+    "item_class": "LINE_PIPE",
+    "item_a": "PIPE SMLS 4\" SCH40 A106-B",
+    "org_a": "GAIL",
+    "item_b": "PIPE SMLS 4\" SCH40 SS316",
+    "org_b": "NRL",
+    "ground_truth": "REJECT",
+    "category": "METALLURGY_CONFLICT"
+  }
+]

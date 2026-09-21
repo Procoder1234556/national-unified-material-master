@@ -1,0 +1,7 @@
+{
+  "*.{js,ts,jsx,tsx,json,md,yml,yaml}": "prettier --ignore-unknown --write",
+  "*.py": [
+    "ruff check --fix",
+    "ruff format"
+  ]
+}
