@@ -1,0 +1,25 @@
+{
+  "framework": "National Unified Material Master (NUMM)",
+  "standard": "One Nation, One Material Code (ONMC)",
+  "version": "2.2.0",
+  "timestamp": "2026-09-21T17:35:49Z",
+  "generation_metrics": {
+    "total_items": 50000,
+    "distinct_index_buckets": 480,
+    "generation_time_seconds": 0.276,
+    "throughput_items_per_second": 181419.6,
+    "participating_orgs": 10
+  },
+  "benchmark_metrics": {
+    "queries_executed": 300,
+    "catalog_size": 50000,
+    "p50_latency_ms": 0.002,
+    "p90_latency_ms": 0.002,
+    "p95_latency_ms": 0.002,
+    "p99_latency_ms": 0.01,
+    "mean_latency_ms": 0.002,
+    "sub_50ms_verified": true,
+    "status": "PASS",
+    "qps": 503778.7
+  }
+}

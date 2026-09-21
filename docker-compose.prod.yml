@@ -1,0 +1,95 @@
+# Production Docker Compose specification for NUMM Enterprise Sovereign Deployment
+# Targeted for NIC MeghRaj Cloud & on-premise air-gapped PSU data centers
+
+services:
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: numm_postgres_prod
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-numm_master}
+      POSTGRES_USER: ${POSTGRES_USER:-numm_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-numm_secure_prod_pass_2026}
+    volumes:
+      - pgdata_prod:/var/lib/postgresql/data
+    networks:
+      - numm_internal_network
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-numm_admin} -d ${POSTGRES_DB:-numm_master}",
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: numm_redis_prod
+    restart: always
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD:-numm_redis_prod_pass}
+    volumes:
+      - redisdata_prod:/data
+    networks:
+      - numm_internal_network
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "redis-cli",
+          "-a",
+          "${REDIS_PASSWORD:-numm_redis_prod_pass}",
+          "ping",
+        ]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: numm_backend_prod
+    restart: always
+    environment:
+      ENVIRONMENT: production
+      USE_SQLITE: "false"
+      POSTGRES_SERVER: postgres
+      POSTGRES_PORT: 5432
+      POSTGRES_DB: ${POSTGRES_DB:-numm_master}
+      POSTGRES_USER: ${POSTGRES_USER:-numm_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-numm_secure_prod_pass_2026}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - numm_internal_network
+    expose:
+      - "8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: numm_frontend_prod
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - backend
+    networks:
+      - numm_internal_network
+
+networks:
+  numm_internal_network:
+    driver: bridge
+
+volumes:
+  pgdata_prod:
+  redisdata_prod:

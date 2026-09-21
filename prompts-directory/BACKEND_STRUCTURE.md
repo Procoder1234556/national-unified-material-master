@@ -216,6 +216,7 @@ from typing import Optional, List, Dict, Any
 from uuid import UUID
 from datetime import datetime
 
+
 class RawMaterialCreate(BaseModel):
     source_item_code: str = Field(..., max_length=64)
     plant_code: str = Field(..., max_length=32)
@@ -224,6 +225,7 @@ class RawMaterialCreate(BaseModel):
     unit_price: float = Field(default=0.0, ge=0.0)
     stock_quantity: int = Field(default=0, ge=0)
     uom: str = Field(default="EA", max_length=16)
+
 
 class ExtractedAttributesSchema(BaseModel):
     clean_text: str
@@ -235,6 +237,7 @@ class ExtractedAttributesSchema(BaseModel):
     end_connection: Optional[str] = None
     standards: List[str] = []
     parametric_attributes: Dict[str, Any] = {}
+
 
 class MatchEvaluationResponse(BaseModel):
     raw_material_id: UUID
@@ -249,11 +252,13 @@ class MatchEvaluationResponse(BaseModel):
     unspsc_code: Optional[str] = None
     mapping_status: str
 
+
 class StewardDecisionRequest(BaseModel):
     mapping_id: UUID
     decision: str = Field(..., pattern="^(APPROVE|REJECT|OVERRIDE)$")
     override_attributes: Optional[Dict[str, Any]] = None
     justification: str = Field(..., min_length=10)
+
 
 class NationalSearchRequest(BaseModel):
     query: str = Field(..., min_length=2)
@@ -261,6 +266,7 @@ class NationalSearchRequest(BaseModel):
     pressure_class: Optional[int] = None
     size_inch: Optional[float] = None
     max_results: int = Field(default=20, le=100)
+
 
 class NationalSearchItem(BaseModel):
     onmc_code: str

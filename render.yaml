@@ -1,0 +1,40 @@
+# Render Blueprint Specification for NUMM (National Unified Material Master)
+# SIH 26099 - Ministry of Petroleum & Natural Gas (MoPNG)
+
+services:
+  # 1. Backend FastAPI Core Engine (Normalization, Vector Matcher, CVC Audit)
+  - type: web
+    name: numm-backend
+    runtime: python
+    plan: free
+    buildCommand: pip install -r config/requirements.txt
+    startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.9
+      - key: ENVIRONMENT
+        value: production
+      - key: USE_SQLITE
+        value: "true"
+      - key: SQLITE_DB_PATH
+        value: ./numm_master.db
+    healthCheckPath: /api/v1/health
+    autoDeploy: true
+
+  # 2. Frontend React 19 / StyleX Sovereign UI
+  - type: web
+    name: numm-frontend
+    runtime: static
+    buildCommand: cd frontend && npm install -g pnpm && pnpm install && pnpm build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: VITE_API_BASE_URL
+        fromService:
+          type: web
+          name: numm-backend
+          property: host
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    autoDeploy: true

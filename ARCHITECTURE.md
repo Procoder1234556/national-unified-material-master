@@ -44,15 +44,17 @@ from abc import ABC, abstractmethod
 from typing import List, BinaryIO, Dict, Any
 from dataclasses import dataclass
 
+
 @dataclass(frozen=True)
 class RawMaterialLine:
-    source_org: str          # e.g., "IOCL", "ONGC"
-    source_item_code: str    # e.g., "10294819"
-    raw_description: str     # e.g., "VLV BL FLGD 50MM 150# CS A105"
-    plant_code: str          # e.g., "1100" (Mathura Refinery)
-    unit_price: float        # e.g., 28500.0
-    uom: str                 # e.g., "EA", "NO", "MTR"
-    metadata: Dict[str, Any] # Additional SAP fields (MARA/MARC)
+    source_org: str  # e.g., "IOCL", "ONGC"
+    source_item_code: str  # e.g., "10294819"
+    raw_description: str  # e.g., "VLV BL FLGD 50MM 150# CS A105"
+    plant_code: str  # e.g., "1100" (Mathura Refinery)
+    unit_price: float  # e.g., 28500.0
+    uom: str  # e.g., "EA", "NO", "MTR"
+    metadata: Dict[str, Any]  # Additional SAP fields (MARA/MARC)
+
 
 class IIngestionAdapter(ABC):
     """Deep module seam for file parsing and ERP data extraction."""
@@ -71,15 +73,16 @@ Encapsulates token cleaning, abbreviation expansion, and physical attribute extr
 @dataclass(frozen=True)
 class ExtractedAttributes:
     clean_text: str
-    item_class: str            # "BALL_VALVE", "WELD_NECK_FLANGE", etc.
-    size_inch: float | None    # 2.0
-    size_mm: int | None        # 50
-    pressure_class: int | None # 150
-    metallurgy: str | None     # "ASTM_A105"
-    end_connection: str | None # "FLANGED_RF"
-    standards: List[str]       # ["API_6D", "ASME_B16.5"]
+    item_class: str  # "BALL_VALVE", "WELD_NECK_FLANGE", etc.
+    size_inch: float | None  # 2.0
+    size_mm: int | None  # 50
+    pressure_class: int | None  # 150
+    metallurgy: str | None  # "ASTM_A105"
+    end_connection: str | None  # "FLANGED_RF"
+    standards: List[str]  # ["API_6D", "ASME_B16.5"]
     mesc_subgroup: str | None  # "74.16"
-    unspsc_code: str | None    # "40141607"
+    unspsc_code: str | None  # "40141607"
+
 
 class INormalizer(ABC):
     """Deep module: Small interface, deep parsing logic."""
@@ -101,6 +104,7 @@ class GateEvaluation:
     rejection_reasons: List[str]
     criticality: str  # "BLOCKER", "WARNING", "CLEAN"
 
+
 class ISafetyGate(ABC):
     """Deep safety seam: evaluates pressure, size, and metallurgy compatibility."""
 
@@ -117,13 +121,14 @@ High-leverage coordinator providing complete catalog resolution.
 ```python
 @dataclass(frozen=True)
 class MatchCandidate:
-    unified_code: str          # "ONMC-MECH-VLV-BAL-002-150-A105-9B2F"
-    confidence_score: float    # 0.945 (94.5%)
+    unified_code: str  # "ONMC-MECH-VLV-BAL-002-150-A105-9B2F"
+    confidence_score: float  # 0.945 (94.5%)
     lexical_similarity: float  # 0.920
-    semantic_similarity: float # 0.970
+    semantic_similarity: float  # 0.970
     gate_result: GateEvaluation
-    matched_mesc: str          # "74.16.01.015.1"
-    matched_unspsc: str        # "40141607"
+    matched_mesc: str  # "74.16.01.015.1"
+    matched_unspsc: str  # "40141607"
+
 
 class IHarmonizationEngine(ABC):
     """Primary high-leverage interface for catalog resolution."""
