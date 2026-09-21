@@ -7,7 +7,7 @@ services:
     name: numm-backend
     runtime: python
     plan: free
-    buildCommand: pip install -r config/requirements.txt
+    buildCommand: pip install -r requirements.txt
     startCommand: uvicorn backend.app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: PYTHON_VERSION
@@ -25,7 +25,7 @@ services:
   - type: web
     name: numm-frontend
     runtime: static
-    buildCommand: cd frontend && npm install -g pnpm && pnpm install && pnpm build
+    buildCommand: cd frontend && npx pnpm install && npx pnpm build
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_BASE_URL
