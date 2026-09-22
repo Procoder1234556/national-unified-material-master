@@ -116,12 +116,23 @@ interface MTIRFDoc {
 
 interface Props {
   onShowAuditMessage: (msg: string) => void;
+  defaultSubTab?: "surplus" | "demand";
+  onInspectONMC?: (code: string) => void;
 }
 
 export const SurplusAndDemandView: React.FC<Props> = ({
   onShowAuditMessage,
+  defaultSubTab = "surplus",
+  onInspectONMC,
 }) => {
-  const [subTab, setSubTab] = useState<"surplus" | "demand">("surplus");
+  const [subTab, setSubTab] = useState<"surplus" | "demand">(defaultSubTab);
+
+  useEffect(() => {
+    if (defaultSubTab) {
+      setSubTab(defaultSubTab);
+    }
+  }, [defaultSubTab]);
+
   const [plants, setPlants] = useState<PlantInfo[]>([]);
   const [selectedPlant, setSelectedPlant] = useState<string>("IOCL_MATHURA");
   const [maxRadius, setMaxRadius] = useState<number>(1500);

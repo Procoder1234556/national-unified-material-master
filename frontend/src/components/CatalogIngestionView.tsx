@@ -148,24 +148,33 @@ export const CatalogIngestionView: React.FC = () => {
   const pipelineStages = [
     {
       num: 1,
-      label: "Schema Parse",
-      desc: "Validating column headers & legacy ERP types",
+      label: "Schema & Header Parse",
+      desc: "Validating legacy ERP column types & encoding",
     },
     {
       num: 2,
       label: "Token Cleansing",
-      desc: "250+ Oil & Gas abbreviation expansion",
+      desc: "250+ Oil & Gas technical abbreviation expansion",
     },
     {
       num: 3,
-      label: "Parametric Extract",
-      desc: "ASME size, class & metallurgy regex parsing",
+      label: "Attribute Extraction",
+      desc: "Parametric ASME size, pressure & metallurgy parsing",
     },
-    { num: 4, label: "Dense Embeddings", desc: "1024-dim BGE dense vectors" },
+    {
+      num: 4,
+      label: "BGE Embeddings",
+      desc: "1024-dim BAAI/bge-large dense vector generation",
+    },
     {
       num: 5,
-      label: "ASME Safety Gate",
-      desc: "HNSW search & physical safety gating",
+      label: "HNSW Search + Safety Gate",
+      desc: "Cosine vector search & ASME B16.5 physical safety gate",
+    },
+    {
+      num: 6,
+      label: "ONMC Mapping",
+      desc: "Cluster merging & sovereign code attribution",
     },
   ];
 

@@ -44,10 +44,28 @@ export const rawTokens = {
   space8: "2.0rem", // 32px
 
   // Radii
-  radiusSm: "4px",
-  radiusMd: "8px",
-  radiusLg: "12px",
+  radiusSm: "6px",
+  radiusMd: "10px",
+  radiusLg: "14px",
+  radiusXl: "18px",
   radiusFull: "9999px",
+
+  // Shadows
+  shadowSubtle: "0 2px 6px rgba(15, 23, 42, 0.04)",
+  shadowCard: "0 4px 14px rgba(15, 23, 42, 0.05)",
+  shadowElevated: "0 10px 25px -3px rgba(15, 23, 42, 0.08)",
+  shadowGlowPeach: "0 0 35px -5px rgba(241, 204, 157, 0.45)",
+  shadowGlowMint: "0 0 30px -5px rgba(165, 215, 201, 0.4)",
+  shadowGlowWine: "0 0 30px -5px rgba(155, 18, 30, 0.25)",
+
+  // Humanto Ambient Gradients
+  glowAmbientHero:
+    "radial-gradient(ellipse 80% 60% at 50% -10%, rgba(241, 204, 157, 0.35) 0%, rgba(233, 67, 68, 0.06) 45%, transparent 80%)",
+  glowAmbientBottom:
+    "radial-gradient(ellipse 60% 50% at 50% 100%, rgba(241, 204, 157, 0.25) 0%, transparent 70%)",
+  darkVaultBg: "#171412",
+  darkVaultCard: "#221E1B",
+  darkVaultBorder: "#342C27",
 };
 
 export const tokens = rawTokens;
