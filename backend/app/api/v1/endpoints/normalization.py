@@ -18,6 +18,18 @@ router = APIRouter()
 
 
 @router.post(
+    "",
+    response_model=NormalizeTextResponse,
+    status_code=status.HTTP_200_OK,
+    include_in_schema=False,
+)
+@router.post(
+    "/",
+    response_model=NormalizeTextResponse,
+    status_code=status.HTTP_200_OK,
+    include_in_schema=False,
+)
+@router.post(
     "/text",
     response_model=NormalizeTextResponse,
     status_code=status.HTTP_200_OK,

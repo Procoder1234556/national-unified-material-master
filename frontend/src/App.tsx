@@ -17,6 +17,7 @@ import {
   ONMCDetailData,
 } from "./components/ONMCDetailDrawer";
 import { TransferModal } from "./components/TransferModal";
+import { LandingPage } from "./components/LandingPage";
 import {
   Terminal,
   ShieldCheck,
@@ -27,6 +28,7 @@ import {
 import { API_BASE } from "./api";
 
 export const App: React.FC = () => {
+  const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
   const [activeTab, setActiveTab] = useState<NavTabId>("overview");
   const [activeRole, setActiveRole] = useState<UserRole>("STEWARD");
   const [searchQuery, setSearchQuery] = useState<string>(
@@ -137,6 +139,19 @@ export const App: React.FC = () => {
     setIsTransferOpen(true);
   };
 
+  if (viewMode === "landing") {
+    return (
+      <LandingPage
+        onEnterDashboard={(targetTab, targetRole) => {
+          if (targetTab) setActiveTab(targetTab as NavTabId);
+          if (targetRole) setActiveRole(targetRole as UserRole);
+          setViewMode("dashboard");
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }}
+      />
+    );
+  }
+
   return (
     <AppShell
       activeTab={activeTab}
@@ -150,6 +165,7 @@ export const App: React.FC = () => {
       }}
       onOpenCommandPalette={() => setIsCommandOpen(true)}
       onOpenKeyboardHelp={() => setIsHelpOpen(true)}
+      onBackToLanding={() => setViewMode("landing")}
       stewardPendingCount={84}
     >
       {/* CVC Tamper-Evident Audit Record Notification Toast */}
@@ -478,16 +494,18 @@ export const App: React.FC = () => {
       />
 
       {/* Inter-CPSE Material Transfer Requisition Form (MTIRF) Modal */}
-      <TransferModal
-        isOpen={isTransferOpen}
-        initialData={transferData}
-        onClose={() => setIsTransferOpen(false)}
-        onComplete={(docNumber) => {
-          handleShowAudit(
-            `Dispatched MTIRF ${docNumber} via MeghRaj SSO e-Sign.`
-          );
-        }}
-      />
+      {isTransferOpen && (
+        <TransferModal
+          isOpen={isTransferOpen}
+          initialData={transferData}
+          onClose={() => setIsTransferOpen(false)}
+          onComplete={(docNumber) => {
+            handleShowAudit(
+              `Dispatched MTIRF ${docNumber} via MeghRaj SSO e-Sign.`
+            );
+          }}
+        />
+      )}
     </AppShell>
   );
 };

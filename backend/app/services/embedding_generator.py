@@ -32,6 +32,11 @@ class EmbeddingGenerator:
         try:
             import os
 
+            # On Render cloud or unless explicitly enabled, use instant deterministic semantic projection
+            if os.environ.get("RENDER") or os.environ.get("NUMM_DOWNLOAD_BGE", "").lower() not in ("1", "true"):
+                self._model = None
+                return
+
             from sentence_transformers import SentenceTransformer
 
             # 1. Attempt to load from local cache without triggering network download
@@ -41,11 +46,8 @@ class EmbeddingGenerator:
             except Exception:
                 pass
 
-            # 2. Only attempt online download if explicitly permitted via NUMM_DOWNLOAD_BGE=1
-            if os.environ.get("NUMM_DOWNLOAD_BGE", "").lower() in ("1", "true"):
-                self._model = SentenceTransformer(self.model_name)
-            else:
-                self._model = None
+            # 2. Online download if permitted
+            self._model = SentenceTransformer(self.model_name)
         except Exception as exc:
             warnings.warn(
                 f"Dense vector model '{self.model_name}' could not be loaded ({exc}). "

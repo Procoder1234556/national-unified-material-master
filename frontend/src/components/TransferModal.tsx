@@ -35,15 +35,16 @@ export const TransferModal: React.FC<TransferModalProps> = ({
   isOpen,
   onClose,
   onComplete,
-  initialData = {},
+  initialData,
 }) => {
-  const [sourceOrg, setSourceOrg] = useState(initialData.sourceOrg || "ONGC");
+  const data = initialData || {};
+  const [sourceOrg, setSourceOrg] = useState(data.sourceOrg || "ONGC");
   const [sourcePlant, setSourcePlant] = useState(
-    initialData.sourcePlant || "Hazira Gas Processing Plant"
+    data.sourcePlant || "Hazira Gas Processing Plant"
   );
-  const [destOrg, setDestOrg] = useState(initialData.destOrg || "IOCL");
+  const [destOrg, setDestOrg] = useState(data.destOrg || "IOCL");
   const [destPlant, setDestPlant] = useState(
-    initialData.destPlant || "Gujarat Refinery, Vadodara"
+    data.destPlant || "Gujarat Refinery, Vadodara"
   );
   const [transferQty, setTransferQty] = useState<number>(4);
   const [reason, setReason] = useState<string>(
@@ -55,13 +56,11 @@ export const TransferModal: React.FC<TransferModalProps> = ({
 
   if (!isOpen) return null;
 
-  const onmcCode =
-    initialData.onmcCode || "ONMC-MECH-VLV-BAL-002-150-A105-9B2F";
+  const onmcCode = data.onmcCode || "ONMC-MECH-VLV-BAL-002-150-A105-9B2F";
   const description =
-    initialData.description ||
-    "VALVE BALL FLGD 2 INCH 150# CS ASTM A105 API 6D";
-  const unitPrice = initialData.unitPrice || 28500;
-  const distanceKm = initialData.distanceKm || 78;
+    data.description || "VALVE BALL FLGD 2 INCH 150# CS ASTM A105 API 6D";
+  const unitPrice = data.unitPrice || 28500;
+  const distanceKm = data.distanceKm || 78;
   const totalValuation = transferQty * unitPrice;
 
   const handleDispatch = () => {

@@ -44,6 +44,7 @@ interface AppShellProps {
   onSelectRole: (role: UserRole) => void;
   onOpenCommandPalette: () => void;
   onOpenKeyboardHelp: () => void;
+  onBackToLanding?: () => void;
   children: React.ReactNode;
   stewardPendingCount?: number;
 }
@@ -55,6 +56,7 @@ export const AppShell: React.FC<AppShellProps> = ({
   onSelectRole,
   onOpenCommandPalette,
   onOpenKeyboardHelp,
+  onBackToLanding,
   children,
   stewardPendingCount = 84,
 }) => {
@@ -519,9 +521,31 @@ export const AppShell: React.FC<AppShellProps> = ({
               fontSize: "13px",
             }}
           >
-            <span style={{ color: rawTokens.textMuted, fontWeight: 500 }}>
-              NUMM
-            </span>
+            {onBackToLanding ? (
+              <button
+                onClick={onBackToLanding}
+                style={{
+                  background: "none",
+                  border: "none",
+                  color: rawTokens.colorAction,
+                  fontWeight: 700,
+                  fontSize: "12px",
+                  cursor: "pointer",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
+                  padding: "2px 6px",
+                  borderRadius: "4px",
+                  backgroundColor: "rgba(233, 67, 68, 0.08)",
+                }}
+              >
+                &larr; Public Portal
+              </button>
+            ) : (
+              <span style={{ color: rawTokens.textMuted, fontWeight: 500 }}>
+                NUMM
+              </span>
+            )}
             <span style={{ color: rawTokens.borderStrong }}>/</span>
             <span style={{ fontWeight: 700, color: rawTokens.textPrimary }}>
               {navItems.find((n) => n.id === activeTab)?.label}

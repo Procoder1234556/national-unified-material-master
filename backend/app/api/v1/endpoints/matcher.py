@@ -18,6 +18,9 @@ from backend.app.services.safety_gate import default_safety_gate
 router = APIRouter()
 
 
+@router.post("", response_model=MatchEvaluationResponse, include_in_schema=False)
+@router.post("/", response_model=MatchEvaluationResponse, include_in_schema=False)
+@router.post("/match", response_model=MatchEvaluationResponse, include_in_schema=False)
 @router.post("/evaluate", response_model=MatchEvaluationResponse, summary="Evaluate match between two material items")
 async def evaluate_match(req: MatchEvaluationRequest):
     """
