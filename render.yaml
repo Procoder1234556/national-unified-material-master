@@ -28,6 +28,8 @@ services:
     buildCommand: cd frontend && npx pnpm install && npx pnpm build
     staticPublishPath: frontend/dist
     envVars:
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
       - key: VITE_API_BASE_URL
         value: https://numm-backend.onrender.com
     routes:
