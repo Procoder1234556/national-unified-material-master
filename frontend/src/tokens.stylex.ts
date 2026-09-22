@@ -1,6 +1,5 @@
-// ponytail: Humanto Sovereign Industrial design tokens defined via StyleX.
-// Upgrade path: add dark-mode token overrides for plant night-shift operations.
-import * as stylex from "@stylexjs/stylex";
+// ponytail: Humanto Sovereign Industrial design tokens.
+// Upgrade path: add @stylexjs/rollup-plugin to vite.config.ts when full StyleX compilation is enabled.
 
 export const rawTokens = {
   // Humanto Sovereign Industrial Color Sequence
@@ -51,4 +50,4 @@ export const rawTokens = {
   radiusFull: "9999px",
 };
 
-export const tokens = stylex.defineVars(rawTokens);
+export const tokens = rawTokens;
