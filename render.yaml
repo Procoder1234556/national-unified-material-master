@@ -29,10 +29,7 @@ services:
     staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_BASE_URL
-        fromService:
-          type: web
-          name: numm-backend
-          property: host
+        value: https://numm-backend.onrender.com
     routes:
       - type: rewrite
         source: /*

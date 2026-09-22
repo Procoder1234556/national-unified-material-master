@@ -25,6 +25,8 @@ app.add_middleware(
 )
 
 
+@app.get("/", tags=["system"])
+@app.head("/", tags=["system"])
 @app.get("/health", tags=["system"])
 async def root_health():
     return {
