@@ -183,13 +183,14 @@ export const AppShell: React.FC<AppShellProps> = ({
                   <div>
                     <div
                       style={{
-                        fontSize: "14px",
-                        fontWeight: 800,
+                        fontSize: "16px",
+                        fontWeight: 700,
+                        fontFamily: rawTokens.fontCalligraphy,
                         color: rawTokens.textPrimary,
-                        letterSpacing: "-0.02em",
+                        letterSpacing: "0em",
                       }}
                     >
-                      NUMM MASTER
+                      NUMM Master
                     </div>
                     <div
                       style={{

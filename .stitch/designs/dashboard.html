@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>NUMM Engine Core — Industrial Editorial Review Cockpit</title>
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#4edea3",
+            "secondary-fixed-dim": "#ffb2b8",
+            "on-secondary-fixed-variant": "#91002d",
+            "on-tertiary": "#ffffff",
+            "error-container": "#ffdad6",
+            "on-secondary-fixed": "#40000f",
+            "surface-container-high": "#dce9ff",
+            "on-tertiary-fixed": "#002113",
+            "on-error": "#ffffff",
+            "on-primary": "#ffffff",
+            "on-secondary-container": "#fffbff",
+            "on-primary-fixed-variant": "#3f465c",
+            "secondary-container": "#da3054",
+            "primary": "#000000",
+            "secondary": "#b60e3d",
+            "on-surface": "#0b1c30",
+            "primary-container": "#131b2e",
+            "on-secondary": "#ffffff",
+            "on-tertiary-container": "#009668",
+            "surface-tint": "#565e74",
+            "primary-fixed": "#dae2fd",
+            "outline-variant": "#c6c6cd",
+            "inverse-primary": "#bec6e0",
+            "surface": "#f8f9ff",
+            "background": "#f8f9ff",
+            "tertiary-fixed": "#6ffbbe",
+            "surface-dim": "#cbdbf5",
+            "surface-variant": "#d3e4fe",
+            "tertiary": "#000000",
+            "primary-fixed-dim": "#bec6e0",
+            "inverse-surface": "#213145",
+            "surface-bright": "#f8f9ff",
+            "on-primary-fixed": "#131b2e",
+            "on-background": "#0b1c30",
+            "on-surface-variant": "#45464d",
+            "on-tertiary-fixed-variant": "#005236",
+            "inverse-on-surface": "#eaf1ff",
+            "tertiary-container": "#002113",
+            "surface-container-highest": "#d3e4fe",
+            "surface-container": "#e5eeff",
+            "on-primary-container": "#7c839b",
+            "surface-container-lowest": "#ffffff",
+            "on-error-container": "#93000a",
+            "surface-container-low": "#eff4ff",
+            "error": "#ba1a1a",
+            "outline": "#76777d",
+            "secondary-fixed": "#ffdadb"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.125rem",
+            "lg": "0.25rem",
+            "xl": "0.5rem",
+            "full": "0.75rem"
+          },
+          "spacing": {
+            "space-md": "0.75rem",
+            "space-sm": "0.5rem",
+            "gutter": "1rem",
+            "gutter-desktop": "1.5rem",
+            "space-xl": "2rem",
+            "space-lg": "1.25rem",
+            "space-xs": "0.25rem",
+            "margin-desktop": "2rem",
+            "margin": "1rem",
+            "margin-tablet": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Hanken Grotesk"],
+            "label-kbd": ["JetBrains Mono"],
+            "label-tag": ["JetBrains Mono"],
+            "headline-lg": ["Newsreader"],
+            "body-lg": ["Hanken Grotesk"],
+            "body-sm": ["Hanken Grotesk"],
+            "label-code": ["JetBrains Mono"],
+            "headline-lg-mobile": ["Newsreader"],
+            "body-md": ["Hanken Grotesk"],
+            "headline-md": ["Newsreader"],
+            "display": ["Newsreader"]
+          },
+          "fontSize": {
+            "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "letterSpacing": "0em", "fontWeight": "600" }],
+            "label-kbd": ["0.625rem", { "lineHeight": "0.75rem", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-tag": ["0.6875rem", { "lineHeight": "0.875rem", "letterSpacing": "0.08em", "fontWeight": "600" }],
+            "headline-lg": ["2.25rem", { "lineHeight": "2.5rem", "letterSpacing": "-0.015em", "fontWeight": "400" }],
+            "body-lg": ["1rem", { "lineHeight": "1.625rem", "fontWeight": "400" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "fontWeight": "500" }],
+            "label-code": ["0.75rem", { "lineHeight": "1rem", "letterSpacing": "0.05em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["1.75rem", { "lineHeight": "2rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }],
+            "headline-md": ["1.5rem", { "lineHeight": "1.875rem", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "display": ["3.5rem", { "lineHeight": "3.75rem", "letterSpacing": "-0.025em", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    /* Custom Scrollbar for ultra-dense engineering tables */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8f9ff;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c6c6cd;
+      border-radius: 2px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #76777d;
+    }
+    .watermark-stamp {
+      border: 1.5px solid currentColor;
+      text-transform: uppercase;
+      transform: rotate(-3deg);
+    }
+  </style>
+</head>
+<body class="h-full bg-background text-on-surface font-body-md antialiased flex flex-col selection:bg-secondary selection:text-white">
+<!-- ================= TOP NAV BAR (SHARED COMPONENT IMPLEMENTATION) ================= -->
+<header class="flex justify-between items-center w-full px-gutter-desktop h-14 bg-surface-container-lowest border-b border-outline-variant shadow-sm z-30 flex-shrink-0">
+<!-- Left: Brand Logo & Product Name -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary-container text-white flex items-center justify-center font-label-kbd font-bold rounded">
+<span class="material-symbols-outlined text-tertiary-fixed text-lg" data-icon="shield">shield</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm font-semibold tracking-tight text-on-surface">NUMM Engine Core</span>
+<span class="font-label-tag text-label-tag text-outline tracking-wider">INSTITUTIONAL SPECIFICATION MATRIX</span>
+</div>
+</div>
+<!-- Institutional Badging -->
+<div class="hidden xl:flex items-center gap-2 px-2.5 py-1 bg-surface-container-low border border-outline-variant text-on-surface rounded text-xs font-label-code">
+<span class="inline-block w-2 h-2 rounded-full bg-tertiary-fixed-dim"></span>
+<span>ASME Sec. VIII Div 1 &amp; 2 Approved Master</span>
+</div>
+<!-- Search Bar on Left as specified in JSON -->
+<div class="relative hidden lg:flex items-center">
+<span class="material-symbols-outlined absolute left-2.5 text-outline text-base" data-icon="search">search</span>
+<input class="pl-8 pr-12 py-1 h-8 w-72 bg-surface border border-outline-variant rounded font-label-code text-xs text-on-surface focus:outline-none focus:border-primary placeholder-outline" placeholder="Catalog Master Query... [/ to search catalog]" type="text"/>
+<span class="absolute right-2 font-label-kbd text-label-kbd px-1 py-0.5 bg-surface-container border border-outline-variant rounded text-on-surface-variant">/</span>
+</div>
+</div>
+<!-- Center: Navigation Links from JSON (ASME Verification is Active) -->
+<nav class="hidden md:flex items-center gap-6 h-full pt-1">
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-sm font-body-sm transition-colors duration-150 ease-in-out" href="#">Catalog Master</a>
+<a class="border-b-2 border-primary text-primary font-semibold pb-1 text-sm font-body-sm transition-colors duration-150 ease-in-out" href="#">ASME Verification</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-sm font-body-sm transition-colors duration-150 ease-in-out" href="#">Audit Ledger</a>
+<a class="text-on-surface-variant hover:text-on-surface pb-1 text-sm font-body-sm transition-colors duration-150 ease-in-out" href="#">Telemetry Grid</a>
+</nav>
+<!-- Right: Trailing Primary/Secondary Actions & Badges -->
+<div class="flex items-center gap-3">
+<!-- Sync telemetry indicator -->
+<div class="hidden lg:flex items-center gap-2 px-2 py-1 bg-surface border border-outline-variant rounded font-label-tag text-label-tag text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary-fixed-dim animate-pulse"></span>
+<span>Ledger v4.18.2 Sync</span>
+</div>
+<!-- Secondary Trailing Action from JSON -->
+<button class="hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 h-8 bg-surface-container-lowest text-secondary border border-secondary rounded font-label-kbd text-label-kbd uppercase hover:bg-error-container/20 transition-all">
+<span>Safety Halt</span>
+<span class="text-outline font-label-code text-[9px]">[Shift+R]</span>
+</button>
+<!-- Primary Trailing Action from JSON -->
+<button class="inline-flex items-center gap-1.5 px-3.5 py-1.5 h-8 bg-primary text-on-primary hover:bg-secondary-container transition-colors rounded font-label-kbd text-label-kbd uppercase shadow-sm">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+<span>Approve Gate</span>
+<span class="text-primary-fixed-dim font-label-code text-[9px]">[Enter]</span>
+</button>
+<!-- Trailing Icon Actions from JSON: tune, terminal, notifications -->
+<div class="flex items-center border-l border-outline-variant pl-3 gap-1">
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container transition-colors rounded" title="Settings &amp; Parameters">
+<span class="material-symbols-outlined text-lg" data-icon="tune">tune</span>
+</button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container transition-colors rounded" title="Terminal CLI">
+<span class="material-symbols-outlined text-lg" data-icon="terminal">terminal</span>
+</button>
+<button class="p-1 text-outline hover:text-on-surface hover:bg-surface-container relative transition-colors rounded" title="Notifications">
+<span class="material-symbols-outlined text-lg" data-icon="notifications">notifications</span>
+<span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-secondary-container"></span>
+</button>
+</div>
+<!-- Auditor Badge Profile Image Avatar -->
+<div class="flex items-center pl-2" title="Chief Quality Auditor badge avatar">
+<div class="w-8 h-8 rounded border border-outline-variant bg-surface-container flex items-center justify-center font-label-code font-bold text-xs text-primary shadow-inner">
+          CQA-9
+        </div>
+</div>
+</div>
+</header>
+<!-- ================= SUB-HEADER / EDITORIAL STRIP & KPI MATRIX ================= -->
+<section class="bg-surface border-b border-outline-variant px-gutter-desktop py-4 flex-shrink-0">
+<div class="max-w-[1920px] mx-auto flex flex-col xl:flex-row xl:items-center justify-between gap-4">
+<!-- Editorial Title & Broadside Meta -->
+<div class="space-y-0.5">
+<div class="flex items-center gap-3">
+<span class="font-label-tag text-label-tag px-2 py-0.5 bg-primary text-white rounded">BULLETIN SEC-VIII</span>
+<span class="font-label-code text-label-code text-outline">EDITION 2024 / ADDENDA Q3</span>
+<span class="text-outline text-xs">•</span>
+<span class="font-label-code text-label-code text-secondary font-semibold">ASME BOILER &amp; PRESSURE VESSEL CODE INSPECTORATE</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-normal tracking-tight">
+          Deterministic Metallurgical Review Cockpit
+        </h1>
+<p class="font-body-sm text-body-sm text-on-surface-variant max-w-3xl">
+          Direct gate authorization terminal for heavy industrial alloys, nuclear-class forgings, and high-pressure vessel claddings. Real-time CMTR cryptographic verification enabled.
+        </p>
+</div>
+<!-- Watermelon UI Modular Metric Blocks (4 Cards) -->
+<div class="grid grid-cols-2 lg:grid-cols-4 gap-3">
+<!-- Card 1: Active Material Grades -->
+<div class="bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm flex flex-col justify-between min-w-[170px]">
+<div class="flex justify-between items-start">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">Active Grades</span>
+<span class="font-label-code text-[10px] text-tertiary-container bg-tertiary-fixed px-1 rounded font-semibold">+184 TD</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-label-code text-lg font-bold text-primary">14,892</span>
+<!-- Sparkline Microchart -->
+<svg class="w-16 h-5" fill="none" viewbox="0 0 64 20">
+<path d="M1 16L12 14L24 17L36 9L48 11L63 3" stroke="#45464d" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"></path>
+<circle cx="63" cy="3" fill="#009668" r="2"></circle>
+</svg>
+</div>
+<div class="text-[10px] font-body-sm text-outline mt-0.5">Verified Section II catalog</div>
+</div>
+<!-- Card 2: ASME Deterministic Gates -->
+<div class="bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm flex flex-col justify-between min-w-[170px] border-l-4 border-l-secondary-container">
+<div class="flex justify-between items-start">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">Gate Clearance</span>
+<span class="font-label-kbd text-label-kbd text-secondary-container bg-error-container px-1 py-0.5 rounded font-bold">3 HOLDS</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-label-code text-lg font-bold text-on-surface">99.84%</span>
+<span class="font-label-tag text-[10px] text-secondary font-semibold">CRITICAL GATE</span>
+</div>
+<div class="text-[10px] font-body-sm text-outline mt-0.5">Pass/Fail deterministic logic</div>
+</div>
+<!-- Card 3: CMTR Traceability Index -->
+<div class="bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm flex flex-col justify-between min-w-[170px]">
+<div class="flex justify-between items-start">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">CMTR Traceability</span>
+<span class="font-label-code text-[10px] text-tertiary-container bg-tertiary-fixed px-1 rounded">0 DEVIATION</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-label-code text-lg font-bold text-primary">100.0%</span>
+<!-- Radial Mini Gauge -->
+<svg class="w-6 h-6" viewbox="0 0 36 36">
+<path class="text-surface-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="4"></path>
+<path class="text-tertiary-container stroke-current" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="100, 100" stroke-linecap="round" stroke-width="4"></path>
+</svg>
+</div>
+<div class="text-[10px] font-body-sm text-outline mt-0.5">Cryptographic heat-lot linked</div>
+</div>
+<!-- Card 4: Pending Cockpit Review -->
+<div class="bg-surface-container-lowest border border-outline-variant p-2.5 rounded shadow-sm flex flex-col justify-between min-w-[170px] relative overflow-hidden">
+<div class="absolute top-0 right-0 w-12 h-12 bg-secondary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex justify-between items-start">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">Awaiting Sign-off</span>
+<span class="flex h-2 w-2 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary-container opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-secondary"></span>
+</span>
+</div>
+<div class="flex items-baseline justify-between mt-1">
+<span class="font-label-code text-lg font-bold text-secondary">7 Heats</span>
+<span class="font-label-tag text-[10px] text-outline">High-Pressure</span>
+</div>
+<div class="text-[10px] font-body-sm text-outline mt-0.5">Metallurgical action required</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= MAIN ASYMMETRIC COCKPIT (LEFT INSPECTOR, RIGHT DATA GRID) ================= -->
+<main class="flex-1 w-full max-w-[1920px] mx-auto px-gutter-desktop py-4 flex flex-col lg:flex-row gap-5 overflow-hidden">
+<!-- ================= LEFT COLUMN: STICKY METADATA INSPECTOR PANE (~35% width) ================= -->
+<aside class="w-full lg:w-[35%] xl:w-[380px] 2xl:w-[410px] flex-shrink-0 flex flex-col bg-surface-container-lowest border border-outline-variant rounded shadow-sm overflow-hidden max-h-full">
+<!-- Inspector Pane Top Anchor -->
+<div class="p-3 bg-surface-container-low border-b border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-base" data-icon="crisis_alert">crisis_alert</span>
+<h2 class="font-label-tag text-label-tag text-on-surface uppercase tracking-wider font-bold">Material Spec Inspector</h2>
+</div>
+<span class="font-label-kbd text-label-kbd px-1.5 py-0.5 bg-surface-container border border-outline-variant text-outline rounded">Cmd + I</span>
+</div>
+<!-- Inspector Scrollable Body -->
+<div class="flex-1 overflow-y-auto p-4 space-y-4 text-xs font-body-md">
+<!-- Active Spec Header & ASME Stamp -->
+<div class="border-b border-outline-variant pb-3">
+<div class="flex justify-between items-start mb-1">
+<span class="font-label-code text-label-code text-secondary-container font-semibold">ACTIVE BATCH INSPECTION</span>
+<span class="watermark-stamp font-label-tag text-[10px] text-tertiary-container px-1.5 py-0.2 bg-tertiary-fixed font-bold">SEC-II PART-A</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-on-surface leading-tight font-medium">SA-516 Gr 70 HIC</h3>
+<p class="font-label-code text-label-code text-outline mt-0.5">HEAT: #HT-88421-B / LOT: #LT-90214-REV4</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">
+            Carbon Steel Plate for Moderate and Lower-Temperature Service in Welded Pressure Vessels with Hydrogen Induced Cracking Resistance.
+          </p>
+</div>
+<!-- Deterministic ASME Safety Gate Status Banner -->
+<div class="p-3 bg-surface border-l-4 border-l-secondary-container border border-outline-variant rounded space-y-2">
+<div class="flex items-center justify-between">
+<span class="font-label-tag text-label-tag uppercase font-bold text-on-surface">ASME Deterministic Verification</span>
+<span class="font-label-tag text-label-tag text-secondary-container font-bold flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="error">error</span>
+              GATE HELD: CHARPY
+            </span>
+</div>
+<!-- Parameter Check Rows -->
+<div class="space-y-1.5 font-label-code text-xs pt-1">
+<div class="flex justify-between items-center py-1 border-b border-outline-variant/40">
+<span class="text-on-surface-variant">Tensile Strength (485 - 620 MPa)</span>
+<span class="text-tertiary-container font-semibold flex items-center gap-1">542 MPa <span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span></span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-outline-variant/40">
+<span class="text-on-surface-variant">Yield Strength (≥ 260 MPa)</span>
+<span class="text-tertiary-container font-semibold flex items-center gap-1">318 MPa <span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span></span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-outline-variant/40 bg-error-container/30 px-1 -mx-1 rounded">
+<span class="text-secondary font-semibold">Charpy V-Notch @ -46°C (≥ 27 J)</span>
+<span class="text-secondary font-bold flex items-center gap-1">26.1 J [FAIL] <span class="material-symbols-outlined text-xs" data-icon="cancel">cancel</span></span>
+</div>
+<div class="flex justify-between items-center py-1 border-b border-outline-variant/40">
+<span class="text-on-surface-variant">HIC Resistance (CLR &lt; 1.5%)</span>
+<span class="text-tertiary-container font-semibold flex items-center gap-1">0.82% <span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span></span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Ultrasonic Examination (SA-578)</span>
+<span class="text-tertiary-container font-semibold flex items-center gap-1">Level 1 Pass <span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span></span>
+</div>
+</div>
+</div>
+<!-- Telemetry Microchart: Stress-Strain Curve -->
+<div class="border border-outline-variant p-3 rounded bg-surface-container-lowest">
+<div class="flex justify-between items-center mb-2">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">Test Telemetry: Stress-Strain</span>
+<span class="font-label-code text-[10px] text-outline">EXTENSOMETER #EX-401</span>
+</div>
+<!-- Engineering SVG Graph -->
+<div class="w-full h-28 bg-surface border border-outline-variant/60 rounded relative p-1">
+<svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 300 100">
+<!-- Grid lines -->
+<line stroke="#c6c6cd" stroke-dasharray="3,3" stroke-width="0.75" x1="0" x2="300" y1="20" y2="20"></line>
+<line stroke="#c6c6cd" stroke-dasharray="3,3" stroke-width="0.75" x1="0" x2="300" y1="50" y2="50"></line>
+<line stroke="#c6c6cd" stroke-dasharray="3,3" stroke-width="0.75" x1="0" x2="300" y1="80" y2="80"></line>
+<!-- Curve -->
+<path d="M5 95 L50 25 Q120 18 200 22 Q250 25 285 45" fill="none" stroke="#da3054" stroke-width="2"></path>
+<!-- Yield point marker -->
+<circle cx="50" cy="25" fill="#0b1c30" r="3"></circle>
+<text fill="#45464d" font-family="JetBrains Mono" font-size="8" x="55" y="24">Yield: 318 MPa</text>
+<!-- Ultimate point marker -->
+<circle cx="150" cy="19" fill="#da3054" r="3"></circle>
+<text fill="#da3054" font-family="JetBrains Mono" font-size="8" x="155" y="17">UTS: 542 MPa</text>
+<!-- Rupture marker -->
+<circle cx="285" cy="45" fill="#ba1a1a" r="3"></circle>
+</svg>
+<span class="absolute bottom-1 right-2 font-label-code text-[8px] text-outline">Elongation: 26.5%</span>
+</div>
+</div>
+<!-- Chemical Spectrometry Breakdown Bar -->
+<div class="border border-outline-variant p-3 rounded bg-surface-container-lowest space-y-2">
+<div class="flex justify-between items-center">
+<span class="font-label-tag text-label-tag text-outline uppercase tracking-wider">Ladle Chemical Analysis (wt%)</span>
+<span class="font-label-code text-[10px] text-tertiary-container font-semibold">Compliant Sec. II</span>
+</div>
+<!-- Stacked Composition Bar -->
+<div class="w-full h-3 rounded overflow-hidden flex bg-surface-container">
+<div class="bg-primary" style="width: 22%" title="C: 0.22%"></div>
+<div class="bg-surface-tint" style="width: 45%" title="Mn: 1.15%"></div>
+<div class="bg-outline" style="width: 15%" title="Si: 0.28%"></div>
+<div class="bg-secondary" style="width: 10%" title="P: 0.012%"></div>
+<div class="bg-tertiary-fixed-dim" style="width: 8%" title="S: 0.003%"></div>
+</div>
+<!-- Tabular Elements -->
+<div class="grid grid-cols-5 gap-1 text-center font-label-code text-[10px]">
+<div class="bg-surface p-1 rounded border border-outline-variant/40">
+<span class="text-outline block">C</span>
+<span class="font-bold text-on-surface">0.22%</span>
+</div>
+<div class="bg-surface p-1 rounded border border-outline-variant/40">
+<span class="text-outline block">Mn</span>
+<span class="font-bold text-on-surface">1.15%</span>
+</div>
+<div class="bg-surface p-1 rounded border border-outline-variant/40">
+<span class="text-outline block">Si</span>
+<span class="font-bold text-on-surface">0.28%</span>
+</div>
+<div class="bg-surface p-1 rounded border border-outline-variant/40">
+<span class="text-outline block">P</span>
+<span class="font-bold text-on-surface">0.012</span>
+</div>
+<div class="bg-surface p-1 rounded border border-outline-variant/40">
+<span class="text-outline block">S</span>
+<span class="font-bold text-on-surface">0.003</span>
+</div>
+</div>
+</div>
+<!-- Heat Traceability & CMTR Cryptographic Proof -->
+<div class="border border-outline-variant p-3 rounded bg-surface font-label-code space-y-1.5 text-[11px]">
+<div class="flex items-center justify-between text-outline text-[10px]">
+<span>CMTR PROVENANCE RECORD</span>
+<span class="text-tertiary-container font-semibold">EN 10204 3.1</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Mill of Origin:</span>
+<span class="text-on-surface font-medium">Voestalpine Grobblech GmbH</span>
+</div>
+<div class="flex justify-between">
+<span class="text-outline">Melt Method:</span>
+<span class="text-on-surface font-medium">Electric Arc Furnace (EAF) + VD</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-outline">Ledger Hash:</span>
+<span class="font-label-code text-[10px] text-primary truncate max-w-[170px]" title="0x7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1f">0x7f83b165...fc2d4b1f</span>
+</div>
+<!-- Barcode Visualization -->
+<div class="pt-2 flex items-center justify-between border-t border-outline-variant/60">
+<div class="flex flex-col">
+<span class="text-[9px] text-outline font-label-tag">DIGITAL SIGNATURE VERIFIED</span>
+<span class="text-[10px] font-bold text-on-surface">ASME-QSC-789-NUMM</span>
+</div>
+<div class="w-20 h-5 bg-surface-container flex items-center justify-center border border-outline-variant">
+<!-- Inline simulated barcode lines -->
+<div class="flex gap-0.5 h-3 items-center">
+<span class="w-0.5 h-full bg-primary"></span>
+<span class="w-1 h-full bg-primary"></span>
+<span class="w-0.5 h-full bg-primary"></span>
+<span class="w-1.5 h-full bg-primary"></span>
+<span class="w-0.5 h-full bg-primary"></span>
+<span class="w-1 h-full bg-primary"></span>
+<span class="w-0.5 h-full bg-primary"></span>
+<span class="w-1.5 h-full bg-primary"></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Watermelon UI Cockpit Action Footer -->
+<div class="p-3 bg-surface-container-low border-t border-outline-variant flex flex-col gap-2 flex-shrink-0">
+<button class="w-full py-2 px-3 bg-secondary-container hover:bg-secondary text-on-secondary font-label-kbd text-label-kbd rounded flex items-center justify-center gap-2 uppercase tracking-wide transition-all shadow-sm">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+<span>Verify &amp; Clear Gate</span>
+<span class="bg-black/20 px-1 py-0.5 rounded text-[9px]">[Enter]</span>
+</button>
+<div class="grid grid-cols-2 gap-2">
+<button class="py-1.5 px-2 bg-surface border border-outline-variant hover:border-secondary text-secondary font-label-kbd text-label-kbd rounded flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="flag">flag</span>
+<span>Flag Deviation</span>
+<span class="text-outline text-[9px]">[D]</span>
+</button>
+<button class="py-1.5 px-2 bg-surface border border-outline-variant hover:border-primary text-on-surface font-label-kbd text-label-kbd rounded flex items-center justify-center gap-1 transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="replay">replay</span>
+<span>Request Re-Test</span>
+<span class="text-outline text-[9px]">[T]</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- ================= RIGHT COLUMN: DYNAMIC DATA GRID (~65% width) ================= -->
+<section class="flex-1 flex flex-col bg-surface-container-lowest border border-outline-variant rounded shadow-sm overflow-hidden min-w-0">
+<!-- Toolbar & Category Toggle Strips -->
+<div class="p-3 bg-surface-container-low border-b border-outline-variant flex flex-col gap-3 flex-shrink-0">
+<!-- Top Toolbar: Filter Categories & Search -->
+<div class="flex flex-wrap items-center justify-between gap-2">
+<!-- Material Categories Toggles -->
+<div class="flex items-center gap-1 overflow-x-auto pb-0.5">
+<button class="px-2.5 py-1 bg-primary text-on-primary font-label-tag text-label-tag rounded uppercase font-semibold">
+              All Alloys
+            </button>
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-tag text-label-tag rounded uppercase transition-colors">
+              Carbon Steel
+            </button>
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-tag text-label-tag rounded uppercase transition-colors">
+              Super Duplex
+            </button>
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-tag text-label-tag rounded uppercase transition-colors">
+              Inconel / Nickel
+            </button>
+<button class="px-2.5 py-1 bg-surface-container hover:bg-surface-container-high border border-outline-variant text-on-surface font-label-tag text-label-tag rounded uppercase transition-colors">
+              Low-Temp Quenched
+            </button>
+</div>
+<!-- Quick search within grid -->
+<div class="flex items-center gap-2">
+<div class="relative">
+<input class="py-1 pl-2 pr-6 h-7 text-xs bg-surface border border-outline-variant rounded font-label-code focus:outline-none focus:border-primary w-44" placeholder="Filter grade or heat..." type="text"/>
+<span class="material-symbols-outlined absolute right-1.5 top-1.5 text-xs text-outline" data-icon="tune">tune</span>
+</div>
+</div>
+</div>
+<!-- Second Row: Gate Status Toggles & Keyboard Shortcuts Ribbon -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-outline-variant/60">
+<!-- Gate status filters -->
+<div class="flex items-center gap-2 text-xs">
+<span class="font-label-tag text-label-tag text-outline uppercase font-semibold">ASME Gate:</span>
+<label class="inline-flex items-center gap-1 font-label-code text-[11px] cursor-pointer">
+<input checked="" class="text-primary focus:ring-0 w-3 h-3" name="gate_filter" type="radio"/>
+<span>All (7)</span>
+</label>
+<label class="inline-flex items-center gap-1 font-label-code text-[11px] cursor-pointer text-tertiary-container font-semibold">
+<input class="text-primary focus:ring-0 w-3 h-3" name="gate_filter" type="radio"/>
+<span>Cleared (4)</span>
+</label>
+<label class="inline-flex items-center gap-1 font-label-code text-[11px] cursor-pointer text-secondary-container font-bold">
+<input class="text-secondary focus:ring-0 w-3 h-3" name="gate_filter" type="radio"/>
+<span>Gate Hold (2)</span>
+</label>
+<label class="inline-flex items-center gap-1 font-label-code text-[11px] cursor-pointer text-outline">
+<input class="text-primary focus:ring-0 w-3 h-3" name="gate_filter" type="radio"/>
+<span>Review (1)</span>
+</label>
+</div>
+<!-- Keyboard hints -->
+<div class="hidden sm:flex items-center gap-2 font-label-kbd text-[10px] text-outline">
+<span class="flex items-center gap-1"><kbd class="bg-surface px-1 py-0.5 border border-outline-variant rounded text-on-surface">J / K</kbd> Navigate</span>
+<span class="flex items-center gap-1"><kbd class="bg-surface px-1 py-0.5 border border-outline-variant rounded text-on-surface">Space</kbd> Inspect</span>
+<span class="flex items-center gap-1"><kbd class="bg-surface px-1 py-0.5 border border-outline-variant rounded text-on-surface">Enter</kbd> Sign-off</span>
+</div>
+</div>
+</div>
+<!-- High-Density Material Master Ledger Table -->
+<div class="flex-1 overflow-x-auto overflow-y-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface font-label-tag text-label-tag text-outline uppercase border-b-2 border-primary sticky top-0 z-10">
+<th class="py-2 px-3 w-8 text-center">
+<input class="rounded-none border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</th>
+<th class="py-2 px-3">Grade Spec / Heat ID</th>
+<th class="py-2 px-3">UNS / EN Spec</th>
+<th class="py-2 px-3">Category</th>
+<th class="py-2 px-3 text-right">Yield / Tensile (MPa)</th>
+<th class="py-2 px-3">ASME Gate Status</th>
+<th class="py-2 px-3 text-center">Test Telemetry</th>
+<th class="py-2 px-3">Auditor / Time</th>
+<th class="py-2 px-3 text-right">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/40 font-body-sm text-xs">
+<!-- ROW 1: ACTIVE SELECTED ROW (SA-516 Gr 70 HIC) -->
+<tr class="bg-surface-container/60 border-l-4 border-l-secondary hover:bg-surface-container transition-colors cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input checked="" class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+                  SA-516 Gr 70 HIC
+                </div>
+<div class="font-label-code text-[10px] text-outline">#HT-88421-B (Voestalpine)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                K02700 / P355GH
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container-high text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">Carbon Steel</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">318 / 542</span>
+<span class="text-[10px] text-outline block">Req: ≥260 / 485-620</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Hold -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-error-container text-secondary-container border-l-2 border-secondary font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="cancel">cancel</span>
+                  ASME Hold: Charpy
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<!-- SVG Sparkline: Thermal Distribution -->
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 14 Q20 18 40 5 T78 12" fill="none" stroke="#da3054" stroke-width="1.5"></path>
+<circle cx="40" cy="5" fill="#da3054" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">D. Vance (CQA)</span>
+<span class="text-outline">14:02:11 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2: SA-240 Type 316L -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface">SA-240 Type 316L</div>
+<div class="font-label-code text-[10px] text-outline">#HT-77210-A (Outokumpu)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                S31603 / 1.4404
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">Austenitic SS</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">295 / 590</span>
+<span class="text-[10px] text-outline block">Req: ≥220 / 515-690</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Cleared -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-tertiary-fixed text-tertiary-container border-l-2 border-on-tertiary-container font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                  Gate Cleared
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 15 L25 12 L45 8 L65 10 L78 6" fill="none" stroke="#009668" stroke-width="1.5"></path>
+<circle cx="78" cy="6" fill="#009668" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">M. Rostova</span>
+<span class="text-outline">13:48:52 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3: SB-443 Inconel 625 -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface">SB-443 Inconel 625</div>
+<div class="font-label-code text-[10px] text-outline">#HT-IN62-9901 (Special Metals)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                N06625 / 2.4856
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">Nickel Superalloy</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">462 / 885</span>
+<span class="text-[10px] text-outline block">Req: ≥415 / ≥825</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Cleared -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-tertiary-fixed text-tertiary-container border-l-2 border-on-tertiary-container font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                  Gate Cleared
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 17 L22 14 L40 10 L60 8 L78 5" fill="none" stroke="#009668" stroke-width="1.5"></path>
+<circle cx="78" cy="5" fill="#009668" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">H. Lindqvist</span>
+<span class="text-outline">12:15:04 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4: SA-387 Gr 22 Cl 2 -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface">SA-387 Gr 22 Cl 2</div>
+<div class="font-label-code text-[10px] text-outline">#HT-38722-K (Nippon Steel)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                K21590 / 10CrMo9-10
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">Cr-Mo Alloy</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">342 / 565</span>
+<span class="text-[10px] text-outline block">Req: ≥310 / 515-690</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Cert Mismatch -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-error-container text-secondary-container border-l-2 border-secondary font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="warning">warning</span>
+                  Cert Mismatch
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 10 L25 15 L45 6 L65 14 L78 12" fill="none" stroke="#76777d" stroke-width="1.5"></path>
+<circle cx="78" cy="12" fill="#76777d" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">S. Chen (Lead)</span>
+<span class="text-outline">11:32:19 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5: SA-790 UNS S32750 Super Duplex -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface">SA-790 UNS S32750</div>
+<div class="font-label-code text-[10px] text-outline">#HT-SD2507-4 (Sandvik)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                S32750 / 1.4410
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">Super Duplex</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">585 / 840</span>
+<span class="text-[10px] text-outline block">Req: ≥550 / 750-1000</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Gate Cleared -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-tertiary-fixed text-tertiary-container border-l-2 border-on-tertiary-container font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="check_circle">check_circle</span>
+                  Gate Cleared
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 16 L20 11 L40 9 L60 6 L78 4" fill="none" stroke="#009668" stroke-width="1.5"></path>
+<circle cx="78" cy="4" fill="#009668" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">D. Vance (CQA)</span>
+<span class="text-outline">10:04:41 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+<!-- ROW 6: SA-182 F91 (Nuclear Grade Forging) -->
+<tr class="hover:bg-surface-container-low transition-colors border-l-4 border-l-transparent cursor-pointer">
+<td class="py-2.5 px-3 text-center">
+<input class="border-outline text-primary focus:ring-0 w-3.5 h-3.5" type="checkbox"/>
+</td>
+<td class="py-2.5 px-3">
+<div class="font-label-code font-bold text-on-surface">SA-182 F91 Forging</div>
+<div class="font-label-code text-[10px] text-outline">#HT-F91-6180 (Japan Steel Works)</div>
+</td>
+<td class="py-2.5 px-3 font-label-code text-on-surface-variant">
+                K90901 / X10CrMoVNb9-1
+              </td>
+<td class="py-2.5 px-3">
+<span class="px-1.5 py-0.5 bg-surface-container text-on-surface border border-outline-variant font-label-tag text-[10px] rounded">High-Creep Alloy</span>
+</td>
+<td class="py-2.5 px-3 text-right font-label-code">
+<span class="font-semibold text-primary">435 / 645</span>
+<span class="text-[10px] text-outline block">Req: ≥415 / 585-760</span>
+</td>
+<td class="py-2.5 px-3">
+<!-- ASME Chip: Nominal Pass -->
+<span class="inline-flex items-center gap-1 px-2 py-0.5 bg-surface-container text-primary border-l-2 border-outline font-label-tag text-[10px] font-bold rounded">
+<span class="material-symbols-outlined text-xs" data-icon="verified">verified</span>
+                  Nominal Pass
+                </span>
+</td>
+<td class="py-2.5 px-3 text-center">
+<svg class="w-20 h-5 mx-auto" viewbox="0 0 80 20">
+<path d="M2 13 L22 13 L42 8 L62 9 L78 7" fill="none" stroke="#45464d" stroke-width="1.5"></path>
+<circle cx="78" cy="7" fill="#45464d" r="2"></circle>
+</svg>
+</td>
+<td class="py-2.5 px-3 font-label-code text-[10px]">
+<span class="text-on-surface font-semibold block">E. Hoffmann</span>
+<span class="text-outline">09:12:00 UTC</span>
+</td>
+<td class="py-2.5 px-3 text-right">
+<button class="p-1 text-outline hover:text-primary hover:bg-surface-container rounded" title="Open Spec Dossier">
+<span class="material-symbols-outlined text-base" data-icon="edit_document">edit_document</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Audit Trail Footer & Quick Pagination -->
+<div class="p-2.5 bg-surface-container-low border-t border-outline-variant flex flex-col sm:flex-row items-center justify-between gap-2 flex-shrink-0 text-xs font-label-code">
+<!-- Sync & Total indicator -->
+<div class="flex items-center gap-3 text-outline">
+<span class="text-on-surface font-semibold">Ledger View: 1 - 6 of 14,892 Specifications</span>
+<span>•</span>
+<span>CRC-32 Checksum: <code class="text-primary font-bold">0xAE89B001</code></span>
+</div>
+<!-- Export & Annex Actions -->
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-surface border border-outline-variant hover:border-primary text-on-surface font-label-kbd text-[11px] rounded transition-colors">
+<span class="material-symbols-outlined text-xs" data-icon="download">download</span>
+<span>Export Ledger CSV</span>
+<span class="text-outline text-[9px]">[Cmd+E]</span>
+</button>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 bg-primary text-on-primary hover:bg-secondary-container rounded font-label-kbd text-[11px] transition-colors shadow-sm">
+<span class="material-symbols-outlined text-xs" data-icon="description">description</span>
+<span>Generate ASME Annex Cert</span>
+</button>
+</div>
+</div>
+</section>
+</main>
+<!-- ================= COCKPIT STATUS STRIP / DOCK FOOTER ================= -->
+<footer class="h-7 bg-primary-container text-primary-fixed border-t border-outline-variant px-gutter-desktop flex items-center justify-between text-[11px] font-label-code flex-shrink-0">
+<div class="flex items-center gap-4">
+<span class="flex items-center gap-1.5 text-tertiary-fixed font-semibold">
+<span class="w-2 h-2 rounded-full bg-tertiary-fixed animate-ping"></span>
+        GATEWAY CONNECTED
+      </span>
+<span class="text-on-primary-container">NODE: AWS-GOV-US-EAST-1 (LATENCY: 12ms)</span>
+<span class="hidden md:inline text-on-primary-container">LEDGER INTEGRITY: SHA-256 SECURED</span>
+</div>
+<div class="flex items-center gap-4 text-on-primary-container">
+<span class="hidden sm:inline">NUMM OPERATIONAL SPEC SPECIFICATION COCKPIT — ASME SECTION VIII DIV 1 COMPLIANT</span>
+<span class="text-primary-fixed font-bold">SESSION: CQA-90214</span>
+</div>
+</footer>
+</body></html>

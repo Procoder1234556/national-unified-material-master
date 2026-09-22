@@ -31,18 +31,18 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
     >
       {/* Title */}
       <div>
-        <div
-          style={{
-            fontSize: "11px",
-            fontWeight: 700,
-            textTransform: "uppercase",
-            letterSpacing: "0.06em",
-            color: rawTokens.textMuted,
-            marginBottom: "12px",
-          }}
-        >
-          Match Quality
-        </div>
+          <div
+            style={{
+              fontSize: "16px",
+              fontWeight: 700,
+              fontFamily: rawTokens.fontCalligraphy,
+              letterSpacing: "0em",
+              color: rawTokens.textPrimary,
+              marginBottom: "12px",
+            }}
+          >
+            Match Quality
+          </div>
 
         {/* Three Large Metrics Row */}
         <div

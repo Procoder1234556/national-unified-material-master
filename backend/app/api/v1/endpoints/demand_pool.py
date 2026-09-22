@@ -4,8 +4,6 @@
 from typing import List
 
 from fastapi import APIRouter, HTTPException
-
-from backend.app.api.v1.endpoints.search import CANONICAL_MASTER_ITEMS
 from backend.app.schemas.demand_pool import (
     DemandAggregationRequest,
     GeMTenderPackage,
@@ -19,6 +17,10 @@ from backend.app.services.gem_compliance import default_gem_engine
 router = APIRouter()
 
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
+from backend.app.db.session import get_db
+
 @router.get("/tiers", response_model=List[VolumeTierInfo], summary="Get volume discount scale tiers")
 async def get_discount_tiers():
     """Returns official MoPNG volume discount tiers (8.0% to 16.0%)."""
@@ -28,31 +30,30 @@ async def get_discount_tiers():
 @router.get(
     "/batches", response_model=PooledBatchesListResponse, summary="List national pooled procurement tender batches"
 )
-async def list_pooled_batches():
+async def list_pooled_batches(session: AsyncSession = Depends(get_db)):
     """Lists all active pooled procurement batches with national aggregate savings KPIs."""
-    return default_demand_pooling_service.list_batches()
+    return await default_demand_pooling_service.list_batches(session)
 
 
 @router.post(
     "/aggregate", response_model=PooledBatchSummary, summary="Aggregate CPSE purchase demands into pooled tender"
 )
-async def aggregate_demands(req: DemandAggregationRequest):
+async def aggregate_demands(req: DemandAggregationRequest, session: AsyncSession = Depends(get_db)):
     """
     Combines individual CPSE demand projections for identical canonical ONMC materials
     and computes volume discount tier and projected INR savings.
     """
-    matched_master = next((m for m in CANONICAL_MASTER_ITEMS if m["onmc_code"] == req.onmc_code), None)
     try:
-        batch = default_demand_pooling_service.aggregate_batch(req, item_details=matched_master)
+        batch = await default_demand_pooling_service.aggregate_batch(session, req)
         return batch
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
 
 
 @router.get("/batches/{batch_id}", response_model=PooledBatchSummary, summary="Retrieve pooled batch details")
-async def get_pooled_batch(batch_id: str):
+async def get_pooled_batch(batch_id: str, session: AsyncSession = Depends(get_db)):
     """Fetches full details of a pooled demand batch including per-CPSE quotas."""
-    batch = default_demand_pooling_service.get_batch(batch_id)
+    batch = await default_demand_pooling_service.get_batch(session, batch_id)
     if not batch:
         raise HTTPException(status_code=404, detail=f"Pooled batch '{batch_id}' not found.")
     return batch
@@ -63,12 +64,12 @@ async def get_pooled_batch(batch_id: str):
     response_model=GeMTenderPackage,
     summary="Generate GeM Rule 149 compliant tender package",
 )
-async def generate_gem_tender(batch_id: str):
+async def generate_gem_tender(batch_id: str, session: AsyncSession = Depends(get_db)):
     """
     Exports an official GeM-ready tender dossier including GFR Rule 149 justification,
     per-CPSE delivery schedules, and CVC anti-cartelization undertaking.
     """
-    batch = default_demand_pooling_service.get_batch(batch_id)
+    batch = await default_demand_pooling_service.get_batch(session, batch_id)
     if not batch:
         raise HTTPException(status_code=404, detail=f"Pooled batch '{batch_id}' not found.")
 

@@ -573,7 +573,7 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
                 color: rawTokens.textPrimary,
               }}
             >
-              Stewardship Review Cockpit (HITL)
+              Resolve Catalog Duplicates (Triage Cockpit)
             </h2>
             <div style={{ fontSize: "12px", color: rawTokens.textSecondary }}>
               Asymmetric triage inspector • Single-key keyboard ergonomics •
@@ -1694,3 +1694,4 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
     </div>
   );
 };
+

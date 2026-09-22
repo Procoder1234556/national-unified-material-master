@@ -5,7 +5,6 @@ from typing import List, Optional
 
 from fastapi import APIRouter, HTTPException, Query
 
-from backend.app.api.v1.endpoints.search import CANONICAL_MASTER_ITEMS
 from backend.app.schemas.surplus import (
     MTIRFApproveRequest,
     MTIRFApproveResponse,
@@ -42,6 +41,13 @@ async def list_cpse_plants():
     return plants
 
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from fastapi import Depends
+from backend.app.db.session import get_db
+from sqlalchemy import select
+from sqlalchemy.orm import selectinload
+from backend.app.models.models import RawMaterial, MaterialMapping, UnifiedMasterCode
+
 @router.get("/nearby", response_model=NearbySurplusResponse, summary="Discover surplus stock within geographic radius")
 async def get_nearby_surplus(
     destination_plant: str = Query("IOCL_MATHURA", description="Requesting plant key or location (e.g. IOCL_MATHURA)"),
@@ -49,6 +55,7 @@ async def get_nearby_surplus(
     onmc_code: Optional[str] = Query(None, description="Filter by ONMC standard code"),
     max_radius_km: float = Query(1200.0, ge=10.0, le=4000.0, description="Max geographic search radius in km"),
     limit: int = Query(20, ge=1, le=100),
+    session: AsyncSession = Depends(get_db)
 ):
     """
     Scans national CPSE inventory for available surplus stock and sorts by road transit distance.
@@ -56,66 +63,73 @@ async def get_nearby_surplus(
     """
     dest_plant_rec = default_geo_service.find_plant(destination_plant)
     if not dest_plant_rec:
-        # Fallback to Mathura Refinery if unknown
         dest_plant_rec = default_geo_service.CPSE_PLANTS["IOCL_MATHURA"]
 
     dest_coords = dest_plant_rec["coordinates"]
     dest_org = dest_plant_rec["organization_code"]
     dest_code = dest_plant_rec["plant_code"]
 
+    # Query RawMaterials that are mapped to UnifiedMasterCode
+    stmt = select(RawMaterial).join(MaterialMapping).join(UnifiedMasterCode).options(
+        selectinload(RawMaterial.mapping).selectinload(MaterialMapping.unified_master),
+        selectinload(RawMaterial.organization)
+    ).where(RawMaterial.stock_quantity > 0)
+    
+    if onmc_code:
+        stmt = stmt.where(UnifiedMasterCode.onmc_code == onmc_code)
+    if item_class:
+        stmt = stmt.where(func.upper(UnifiedMasterCode.item_class) == item_class.upper())
+        
+    result = await session.execute(stmt)
+    raw_materials = result.scalars().all()
+
     surplus_hits: List[SurplusItem] = []
 
-    for master in CANONICAL_MASTER_ITEMS:
-        # Filter item class or ONMC code if specified
-        if item_class and master["item_class"].upper() != item_class.upper():
-            continue
-        if onmc_code and master["onmc_code"] != onmc_code:
+    for stock in raw_materials:
+        master = stock.mapping.unified_master
+        if not master:
             continue
 
-        for stock in master["stock_distribution"]:
-            # Exclude stock located at the requesting plant itself
-            if stock.plant_code == dest_code and stock.organization_code == dest_org:
-                continue
+        if stock.plant_code == dest_code and stock.organization.code == dest_org:
+            continue
 
-            # Resolve coordinates of the source plant holding stock
-            source_rec = default_geo_service.find_plant(f"{stock.organization_code}_{stock.plant_code}")
-            if not source_rec:
-                source_rec = default_geo_service.find_plant(stock.plant_location)
+        source_rec = default_geo_service.find_plant(f"{stock.organization.code}_{stock.plant_code}")
+        if not source_rec:
+            source_rec = default_geo_service.find_plant(stock.plant_location)
 
-            if source_rec:
-                dist = default_geo_service.calculate_distance(dest_coords, source_rec["coordinates"])
-                plant_name = source_rec["plant_name"]
-            else:
-                dist = 450.0  # Conservative estimate
-                plant_name = stock.plant_location
+        if source_rec:
+            dist = default_geo_service.calculate_distance(dest_coords, source_rec["coordinates"])
+            plant_name = source_rec["plant_name"]
+        else:
+            dist = 450.0  # Conservative estimate
+            plant_name = stock.plant_location
 
-            if dist <= max_radius_km:
-                transit_hours = default_geo_service.estimate_transit_hours(dist)
-                surplus_hits.append(
-                    SurplusItem(
-                        onmc_code=master["onmc_code"],
-                        canonical_description=master["canonical_description"],
-                        item_class=master["item_class"],
-                        size_inch=master.get("size_inch"),
-                        pressure_class=master.get("pressure_class"),
-                        metallurgy=master.get("metallurgy"),
-                        source_organization=stock.organization_code,
-                        source_organization_name=stock.organization_name,
-                        source_plant_code=stock.plant_code,
-                        source_plant_name=plant_name,
-                        source_plant_location=stock.plant_location,
-                        available_stock=stock.available_stock,
-                        unit_price=stock.unit_price,
-                        currency=stock.currency,
-                        distance_km=dist,
-                        estimated_transit_hours=transit_hours,
-                        shell_mesc_code=master.get("shell_mesc_code"),
-                        unspsc_code=master.get("unspsc_code"),
-                        gem_category_id=master.get("gem_category_id"),
-                    )
+        if dist <= max_radius_km:
+            transit_hours = default_geo_service.estimate_transit_hours(dist)
+            surplus_hits.append(
+                SurplusItem(
+                    onmc_code=master.onmc_code,
+                    canonical_description=master.canonical_description,
+                    item_class=master.item_class,
+                    size_inch=float(master.size_inch) if master.size_inch else None,
+                    pressure_class=master.pressure_class,
+                    metallurgy=master.metallurgy,
+                    source_organization=stock.organization.code,
+                    source_organization_name=stock.organization.name,
+                    source_plant_code=stock.plant_code,
+                    source_plant_name=plant_name,
+                    source_plant_location=stock.plant_location,
+                    available_stock=stock.stock_quantity,
+                    unit_price=float(stock.unit_price),
+                    currency=stock.currency,
+                    distance_km=dist,
+                    estimated_transit_hours=transit_hours,
+                    shell_mesc_code=master.shell_mesc_code,
+                    unspsc_code=master.unspsc_code,
+                    gem_category_id=master.gem_category_id,
                 )
+            )
 
-    # Sort items by proximity ascending (nearest plant first)
     surplus_hits.sort(key=lambda x: x.distance_km)
     surplus_hits = surplus_hits[:limit]
 

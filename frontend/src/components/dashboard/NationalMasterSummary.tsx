@@ -44,8 +44,9 @@ export const NationalMasterSummary: React.FC = () => {
           </div>
           <div
             style={{
-              fontSize: "12px",
+              fontSize: "15px",
               fontWeight: 700,
+              fontFamily: rawTokens.fontCalligraphy,
               color: rawTokens.textPrimary,
               marginTop: "2px",
             }}

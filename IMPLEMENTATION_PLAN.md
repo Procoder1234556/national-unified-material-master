@@ -4,129 +4,104 @@
 
 **Problem Statement**: SIH 26099 (Ministry of Petroleum & Natural Gas - MoPNG)  
 **Standard**: One Nation, One Material Code (ONMC)  
-**Version**: 2.2.0 (Enterprise Production Blueprint)
+**Version**: 2.2.0 (Engineering Reality-Grounded Plan)
 
 ---
 
 ## 1. Build Philosophy & Engineering Principles
 
-1. **Code Follows Documentation**: Every database table, API route, NLP extractor, and UI component strictly conforms to the canonical specifications in `PRD.md`, `TECH_STACK.md`, and `BACKEND_STRUCTURE.md`.
-2. **Deterministic Safety Rules Over Blind Vectors**: High-dimensional vector search proposes candidate items; deterministic engineering rules (ASME B16.5, ASME B16.34, API 6D) gate and authorize matches.
-3. **Loop Engineering**: Every phase concludes with automated verification scripts that execute test matrices, measure deviations against physical standards, and halt progression until 100% convergence is achieved.
-4. **Ponytail Discipline**: Minimum complexity that achieves the objective. Standard libraries and direct implementations over convoluted layers.
+1. **Ponytail Discipline**: YAGNI over aspirational architecture. Minimum complexity that achieves the objective. Standard libraries and direct implementations over convoluted layers.
+2. **Evidence Before Assertions**: (Verification-Before-Completion) Every phase must be verifiably complete with hard evidence (tests passing, DB persisted) before moving on.
+3. **Deterministic Safety Rules**: The ASME/API rules are the source of truth. Any ML/NLP components are subservient to deterministic safety rules. 
+4. **Lean Build**: Focus strictly on the gap between the code review reality and a shipping product, cutting out PRD features that aren't on the critical path.
 
 ---
 
 ## 2. Six-Phase Delivery Sequence
 
 ```mermaid
-flowchart LR
-    P1["Phase 1: Foundation & DB Setup"] --> P2["Phase 2: NLP Normalization Engine"]
-    P2 --> P3["Phase 3: Hybrid Matcher & Safety Gate"]
-    P3 --> P4["Phase 4: Full-Stack Web Application"]
-    P4 --> P5["Phase 5: Inter-CPSE Surplus & Demand"]
-    P5 --> P6["Phase 6: Hardening & Enterprise Pilot"]
+flowchart TD
+    P0["Phase 0: Stop the bleeding (1-2 days)"] --> P1["Phase 1: Make the database real (1-2 weeks)"]
+    P1 --> P4["Phase 4: Load and safety validation (1 week)"]
+    P1 --> P2["Phase 2: Decide matching architecture (2-3 days)"]
+    
+    P3["Phase 3: Real auth (Parallel track)"] --> P5
+    P4 --> P5["Phase 5: Pilot rollout"]
 ```
 
-### Phase 1: Foundation & Environment Setup
+### Phase 0: Stop the bleeding (1–2 days)
+*Status: Completed*
 
-- **Scope**: PostgreSQL 16 with `pgvector`, Redis 7, Python 3.11 FastAPI project scaffold, React 19 Vite scaffold.
+- **Scope**: Security triage and critical configuration fixes before doing feature work.
 - **Tasks**:
-  1. Author `docker-compose.yml` configuring `pgvector/pgvector:pg16` and `redis:7-alpine`.
-  2. Implement database migrations via Alembic creating all 10 core tables: `organizations`, `users`, `raw_materials`, `cleansed_materials`, `material_embeddings`, `unified_master_codes`, `duplicate_clusters`, `material_mappings`, `pooled_demands`, and `audit_logs`.
-  3. Create HNSW cosine vector index with `m = 16, ef_construction = 64`.
-  4. Scaffold React 19 Vite application configured with `@stylexjs/stylex` and `@astryxdesign/core`.
-- **Verification Gate**:
-  ```powershell
-  docker compose up -d
-  python -c "import psycopg2; print('PostgreSQL connection verified')"
-  ```
+  1. `main.py`: Replace `allow_origins=["*"]` with an explicit allowlist from settings.
+  2. Pull all default passwords (`numm_secure_pass`, `alembic.ini`'s hardcoded connection string) out of committed files into `.env` / secrets, and rotate them.
+  3. `core/security.py`: Flip `HTTPBearer(auto_error=False)` behavior so routes are auth-required by default, with an explicit opt-out for `/health` only.
+  4. Add `USE_SQLITE=false` as the required prod setting and fail startup loudly if Postgres isn't reachable.
 
 ---
 
-### Phase 2: NLP Normalization & Attribute Extraction Engine
+### Phase 1: Make the database real (1–2 weeks — highest leverage)
+*Status: Pending*
 
-- **Scope**: Abbreviation expansion, parametric regex extraction, and physical unit conversion.
+- **Scope**: Move every endpoint from module-level Python dicts to real, persistent queries.
 - **Tasks**:
-  1. Implement `DomainNormalizer` dictionary expanding 250+ Oil & Gas acronyms (`VLV` -> `VALVE`, `FLG` -> `FLANGED`, `CS` -> `CARBON STEEL`, `SS316` -> `STAINLESS STEEL 316`).
-  2. Implement regex attribute extractor resolving:
-     - `item_class` (Ball Valve, Gate Valve, Globe Valve, Check Valve, Weld Neck Flange, Spiral Wound Gasket, Line Pipe).
-     - `size_inch` and `size_mm` (metric-imperial bidirectional conversion).
-     - `pressure_class` (150#, 300#, 600#, 900#, 1500#, 2500# / PN equivalents).
-     - `metallurgy` (ASTM A105, A216 WCB, A106 Gr B, A350 LF2, A182 F316).
-     - `standards` (API 6D, ASME B16.5, ASME B16.34, ASME B16.20).
-  3. Map extracted attributes to Shell MESC Group (74/76/60/27) and UNSPSC Class (40141600/40141700/31181502).
+  1. **Ingestion → `raw_materials` / `cleansed_materials`**: `ingest.py`'s `_process_items_sync` must `INSERT` each parsed item via the async session instead of writing to `_INGESTED_RECORDS`. 
+  2. **Embeddings → `material_embeddings`**: Generate and store the embedding vector per cleansed material once records persist.
+  3. **Steward queue → `material_mappings`**: Replace `_TRIAGE_ITEMS` with a real query where `mapping_status='PENDING_REVIEW'`; `record_steward_decision` must `UPDATE` the row.
+  4. **Search → `unified_master_codes` + `cleansed_materials`**: Replace `CANONICAL_MASTER_ITEMS`. Implement metadata filtering (exact `item_class`/`size`/`pressure` matches) before adding vector similarity.
+  5. **Audit chain → `audit_logs` table**: `CVCAuditService._chain` must read/write the table instead of an in-memory list. The hash-chain-link logic survives restarts.
+  6. **Demand pooling → `pooled_demands`**: Move from in-memory objects to actual database queries.
 - **Verification Gate**:
-  ```powershell
-  pytest tests/test_normalization.py -v
-  ```
-  Expected outcome: Extraction accuracy ≥ 95.0% across test fixtures.
+  - Kill the server process mid-session and restart it. Every piece of data (ingested items, steward decisions, audit blocks) must still be there. 
 
 ---
 
-### Phase 3: Hybrid Matcher, Vector Indexing & Safety Rule Gates
+### Phase 2: Decide the matching architecture honestly (2–3 days)
+*Status: Pending*
 
-- **Scope**: BGE dense vector embeddings, RapidFuzz lexical scoring, and ASME safety gating.
-- **Tasks**:
-  1. Integrate `BAAI/bge-large-en-v1.5` dense embedding generator via `sentence-transformers`.
-  2. Implement hybrid scoring function:
-     $$\text{Score} = 0.65 \times \text{Semantic} + 0.35 \times \text{Lexical}$$
-  3. Implement inviolable `SafetyGate`:
-     - Disqualifies candidates if pressure classes or nominal sizes mismatch.
-     - Enforces NACE MR0175 sour gas service segregation.
-  4. Implement deterministic `ONMCMinter` generating sovereign codes with SHA-256 validation hash.
+- **Scope**: Formally resolve the disconnect between the docs and the code regarding deterministic vs. ML matching.
+- **Decision Options**:
+  - **Option A (Recommended)**: Keep deterministic attribute/lexical matcher as primary. Document it as the actual architecture and reposition BGE embeddings as an optional fuzzy-recall layer.
+  - **Option B**: Wire in `sentence-transformers` + BGE, generate embeddings on ingest, and add real `pgvector` HNSW query as a first-pass candidate retrieval step before the safety gate filters.
 - **Verification Gate**:
-  ```powershell
-  python verify_poc_and_tests.py
-  ```
-  Expected outcome: 100% convergence across safety tests; 0.0% false-positive pressure/size mismatches.
+  - A written architectural decision record (ADR) or updated `TECH_STACK.md` that perfectly matches the executed code.
 
 ---
 
-### Phase 4: Full-Stack Web Application (FastAPI + Astryx + StyleX)
+### Phase 3: Real auth (Parallel track)
+*Status: Ongoing*
 
-- **Scope**: Production UI and API implementation.
+- **Scope**: True RBAC and SSO integration.
 - **Tasks**:
-  1. Implement FastAPI REST routes: `/api/v1/ingest`, `/api/v1/search`, `/api/v1/steward/queue`, `/api/v1/steward/decision`.
-  2. Build Astryx + StyleX frontend layout:
-     - Humanto warm sovereign aesthetic (`tokens.stylex.ts`).
-     - Asymmetric split view (`380px` sticky inspector + `1fr` virtualized TanStack table).
-     - Keyboard event listener handling <kbd>J</kbd>, <kbd>K</kbd>, <kbd>A</kbd>, <kbd>R</kbd>, <kbd>E</kbd>, <kbd>N</kbd>.
-     - `MaterialDiffCard` with attribute conflict highlighting.
+  1. Kick off MeghRaj SSO onboarding conversation with NIC (institutional task).
+  2. Implement real SAML 2.0 / OIDC token exchange in `meghraj_auth_service.py` behind a feature flag. Keep `/demo-tokens` working only when `ENVIRONMENT=development`.
+  3. Apply RBAC role checks (`require_steward`, `require_procurement`) to every mutating endpoint, auditing `record_steward_decision` and MTIRF approvals in particular.
 - **Verification Gate**:
-  ```powershell
-  pnpm test
-  pnpm build
-  ```
-  Expected outcome: Zero TypeScript or StyleX compilation errors; bundle size < 180kB gzip.
+  - `/demo-tokens` fails in production. Mutating endpoints correctly reject unauthorized roles with HTTP 403.
 
 ---
 
-### Phase 5: Inter-CPSE Surplus Discovery & Pooled Demand Engine
+### Phase 4: Load and safety validation (1 week, after Phase 1)
+*Status: Pending*
 
-- **Scope**: Cross-company inventory visibility and joint procurement tendering.
+- **Scope**: Validate performance claims and safety constraints against real-world data volumes and edge cases.
 - **Tasks**:
-  1. Implement geographic distance calculation between CPSE plants (e.g. IOCL Mathura, ONGC Hazira, BPCL Mumbai).
-  2. Build Inter-CPSE Material Transfer Requisition Form (MTIRF) generator.
-  3. Implement demand pooling aggregator computing volume discount savings (8% to 16% tiers).
-  4. Integrate GeM Category ID linking for Rule 149 GFR procurement compliance.
+  1. Load-test search latency against a multi-hundred-thousand-row dataset in Postgres to validate sub-50ms p95 claims.
+  2. Build an adversarial test set for the safety gate: near-miss sizes, unit ambiguity (`150#` vs `PN 20` vs `CL150`), and sour-service segregation.
+  3. Re-run `verify_poc_and_tests.py` and `TEST_CASES.md` against the *database-backed* endpoints, not standalone functions.
 - **Verification Gate**:
-  ```powershell
-  pytest tests/test_demand_pooling.py -v
-  ```
+  - Load test metrics published. 100% pass rate on adversarial safety tests against live endpoints.
 
 ---
 
-### Phase 6: Enterprise Hardening, GeM/SAP Integration & Pilot Deployment
+### Phase 5: Pilot rollout
+*Status: Pending*
 
-- **Scope**: CVC audit logging, role-based access control, and pilot deployment.
+- **Scope**: Production deployment to pilot sites.
 - **Tasks**:
-  1. Implement append-only SHA-256 cryptographic audit chain for all steward actions.
-  2. Configure OAuth2 / SAML 2.0 SSO with NIC MeghRaj Cloud authentication.
-  3. Execute end-to-end simulation across 50,000 real CPSE catalog rows.
-  4. Produce final deployment container bundle and operational runbook.
+  1. Deploy to four named pilot refineries (IOCL Mathura, ONGC Hazira, BPCL Mumbai, HPCL Vizag) per BG-02.
+  2. Backup/restore drill: Execute documented `pg_dump`/`pg_restore` cycle before go-live.
+  3. GeM API institutional access integration.
 - **Verification Gate**:
-  ```powershell
-  pytest tests/test_security_audit.py -v
-  ```
-  Expected outcome: 100% audit chain integrity verified; sub-50ms query latency under load.
+  - Successful deployment to pilot sites and confirmed data restoration from backup.

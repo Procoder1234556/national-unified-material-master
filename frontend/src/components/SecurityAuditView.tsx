@@ -220,7 +220,7 @@ export const SecurityAuditView: React.FC<Props> = ({
                 marginTop: "6px",
               }}
             >
-              Cryptographic Security & CVC Audit Trail Cockpit
+              100% CVC Audit Compliance. Instantly Verifiable.
             </h2>
             <p
               style={{
@@ -230,9 +230,7 @@ export const SecurityAuditView: React.FC<Props> = ({
                 maxWidth: "720px",
               }}
             >
-              Every human-in-the-loop decision, novel ONMC minting event, and
-              inter-CPSE material transfer is permanently sealed into an
-              immutable SHA-256 cryptographic chain.
+              Sleep easy knowing every decision is auditable. Every catalog merge, new code mint, and inter-refinery transfer is permanently sealed into a tamper-proof cryptographic chain for CVC inspectors.
             </p>
           </div>
 
@@ -527,7 +525,7 @@ export const SecurityAuditView: React.FC<Props> = ({
                 color: rawTokens.textPrimary,
               }}
             >
-              Sequential Audit Ledger (Append-Only Hash Chain)
+              The Immutable Ledger
             </h3>
             <p
               style={{
@@ -536,8 +534,7 @@ export const SecurityAuditView: React.FC<Props> = ({
                 marginTop: "2px",
               }}
             >
-              Each block cryptographically encapsulates the prior block's hash,
-              preventing retroactive alteration or erasure.
+              Every transaction locks in the history before it. Retroactive changes are mathematically impossible.
             </p>
           </div>
           <button
@@ -821,3 +818,4 @@ export const SecurityAuditView: React.FC<Props> = ({
     </div>
   );
 };
+

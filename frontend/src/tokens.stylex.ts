@@ -26,6 +26,7 @@ export const rawTokens = {
   fontSans:
     "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
   fontMono: "'JetBrains Mono', 'Fira Code', monospace",
+  fontCalligraphy: "'Dancing Script', 'Palatino Linotype', cursive",
 
   // Font Sizes
   textXs: "0.75rem", // 12px

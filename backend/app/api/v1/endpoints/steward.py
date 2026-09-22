@@ -183,13 +183,59 @@ for s in _SEED_DATA:
     _TRIAGE_ITEMS[s["id"]] = item
 
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from sqlalchemy.orm import joinedload
+from fastapi import Depends
+from backend.app.db.session import get_db
+from backend.app.models.models import MaterialMapping, RawMaterial, UnifiedMasterCode, CleansedMaterial, Organization
+
 @router.get("/queue", response_model=TriageQueueResponse, summary="Get HITL steward triage queue")
-async def get_steward_queue():
+async def get_steward_queue(session: AsyncSession = Depends(get_db)):
     """
     Returns pending borderline candidate pairs requiring data steward inspection.
     Includes side-by-side attribute diffs and ASME/API safety flags.
     """
-    pending = [item for item in _TRIAGE_ITEMS.values() if item.mapping_status == "PENDING_REVIEW"]
+    stmt = (
+        select(MaterialMapping)
+        .options(
+            joinedload(MaterialMapping.raw_material).joinedload(RawMaterial.organization),
+            joinedload(MaterialMapping.unified_master)
+        )
+        .where(MaterialMapping.mapping_status == "PENDING_REVIEW")
+    )
+    result = await session.execute(stmt)
+    mappings = result.scalars().all()
+    
+    pending = []
+    for m in mappings:
+        raw = m.raw_material
+        master = m.unified_master
+        
+        diffs = _generate_attribute_diffs(raw.raw_description, master.canonical_description) if (raw and master) else []
+        
+        item = TriageQueueItem(
+            mapping_id=m.id,
+            raw_material_id=m.raw_material_id,
+            organization_code=raw.organization.code if raw and raw.organization else "UNKNOWN",
+            plant_location=raw.plant_location if raw else "",
+            source_item_code=raw.source_item_code if raw else "",
+            raw_description=raw.raw_description if raw else "",
+            onmc_candidate_code=master.onmc_code if master else "",
+            canonical_description=master.canonical_description if master else "",
+            confidence_score=float(m.confidence_score),
+            lexical_similarity=float(m.lexical_similarity),
+            semantic_similarity=float(m.semantic_similarity),
+            rule_gate_passed=m.rule_gate_passed,
+            rejection_reasons=[],
+            shell_mesc_code=master.shell_mesc_code if master else None,
+            unspsc_code=master.unspsc_code if master else None,
+            gem_category_id=master.gem_category_id if master else None,
+            attribute_diffs=diffs,
+            mapping_status=m.mapping_status,
+        )
+        pending.append(item)
+        
     return TriageQueueResponse(
         total_pending=len(pending),
         items=pending,
@@ -199,22 +245,28 @@ async def get_steward_queue():
 @router.post(
     "/decision", response_model=StewardDecisionResponse, summary="Record data steward decision with audit hash"
 )
-async def record_steward_decision(req: StewardDecisionRequest):
+async def record_steward_decision(
+    req: StewardDecisionRequest,
+    session: AsyncSession = Depends(get_db)
+):
     """
     Records data steward approval, rejection, override, or novel code minting.
     Produces an immutable SHA-256 cryptographic hash compliant with CVC and CAG audit norms.
     """
-    if req.mapping_id not in _TRIAGE_ITEMS:
-        # Fallback for dynamic/newly uploaded mappings
-        target_item = None
-    else:
-        target_item = _TRIAGE_ITEMS[req.mapping_id]
+    stmt = select(MaterialMapping).options(joinedload(MaterialMapping.raw_material)).where(MaterialMapping.id == req.mapping_id)
+    result = await session.execute(stmt)
+    target_mapping = result.scalars().first()
 
     timestamp = datetime.now(timezone.utc)
     audit_id = uuid.uuid4()
-    onmc_code = target_item.onmc_candidate_code if target_item else "ONMC-SOV-NEW-0000"
+    
+    onmc_code = "ONMC-SOV-NEW-0000"
+    if target_mapping and target_mapping.unified_master_id:
+        master_res = await session.execute(select(UnifiedMasterCode).where(UnifiedMasterCode.id == target_mapping.unified_master_id))
+        master = master_res.scalars().first()
+        if master:
+            onmc_code = master.onmc_code
 
-    # Compute tamper-evident audit hash
     hash_payload = f"{req.actor_email}:{req.decision}:{req.mapping_id}:{req.justification}:{timestamp.isoformat()}"
     sha256_hash = hashlib.sha256(hash_payload.encode("utf-8")).hexdigest()
 
@@ -226,7 +278,7 @@ async def record_steward_decision(req: StewardDecisionRequest):
         msg = "Candidate match rejected. Item quarantined from cluster."
     elif req.decision == "MINT":
         new_status = "MINTED_NOVEL"
-        raw_desc = target_item.raw_description if target_item else "CUSTOM ITEM"
+        raw_desc = target_mapping.raw_material.raw_description if target_mapping and target_mapping.raw_material else "CUSTOM ITEM"
         attrs = default_extractor.extract(raw_desc)
         base = default_onmc_minter.mint_base_code(attrs)
         v_hash = default_onmc_minter.compute_verification_hash(base)
@@ -238,11 +290,12 @@ async def record_steward_decision(req: StewardDecisionRequest):
     else:
         raise HTTPException(status_code=400, detail="Invalid steward decision.")
 
-    if target_item:
-        target_item.mapping_status = new_status
+    if target_mapping:
+        target_mapping.mapping_status = new_status
+        await session.commit()
 
-    # Record into append-only cryptographic audit chain
-    audit_block = default_cvc_audit_service.record_action(
+    audit_block = await default_cvc_audit_service.record_action(
+        session=session,
         actor_email=req.actor_email,
         actor_role="STEWARD",
         action=f"STEWARD_{req.decision}",
@@ -258,17 +311,6 @@ async def record_steward_decision(req: StewardDecisionRequest):
     )
     audit_id = uuid.UUID(audit_block["audit_id"])
     sha256_hash = audit_block["block_hash"]
-
-    # Record into legacy in-memory store
-    _AUDIT_LOG_STORE[audit_id] = {
-        "id": audit_id,
-        "actor": req.actor_email,
-        "decision": req.decision,
-        "mapping_id": req.mapping_id,
-        "justification": req.justification,
-        "sha256_hash": sha256_hash,
-        "timestamp": timestamp,
-    }
 
     return StewardDecisionResponse(
         mapping_id=req.mapping_id,

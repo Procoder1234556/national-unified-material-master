@@ -450,7 +450,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
                   color: rawTokens.textPrimary,
                 }}
               >
-                Available Inter-CPSE Surplus Stock ({surplusList.length} items
+                Surplus Stock Ready for Transfer ({surplusList.length} items
                 within {maxRadius} km)
               </h3>
               <span
@@ -1245,7 +1245,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
                     marginTop: "6px",
                   }}
                 >
-                  Material Transfer Inter-Company Requisition Form (MTIRF)
+                  Transfer Surplus Stock Now (MTIRF)
                 </h2>
                 <div
                   style={{
@@ -2148,3 +2148,4 @@ export const SurplusAndDemandView: React.FC<Props> = ({
     </div>
   );
 };
+

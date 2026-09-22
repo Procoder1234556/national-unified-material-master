@@ -79,11 +79,11 @@ export const CPSEHeatmap: React.FC = () => {
         <div>
           <div
             style={{
-              fontSize: "11px",
+              fontSize: "16px",
               fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
-              color: rawTokens.textMuted,
+              fontFamily: rawTokens.fontCalligraphy,
+              letterSpacing: "0em",
+              color: rawTokens.textPrimary,
             }}
           >
             CPSE Activity

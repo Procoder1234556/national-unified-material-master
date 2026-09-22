@@ -9,12 +9,14 @@ class Settings(BaseSettings):
     ENVIRONMENT: str = "development"
 
     # Database configuration
-    USE_SQLITE: bool = True
+    USE_SQLITE: bool = False
     POSTGRES_USER: str = "numm_admin"
-    POSTGRES_PASSWORD: str = "numm_secure_pass"
+    POSTGRES_PASSWORD: str = ""
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "numm_master"
+    
+    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
     # SQLite fallback file
     SQLITE_DB_PATH: str = "./numm_dev.db"

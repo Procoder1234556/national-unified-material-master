@@ -9,8 +9,8 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from backend.app.schemas.auth import UserSession
 from backend.app.services.meghraj_auth_service import default_meghraj_auth
 
-# Auto-error False allows optional auth in dev / pilot environments
-bearer_scheme = HTTPBearer(auto_error=False)
+# Auto-error True enforces auth presence at the schema level
+bearer_scheme = HTTPBearer(auto_error=True)
 
 
 async def get_current_user(

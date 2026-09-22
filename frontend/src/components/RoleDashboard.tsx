@@ -3,6 +3,7 @@
 
 import React, { useState } from "react";
 import { rawTokens } from "../tokens.stylex";
+import { Pagination } from "./Pagination";
 import {
   Sparkline,
   SparkBar,
@@ -50,6 +51,7 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
   onSearchQuery,
   onInspectONMC,
 }) => {
+  const [currentPage, setCurrentPage] = useState(1);
   const [searchHeroText, setSearchHeroText] = useState(
     "2 inch 150# flanged ball valve CS A105"
   );
@@ -197,13 +199,13 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
               }}
             >
               {activeRole === "STEWARD" &&
-                "Good morning. Here's your catalog stewardship queue."}
+                "Clear the Backlog. Your Triage Queue is Ready."}
               {activeRole === "PROCUREMENT_OFFICER" &&
-                "Pre-Procurement Discovery & Pooled Demand Dashboard."}
+                "Stop Buying Duplicates. The National Surplus Locator."}
               {activeRole === "PLANT_ENGINEER" &&
-                "Emergency Spare Discovery & Inter-Refinery Surplus Inventory."}
+                "Find Emergency Spares Before the Plant Shuts Down."}
               {activeRole === "AUDITOR" &&
-                "Sovereign Catalog Harmonization & Immutable Audit Ledger."}
+                "Verify Compliance. The CVC Immutable Audit Ledger."}
             </h1>
             <p
               style={{
@@ -214,13 +216,13 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
               }}
             >
               {activeRole === "STEWARD" &&
-                "Review borderline duplicate clusters (70% - 91% confidence), enforce ASME physical safety gates, and resolve cross-CPSE material discrepancies across IOCL, ONGC, and BPCL."}
+                "Don't let catalog deduplication take months. Resolve borderline clusters instantly, enforce ASME physical safety gates, and unify materials across IOCL, ONGC, and BPCL."}
               {activeRole === "PROCUREMENT_OFFICER" &&
-                "Prevent duplicate purchases by querying national inventories before issuing tenders. Aggregate scheduled CPSE demands to unlock bulk GeM volume discounts."}
+                "Check national inventory before you write that tender. Comply with GFR Rule 149 automatically and aggregate CPSE demand to unlock bulk GeM volume discounts."}
               {activeRole === "PLANT_ENGINEER" &&
-                "Discover critical insurance spares in neighboring CPSE refineries within 100 km. Initiate digital MTIRF requisitions to eliminate shutdown delays."}
+                "When a plant goes down, every minute costs money. Instantly locate critical insurance spares in neighboring CPSE refineries within 100 km and initiate digital MTIRFs."}
               {activeRole === "AUDITOR" &&
-                "Inspect cryptographically signed triage actions, verify append-only SHA-256 decision hashes, and monitor deterministic safety gate disqualification metrics."}
+                "100% transparency. Verify cryptographically signed triage actions, trace append-only SHA-256 decision hashes, and monitor safety gate disqualification metrics."}
             </p>
           </div>
         </div>
@@ -2343,3 +2345,4 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
     </div>
   );
 };
+

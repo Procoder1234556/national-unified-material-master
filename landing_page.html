@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Humante — Strategic Fractional Head of People</title>
+<!-- Google Fonts & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@100..900&family=Plus+Jakarta+Sans:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS with Forms and Container Queries -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config as mandated -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "on-tertiary": "#ffffff",
+            "on-error-container": "#93000a",
+            "primary": "#000000",
+            "on-tertiary-fixed": "#251912",
+            "on-secondary": "#ffffff",
+            "surface-bright": "#fff8f5",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#fd9e7e",
+            "on-surface": "#211a16",
+            "on-primary-container": "#8d817d",
+            "tertiary-container": "#251912",
+            "background": "#fff8f5",
+            "surface-tint": "#665c58",
+            "on-secondary-fixed-variant": "#76331a",
+            "on-secondary-container": "#76331b",
+            "surface-container-high": "#f3e6de",
+            "surface": "#fff8f5",
+            "surface-variant": "#ede0d8",
+            "tertiary": "#000000",
+            "primary-container": "#211a17",
+            "error": "#ba1a1a",
+            "on-tertiary-fixed-variant": "#53443b",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#d1c4bf",
+            "error-container": "#ffdad6",
+            "surface-container": "#f9ebe4",
+            "outline-variant": "#d1c4bf",
+            "on-primary-fixed-variant": "#4e4541",
+            "on-surface-variant": "#4e4541",
+            "tertiary-fixed": "#f5ded2",
+            "secondary": "#93492f",
+            "secondary-fixed": "#ffdbcf",
+            "primary-fixed-dim": "#d1c4bf",
+            "tertiary-fixed-dim": "#d8c2b7",
+            "on-primary-fixed": "#211a17",
+            "inverse-on-surface": "#fceee6",
+            "on-secondary-fixed": "#390c00",
+            "surface-dim": "#e5d7d0",
+            "secondary-fixed-dim": "#ffb59c",
+            "inverse-surface": "#362f2a",
+            "on-tertiary-container": "#928076",
+            "primary-fixed": "#eedfda",
+            "outline": "#807571",
+            "surface-container-low": "#fff1e9",
+            "on-background": "#211a16",
+            "surface-container-highest": "#ede0d8",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "1rem",
+            "lg": "2rem",
+            "xl": "3rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "gutter-mobile": "1rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1.25rem",
+            "space-md": "1rem",
+            "margin": "3rem",
+            "space-xl": "2.5rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "display": ["Playfair Display"],
+            "label-md": ["Plus Jakarta Sans"],
+            "display-mobile": ["Playfair Display"],
+            "headline-sm": ["Playfair Display"],
+            "headline-md": ["Playfair Display"],
+            "headline-lg-mobile": ["Playfair Display"],
+            "body-sm": ["Plus Jakarta Sans"],
+            "headline-lg": ["Playfair Display"],
+            "title-lg": ["Plus Jakarta Sans"],
+            "body-lg": ["Plus Jakarta Sans"],
+            "body-md": ["Plus Jakarta Sans"],
+            "title-md": ["Plus Jakarta Sans"],
+            "label-sm": ["Plus Jakarta Sans"]
+          },
+          "fontSize": {
+            "display": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "600" }],
+            "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600" }],
+            "display-mobile": ["38px", { "lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "headline-sm": ["22px", { "lineHeight": "30px", "fontWeight": "500" }],
+            "headline-md": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "500" }],
+            "headline-lg-mobile": ["30px", { "lineHeight": "38px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }],
+            "headline-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.015em", "fontWeight": "600" }],
+            "title-lg": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+            "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+            "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "title-md": ["16px", { "lineHeight": "24px", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "16px", "letterSpacing": "0.06em", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .editorial-gradient {
+      background: radial-gradient(120% 80% at 50% 0%, #FFF0E8 0%, #FFF8F5 55%, #FFFFFF 100%);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 16px 40px -12px rgba(33, 26, 22, 0.05);
+    }
+    .glass-card-hover {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glass-card-hover:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 48px -12px rgba(33, 26, 22, 0.09);
+      border-color: rgba(253, 158, 126, 0.45);
+    }
+    .warm-glow {
+      box-shadow: 0 10px 30px -5px rgba(253, 158, 126, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-surface text-on-surface antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed font-body-md text-body-md overflow-x-hidden">
+<!-- TOP APP BAR (Shared Component Anchor) -->
+<header class="docked full-width top-0 sticky z-50 bg-surface/80 dark:bg-surface/80 backdrop-blur-md shadow-sm dark:shadow-none border-b border-outline-variant/30 dark:border-outline-variant/20">
+<div class="flex justify-between items-center w-full px-6 md:px-12 max-w-7xl mx-auto h-20">
+<!-- Left: Brand Logo & Wordmark -->
+<div class="flex items-center gap-8">
+<a class="font-headline-md text-headline-md tracking-tight text-on-surface dark:text-on-surface flex items-center gap-2 group" href="#">
+<span class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-headline-sm text-headline-sm font-semibold transition-transform duration-200 group-hover:scale-105">H</span>
+<span>Humante</span>
+</a>
+<!-- Desktop Navigation Cluster -->
+<nav class="hidden md:flex items-center gap-8 pl-4">
+<a class="text-primary dark:text-primary font-title-md text-title-md hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#services">Services</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#fractional-model">Fractional Model</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#case-studies">Case Studies</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#about">About</a>
+<a class="text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md hover:text-primary dark:hover:text-primary transition-colors duration-200" href="#insights">Insights</a>
+</nav>
+</div>
+<!-- Right: Action & Mobile Menu Toggle -->
+<div class="flex items-center gap-4">
+<a class="hidden sm:inline-flex items-center justify-center px-6 py-2.5 rounded-full bg-primary text-on-primary font-title-md text-title-md active:scale-[0.98] transition-all duration-150 hover:bg-surface-tint hover:shadow-md" href="#contact">
+          Book a call
+        </a>
+<!-- Mobile Drawer Trigger Button -->
+<button aria-label="Open Navigation Menu" class="md:hidden p-2 rounded-full text-on-surface hover:bg-surface-container active:scale-[0.98] transition-transform" id="drawerToggle">
+<span class="material-symbols-outlined text-[26px]">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- NAVIGATION DRAWER (Shared Component Anchor) -->
+<div class="fixed inset-0 bg-primary/20 backdrop-blur-sm z-40 hidden transition-opacity duration-300 opacity-0" id="drawerOverlay"></div>
+<aside class="docked h-full w-80 fixed right-0 top-0 z-50 bg-surface dark:bg-surface border-l border-outline-variant/30 dark:border-outline-variant/20 shadow-xl dark:shadow-none translate-x-full transition-transform duration-300 ease-out flex flex-col h-full p-6 w-80 max-w-full" id="navDrawer">
+<div class="flex items-center justify-between pb-6 border-b border-outline-variant/20">
+<div>
+<span class="font-headline-sm text-headline-sm text-on-surface dark:text-on-surface">Humante</span>
+<p class="text-label-sm font-label-sm text-on-surface-variant tracking-wider uppercase">Executive Advisory</p>
+</div>
+<button class="p-2 rounded-full hover:bg-surface-container active:scale-[0.99] text-on-surface" id="drawerClose">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="mt-6">
+<h3 class="font-title-lg text-title-lg text-on-surface mb-4">Humante Executive Advisory</h3>
+<nav class="flex flex-col gap-1.5">
+<a class="flex items-center gap-3 px-4 py-3 bg-surface-container dark:bg-surface-container text-on-surface dark:text-on-surface font-title-md text-title-md rounded-lg active:scale-[0.99] transition-transform duration-150" href="#services">
+<span class="material-symbols-outlined text-[20px]">business_center</span>
+<span>Services</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-high hover:text-on-surface dark:hover:text-on-surface transition-colors duration-200" href="#fractional-model">
+<span class="material-symbols-outlined text-[20px]">view_quilt</span>
+<span>Fractional Model</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-high hover:text-on-surface dark:hover:text-on-surface transition-colors duration-200" href="#case-studies">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Case Studies</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-high hover:text-on-surface dark:hover:text-on-surface transition-colors duration-200" href="#about">
+<span class="material-symbols-outlined text-[20px]">person</span>
+<span>About</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-on-surface-variant font-body-md text-body-md rounded-lg hover:bg-surface-container-high dark:hover:bg-surface-container-high hover:text-on-surface dark:hover:text-on-surface transition-colors duration-200" href="#insights">
+<span class="material-symbols-outlined text-[20px]">article</span>
+<span>Insights</span>
+</a>
+</nav>
+</div>
+<div class="mt-auto pt-6 border-t border-outline-variant/20">
+<a class="flex items-center justify-center w-full py-3 rounded-full bg-primary text-on-primary font-title-md text-title-md active:scale-[0.98]" href="#contact">
+        Book a call
+      </a>
+</div>
+</aside>
+<main>
+<!-- HERO SECTION -->
+<section class="editorial-gradient pt-16 md:pt-24 pb-20 border-b border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-6 md:px-12 text-center">
+<!-- Executive Pill Badge -->
+<div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-surface-container border border-secondary-container/40 text-on-secondary-container mb-8">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">FRACTIONAL HEAD OF PEOPLE</span>
+</div>
+<!-- Editorial Headline -->
+<h1 class="font-display text-display md:text-[68px] md:leading-[76px] text-on-surface max-w-4xl mx-auto tracking-tight font-medium">
+          A Fractional Head of People For Startups & Scaleups
+        </h1>
+<!-- Subheadline -->
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mt-6">
+          Strategic HR leadership when you need it. Minus the full-time overhead. Scale your culture, compliance, and leadership team with precision.
+        </p>
+<!-- CTA & Social Proof -->
+<div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-6">
+<a class="px-8 py-4 rounded-full bg-primary text-on-primary font-title-md text-title-md flex items-center gap-3 group warm-glow active:scale-[0.98] transition-all hover:bg-surface-tint" href="#contact">
+<span>Let's connect</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+<!-- Social Proof Avatar Stack -->
+<div class="flex items-center gap-3">
+<div class="flex -space-x-2.5">
+<span class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-surface-container-high flex items-center justify-center font-bold text-xs text-on-surface-variant">SC</span>
+<span class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-secondary-fixed flex items-center justify-center font-bold text-xs text-on-secondary-fixed">MR</span>
+<span class="inline-block h-10 w-10 rounded-full ring-2 ring-surface bg-tertiary-fixed flex items-center justify-center font-bold text-xs text-on-tertiary-fixed">AL</span>
+</div>
+<div class="text-left">
+<div class="flex items-center gap-1 text-secondary">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-title-md text-title-md text-on-surface font-semibold">4.9/5</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">from 30+ venture-backed founders</p>
+</div>
+</div>
+</div>
+<!-- Monochromatic Client Logo Strip -->
+<div class="mt-16 pt-10 border-t border-outline-variant/30">
+<p class="font-label-sm text-label-sm text-outline uppercase tracking-widest mb-6">Trusted by leadership teams backed by top-tier venture funds</p>
+<div class="flex flex-wrap justify-center items-center gap-8 md:gap-14 opacity-75 grayscale hover:grayscale-0 transition-all duration-300">
+<span class="font-display text-xl font-bold tracking-widest text-on-surface/80">VERCEL</span>
+<span class="font-display text-xl font-medium tracking-tight text-on-surface/80">Lattice</span>
+<span class="font-display text-xl font-semibold tracking-wide text-on-surface/80">NOTION</span>
+<span class="font-display text-xl font-medium italic text-on-surface/80">loom</span>
+<span class="font-display text-xl font-bold tracking-tight text-on-surface/80">RAMP</span>
+<span class="font-display text-xl font-semibold tracking-wider text-on-surface/80">Retool</span>
+</div>
+</div>
+</div>
+</section>
+<!-- STAGE PROGRESSION CARDS (Start where you are) -->
+<section class="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto" id="fractional-model">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Tailored Engagement</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-3">
+          Start where you are — then we'll guide you to the right next step
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-4">
+          People infrastructure must match your operational maturity. Flexible fractional bandwidth that flexes as you hit inflection points.
+        </p>
+</div>
+<!-- 3 Vertical Cards Grid -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Stage 1 -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between glass-card-hover relative">
+<div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface mb-6">
+<span class="material-symbols-outlined text-[24px]">flag</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Seed to Series A</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1 mb-3">Early-Stage Startup</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+              Essential HR audit & People Ops setup to insulate against foundational risks and establish initial team trust.
+            </p>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface border-t border-outline-variant/30 pt-6">
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Compliant multi-state payroll setup</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Executive handbook & core policies</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Standardized offer letters & IP assigns</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Foundational onboarding journey</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/20">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cadence: ~5-10 hrs / week</span>
+</div>
+</div>
+<!-- Stage 2 (Highlighted) -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between glass-card-hover relative border-2 border-secondary-container">
+<div class="absolute -top-3.5 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-secondary text-on-secondary font-label-sm text-label-sm uppercase tracking-wider font-semibold shadow-sm">
+            Most Popular
+          </div>
+<div>
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-fixed mb-6">
+<span class="material-symbols-outlined text-[24px]">trending_up</span>
+</div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-wider font-semibold">Series A to Series B</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1 mb-3">Scaling Fast</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+              Compensation band leveling, high-impact manager enablement, and performance feedback infrastructure.
+            </p>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface border-t border-outline-variant/30 pt-6">
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Compensation benchmarking & salary bands</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>First-time manager training & coaching</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Quarterly performance feedback cadence</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Talent pipeline metrics & ATS calibration</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/20">
+<span class="font-label-sm text-label-sm text-secondary font-semibold">Cadence: ~15-20 hrs / week</span>
+</div>
+</div>
+<!-- Stage 3 -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between glass-card-hover relative">
+<div>
+<div class="w-12 h-12 rounded-full bg-surface-container flex items-center justify-center text-on-surface mb-6">
+<span class="material-symbols-outlined text-[24px]">corporate_fare</span>
+</div>
+<span class="font-label-sm text-label-sm text-outline uppercase tracking-wider">Series B and Beyond</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mt-1 mb-3">Executive Stage</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6">
+              Executive advisory & C-Suite alignment, board compensation deck prep, VP search advisory, and international expansion.
+            </p>
+<ul class="space-y-3 font-body-sm text-body-sm text-on-surface border-t border-outline-variant/30 pt-6">
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Board of Directors compensation memos</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>VP/Director executive vetting & closing</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Distributed global entity compliance</span>
+</li>
+<li class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">check_circle</span>
+<span>Full-time Chief People Officer succession plan</span>
+</li>
+</ul>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/20">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Cadence: Strategic Retainer / Embedded</span>
+</div>
+</div>
+</div>
+</section>
+<!-- ELEGANT STAT STRIP -->
+<section class="border-y border-outline-variant/30 bg-surface-container-low py-12 px-6 md:px-12">
+<div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-outline-variant/30">
+<div class="px-6 pt-4 md:pt-0">
+<p class="font-display text-[44px] leading-tight text-on-surface font-semibold tracking-tight">68%</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Average First-Year Regretted Turnover Reduction</p>
+</div>
+<div class="px-6 pt-6 md:pt-0">
+<p class="font-display text-[44px] leading-tight text-on-surface font-semibold tracking-tight">3.4x</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Key Leadership Hiring Velocity with Structured Rubrics</p>
+</div>
+<div class="px-6 pt-6 md:pt-0">
+<p class="font-display text-[44px] leading-tight text-on-surface font-semibold tracking-tight">$280k+</p>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">Annual Overhead Saved vs. Full-Time CPO Package</p>
+</div>
+</div>
+</section>
+<!-- SERVICES GRID (3x2) -->
+<section class="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto" id="services">
+<div class="text-center max-w-3xl mx-auto mb-16">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Executive Expertise</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-3">
+          What can I do for you as your fractional head of people
+        </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-4">
+          Holistic, discreet leadership designed to untangle complex team dynamics while building institutional operational excellence.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Service 1 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">account_tree</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">People Ops & Architecture</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Design end-to-end employee lifecycle engines: HRIS integrations, automated offboarding, compliant contractor management, and clean audit logs.
+          </p>
+</div>
+<!-- Service 2 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">psychology</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Executive Coaching & Mentorship</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Confidential sounding board for founder CEOs and first-time executives, building resilience, clear boundary management, and high-trust communications.
+          </p>
+</div>
+<!-- Service 3 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">sync_alt</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Performance & Feedback Loops</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Lightweight, continuous performance management systems that replace painful annual reviews with high-signal quarterly growth cycles.
+          </p>
+</div>
+<!-- Service 4 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">groups</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Talent Acquisition Strategy</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Eliminate reliance on predatory contingency agencies. Build internal recruiter sourcing playbooks, scorecard interviews, and closing narratives.
+          </p>
+</div>
+<!-- Service 5 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">public</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Culture & Distributed Norms</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Crafting intentional operating manuals, asynchronous communication standards, and high-impact company-wide onsite agendas that foster real cohesion.
+          </p>
+</div>
+<!-- Service 6 -->
+<div class="glass-card rounded-lg p-8 glass-card-hover">
+<div class="w-12 h-12 rounded-xl bg-surface-container flex items-center justify-center text-secondary mb-6">
+<span class="material-symbols-outlined text-[26px]">balance</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-2">Compliance, Equity & Retention</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+            Multi-state employment legal frameworks, transparent equity compensation education, retention cliff management, and proactive risk insulation.
+          </p>
+</div>
+</div>
+</section>
+<!-- FOUR-STEP PATH SECTION WITH LAPTOP IMAGE https://lh3.googleusercontent.com/aida/AEtjO1XqJ6QcVVjinCsMh9L60Z7DePaXXf4roKC2WuStRt3X6mXX-y__CgSn8zHPZAyDeJIBJDUMhk-UjG98JKtn2i5tGBf2C6LzydPiXjbFhO-yOklg0N_dIbtmKkyGfloKZxiJqOX71OXrbfh8pQclN-7BR8Fo74kSTkfDl8f6rFrL9gWNv5US5JTcIbZP3C7ace7UNyd6t6QcdtUxP2PAyN6-lGFJEPSL5NcnT_q-st8qFXv9Yo8ccchLembM -->
+<section class="py-20 md:py-28 bg-surface-container/50 border-y border-outline-variant/20">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<!-- Left Column: Steps -->
+<div class="lg:col-span-7">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">The Engagement Blueprint</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2 mb-8">
+              A clear four-step path to scalable People Ops
+            </h2>
+<div class="space-y-8">
+<!-- Step 1 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold font-title-md shrink-0">
+                  1
+                </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Discovery & Comprehensive Diagnostic</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                    Confidential 1:1 stakeholder interviews, an exhaustive compliance and systems audit, and an engagement pulse survey to establish baseline reality.
+                  </p>
+</div>
+</div>
+<!-- Step 2 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold font-title-md shrink-0">
+                  2
+                </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Strategic Roadmap & 90-Day Sprint</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                    Prioritizing immediate liability patches and high-leverage organizational wins. Direct alignment with the CEO on target milestones.
+                  </p>
+</div>
+</div>
+<!-- Step 3 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold font-title-md shrink-0">
+                  3
+                </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Active Implementation & Embedded Leadership</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                    Acting as your real Head of People in Slack, leadership meetings, and manager coaching. Delivering tools, not just high-level slide decks.
+                  </p>
+</div>
+</div>
+<!-- Step 4 -->
+<div class="flex items-start gap-4">
+<div class="w-10 h-10 rounded-full bg-primary text-on-primary flex items-center justify-center font-bold font-title-md shrink-0">
+                  4
+                </div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">Scale, Handoff & Sustainable Playbooks</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mt-1">
+                    Codifying operating playbooks and orchestrating a smooth transition when you are genuinely ready to hire a full-time in-house executive.
+                  </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Laptop Visual https://lh3.googleusercontent.com/aida/AEtjO1XqJ6QcVVjinCsMh9L60Z7DePaXXf4roKC2WuStRt3X6mXX-y__CgSn8zHPZAyDeJIBJDUMhk-UjG98JKtn2i5tGBf2C6LzydPiXjbFhO-yOklg0N_dIbtmKkyGfloKZxiJqOX71OXrbfh8pQclN-7BR8Fo74kSTkfDl8f6rFrL9gWNv5US5JTcIbZP3C7ace7UNyd6t6QcdtUxP2PAyN6-lGFJEPSL5NcnT_q-st8qFXv9Yo8ccchLembM -->
+<div class="lg:col-span-5">
+<div class="relative rounded-2xl overflow-hidden glass-card p-3 shadow-2xl border border-outline-variant/40">
+<img alt="Humante executive leading a strategic video consultation while reviewing startup people analytics on laptop" class="w-full h-auto rounded-xl object-cover shadow-sm" src="https://lh3.googleusercontent.com/aida/AEtjO1XqJ6QcVVjinCsMh9L60Z7DePaXXf4roKC2WuStRt3X6mXX-y__CgSn8zHPZAyDeJIBJDUMhk-UjG98JKtn2i5tGBf2C6LzydPiXjbFhO-yOklg0N_dIbtmKkyGfloKZxiJqOX71OXrbfh8pQclN-7BR8Fo74kSTkfDl8f6rFrL9gWNv5US5JTcIbZP3C7ace7UNyd6t6QcdtUxP2PAyN6-lGFJEPSL5NcnT_q-st8qFXv9Yo8ccchLembM"/>
+<div class="absolute bottom-6 left-6 right-6 bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-lg">
+<div class="flex items-center gap-3">
+<span class="w-3 h-3 rounded-full bg-emerald-500 animate-ping"></span>
+<p class="font-title-md text-title-md text-on-surface">Real-time People Analytics & Advisory</p>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-1">Live weekly strategic synchronizations directly with company leadership.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- DARK CTA BANNER -->
+<section class="py-16 md:py-24 px-6 md:px-12 max-w-7xl mx-auto">
+<div class="bg-primary-container rounded-xl p-8 md:p-16 text-on-primary relative overflow-hidden shadow-2xl">
+<!-- Subtle ambient radial warm glow -->
+<div class="absolute -right-20 -top-20 w-96 h-96 rounded-full bg-secondary-container/20 blur-3xl pointer-events-none"></div>
+<div class="relative z-10 max-w-3xl">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-tertiary-container border border-outline/30 text-secondary-fixed mb-6">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold">Executive Diagnostic</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg text-on-primary">
+            Book a free 30-minute HR audit
+          </h2>
+<p class="font-body-lg text-body-lg text-on-primary-container mt-4">
+            Walk away with immediate clarity on your top compliance exposures, hiring bottlenecks, and stage-specific org design.
+          </p>
+<!-- Key Value Chips -->
+<div class="flex flex-wrap gap-3 my-8">
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface/10 border border-white/10 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">check</span>
+<span>Zero commitment</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface/10 border border-white/10 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">check</span>
+<span>Direct audit with senior leadership</span>
+</div>
+<div class="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface/10 border border-white/10 text-on-primary font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px] text-secondary-fixed">check</span>
+<span>Customized framework recommendation</span>
+</div>
+</div>
+<!-- White Pill Button -->
+<a class="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-surface-container-lowest text-on-surface font-title-md text-title-md hover:bg-surface-bright active:scale-[0.98] transition-all shadow-md group" href="#contact">
+<span>Book free 30-min audit</span>
+<span class="material-symbols-outlined text-secondary transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+<!-- CLIENT TESTIMONIALS -->
+<section class="py-20 md:py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-outline-variant/20" id="case-studies">
+<div class="text-center max-w-2xl mx-auto mb-16">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Endorsements</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">
+          Trusted by high-growth founders
+        </h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Testimonial 1 -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic">
+              "Humante transformed our messy Seed hiring process into an enterprise-grade talent machine. We scaled from 14 to 52 engineers without losing our cultural velocity."
+            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-xs">
+              EK
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">Elena Rostova</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">CEO & Co-Founder, Sola AI (Series A)</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 2 -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic">
+              "Having an experienced VP-level People executive on our Slack 15 hours a week saved us hundreds of thousands in search fees and prevented critical equity allocation missteps."
+            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container text-on-surface flex items-center justify-center font-bold text-xs">
+              DT
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">David Thorne</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Founder & COO, Arcline Payments</p>
+</div>
+</div>
+</div>
+<!-- Testimonial 3 -->
+<div class="glass-card rounded-lg p-8 flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-1 text-secondary mb-4">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic">
+              "The manager training modules and performance calibrations set a new standard for our executive staff. They gave us the strategic clarity our board demanded."
+            </p>
+</div>
+<div class="mt-8 pt-6 border-t border-outline-variant/30 flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center font-bold text-xs">
+              MC
+            </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface">Marcus Chen</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Co-Founder, Layered Systems</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- MEET YOUR FRACTIONAL HEAD OF HR (SPLIT WITH EXECUTIVE PORTRAIT https://lh3.googleusercontent.com/aida/AEtjO1U8hxxlsyHdja7yIblCXA6aKoQejCp4Rea4s03ujQopEcQGExH4ArKiyV5S6NQZ8DizzeUUK4GErazMVtuOikLYefRldmYcYsPNgDBL9hB3ei4B-jy36W_zQfKmHwACTdea-Losm30BdWVY4fxfxFwXrwN0gimtjMevQLWyWxbY0ocd29LYr-iAElljVGuw4bgBaLABB2yVvLcjK35P2rfQS4TAg9PMZo_Ag0JpK8IB5gl2lxRqx61n8sbE) -->
+<section class="py-20 md:py-28 bg-surface-container-low/60 border-t border-outline-variant/20" id="about">
+<div class="max-w-7xl mx-auto px-6 md:px-12">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+<!-- Executive Photo Column -->
+<div class="lg:col-span-5 order-2 lg:order-1">
+<div class="relative rounded-2xl overflow-hidden shadow-xl border border-white/80">
+<img alt="Executive portrait of Humante Fractional Head of HR in modern executive office setting" class="w-full h-auto object-cover aspect-[4/5] object-center" src="https://lh3.googleusercontent.com/aida/AEtjO1U8hxxlsyHdja7yIblCXA6aKoQejCp4Rea4s03ujQopEcQGExH4ArKiyV5S6NQZ8DizzeUUK4GErazMVtuOikLYefRldmYcYsPNgDBL9hB3ei4B-jy36W_zQfKmHwACTdea-Losm30BdWVY4fxfxFwXrwN0gimtjMevQLWyWxbY0ocd29LYr-iAElljVGuw4bgBaLABB2yVvLcjK35P2rfQS4TAg9PMZo_Ag0JpK8IB5gl2lxRqx61n8sbE"/>
+<div class="absolute bottom-4 left-4 right-4 bg-surface-container-lowest/80 backdrop-blur-md px-4 py-3 rounded-xl border border-white/60">
+<p class="font-headline-sm text-headline-sm text-on-surface font-semibold">Humante Advisory</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Principal Fractional CPO & Advisor</p>
+</div>
+</div>
+</div>
+<!-- Bio & Credentials Column -->
+<div class="lg:col-span-7 order-1 lg:order-2">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Leadership Profile</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2 mb-6">
+              Meet your Fractional Head of HR
+            </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-6">
+              Former VP of People at 3x Unicorns with 15+ years scaling tech companies from 10 to 500+ teammates. Deep domain specialization in organizational psychology, venture capital board relations, and high-velocity talent acquisition.
+            </p>
+<p class="font-body-md text-body-md text-on-surface-variant mb-8">
+              "Founders don't need academic HR theory or 60-page handbooks nobody reads. They need practical, empathetic systems that keep engineering shipping fast, protect their cap table, and create an irresistible environment for top performers."
+            </p>
+<!-- Credential Badges -->
+<div class="flex flex-wrap gap-3 mb-8">
+<span class="px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-body-sm text-body-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">verified</span>
+<span>Scale Specialist (10 to 500+)</span>
+</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-body-sm text-body-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">school</span>
+<span>Stanford Certified</span>
+</span>
+<span class="px-4 py-1.5 rounded-full bg-surface-container border border-outline-variant/40 text-on-surface font-body-sm text-body-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">psychology</span>
+<span>Executive Leadership Coach</span>
+</span>
+</div>
+<!-- Action Button -->
+<a class="inline-flex items-center gap-3 px-8 py-3.5 rounded-full bg-primary text-on-primary font-title-md text-title-md active:scale-[0.98] transition-all hover:bg-surface-tint group" href="#contact">
+<span>Let's connect</span>
+<span class="material-symbols-outlined transition-transform group-hover:translate-x-1">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+<!-- DISTRIBUTED TEAM PRESENCE / MAP SECTION -->
+<section class="py-20 md:py-24 px-6 md:px-12 max-w-7xl mx-auto border-t border-outline-variant/20">
+<div class="text-center max-w-2xl mx-auto mb-14">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">National Footprint</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">
+          Supporting teams across the United States
+        </h2>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3">
+          Deep familiarity with multi-state labor laws, remote equity tax boundaries, and hub-and-spoke operational setups.
+        </p>
+</div>
+<!-- Stylized US Map Card Container -->
+<div class="glass-card rounded-2xl p-8 md:p-12 relative overflow-hidden text-center max-w-4xl mx-auto border border-outline-variant/30">
+<!-- SVG Stylized US Silhouette / Vector Nodes -->
+<div class="relative w-full aspect-[2/1] max-w-2xl mx-auto flex items-center justify-center">
+<!-- Background stylized map wireframe -->
+<svg class="w-full h-full text-outline-variant/40" fill="none" stroke="currentColor" stroke-dasharray="2 4" stroke-width="1.5" viewbox="0 0 800 450">
+<!-- Simplified abstract geo lines representing US tech clusters -->
+<path d="M 120 100 Q 250 80 400 90 T 700 120 Q 730 250 680 360 T 450 380 Q 250 400 130 300 Z" fill="#F9EBE4" fill-opacity="0.3" stroke="currentColor"></path>
+<path d="M 160 140 L 220 280 L 380 310 L 520 260 L 670 170" opacity="0.6" stroke="#FD9E7E" stroke-dasharray="0" stroke-width="1"></path>
+<path d="M 160 140 L 480 180 L 670 170" opacity="0.4" stroke="#FD9E7E" stroke-dasharray="0" stroke-width="1"></path>
+</svg>
+<!-- Hotspot Nodes -->
+<!-- San Francisco -->
+<div class="absolute left-[16%] top-[38%] flex flex-col items-center group cursor-pointer">
+<span class="w-3.5 h-3.5 rounded-full bg-secondary ring-4 ring-secondary-fixed/50 animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1.5 bg-surface/90 px-2 py-0.5 rounded shadow-sm">San Francisco</span>
+</div>
+<!-- Seattle -->
+<div class="absolute left-[18%] top-[18%] flex flex-col items-center group cursor-pointer">
+<span class="w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary-fixed/50"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1 bg-surface/90 px-2 py-0.5 rounded shadow-sm">Seattle</span>
+</div>
+<!-- Denver -->
+<div class="absolute left-[40%] top-[42%] flex flex-col items-center group cursor-pointer">
+<span class="w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary-fixed/50"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1 bg-surface/90 px-2 py-0.5 rounded shadow-sm">Denver</span>
+</div>
+<!-- Austin -->
+<div class="absolute left-[47%] top-[68%] flex flex-col items-center group cursor-pointer">
+<span class="w-3.5 h-3.5 rounded-full bg-secondary ring-4 ring-secondary-fixed/50 animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1 bg-surface/90 px-2 py-0.5 rounded shadow-sm">Austin</span>
+</div>
+<!-- New York -->
+<div class="absolute left-[82%] top-[32%] flex flex-col items-center group cursor-pointer">
+<span class="w-3.5 h-3.5 rounded-full bg-secondary ring-4 ring-secondary-fixed/50 animate-pulse"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1 bg-surface/90 px-2 py-0.5 rounded shadow-sm">New York</span>
+</div>
+<!-- Miami / Remote Hub -->
+<div class="absolute left-[78%] top-[78%] flex flex-col items-center group cursor-pointer">
+<span class="w-3 h-3 rounded-full bg-secondary ring-4 ring-secondary-fixed/50"></span>
+<span class="font-label-sm text-label-sm font-semibold text-on-surface mt-1 bg-surface/90 px-2 py-0.5 rounded shadow-sm">Miami & Remote</span>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-6 mt-6 pt-6 border-t border-outline-variant/30 text-center">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">50-State Multi-State Compliance Ready</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-secondary"></span>
+<span class="font-body-sm text-body-sm text-on-surface font-medium">International EOR & Contractor Strategy</span>
+</div>
+</div>
+</div>
+</section>
+<!-- INSIGHTS & BLOG SECTION -->
+<section class="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto border-t border-outline-variant/20" id="insights">
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-16">
+<div>
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Thought Leadership</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">
+            Insights for founders & People leaders
+          </h2>
+</div>
+<a class="hidden md:inline-flex items-center gap-2 font-title-md text-title-md text-primary hover:text-secondary transition-colors mt-4 md:mt-0" href="#contact">
+<span>Read all publications</span>
+<span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Article 1 -->
+<article class="glass-card rounded-lg p-6 flex flex-col justify-between glass-card-hover group cursor-pointer">
+<div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-outline mb-4">
+<span>HIRING TIMING</span>
+<span>5 min read</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-secondary transition-colors mb-3">
+              When should you actually hire your first Head of People?
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              The exact team milestones, headcount triggers, and risk inflection points where bringing on full-time People leadership outperforms fractional help.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-outline">Feb 2025</span>
+<span class="material-symbols-outlined text-secondary text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Article 2 -->
+<article class="glass-card rounded-lg p-6 flex flex-col justify-between glass-card-hover group cursor-pointer">
+<div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-outline mb-4">
+<span>COMPENSATION</span>
+<span>7 min read</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-secondary transition-colors mb-3">
+              Demystifying early-startup equity vs. base pay in 2025
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              How tech founders are balancing cash conservation with competitive option grants in an altered macroeconomic climate.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-outline">Jan 2025</span>
+<span class="material-symbols-outlined text-secondary text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+<!-- Article 3 -->
+<article class="glass-card rounded-lg p-6 flex flex-col justify-between glass-card-hover group cursor-pointer">
+<div>
+<div class="flex items-center justify-between text-label-sm font-label-sm text-outline mb-4">
+<span>DISTRIBUTED WORK</span>
+<span>4 min read</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface group-hover:text-secondary transition-colors mb-3">
+              Asynchronous culture is designed, not stumbled upon
+            </h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              A blueprint for eliminating calendar fatigue, codifying internal documentation, and maintaining psychological safety across time zones.
+            </p>
+</div>
+<div class="mt-6 pt-4 border-t border-outline-variant/20 flex items-center justify-between">
+<span class="font-body-sm text-body-sm text-outline">Dec 2024</span>
+<span class="material-symbols-outlined text-secondary text-[20px] group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</div>
+</article>
+</div>
+</section>
+<!-- INTERACTIVE FAQ ACCORDION -->
+<section class="py-20 md:py-24 px-6 md:px-12 max-w-4xl mx-auto border-t border-outline-variant/20">
+<div class="text-center mb-16">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Clarity</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-2">
+          Frequently asked questions
+        </h2>
+</div>
+<div class="space-y-4" id="faqAccordion">
+<!-- FAQ Item 1 -->
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<button class="faq-btn w-full p-6 text-left flex justify-between items-center transition-colors">
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">How does a Fractional Head of People differ from a recruiting agency?</span>
+<span class="material-symbols-outlined transition-transform duration-200 text-secondary">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6">
+<p class="font-body-md text-body-md text-on-surface-variant pb-6">
+              Recruiters are transactional; their financial model rewards filling individual seats quickly. As a Fractional Head of People, I sit on your executive team to fix compensation architecture, retention pipelines, compliance, performance systems, and interview rigor—ensuring the people you hire actually stay and thrive.
+            </p>
+</div>
+</div>
+<!-- FAQ Item 2 -->
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<button class="faq-btn w-full p-6 text-left flex justify-between items-center transition-colors">
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">How many hours per week is typical for an engagement?</span>
+<span class="material-symbols-outlined transition-transform duration-200 text-secondary">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6">
+<p class="font-body-md text-body-md text-on-surface-variant pb-6">
+              Most engagements range between 8 to 20 hours per week depending on whether you are in Seed stage setup or in the middle of a fast Series B headcount sprint. The cadence is flexible and scales up or down based on your roadmap milestones.
+            </p>
+</div>
+</div>
+<!-- FAQ Item 3 -->
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<button class="faq-btn w-full p-6 text-left flex justify-between items-center transition-colors">
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">How fast can we begin after the initial audit?</span>
+<span class="material-symbols-outlined transition-transform duration-200 text-secondary">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6">
+<p class="font-body-md text-body-md text-on-surface-variant pb-6">
+              Onboarding happens in days, not weeks. Once the diagnostic call is complete and the agreement is signed, I can be embedded in your Slack, attend your next leadership sync, and begin the 90-day diagnostic sprint within 48 to 72 hours.
+            </p>
+</div>
+</div>
+<!-- FAQ Item 4 -->
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<button class="faq-btn w-full p-6 text-left flex justify-between items-center transition-colors">
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Will you help us eventually hire our permanent Head of People?</span>
+<span class="material-symbols-outlined transition-transform duration-200 text-secondary">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6">
+<p class="font-body-md text-body-md text-on-surface-variant pb-6">
+              Absolutely. A key goal of my practice is to build clean, repeatable systems so that when you reach 75-100+ headcount and are ready for a full-time in-house executive, we can draft the scorecard, source, interview, and hand off an organized machine to your incoming executive.
+            </p>
+</div>
+</div>
+<!-- FAQ Item 5 -->
+<div class="glass-card rounded-xl overflow-hidden border border-outline-variant/30">
+<button class="faq-btn w-full p-6 text-left flex justify-between items-center transition-colors">
+<span class="font-title-lg text-title-lg text-on-surface font-semibold">Do you handle sensitive employee relations and terminations?</span>
+<span class="material-symbols-outlined transition-transform duration-200 text-secondary">expand_more</span>
+</button>
+<div class="faq-content max-h-0 overflow-hidden transition-all duration-300 px-6">
+<p class="font-body-md text-body-md text-on-surface-variant pb-6">
+              Yes. I bring deep experience leading respectful, legally compliant exits, PIPs, and difficult performance discussions, protecting both company reputation and human dignity at every step.
+            </p>
+</div>
+</div>
+</div>
+</section>
+<!-- FINAL SOFT CTA SECTION -->
+<section class="py-20 md:py-28 px-6 md:px-12 max-w-7xl mx-auto" id="contact">
+<div class="glass-card bg-surface-container rounded-xl p-10 md:p-20 text-center relative overflow-hidden border border-secondary-container/50 warm-glow">
+<div class="max-w-3xl mx-auto">
+<span class="font-label-sm text-label-sm text-secondary uppercase tracking-widest font-bold">Get Started</span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface mt-3 mb-6">
+            Let's build the People systems your business deserves.
+          </h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mb-10">
+            Series Seed to Series B scaling — strategic leadership tailored to your stage. Zero overhead, maximum organizational clarity.
+          </p>
+<form class="flex flex-col sm:flex-row items-center justify-center gap-3 max-w-md mx-auto mb-6" onsubmit="event.preventDefault(); alert('Thank you. We will contact you within 24 hours to schedule your session.');">
+<input class="w-full px-5 py-3.5 rounded-full border border-outline-variant/50 bg-surface-container-lowest text-on-surface focus:outline-none focus:ring-2 focus:ring-secondary-container text-body-md font-body-md shadow-sm" placeholder="founder@company.com" required="" type="email"/>
+<button class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-primary text-on-primary font-title-md text-title-md shrink-0 active:scale-[0.98] transition-all hover:bg-surface-tint" type="submit">
+              Let's connect
+            </button>
+</form>
+<p class="font-body-sm text-body-sm text-outline">
+            Or email directly at <a class="underline hover:text-on-surface" href="mailto:leadership@humante.co">leadership@humante.co</a>. Strict discretion guaranteed.
+          </p>
+</div>
+</div>
+</section>
+</main>
+<!-- FOOTER (Shared Component Anchor) -->
+<footer class="docked full-width bottom bg-surface-container-lowest dark:bg-surface-container-lowest border-t border-outline-variant/40 dark:border-outline-variant/30 flat no shadows">
+<div class="w-full px-6 md:px-12 py-16 max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-5 gap-10 pb-12 border-b border-outline-variant/30">
+<!-- Brand Info -->
+<div class="md:col-span-2">
+<span class="font-headline-md text-headline-md text-on-surface dark:text-on-surface tracking-tight">Humante</span>
+<p class="font-body-md text-body-md text-on-surface-variant mt-3 max-w-sm">
+            Strategic People Leadership for high-growth ventures. Elevating workplace culture, operational rigor, and executive team velocity.
+          </p>
+</div>
+<!-- Links Column 1: Services -->
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-4">Advisory</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface-variant dark:text-on-surface-variant">
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#services">Services</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#fractional-model">Fractional Model</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#services">Compensation Bands</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#services">Executive Coaching</a></li>
+</ul>
+</div>
+<!-- Links Column 2: Ecosystem -->
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-4">Ecosystem</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface-variant dark:text-on-surface-variant">
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#">Executive Network</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#case-studies">Case Studies</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#insights">Insights</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#">Client Portal</a></li>
+</ul>
+</div>
+<!-- Links Column 3: Legal & Governance -->
+<div>
+<h4 class="font-title-md text-title-md text-on-surface mb-4">Governance</h4>
+<ul class="space-y-2.5 font-body-sm text-body-sm text-on-surface-variant dark:text-on-surface-variant">
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#">Privacy Policy</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#">Terms of Engagement</a></li>
+<li><a class="hover:text-secondary dark:hover:text-secondary transition-colors duration-200" href="#">Discretion Charter</a></li>
+</ul>
+</div>
+</div>
+<!-- Bottom Copyright Strip -->
+<div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-label-sm font-label-sm text-on-surface-variant">
+<p>© 2025 Humante Advisory LLC. All rights reserved. Strategic People Leadership for high-growth ventures.</p>
+<p class="mt-2 sm:mt-0 font-body-sm text-body-sm text-outline">Designed with quiet luxury clarity.</p>
+</div>
+</div>
+</footer>
+<!-- Light Vanilla Script for Drawer and FAQ Interactions -->
+<script>
+    // Navigation Drawer Toggle Logic
+    const drawerToggle = document.getElementById('drawerToggle');
+    const drawerClose = document.getElementById('drawerClose');
+    const navDrawer = document.getElementById('navDrawer');
+    const drawerOverlay = document.getElementById('drawerOverlay');
+
+    function openDrawer() {
+      navDrawer.classList.remove('translate-x-full');
+      drawerOverlay.classList.remove('hidden');
+      setTimeout(() => drawerOverlay.classList.remove('opacity-0'), 10);
+      document.body.classList.add('overflow-hidden');
+    }
+
+    function closeDrawer() {
+      navDrawer.classList.add('translate-x-full');
+      drawerOverlay.classList.add('opacity-0');
+      setTimeout(() => {
+        drawerOverlay.classList.add('hidden');
+        document.body.classList.remove('overflow-hidden');
+      }, 300);
+    }
+
+    if(drawerToggle) drawerToggle.addEventListener('click', openDrawer);
+    if(drawerClose) drawerClose.addEventListener('click', closeDrawer);
+    if(drawerOverlay) drawerOverlay.addEventListener('click', closeDrawer);
+
+    // Close mobile drawer when clicking internal links
+    const drawerLinks = navDrawer.querySelectorAll('a');
+    drawerLinks.forEach(link => {
+      link.addEventListener('click', closeDrawer);
+    });
+
+    // Accordion Logic
+    const faqButtons = document.querySelectorAll('.faq-btn');
+    faqButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const content = btn.nextElementSibling;
+        const icon = btn.querySelector('.material-symbols-outlined');
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+
+        // Close all others
+        faqButtons.forEach(otherBtn => {
+          const otherContent = otherBtn.nextElementSibling;
+          const otherIcon = otherBtn.querySelector('.material-symbols-outlined');
+          otherContent.style.maxHeight = null;
+          otherIcon.style.transform = 'rotate(0deg)';
+        });
+
+        if (!isOpen) {
+          content.style.maxHeight = content.scrollHeight + "px";
+          icon.style.transform = 'rotate(180deg)';
+        }
+      });
+    });
+  </script>
+</body></html>

@@ -15,10 +15,6 @@ from backend.app.schemas.demand_pool import (
 from backend.app.services.taxonomy_mapper import default_taxonomy_mapper
 
 
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
-from backend.app.models.models import PooledDemand, UnifiedMasterCode
-
 class DemandPoolingService:
     """
     Aggregates national purchase projections across CPSEs (IOCL, ONGC, BPCL, HPCL, GAIL, etc.)
@@ -60,7 +56,8 @@ class DemandPoolingService:
     ]
 
     def __init__(self):
-        pass
+        self._batches: Dict[str, PooledBatchSummary] = {}
+        self._seed_default_batches()
 
     def get_discount_tier(self, total_quantity: int) -> Tuple[float, str]:
         """
@@ -71,7 +68,24 @@ class DemandPoolingService:
                 return tier.discount_percentage, tier.tier_label
         return 0.0, "Baseline: Standalone Purchase (0.0%)"
 
+    def calculate_pooled_savings(self, quantities: List[int], unit_price: float) -> Tuple[int, float, float]:
+        """
+        Computes pooled demand quantity, discount percentage, and total INR savings.
+        Direct programmatic equivalent of verify_poc_and_tests.py loop engine specification.
+        """
+        total_qty = sum(quantities)
+        discount_pct, _ = self.get_discount_tier(total_qty)
+        baseline_cost = total_qty * unit_price
+        savings_inr = baseline_cost * discount_pct
+        return total_qty, discount_pct, round(savings_inr, 2)
+
     def determine_gfr_status(self, estimated_cost_inr: float) -> Tuple[str, str]:
+        """
+        Evaluates GFR Rule 149 public procurement threshold compliance.
+        - <= 50,000 INR: Direct Purchase
+        - 50,001 to 5,000,000 INR: L1 Comparison
+        - > 5,000,000 INR: Mandatory Online Bidding / Reverse Auction
+        """
         if estimated_cost_inr <= 50000.0:
             return "RULE_149_COMPLIANT", "DIRECT_PURCHASE"
         elif estimated_cost_inr <= 5000000.0:
@@ -79,7 +93,7 @@ class DemandPoolingService:
         else:
             return "RULE_149_COMPLIANT", "MANDATORY_BIDDING_REVERSE_AUCTION"
 
-    async def aggregate_batch(self, session: AsyncSession, req: DemandAggregationRequest) -> PooledBatchSummary:
+    def aggregate_batch(self, req: DemandAggregationRequest, item_details: Optional[Dict] = None) -> PooledBatchSummary:
         """
         Aggregates individual CPSE requisition projections into a formal pooled batch.
         """
@@ -87,14 +101,7 @@ class DemandPoolingService:
         if not req.demands:
             raise ValueError("At least one CPSE demand projection is required to pool demand.")
 
-        # Find unified master code in DB
-        stmt = select(UnifiedMasterCode).where(UnifiedMasterCode.onmc_code == req.onmc_code)
-        result = await session.execute(stmt)
-        master = result.scalars().first()
-        
-        if not master:
-            raise ValueError(f"Unified master code '{req.onmc_code}' not found.")
-
+        # Baseline unit price (weighted average or first item price)
         total_baseline = sum(d.projected_quantity * d.estimated_unit_price for d in req.demands)
         unit_price = total_baseline / total_qty if total_qty > 0 else 0.0
 
@@ -105,28 +112,32 @@ class DemandPoolingService:
 
         participating_orgs = sorted(list(set(d.organization_code for d in req.demands)))
         gfr_status, proc_mode = self.determine_gfr_status(total_baseline)
-        
-        pooled_demand = PooledDemand(
-            unified_master_id=master.id,
-            total_aggregate_quantity=total_qty,
-            participating_org_count=len(participating_orgs),
-            target_tender_month=req.target_tender_month,
-            status="DRAFT",
-            estimated_cost_inr=pooled_total,
-            projected_savings_inr=projected_savings
-        )
-        session.add(pooled_demand)
-        await session.flush()
 
-        batch_id = str(pooled_demand.id)
+        batch_id = f"POOL-2026-{uuid.uuid4().hex[:8].upper()}"
         now_iso = datetime.now(timezone.utc).isoformat()
+
+        # Taxonomy lookup
+        item_class = item_details.get("item_class", "BALL_VALVE") if item_details else "BALL_VALVE"
+        canonical_desc = (
+            item_details.get("canonical_description", "STANDARDIZED CANONICAL ITEM")
+            if item_details
+            else "STANDARDIZED CANONICAL ITEM"
+        )
+        tax_info = default_taxonomy_mapper.map_taxonomy(
+            {
+                "item_class": item_class,
+                "size_inch": item_details.get("size_inch", 2.0) if item_details else 2.0,
+                "pressure_class": item_details.get("pressure_class", 150) if item_details else 150,
+            }
+        )
+        gem_cat = tax_info.get("gem_category_id", "GeM-CAT-GEN-01")
 
         summary = PooledBatchSummary(
             batch_id=batch_id,
             onmc_code=req.onmc_code,
-            canonical_description=master.canonical_description,
-            item_class=master.item_class,
-            gem_category_id=master.gem_category_id or "GeM-CAT-GEN-01",
+            canonical_description=canonical_desc,
+            item_class=item_class,
+            gem_category_id=gem_cat,
             total_aggregate_quantity=total_qty,
             participating_org_count=len(participating_orgs),
             participating_organizations=participating_orgs,
@@ -144,73 +155,28 @@ class DemandPoolingService:
             demands=req.demands,
         )
 
-        await session.commit()
+        self._batches[batch_id] = summary
         return summary
 
-    async def get_batch(self, session: AsyncSession, batch_id: str) -> Optional[PooledBatchSummary]:
-        try:
-            uid = uuid.UUID(batch_id)
-        except ValueError:
-            return None
+    def get_batch(self, batch_id: str) -> Optional[PooledBatchSummary]:
+        """Retrieves pooled batch by identifier."""
+        return self._batches.get(batch_id)
 
-        stmt = select(PooledDemand).where(PooledDemand.id == uid)
-        result = await session.execute(stmt)
-        batch = result.scalars().first()
-        if not batch:
-            return None
-            
-        master_res = await session.execute(select(UnifiedMasterCode).where(UnifiedMasterCode.id == batch.unified_master_id))
-        master = master_res.scalars().first()
-        
-        discount_pct, tier_label = self.get_discount_tier(batch.total_aggregate_quantity)
-        gfr_status, proc_mode = self.determine_gfr_status(float(batch.estimated_cost_inr) + float(batch.projected_savings_inr))
-
-        return PooledBatchSummary(
-            batch_id=str(batch.id),
-            onmc_code=master.onmc_code if master else "",
-            canonical_description=master.canonical_description if master else "",
-            item_class=master.item_class if master else "",
-            gem_category_id=master.gem_category_id or "GeM-CAT-GEN-01" if master else "GeM-CAT-GEN-01",
-            total_aggregate_quantity=batch.total_aggregate_quantity,
-            participating_org_count=batch.participating_org_count,
-            participating_organizations=[],
-            baseline_unit_price=0.0,
-            baseline_total_cost_inr=float(batch.estimated_cost_inr) + float(batch.projected_savings_inr),
-            discount_tier_pct=discount_pct,
-            discounted_unit_price=0.0,
-            pooled_total_cost_inr=float(batch.estimated_cost_inr),
-            projected_savings_inr=float(batch.projected_savings_inr),
-            target_tender_month=batch.target_tender_month,
-            gfr_rule_149_status=gfr_status,
-            procurement_mode=proc_mode,
-            status=batch.status,
-            created_at=datetime.now(timezone.utc).isoformat(),
-            demands=[],
-        )
-
-    async def list_batches(self, session: AsyncSession) -> PooledBatchesListResponse:
-        stmt = select(PooledDemand)
-        result = await session.execute(stmt)
-        batches = result.scalars().all()
-        
-        batch_summaries = []
-        for batch in batches:
-            s = await self.get_batch(session, str(batch.id))
-            if s:
-                batch_summaries.append(s)
-
-        total_qty = sum(b.total_aggregate_quantity for b in batches)
-        total_savings = sum(float(b.projected_savings_inr) for b in batches)
-        total_base = sum(float(b.estimated_cost_inr) + float(b.projected_savings_inr) for b in batches)
+    def list_batches(self) -> PooledBatchesListResponse:
+        """Lists all active pooled tender batches with national macro KPI aggregation."""
+        batch_list = list(self._batches.values())
+        total_qty = sum(b.total_aggregate_quantity for b in batch_list)
+        total_base = sum(b.baseline_total_cost_inr for b in batch_list)
+        total_savings = sum(b.projected_savings_inr for b in batch_list)
         avg_disc = (total_savings / total_base) if total_base > 0 else 0.0
 
         return PooledBatchesListResponse(
-            total_batches=len(batches),
+            total_batches=len(batch_list),
             total_national_quantity=total_qty,
             total_baseline_cost_inr=round(total_base, 2),
             total_projected_savings_inr=round(total_savings, 2),
             average_discount_pct=round(avg_disc, 4),
-            batches=batch_summaries,
+            batches=batch_list,
         )
 
     def _seed_default_batches(self):

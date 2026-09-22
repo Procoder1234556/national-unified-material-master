@@ -145,10 +145,11 @@ export const PriorityReviewQueue: React.FC<PriorityReviewQueueProps> = ({
         <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
           <h2
             style={{
-              fontSize: "12px",
+              fontSize: "16px",
               fontWeight: 700,
-              textTransform: "uppercase",
-              letterSpacing: "0.06em",
+              fontFamily: rawTokens.fontCalligraphy,
+              letterSpacing: "0em",
+              textTransform: "none",
               color: rawTokens.textPrimary,
               margin: 0,
             }}

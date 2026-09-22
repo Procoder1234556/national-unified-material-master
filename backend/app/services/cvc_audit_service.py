@@ -16,6 +16,10 @@ from backend.app.schemas.audit import (
 )
 
 
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select, desc
+from backend.app.models.models import AuditLog
+
 class CVCAuditService:
     """
     Cryptographic Append-Only Audit Ledger.
@@ -27,9 +31,7 @@ class CVCAuditService:
     GENESIS_ROOT_DIGEST = hashlib.sha256(b"CVC-ROOT-MoPNG-2026-NUMM-GENESIS").hexdigest()
 
     def __init__(self):
-        self._chain: List[Dict[str, Any]] = []
-        self._initialize_genesis_block()
-        self._seed_pilot_events()
+        pass
 
     @staticmethod
     def _compute_hash(
@@ -49,45 +51,9 @@ class CVCAuditService:
         )
         return hashlib.sha256(content.encode("utf-8")).hexdigest()
 
-    def _initialize_genesis_block(self):
-        if self._chain:
-            return
-
-        genesis_ts = "2026-01-01T00:00:00Z"
-        genesis_hash = self._compute_hash(
-            index=0,
-            timestamp=genesis_ts,
-            actor_email="system.genesis@numm.gov.in",
-            actor_role="SYSTEM",
-            action="GENESIS_BLOCK",
-            entity_type="SYSTEM",
-            entity_id="ROOT_000",
-            payload_digest=self.GENESIS_ROOT_DIGEST,
-            previous_hash=self.GENESIS_PREV_HASH,
-        )
-
-        genesis_block = {
-            "index": 0,
-            "audit_id": "00000000-0000-0000-0000-000000000000",
-            "timestamp": genesis_ts,
-            "actor_email": "system.genesis@numm.gov.in",
-            "actor_role": "SYSTEM",
-            "action": "GENESIS_BLOCK",
-            "entity_type": "SYSTEM",
-            "entity_id": "ROOT_000",
-            "payload_digest": self.GENESIS_ROOT_DIGEST,
-            "previous_hash": self.GENESIS_PREV_HASH,
-            "block_hash": genesis_hash,
-            "details": {
-                "framework": "National Unified Material Master (NUMM)",
-                "ministry": "Ministry of Petroleum & Natural Gas (MoPNG)",
-                "governance": "CVC Circular No. 01/01/2021 & GFR Rule 149",
-            },
-        }
-        self._chain.append(genesis_block)
-
-    def record_action(
+    async def record_action(
         self,
+        session: AsyncSession,
         actor_email: str,
         actor_role: str,
         action: str,
@@ -96,11 +62,20 @@ class CVCAuditService:
         details: Optional[Dict[str, Any]] = None,
     ) -> Dict[str, Any]:
         """
-        Appends a new immutable block to the cryptographic chain.
+        Appends a new immutable block to the cryptographic chain in the DB.
         """
-        tip = self._chain[-1]
-        previous_hash = tip["block_hash"]
-        index = len(self._chain)
+        # Fetch the tip of the chain
+        stmt = select(AuditLog).order_by(desc(AuditLog.created_at)).limit(1)
+        result = await session.execute(stmt)
+        last_log = result.scalars().first()
+
+        if not last_log:
+            previous_hash = self.GENESIS_PREV_HASH
+            index = 0
+        else:
+            previous_hash = last_log.sha256_hash
+            index = last_log.new_state.get("index", 0) + 1 if last_log.new_state else 1
+
         audit_id = str(uuid.uuid4())
         timestamp = datetime.now(timezone.utc).isoformat()
 
@@ -120,6 +95,28 @@ class CVCAuditService:
             previous_hash=previous_hash,
         )
 
+        new_state = {
+            "index": index,
+            "timestamp": timestamp,
+            "actor_email": actor_email,
+            "actor_role": actor_role,
+            "payload_digest": payload_digest,
+            "previous_hash": previous_hash,
+            "details": details_payload,
+        }
+
+        audit_log = AuditLog(
+            id=uuid.UUID(audit_id),
+            action=action,
+            entity_type=entity_type,
+            entity_id=uuid.UUID(entity_id) if entity_id else uuid.uuid4(), # Handle strings gracefully if possible, or assume valid UUID.
+            prior_state=None,
+            new_state=new_state,
+            sha256_hash=block_hash,
+        )
+        session.add(audit_log)
+        await session.flush()
+
         block = {
             "index": index,
             "audit_id": audit_id,
@@ -134,15 +131,18 @@ class CVCAuditService:
             "block_hash": block_hash,
             "details": details_payload,
         }
-        self._chain.append(block)
         return block
 
-    def verify_chain_integrity(self) -> AuditChainVerificationResponse:
+    async def verify_chain_integrity(self, session: AsyncSession) -> AuditChainVerificationResponse:
         """
         Full traversal from Genesis to Tip, re-verifying every hash pointer and block content.
         """
         now_str = datetime.now(timezone.utc).isoformat()
-        if not self._chain:
+        stmt = select(AuditLog).order_by(AuditLog.created_at)
+        result = await session.execute(stmt)
+        chain = result.scalars().all()
+
+        if not chain:
             return AuditChainVerificationResponse(
                 is_valid=False,
                 total_blocks=0,
@@ -152,110 +152,171 @@ class CVCAuditService:
                 reason="Chain is completely empty.",
             )
 
-        genesis = self._chain[0]
-        if genesis["previous_hash"] != self.GENESIS_PREV_HASH:
+        genesis = chain[0]
+        if genesis.new_state and genesis.new_state.get("previous_hash") != self.GENESIS_PREV_HASH:
             return AuditChainVerificationResponse(
                 is_valid=False,
-                total_blocks=len(self._chain),
-                genesis_hash=genesis["block_hash"],
-                tip_hash=self._chain[-1]["block_hash"],
+                total_blocks=len(chain),
+                genesis_hash=genesis.sha256_hash,
+                tip_hash=chain[-1].sha256_hash,
                 verified_at=now_str,
                 tamper_detected_at_index=0,
                 reason="Genesis block previous hash violates root convention.",
             )
 
-        for i in range(len(self._chain)):
-            curr = self._chain[i]
+        for i in range(len(chain)):
+            curr = chain[i]
+            curr_state = curr.new_state or {}
 
-            # 1. Verify link to previous block
             if i > 0:
-                prev = self._chain[i - 1]
-                if curr["previous_hash"] != prev["block_hash"]:
+                prev = chain[i - 1]
+                if curr_state.get("previous_hash") != prev.sha256_hash:
                     return AuditChainVerificationResponse(
                         is_valid=False,
-                        total_blocks=len(self._chain),
-                        genesis_hash=genesis["block_hash"],
-                        tip_hash=self._chain[-1]["block_hash"],
+                        total_blocks=len(chain),
+                        genesis_hash=genesis.sha256_hash,
+                        tip_hash=chain[-1].sha256_hash,
                         verified_at=now_str,
                         tamper_detected_at_index=i,
-                        reason=f"Block {i} previous_hash mismatch. Expected {prev['block_hash']}, got {curr['previous_hash']}",
+                        reason=f"Block {i} previous_hash mismatch. Expected {prev.sha256_hash}, got {curr_state.get('previous_hash')}",
                     )
 
-            # 2. Recompute current block hash
             expected_hash = self._compute_hash(
-                index=curr["index"],
-                timestamp=curr["timestamp"],
-                actor_email=curr["actor_email"],
-                actor_role=curr["actor_role"],
-                action=curr["action"],
-                entity_type=curr.get("entity_type", "SYSTEM"),
-                entity_id=curr["entity_id"],
-                payload_digest=curr["payload_digest"],
-                previous_hash=curr["previous_hash"],
+                index=curr_state.get("index", 0),
+                timestamp=curr_state.get("timestamp", ""),
+                actor_email=curr_state.get("actor_email", ""),
+                actor_role=curr_state.get("actor_role", ""),
+                action=curr.action,
+                entity_type=curr.entity_type,
+                entity_id=str(curr.entity_id),
+                payload_digest=curr_state.get("payload_digest", ""),
+                previous_hash=curr_state.get("previous_hash", ""),
             )
 
-            if curr["block_hash"] != expected_hash:
+            if curr.sha256_hash != expected_hash:
                 return AuditChainVerificationResponse(
                     is_valid=False,
-                    total_blocks=len(self._chain),
-                    genesis_hash=genesis["block_hash"],
-                    tip_hash=self._chain[-1]["block_hash"],
+                    total_blocks=len(chain),
+                    genesis_hash=genesis.sha256_hash,
+                    tip_hash=chain[-1].sha256_hash,
                     verified_at=now_str,
                     tamper_detected_at_index=i,
-                    reason=f"Block {i} payload or digest tampered! Stored: {curr['block_hash']}, Recomputed: {expected_hash}",
+                    reason=f"Block {i} payload or digest tampered! Stored: {curr.sha256_hash}, Recomputed: {expected_hash}",
                 )
 
         return AuditChainVerificationResponse(
             is_valid=True,
-            total_blocks=len(self._chain),
-            genesis_hash=genesis["block_hash"],
-            tip_hash=self._chain[-1]["block_hash"],
+            total_blocks=len(chain),
+            genesis_hash=genesis.sha256_hash,
+            tip_hash=chain[-1].sha256_hash,
             verified_at=now_str,
             tamper_detected_at_index=None,
             reason=None,
         )
 
-    def get_chain(self, limit: int = 100, offset: int = 0) -> AuditChainResponse:
-        total = len(self._chain)
-        sl = self._chain[offset : offset + limit]
+    async def get_chain(self, session: AsyncSession, limit: int = 100, offset: int = 0) -> AuditChainResponse:
+        stmt = select(AuditLog).order_by(AuditLog.created_at).offset(offset).limit(limit)
+        result = await session.execute(stmt)
+        chain = result.scalars().all()
+
+        total_stmt = select(AuditLog.id)
+        total_result = await session.execute(total_stmt)
+        total = len(total_result.scalars().all())
+        
+        genesis_stmt = select(AuditLog).order_by(AuditLog.created_at).limit(1)
+        genesis = (await session.execute(genesis_stmt)).scalars().first()
+        
+        tip_stmt = select(AuditLog).order_by(desc(AuditLog.created_at)).limit(1)
+        tip = (await session.execute(tip_stmt)).scalars().first()
+
+        blocks = []
+        for l in chain:
+            st = l.new_state or {}
+            blocks.append(AuditBlockSchema(
+                index=st.get("index", 0),
+                audit_id=str(l.id),
+                timestamp=st.get("timestamp", ""),
+                actor_email=st.get("actor_email", ""),
+                actor_role=st.get("actor_role", ""),
+                action=l.action,
+                entity_type=l.entity_type,
+                entity_id=str(l.entity_id),
+                payload_digest=st.get("payload_digest", ""),
+                previous_hash=st.get("previous_hash", ""),
+                block_hash=l.sha256_hash,
+                details=st.get("details", {})
+            ))
+
         return AuditChainResponse(
             total_blocks=total,
-            genesis_hash=self._chain[0]["block_hash"],
-            tip_hash=self._chain[-1]["block_hash"],
-            blocks=[AuditBlockSchema(**b) for b in sl],
+            genesis_hash=genesis.sha256_hash if genesis else "",
+            tip_hash=tip.sha256_hash if tip else "",
+            blocks=blocks,
         )
 
-    def get_stats(self) -> AuditStatsResponse:
-        verification = self.verify_chain_integrity()
-        actors = set(b["actor_email"] for b in self._chain)
+    async def get_stats(self, session: AsyncSession) -> AuditStatsResponse:
+        verification = await self.verify_chain_integrity(session)
+        stmt = select(AuditLog)
+        result = await session.execute(stmt)
+        chain = result.scalars().all()
+
+        actors = set(c.new_state.get("actor_email") for c in chain if c.new_state)
         actions: Dict[str, int] = {}
-        for b in self._chain:
-            act = b["action"]
+        for c in chain:
+            act = c.action
             actions[act] = actions.get(act, 0) + 1
+            
+        genesis = chain[0] if chain else None
+        tip = chain[-1] if chain else None
 
         return AuditStatsResponse(
-            total_records=len(self._chain),
+            total_records=len(chain),
             unique_actors=len(actors),
             action_breakdown=actions,
             is_chain_healthy=verification.is_valid,
-            tip_hash=self._chain[-1]["block_hash"],
-            genesis_hash=self._chain[0]["block_hash"],
+            tip_hash=tip.sha256_hash if tip else "",
+            genesis_hash=genesis.sha256_hash if genesis else "",
             last_verified_at=verification.verified_at,
         )
 
-    def export_cvc_dossier(self) -> CVCDossierExportResponse:
+    async def export_cvc_dossier(self, session: AsyncSession) -> CVCDossierExportResponse:
         now_str = datetime.now(timezone.utc).isoformat()
-        verification = self.verify_chain_integrity()
+        verification = await self.verify_chain_integrity(session)
         cert_id = f"CVC-NUMM-CERT-{hashlib.sha256(now_str.encode()).hexdigest()[:12].upper()}"
+
+        stmt = select(AuditLog).order_by(AuditLog.created_at)
+        result = await session.execute(stmt)
+        chain = result.scalars().all()
+        
+        genesis = chain[0] if chain else None
+        tip = chain[-1] if chain else None
+
+        blocks = []
+        for l in chain:
+            st = l.new_state or {}
+            blocks.append(AuditBlockSchema(
+                index=st.get("index", 0),
+                audit_id=str(l.id),
+                timestamp=st.get("timestamp", ""),
+                actor_email=st.get("actor_email", ""),
+                actor_role=st.get("actor_role", ""),
+                action=l.action,
+                entity_type=l.entity_type,
+                entity_id=str(l.entity_id),
+                payload_digest=st.get("payload_digest", ""),
+                previous_hash=st.get("previous_hash", ""),
+                block_hash=l.sha256_hash,
+                details=st.get("details", {})
+            ))
 
         return CVCDossierExportResponse(
             certificate_id=cert_id,
             issued_at=now_str,
-            total_blocks_audited=len(self._chain),
+            total_blocks_audited=len(chain),
             chain_integrity="CRYPTOGRAPHICALLY_VERIFIED_100_PERCENT" if verification.is_valid else "TAMPER_DETECTED",
-            genesis_root_hash=self._chain[0]["block_hash"],
-            tip_block_hash=self._chain[-1]["block_hash"],
-            blocks=[AuditBlockSchema(**b) for b in self._chain],
+            genesis_root_hash=genesis.sha256_hash if genesis else "",
+            tip_block_hash=tip.sha256_hash if tip else "",
+            blocks=blocks,
         )
 
     def _seed_pilot_events(self):

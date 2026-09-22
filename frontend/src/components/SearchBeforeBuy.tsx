@@ -348,9 +348,7 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
             marginBottom: "18px",
           }}
         >
-          Query 104,000+ harmonized ONMC codes across all 10 CPSEs. Surfaces
-          unallocated insurance surplus, cross-walked Shell MESC & UNSPSC codes,
-          and purchase avoidance opportunities.
+          Query 104,000+ harmonized ONMC codes across all 10 CPSEs. Find exactly who has the surplus stock you need before you float a redundant purchase order.
         </p>
 
         {/* Input Bar */}
@@ -516,8 +514,7 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
                 marginTop: "6px",
               }}
             >
-              This may represent a novel engineering item. Consider submitting
-              for sovereign code minting.
+              Can't find it in the network? Submit this item for sovereign code minting so others can find it next time.
             </p>
           </div>
         ) : (
@@ -924,3 +921,4 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
     </div>
   );
 };
+

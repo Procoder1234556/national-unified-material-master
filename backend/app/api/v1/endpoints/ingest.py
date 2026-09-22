@@ -8,7 +8,7 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, List
 
-from fastapi import APIRouter, File, HTTPException, UploadFile
+from fastapi import APIRouter, File, HTTPException, UploadFile, Depends
 
 from backend.app.schemas.ingest import (
     BatchIngestRequest,
@@ -54,24 +54,43 @@ CANONICAL_SEED_RECORDS = [
 ]
 
 
-def _process_items_sync(job_id: str, org_code: str, items: List[RawMaterialIn]) -> IngestSummaryResponse:
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from backend.app.db.session import get_db
+from backend.app.models.models import Organization, RawMaterial, CleansedMaterial, MaterialEmbedding, UnifiedMasterCode, MaterialMapping
+from backend.app.services.embedding_generator import default_embedding_generator
+
+async def _process_items_async(session: AsyncSession, job_id: str, org_code: str, items: List[RawMaterialIn]) -> IngestSummaryResponse:
     total_rows = len(items)
     auto_approved = 0
     review_required = 0
     novel_count = 0
-    records = []
+
+    # Ensure organization exists
+    org_result = await session.execute(select(Organization).where(Organization.code == org_code))
+    org = org_result.scalars().first()
+    if not org:
+        org = Organization(code=org_code, name=f"{org_code} Auto-Created", division="Default")
+        session.add(org)
+        await session.flush()
+
+    # Load seeds from DB
+    seeds_result = await session.execute(select(UnifiedMasterCode))
+    seeds = seeds_result.scalars().all()
 
     for item in items:
         attrs = default_extractor.extract(item.raw_description)
 
         best_match = None
         best_score = -1.0
+        best_seed = None
 
-        for seed in CANONICAL_SEED_RECORDS:
-            eval_res = default_matcher.evaluate_pair(item.raw_description, seed["raw_description"])
+        for seed in seeds:
+            eval_res = default_matcher.evaluate_pair(item.raw_description, seed.canonical_description)
             if eval_res.confidence_score > best_score:
                 best_score = eval_res.confidence_score
                 best_match = eval_res
+                best_seed = seed
 
         if best_match and best_match.gate_result.passed and best_score >= 0.92:
             status = "AUTO_APPROVED"
@@ -83,24 +102,69 @@ def _process_items_sync(job_id: str, org_code: str, items: List[RawMaterialIn]) 
             status = "NOVEL_ITEM"
             novel_count += 1
 
-        records.append(
-            {
-                "source_item_code": item.source_item_code,
-                "raw_description": item.raw_description,
-                "organization_code": org_code,
-                "plant_location": item.plant_location,
-                "extracted_attributes": attrs,
-                "status": status,
-                "best_match": best_match,
-            }
+        # 1. RawMaterial
+        raw_mat = RawMaterial(
+            organization_id=org.id,
+            source_item_code=item.source_item_code,
+            plant_code=item.plant_code,
+            plant_location=item.plant_location,
+            raw_description=item.raw_description,
+            unit_price=item.unit_price,
+            currency=item.currency,
+            stock_quantity=item.stock_quantity,
+            uom=item.uom,
         )
+        session.add(raw_mat)
+        await session.flush()
 
-    _INGESTED_RECORDS[job_id] = records
+        # 2. CleansedMaterial
+        clean_mat = CleansedMaterial(
+            raw_material_id=raw_mat.id,
+            cleaned_description=attrs.get("clean_text", item.raw_description),
+            item_class=attrs.get("item_class", "UNKNOWN"),
+            size_inch=attrs.get("size_inch"),
+            size_mm=attrs.get("size_mm"),
+            pressure_class=attrs.get("pressure_class"),
+            metallurgy=attrs.get("metallurgy"),
+            end_connection=attrs.get("end_connection"),
+            standards=attrs.get("standards", []),
+            parametric_attributes=attrs,
+        )
+        session.add(clean_mat)
+        await session.flush()
+
+        # 3. MaterialEmbedding
+        emb_vector = default_embedding_generator.generate_embedding(clean_mat.cleaned_description)
+        # Ensure it's padded to 1024 dims if using mock generator, or let the DB handle it.
+        # But we must provide it.
+        if len(emb_vector) < 1024:
+            emb_vector = emb_vector + [0.0] * (1024 - len(emb_vector))
+        elif len(emb_vector) > 1024:
+            emb_vector = emb_vector[:1024]
+            
+        embedding = MaterialEmbedding(
+            cleansed_material_id=clean_mat.id,
+            embedding_1024=emb_vector
+        )
+        session.add(embedding)
+
+        # 4. MaterialMapping
+        mapping = MaterialMapping(
+            raw_material_id=raw_mat.id,
+            unified_master_id=best_seed.id if best_seed else None,
+            confidence_score=best_match.confidence_score if best_match else 0.0,
+            lexical_similarity=best_match.lexical_similarity if best_match else 0.0,
+            semantic_similarity=best_match.semantic_similarity if best_match else 0.0,
+            rule_gate_passed=best_match.gate_result.passed if best_match else False,
+            mapping_status=status
+        )
+        session.add(mapping)
+        
+    await session.commit()
 
     auto_pct = round((auto_approved / total_rows) * 100, 2) if total_rows > 0 else 0.0
     review_pct = round((review_required / total_rows) * 100, 2) if total_rows > 0 else 0.0
     novel_pct = round((novel_count / total_rows) * 100, 2) if total_rows > 0 else 0.0
-    # Estimated savings: ₹35,000 per auto-approved duplicate consolidation
     savings_inr = auto_approved * 35000.0
 
     completed_time = datetime.now(timezone.utc)
@@ -135,13 +199,16 @@ def _process_items_sync(job_id: str, org_code: str, items: List[RawMaterialIn]) 
 
 
 @router.post("/batch", response_model=IngestSummaryResponse, summary="Ingest batch of CPSE catalog items")
-async def ingest_batch(req: BatchIngestRequest):
+async def ingest_batch(
+    req: BatchIngestRequest,
+    session: AsyncSession = Depends(get_db)
+):
     """
     Synchronously ingests and harmonizes a structured batch of legacy CPSE materials.
     Runs NLP normalization, attribute extraction, and ASME safety gate matching.
     """
     job_id = str(uuid.uuid4())
-    summary = _process_items_sync(job_id, req.organization_code, req.items)
+    summary = await _process_items_async(session, job_id, req.organization_code, req.items)
     return summary
 
 
@@ -149,6 +216,7 @@ async def ingest_batch(req: BatchIngestRequest):
 async def upload_catalog_file(
     file: UploadFile = File(...),
     organization_code: str = "IOCL",
+    session: AsyncSession = Depends(get_db)
 ):
     """
     Parses and processes an uploaded CSV or JSON procurement catalog file.
@@ -204,7 +272,7 @@ async def upload_catalog_file(
     if not items:
         raise HTTPException(status_code=400, detail="Uploaded file contains no valid material descriptions.")
 
-    summary = _process_items_sync(job_id, organization_code, items)
+    summary = await _process_items_async(session, job_id, organization_code, items)
     return summary
 
 

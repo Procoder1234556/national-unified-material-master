@@ -1,1773 +1,843 @@
-// ponytail: Humanto-inspired public landing page for NUMM (One Nation, One Material Code).
-// Features warm editorial aesthetic, ambient radial glow, interactive persona pathways, and seamless transition to enterprise workspace.
-
 import React, { useState } from "react";
-import { rawTokens } from "../tokens.stylex";
-import {
-  Sparkline,
-  SparkBar,
-  SegBar,
-  BulletMeter,
-  DonutMicro,
-} from "./MicroCharts";
-import {
-  ArrowRight,
-  ShieldCheck,
-  Search,
-  Truck,
-  TrendingDown,
-  Layers,
-  FileCheck2,
-  CheckCircle2,
-  AlertTriangle,
-  Building2,
-  Factory,
-  ChevronDown,
-  ChevronUp,
-  Sparkles,
-  ExternalLink,
-  Lock,
-  ArrowRightLeft,
-  ChevronRight,
-} from "lucide-react";
 
-interface LandingPageProps {
-  onEnterDashboard: (targetTab?: string, targetRole?: string) => void;
-}
 
-export const LandingPage: React.FC<LandingPageProps> = ({
-  onEnterDashboard,
-}) => {
-  const [activeFaq, setActiveFaq] = useState<number | null>(null);
 
-  const cpseList = [
-    { code: "IOCL", name: "Indian Oil" },
-    { code: "ONGC", name: "Oil & Natural Gas Corp" },
-    { code: "BPCL", name: "Bharat Petroleum" },
-    { code: "HPCL", name: "Hindustan Petroleum" },
-    { code: "GAIL", name: "Gas Authority of India" },
-    { code: "OIL", name: "Oil India Limited" },
-    { code: "EIL", name: "Engineers India" },
-    { code: "NRL", name: "Numaligarh Refinery" },
-    { code: "MRPL", name: "Mangalore Refinery" },
-    { code: "CPCL", name: "Chennai Petroleum" },
-  ];
+const styles: Record<string, React.CSSProperties> = {
+  page: {
+    backgroundColor: "#faf8f5",
+    color: "#141414",
+    fontFamily: "'Inter', sans-serif",
+    minHeight: "100vh",
+  },
+  sectionWhite: {
+    backgroundColor: "#ffffff",
+  },
+  sectionCream: {
+    backgroundColor: "#faf8f5",
+  },
+  cropMarks: {
+    position: "relative",
+    
+    
+  },
+  cropMarksOrange: {
+    position: "relative",
+    
+    
+  },
+  announcementBar: {
+    backgroundColor: "#141414",
+    color: "#fff",
+    textAlign: "center",
+    padding: "8px 16px",
+    fontSize: "14px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: "12px",
+  },
+  announcementLink: {
+    color: "#fff",
+    textDecoration: "underline",
+  },
+  navbar: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: "16px 40px",
+    position: "sticky",
+    top: 0,
+    backgroundColor: "rgba(250, 248, 245, 0.9)",
+    backdropFilter: "blur(8px)",
+    zIndex: 100,
+  },
+  navLinks: {
+    display: "flex",
+    gap: "32px",
+    fontSize: "15px",
+    fontWeight: 500,
+  },
+  navActions: {
+    display: "flex",
+    gap: "16px",
+    alignItems: "center",
+  },
+  hero: {
+    padding: "120px 40px",
+    textAlign: "center",
+    maxWidth: "960px",
+    margin: "0 auto",
+    position: "relative",
+  },
+  heroTitle: {
+    fontSize: "96px",
+    lineHeight: 1.1,
+    letterSpacing: "-0.02em",
+    fontWeight: 600,
+    marginBottom: "24px",
+  },
+  serifContrast: {
+    fontFamily: "'Georgia', serif",
+    fontWeight: 400,
+    fontStyle: "italic",
+    color: "#593C32",
+  },
+  heroSubtitle: {
+    fontSize: "20px",
+    lineHeight: 1.6,
+    color: "#4B5563",
+    maxWidth: "600px",
+    margin: "0 auto 40px",
+  },
+  buttonGroup: {
+    display: "flex",
+    gap: "16px",
+    justifyContent: "center",
+    marginBottom: "16px",
+  },
+  btnSolid: {
+    backgroundColor: "#141414",
+    color: "#fff",
+    borderRadius: "999px",
+    padding: "16px 32px",
+    fontWeight: 500,
+    border: "none",
+    cursor: "pointer",
+  },
+  btnOutline: {
+    backgroundColor: "transparent",
+    color: "#141414",
+    borderRadius: "999px",
+    padding: "16px 32px",
+    fontWeight: 500,
+    border: "1px solid #141414",
+    cursor: "pointer",
+  },
+  reassurance: {
+    fontSize: "13px",
+    color: "#9CA3AF",
+  },
+  floatingWidget: {
+    position: "absolute",
+    bottom: "-40px",
+    right: "-80px",
+    backgroundColor: "#fff",
+    padding: "24px",
+    borderRadius: "16px",
+    boxShadow: "0 24px 48px rgba(0,0,0,0.08)",
+    width: "320px",
+    textAlign: "left",
+    border: "1px solid #E5E7EB",
+  },
+  tabsContainer: {
+    display: "flex",
+    justifyContent: "center",
+    gap: "8px",
+    marginBottom: "40px",
+  },
+  tab: {
+    padding: "12px 24px",
+    borderRadius: "999px",
+    border: "1px solid #E5E7EB",
+    backgroundColor: "#fff",
+    cursor: "pointer",
+    fontWeight: 500,
+  },
+  tabActive: {
+    backgroundColor: "#f0f0f0",
+  },
+  productPanel: {
+    maxWidth: "1200px",
+    margin: "0 auto",
+    backgroundColor: "#f5f5f5",
+    borderRadius: "24px",
+    padding: "40px",
+    boxShadow: "inset 0 2px 10px rgba(0,0,0,0.02)",
+  },
+  panelImage: {
+    width: "100%",
+    borderRadius: "12px",
+    boxShadow: "0 12px 32px rgba(0,0,0,0.1)",
+  },
+  logoCloud: {
+    padding: "80px 40px",
+    textAlign: "center",
+  },
+  eyebrow: {
+    fontSize: "12px",
+    textTransform: "uppercase",
+    letterSpacing: "0.1em",
+    fontWeight: 600,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: "8px",
+    marginBottom: "32px",
+  },
+  markerBlue: {
+    width: "8px",
+    height: "8px",
+    backgroundColor: "#5F978E",
+  },
+  markerOrange: {
+    width: "8px",
+    height: "8px",
+    backgroundColor: "#E94344",
+  },
+  logosGrid: {
+    display: "flex",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    gap: "48px",
+    opacity: 0.6,
+  },
+  featureSection: {
+    padding: "120px 40px",
+    display: "flex",
+    flexDirection: "column",
+    gap: "64px",
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  featureHeader: {
+    maxWidth: "600px",
+    position: "relative",
+  },
+  featureHeadline: {
+    fontSize: "64px",
+    lineHeight: 1.1,
+    fontWeight: 600,
+    marginBottom: "24px",
+  },
+  featureBody: {
+    fontSize: "18px",
+    lineHeight: 1.6,
+    color: "#4B5563",
+    marginBottom: "32px",
+  },
+  inkIllustration: {
+    position: "absolute",
+    right: "-200px",
+    top: 0,
+    opacity: 0.8,
+    width: "150px",
+  },
+  threeColGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "32px",
+  },
+  gridCardTitle: {
+    fontSize: "20px",
+    fontWeight: 600,
+    marginBottom: "12px",
+  },
+  gridCardBody: {
+    fontSize: "16px",
+    color: "#4B5563",
+    marginBottom: "16px",
+  },
+  linkStyle: {
+    color: "#141414",
+    fontWeight: 600,
+    textDecoration: "underline",
+    cursor: "pointer",
+  },
+  testimonial: {
+    padding: "120px 40px",
+    maxWidth: "1000px",
+    margin: "0 auto",
+  },
+  testimonialPanel: {
+    border: "1px solid #E5E7EB",
+    borderRadius: "24px",
+    padding: "64px",
+    backgroundColor: "#fff",
+    display: "flex",
+    gap: "40px",
+  },
+  testimonialQuote: {
+    fontSize: "32px",
+    lineHeight: 1.4,
+    fontWeight: 500,
+    flex: 1,
+  },
+  highlight: {
+    color: "#E94344",
+    borderBottom: "2px solid #E94344",
+  },
+  testimonialAuthor: {
+    marginTop: "32px",
+    fontSize: "16px",
+    fontWeight: 600,
+  },
+  integrations: {
+    padding: "120px 40px",
+    display: "grid",
+    gridTemplateColumns: "1fr 1fr",
+    gap: "80px",
+    maxWidth: "1200px",
+    margin: "0 auto",
+  },
+  integrationGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gap: "16px",
+  },
+  integrationCard: {
+    border: "1px solid #E5E7EB",
+    borderRadius: "12px",
+    padding: "24px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "12px",
+    backgroundColor: "#fff",
+  },
+  pricing: {
+    padding: "120px 40px",
+    textAlign: "center",
+  },
+  pricingCard: {
+    maxWidth: "600px",
+    margin: "40px auto 0",
+    backgroundColor: "#faf8f5",
+    border: "1px solid #E5E7EB",
+    borderRadius: "24px",
+    padding: "64px",
+    position: "relative",
+    overflow: "hidden",
+  },
+  priceValue: {
+    fontSize: "80px",
+    fontWeight: 600,
+    letterSpacing: "-0.04em",
+    margin: "24px 0",
+  },
+  halftonePattern: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundImage: "radial-gradient(#CBD5E1 1px, transparent 1px)",
+    backgroundSize: "20px 20px",
+    opacity: 0.3,
+    pointerEvents: "none",
+  },
+  closing: {
+    padding: "160px 40px",
+    textAlign: "center",
+    position: "relative",
+  },
+  closingTitle: {
+    fontSize: "88px",
+    lineHeight: 1,
+    fontWeight: 600,
+    maxWidth: "1000px",
+    margin: "0 auto 40px",
+  },
+  footer: {
+    padding: "80px 40px 40px",
+    backgroundColor: "#fff",
+    borderTop: "1px solid #E5E7EB",
+  },
+  footerGrid: {
+    display: "grid",
+    gridTemplateColumns: "repeat(5, 1fr)",
+    gap: "32px",
+    maxWidth: "1200px",
+    margin: "0 auto 80px",
+  },
+  footerColHeader: {
+    fontSize: "12px",
+    textTransform: "uppercase",
+    fontWeight: 600,
+    color: "#9CA3AF",
+    marginBottom: "24px",
+  },
+  footerLink: {
+    display: "block",
+    color: "#4B5563",
+    marginBottom: "12px",
+    fontSize: "14px",
+    textDecoration: "none",
+  },
+  footerLegal: {
+    display: "flex",
+    justifyContent: "space-between",
+    borderTop: "1px solid #E5E7EB",
+    paddingTop: "24px",
+    fontSize: "14px",
+    color: "#9CA3AF",
+    maxWidth: "1200px",
+    margin: "0 auto",
+  }
+};
 
-  const faqs = [
-    {
-      q: "How does the deterministic ASME safety gate prevent valve misapplications?",
-      a: "NUMM couples BGE semantic vector embeddings with a strict, rule-based ASME physical safety gate. If an incoming catalog record specifies Class 300 (51 bar) while the candidate master code is Class 150 (19 bar), the automated merger is halted, highlighted in Crimson Wine (#9B121E), and locked to 'Split / Mint New Code' to prevent catastrophic field ruptures.",
-    },
-    {
-      q: "What is the GFR Rule 149 'Search Before Buy' mandate?",
-      a: "General Financial Rules (GFR) Rule 149 mandates that CPSE procurement officers verify existing unallocated surplus inventory across sister CPSEs before issuing new purchase requisitions. If ONGC Hazira holds 14 unallocated ball valves 78 km from IOCL Gujarat Refinery, an inter-CPSE transfer is executed instead of floating a duplicate tender.",
-    },
-    {
-      q: "How does MeghRaj SSO ensure auditability for CVC oversight?",
-      a: "Every triage approval, attribute override, and novel code minting action is cryptographically signed using the data steward's National Informatics Centre (NIC) MeghRaj SSO JWT session. The resulting SHA-256 hash is appended to an immutable audit ledger accessible by MoPNG and Central Vigilance Commission (CVC) inspectors.",
-    },
-    {
-      q: "Can legacy SAP ECC and S/4HANA material numbers coexist with ONMC?",
-      a: "Yes. NUMM operates as a federated cross-walk layer. Existing CPSE SAP material numbers (e.g. IOCL MAT-1002931) remain intact in local ERPs while being cross-walked to the canonical ONMC code (e.g. ONMC-MECH-VLV-BAL-002-150-A105-9B2F), Shell MESC (74.16.01.015.1), and GeM Category.",
-    },
-  ];
+interface LandingPageProps { onEnterDashboard: (targetTab?: string, targetRole?: string) => void; }
+
+
+const KoboyoDashboard = () => (
+  <svg viewBox="0 0 400 300" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+    <rect x="20" y="20" width="360" height="260" rx="12" />
+    <line x1="20" y1="60" x2="380" y2="60" />
+    <circle cx="40" cy="40" r="5" fill="currentColor" />
+    <circle cx="60" cy="40" r="5" fill="currentColor" />
+    <circle cx="80" cy="40" r="5" fill="currentColor" />
+    <rect x="40" y="80" width="100" height="20" rx="4" />
+    <rect x="160" y="80" width="200" height="20" rx="4" />
+    <rect x="40" y="120" width="80" height="20" rx="4" />
+    <rect x="140" y="120" width="220" height="20" rx="4" />
+    <rect x="40" y="160" width="120" height="20" rx="4" />
+    <rect x="180" y="160" width="180" height="20" rx="4" />
+    <path d="M280 200 Q300 180 320 200 T360 200" strokeDasharray="4 4" />
+  </svg>
+);
+
+const KoboyoHarmonization = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+    <path d="M40 100 C 20 80, 40 40, 70 50 C 90 20, 120 40, 110 70 C 140 60, 160 90, 140 120 C 160 150, 120 180, 100 150 C 70 170, 30 150, 50 120 C 20 120, 20 100, 40 100 Z" strokeDasharray="4 4" />
+    <path d="M80 100 L120 100 M100 80 L100 120" />
+    <rect x="60" y="80" width="16" height="16" />
+    <rect x="124" y="104" width="16" height="16" />
+    <circle cx="100" cy="100" r="40" />
+  </svg>
+);
+
+const KoboyoTransfer = () => (
+  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+    <rect x="20" y="40" width="60" height="60" rx="4" />
+    <polygon points="20,40 50,20 80,40" />
+    <rect x="120" y="100" width="60" height="60" rx="4" />
+    <polygon points="120,100 150,80 180,100" />
+    <path d="M80 70 Q 100 70 100 100 T 120 130" strokeDasharray="4 4" />
+    <polygon points="110,120 120,130 110,140" fill="currentColor" />
+  </svg>
+);
+
+const KoboyoOverlap = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+    <circle cx="40" cy="50" r="30" />
+    <circle cx="60" cy="50" r="30" />
+    <path d="M45 50 L50 55 L58 43" />
+  </svg>
+);
+
+const KoboyoBatch = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+    <rect x="20" y="30" width="60" height="50" rx="4" />
+    <line x1="20" y1="45" x2="80" y2="45" />
+    <line x1="20" y1="60" x2="80" y2="60" />
+    <path d="M40 30 L40 20 L60 20 L60 30" />
+  </svg>
+);
+
+const KoboyoSavings = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+    <line x1="20" y1="80" x2="80" y2="80" />
+    <line x1="20" y1="80" x2="20" y2="20" />
+    <path d="M20 70 L40 50 L60 60 L80 30" />
+    <polygon points="70,30 80,30 80,40" fill="currentColor" />
+  </svg>
+);
+
+const KoboyoPortrait = () => (
+  <svg viewBox="0 0 200 300" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+    <circle cx="100" cy="100" r="50" />
+    <path d="M40 250 C 40 180, 160 180, 160 250 Z" />
+    <path d="M80 90 Q 90 85 100 90 T 120 90" />
+    <path d="M90 120 Q 100 130 110 120" />
+  </svg>
+);
+
+
+const KoboyoButterfly = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+    <path d="M50 50 C 20 20, 10 40, 50 80 C 90 40, 80 20, 50 50 Z" />
+    <path d="M50 50 C 30 10, 10 30, 40 60" />
+    <path d="M50 50 C 70 10, 90 30, 60 60" />
+    <line x1="48" y1="50" x2="45" y2="25" />
+    <line x1="52" y1="50" x2="55" y2="25" />
+  </svg>
+);
+
+const KoboyoKite = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+    <polygon points="50,10 80,40 50,90 20,40" />
+    <line x1="50" y1="10" x2="50" y2="90" />
+    <line x1="20" y1="40" x2="80" y2="40" />
+    <path d="M50,90 Q 60,110 50,130" strokeDasharray="4 4" />
+  </svg>
+);
+
+const KoboyoSparkle = () => (
+  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+    <path d="M50 10 Q 50 50 90 50 Q 50 50 50 90 Q 50 50 10 50 Q 50 50 50 10 Z" />
+  </svg>
+);
+
+export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard }) => {
+  const [activeTab, setActiveTab] = useState("harmonization");
+  const [activeTestimonial, setActiveTestimonial] = useState("ioc");
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        backgroundColor: rawTokens.canvasBackground,
-        color: rawTokens.textPrimary,
-        fontFamily: rawTokens.fontSans,
-        overflowX: "hidden",
-      }}
-    >
-      {/* ========================================================================= */}
-      {/* FLOATING PILL HEADER (Humanto reference)                                  */}
-      {/* ========================================================================= */}
-      <header
-        style={{
-          position: "sticky",
-          top: "16px",
-          zIndex: 100,
-          maxWidth: "1200px",
-          margin: "0 auto",
-          padding: "0 16px",
-        }}
-      >
-        <div
-          style={{
-            backgroundColor: "rgba(255, 255, 255, 0.92)",
-            backdropFilter: "blur(12px)",
-            border: `1px solid ${rawTokens.borderSubtle}`,
-            borderRadius: rawTokens.radiusFull,
-            padding: "8px 16px 8px 24px",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            boxShadow: "0 4px 20px rgba(15, 23, 42, 0.06)",
-          }}
-        >
-          {/* Brand Logo */}
-          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
-            <div
-              style={{
-                width: "28px",
-                height: "28px",
-                borderRadius: "6px",
-                backgroundColor: rawTokens.colorAction,
-                color: "#FFFFFF",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 900,
-                fontSize: "15px",
-                letterSpacing: "-0.05em",
-              }}
-            >
-              N
-            </div>
-            <div>
-              <span
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 800,
-                  color: rawTokens.textPrimary,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                NUMM
-              </span>
-              <span
-                style={{
-                  marginLeft: "8px",
-                  fontSize: "10px",
-                  fontWeight: 700,
-                  color: rawTokens.textMuted,
-                  letterSpacing: "0.06em",
-                }}
-              >
-                MoPNG • SIH 26099
-              </span>
-            </div>
+    <div style={styles.page}>
+      {/* 1. Announcement bar */}
+      <div style={styles.announcementBar}>
+        <span>Version 2.2.0 (Enterprise Production) now deployed to MeghRaj Cloud.</span>
+        <a href="#" style={styles.announcementLink}>Read release notes &rarr;</a>
+        <span style={{ cursor: 'pointer', marginLeft: 'auto' }}>✕</span>
+      </div>
+
+      {/* 2. Navbar */}
+      <nav style={styles.navbar}>
+        <div style={{ fontWeight: 700, fontSize: "20px", letterSpacing: "-0.02em" }}>NUMM</div>
+        <div style={styles.navLinks}>
+          <span>Product</span>
+          <span>Customers</span>
+          <span>Resources</span>
+          <span>Compliance</span>
+        </div>
+        <div style={styles.navActions}>
+          <span style={{ fontWeight: 500, cursor: "pointer" }}>Log in</span>
+          <span style={{ fontWeight: 500, cursor: "pointer" }}>Contact DGH</span>
+          <button style={{...styles.btnSolid,  padding: "10px 20px" }} onClick={() => onEnterDashboard()}>View demo</button>
+        </div>
+      </nav>
+
+      {/* 3. Hero */}
+      <section style={styles.hero}>
+        <h1 style={styles.heroTitle}>
+          One Nation, <br />
+          <span style={styles.serifContrast}>One Material Code</span>
+        </h1>
+        <p style={styles.heroSubtitle}>
+          The AI-powered enterprise data harmonization and collaborative procurement platform. 
+          Unifying legacy catalogs across India's public sector supply chain.
+        </p>
+        <div style={styles.buttonGroup}>
+          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>Start deployment</button>
+          <button style={styles.btnOutline}>Read the PRD</button>
+        </div>
+        <div style={styles.reassurance}>Sovereign infrastructure, CVC-compliant.</div>
+        
+        {/* Floating Triage Widget */}
+        <div style={styles.floatingWidget}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
+            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#5F978E' }} />
+            <span style={{ fontWeight: 600, fontSize: '14px' }}>Match Confidence: 96%</span>
           </div>
+          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#4B5563' }}>
+            ONMC-MECH-VLV-BAL-002-150-A105<br/>
+            = IOCL: 2" CL150 FLG RF BALL<br/>
+            = ONGC: VLV BL FLGD 50MM 150#
+          </div>
+        </div>
+      </section>
 
-          {/* Nav Links */}
-          <nav style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-            <a
-              href="#pathways"
-              style={{
-                textDecoration: "none",
-                color: rawTokens.textSecondary,
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              Role Pathways
-            </a>
-            <a
-              href="#features"
-              style={{
-                textDecoration: "none",
-                color: rawTokens.textSecondary,
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              Commodities
-            </a>
-            <a
-              href="#safety"
-              style={{
-                textDecoration: "none",
-                color: rawTokens.textSecondary,
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              ASME Safety Gate
-            </a>
-            <a
-              href="#network"
-              style={{
-                textDecoration: "none",
-                color: rawTokens.textSecondary,
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              CPSE Network
-            </a>
-            <a
-              href="#faq"
-              style={{
-                textDecoration: "none",
-                color: rawTokens.textSecondary,
-                fontSize: "13px",
-                fontWeight: 600,
-              }}
-            >
-              FAQ
-            </a>
-          </nav>
-
-          {/* Launch Enterprise Workspace Pill CTA */}
-          <button
-            onClick={() => onEnterDashboard("overview")}
-            style={{
-              backgroundColor: rawTokens.textPrimary,
-              color: "#FFFFFF",
-              border: "none",
-              borderRadius: rawTokens.radiusFull,
-              padding: "9px 20px",
-              fontSize: "12px",
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "flex",
-              alignItems: "center",
-              gap: "6px",
-              boxShadow: "0 2px 6px rgba(15, 23, 42, 0.15)",
-              transition: "transform 0.15s ease",
-            }}
+      {/* 4. Two-product tabs */}
+      <section style={{ padding: "0 40px 120px" }}>
+        <div style={styles.tabsContainer}>
+          <button 
+            style={{...styles.tab, ...(activeTab === "harmonization" ? styles.tabActive : {})}}
+            onClick={() => setActiveTab("harmonization")}
           >
-            <span>Launch Platform</span>
-            <ArrowRight size={13} />
+            Catalog Data Harmonization
+          </button>
+          <button 
+            style={{...styles.tab, ...(activeTab === "surplus" ? styles.tabActive : {})}}
+            onClick={() => setActiveTab("surplus")}
+          >
+            Inter-CPSE Procurement
           </button>
         </div>
-      </header>
-
-      {/* ========================================================================= */}
-      {/* HERO SECTION WITH WARM AMBIENT GLOW (Humanto style)                       */}
-      {/* ========================================================================= */}
-      <section
-        style={{
-          position: "relative",
-          padding: "80px 24px 60px",
-          maxWidth: "1280px",
-          margin: "0 auto",
-          textAlign: "center",
-        }}
-      >
-        {/* Soft Ambient Radial Gradient Backdrop */}
-        <div
-          style={{
-            position: "absolute",
-            top: "-10%",
-            left: "50%",
-            transform: "translateX(-50%)",
-            width: "85%",
-            height: "120%",
-            background: rawTokens.glowAmbientHero,
-            filter: "blur(50px)",
-            pointerEvents: "none",
-            zIndex: 0,
-            opacity: 0.9,
-          }}
-        />
-
-        <div style={{ position: "relative", zIndex: 1 }}>
-          {/* Sovereign Badge */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              marginBottom: "18px",
-            }}
-          >
-            <span
-              style={{
-                backgroundColor: "rgba(233, 67, 68, 0.12)",
-                color: rawTokens.colorAction,
-                fontSize: "11px",
-                fontWeight: 800,
-                padding: "4px 12px",
-                borderRadius: rawTokens.radiusFull,
-                letterSpacing: "0.06em",
-              }}
-            >
-              ONE NATION, ONE MATERIAL CODE (ONMC)
-            </span>
-            <span
-              style={{
-                fontSize: "12px",
-                color: rawTokens.textSecondary,
-                fontWeight: 600,
-              }}
-            >
-              Sovereign Industrial Catalog Harmonization
-            </span>
-          </div>
-
-          {/* Main H1 Headline */}
-          <h1
-            style={{
-              fontSize: "46px",
-              fontWeight: 800,
-              color: rawTokens.textPrimary,
-              lineHeight: 1.18,
-              letterSpacing: "-0.03em",
-              maxWidth: "920px",
-              margin: "0 auto",
-            }}
-          >
-            Harmonizing India's Energy Procurement with Deterministic
-            Engineering AI
-          </h1>
-
-          {/* Sub-lead */}
-          <p
-            style={{
-              fontSize: "16px",
-              color: rawTokens.textSecondary,
-              lineHeight: 1.6,
-              maxWidth: "760px",
-              margin: "18px auto 0",
-            }}
-          >
-            A unified national material master for India's oil & gas CPSEs.
-            Eliminates duplicate tenders, surfaces ₹12.8+ Crore in neighboring
-            surplus inventory, and prevents dangerous specification
-            discrepancies before they reach the plant.
-          </p>
-
-          {/* Primary Action Buttons */}
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              gap: "14px",
-              marginTop: "32px",
-              alignItems: "center",
-            }}
-          >
-            <button
-              onClick={() => onEnterDashboard("overview", "STEWARD")}
-              style={{
-                backgroundColor: rawTokens.colorAction,
-                color: "#FFFFFF",
-                border: "none",
-                borderRadius: rawTokens.radiusFull,
-                padding: "14px 32px",
-                fontSize: "14px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: "0 4px 14px rgba(233, 67, 68, 0.35)",
-              }}
-            >
-              <span>Enter Enterprise Platform</span>
-              <ArrowRight size={16} />
-            </button>
-
-            <button
-              onClick={() => onEnterDashboard("search", "PROCUREMENT_OFFICER")}
-              style={{
-                backgroundColor: "#FFFFFF",
-                color: rawTokens.textPrimary,
-                border: `1px solid ${rawTokens.borderStrong}`,
-                borderRadius: rawTokens.radiusFull,
-                padding: "14px 28px",
-                fontSize: "14px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "8px",
-                boxShadow: rawTokens.shadowSubtle,
-              }}
-            >
-              <Search size={15} color={rawTokens.colorAction} />
-              <span>Search Before Buy</span>
-            </button>
-          </div>
-
-          {/* Live Micro-Metrics Bar */}
-          <div
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "28px",
-              marginTop: "36px",
-              padding: "10px 24px",
-              backgroundColor: "rgba(255, 255, 255, 0.8)",
-              backdropFilter: "blur(6px)",
-              borderRadius: rawTokens.radiusFull,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              fontSize: "12px",
-            }}
-          >
-            <div style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-              <span
-                style={{
-                  width: "8px",
-                  height: "8px",
-                  borderRadius: "50%",
-                  backgroundColor: "#0D533A",
-                }}
-              />
-              <span>
-                <strong>104,219</strong> Materials Harmonized
-              </span>
-            </div>
-            <span>•</span>
-            <div>
-              <span>
-                <strong>₹12.8 Cr</strong> Projected Savings
-              </span>
-            </div>
-            <span>•</span>
-            <div>
-              <span style={{ color: "#0D533A", fontWeight: 700 }}>92.4%</span>{" "}
-              Auto-Approval Rate
-            </div>
-            <span>•</span>
-            <div>
-              <span>
-                <strong>100%</strong> CVC Auditable (SHA-256)
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* 3 Editorial Feature Preview Cards (Humanto Hero Bottom trio) */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "20px",
-            marginTop: "56px",
-            textAlign: "left",
-          }}
-        >
-          <div
-            onClick={() => onEnterDashboard("steward", "STEWARD")}
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "24px",
-              boxShadow: rawTokens.shadowSubtle,
-              cursor: "pointer",
-              transition: "transform 0.15s ease, box-shadow 0.15s ease",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "10px",
-                  fontWeight: 800,
-                  color: rawTokens.colorAction,
-                  letterSpacing: "0.06em",
-                }}
-              >
-                HUMAN-IN-THE-LOOP TRIAGE
-              </span>
-              <FileCheck2 size={18} color={rawTokens.colorAction} />
-            </div>
-            <h3
-              style={{
-                fontSize: "16px",
-                fontWeight: 800,
-                color: rawTokens.textPrimary,
-                marginTop: "10px",
-              }}
-            >
-              High-Throughput Stewardship
-            </h3>
-            <p
-              style={{
-                fontSize: "12px",
-                color: rawTokens.textSecondary,
-                marginTop: "6px",
-                lineHeight: 1.5,
-              }}
-            >
-              Resolve borderline duplicate clusters (70% - 91% confidence) with
-              side-by-side attribute deltas and keyboard shortcuts (
-              <kbd>J/K/A/R</kbd>).
-            </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                marginTop: "14px",
-                fontSize: "12px",
-                fontWeight: 700,
-                color: rawTokens.colorAction,
-              }}
-            >
-              <span>Open Triage Cockpit</span>
-              <ChevronRight size={14} />
-            </div>
-          </div>
-
-          <div
-            onClick={() => onEnterDashboard("search", "PROCUREMENT_OFFICER")}
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "24px",
-              boxShadow: rawTokens.shadowSubtle,
-              cursor: "pointer",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "10px",
-                  fontWeight: 800,
-                  color: "#0D533A",
-                  letterSpacing: "0.06em",
-                }}
-              >
-                PRE-PROCUREMENT DISCOVERY
-              </span>
-              <Search size={18} color="#0D533A" />
-            </div>
-            <h3
-              style={{
-                fontSize: "16px",
-                fontWeight: 800,
-                color: rawTokens.textPrimary,
-                marginTop: "10px",
-              }}
-            >
-              Search Before Buy
-            </h3>
-            <p
-              style={{
-                fontSize: "12px",
-                color: rawTokens.textSecondary,
-                marginTop: "6px",
-                lineHeight: 1.5,
-              }}
-            >
-              Mandatory GFR Rule 149 verification: discover unallocated surplus
-              stock in neighboring sister CPSEs before floating redundant
-              purchase orders.
-            </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                marginTop: "14px",
-                fontSize: "12px",
-                fontWeight: 700,
-                color: "#0D533A",
-              }}
-            >
-              <span>Search National Master</span>
-              <ChevronRight size={14} />
-            </div>
-          </div>
-
-          <div
-            onClick={() => onEnterDashboard("security", "AUDITOR")}
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "24px",
-              boxShadow: rawTokens.shadowSubtle,
-              cursor: "pointer",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-              }}
-            >
-              <span
-                style={{
-                  fontSize: "10px",
-                  fontWeight: 800,
-                  color: rawTokens.colorAnchor,
-                  letterSpacing: "0.06em",
-                }}
-              >
-                DETERMINISTIC SAFETY GATES
-              </span>
-              <ShieldCheck size={18} color={rawTokens.colorAnchor} />
-            </div>
-            <h3
-              style={{
-                fontSize: "16px",
-                fontWeight: 800,
-                color: rawTokens.textPrimary,
-                marginTop: "10px",
-              }}
-            >
-              Zero-Tolerance Safety Intercepts
-            </h3>
-            <p
-              style={{
-                fontSize: "12px",
-                color: rawTokens.textSecondary,
-                marginTop: "6px",
-                lineHeight: 1.5,
-              }}
-            >
-              Deterministic physical rules block pressure rating mismatches
-              (Class 150 vs 300) and metallurgical incompatibilities with
-              cryptographic logging.
-            </p>
-            <div
-              style={{
-                display: "flex",
-                alignItems: "center",
-                gap: "6px",
-                marginTop: "14px",
-                fontSize: "12px",
-                fontWeight: 700,
-                color: rawTokens.colorAnchor,
-              }}
-            >
-              <span>Inspect Audit Ledger</span>
-              <ChevronRight size={14} />
-            </div>
-          </div>
+        <div style={styles.productPanel}>
+          {/* Placeholder for dense product UI screenshot */}
+          <div style={{ width: "100%", height: "600px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#5F978E", padding: "40px" }}><KoboyoDashboard /></div>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* PARTICIPATING CPSE FEDERATION BAR                                         */}
-      {/* ========================================================================= */}
-      <section
-        style={{
-          borderTop: `1px solid ${rawTokens.borderSubtle}`,
-          borderBottom: `1px solid ${rawTokens.borderSubtle}`,
-          backgroundColor: "#FFFFFF",
-          padding: "24px 0",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "0 auto",
-            padding: "0 24px",
-            textAlign: "center",
-          }}
-        >
-          <div
-            style={{
-              fontSize: "11px",
-              fontWeight: 700,
-              color: rawTokens.textMuted,
-              letterSpacing: "0.06em",
-              textTransform: "uppercase",
-              marginBottom: "14px",
-            }}
-          >
-            Federating Public Sector Enterprises Across India's Energy
-            Infrastructure
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              flexWrap: "wrap",
-              gap: "12px",
-            }}
-          >
-            {cpseList.map((cpse) => (
-              <div
-                key={cpse.code}
-                style={{
-                  padding: "8px 16px",
-                  borderRadius: rawTokens.radiusSm,
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  border: `1px solid ${rawTokens.borderSubtle}`,
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "8px",
-                }}
-              >
-                <strong
-                  style={{ fontSize: "12px", color: rawTokens.textPrimary }}
-                >
-                  {cpse.code}
-                </strong>
-                <span
-                  style={{ fontSize: "11px", color: rawTokens.textSecondary }}
-                >
-                  {cpse.name}
-                </span>
-              </div>
-            ))}
-          </div>
+      {/* 5. Logo cloud */}
+      <section style={{...styles.sectionWhite, ...styles.logoCloud}}>
+        <div style={styles.eyebrow}>
+          Trusted by India's leading CPSEs
+        </div>
+        <div style={styles.logosGrid}>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>IOCL</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>ONGC</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>BPCL</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>HPCL</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>GAIL</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>OIL</span>
+          <span style={{ fontSize: '24px', fontWeight: 600 }}>EIL</span>
         </div>
       </section>
 
-      {/* ========================================================================= */}
-      {/* INTERACTIVE ROLE PATHWAYS ("Start where you are" from Humanto)            */}
-      {/* ========================================================================= */}
-      <section
-        id="pathways"
-        style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto" }}
-      >
-        <div style={{ textAlign: "center", marginBottom: "48px" }}>
-          <span
-            style={{
-              fontSize: "11px",
-              fontWeight: 800,
-              color: rawTokens.colorAction,
-              letterSpacing: "0.06em",
-            }}
-          >
-            TAILORED OPERATIONAL WORKSPACES
-          </span>
-          <h2
-            style={{
-              fontSize: "32px",
-              fontWeight: 800,
-              color: rawTokens.textPrimary,
-              marginTop: "8px",
-            }}
-          >
-            Start where you are — we'll guide you to the right workflow
+      {/* 6. Feature section A */}
+      <section style={{...styles.sectionCream, ...styles.featureSection, ...styles.cropMarks}}>
+        <div style={styles.featureHeader}>
+          <div style={{...styles.eyebrow,  justifyContent: 'flex-start' }}>
+            <div style={styles.markerBlue} /> AI Harmonization
+          </div>
+          <h2 style={styles.featureHeadline}>
+            Standardize catalogs with <span style={styles.serifContrast}>engineering</span> precision.
           </h2>
-          <p
-            style={{
-              fontSize: "14px",
-              color: rawTokens.textSecondary,
-              marginTop: "8px",
-            }}
-          >
-            Role-gated interfaces designed for enterprise efficiency, keyboard
-            navigation, and statutory compliance
+          <p style={styles.featureBody}>
+            Pair dense semantic vector embeddings with deterministic rule gating to map fragmented ERP entries into a single sovereign taxonomy. Zero false positives on pressure ratings.
           </p>
-        </div>
-
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: "24px",
-          }}
-        >
-          {/* Pathway 1: Data Steward */}
-          <div
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "32px 28px",
-              boxShadow: rawTokens.shadowCard,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: rawTokens.radiusMd,
-                  backgroundColor: "rgba(233, 67, 68, 0.1)",
-                  color: rawTokens.colorAction,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "18px",
-                }}
-              >
-                <FileCheck2 size={24} />
-              </div>
-
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 800,
-                  color: rawTokens.textPrimary,
-                }}
-              >
-                I'm a Data Steward
-              </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: rawTokens.textSecondary,
-                  marginTop: "8px",
-                  lineHeight: 1.5,
-                }}
-              >
-                Review borderline catalog clusters, inspect attribute deltas,
-                and resolve discrepancies with 1,000+ items/hr throughput.
-              </p>
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  padding: "14px",
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  borderRadius: rawTokens.radiusSm,
-                  fontSize: "11px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "6px",
-                }}
-              >
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Pending Triage Queue:
-                  </span>
-                  <strong
-                    style={{
-                      fontFamily: rawTokens.fontMono,
-                      color: rawTokens.colorAction,
-                    }}
-                  >
-                    84 items
-                  </strong>
-                </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Keyboard Shortcuts:
-                  </span>
-                  <span
-                    style={{ fontFamily: rawTokens.fontMono, fontWeight: 700 }}
-                  >
-                    J, K, A, R, E, N
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onEnterDashboard("steward", "STEWARD")}
-              style={{
-                marginTop: "24px",
-                backgroundColor: rawTokens.textPrimary,
-                color: "#FFFFFF",
-                border: "none",
-                borderRadius: rawTokens.radiusFull,
-                padding: "12px",
-                fontSize: "13px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "6px",
-              }}
-            >
-              <span>Enter Triage Cockpit</span>
-              <ArrowRight size={14} />
-            </button>
+          <div style={{...styles.buttonGroup,  justifyContent: 'flex-start' }}>
+            <button style={styles.btnSolid}>Explore taxonomy</button>
+            <button style={styles.btnOutline}>Read whitepaper</button>
           </div>
-
-          {/* Pathway 2: Procurement Officer */}
-          <div
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "32px 28px",
-              boxShadow: rawTokens.shadowCard,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: rawTokens.radiusMd,
-                  backgroundColor: "rgba(95, 151, 142, 0.15)",
-                  color: "#0D533A",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "18px",
-                }}
-              >
-                <Search size={24} />
-              </div>
-
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 800,
-                  color: rawTokens.textPrimary,
-                }}
-              >
-                I'm a Procurement Officer
-              </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: rawTokens.textSecondary,
-                  marginTop: "8px",
-                  lineHeight: 1.5,
-                }}
-              >
-                Query national master holdings before floating tenders. Find
-                surplus inventory within 100 km and aggregate pooled demand.
-              </p>
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  padding: "14px",
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  borderRadius: rawTokens.radiusSm,
-                  fontSize: "11px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "6px",
-                }}
-              >
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Duplicate Avoidance:
-                  </span>
-                  <strong
-                    style={{ fontFamily: rawTokens.fontMono, color: "#0D533A" }}
-                  >
-                    ₹3.42 Cr identified
-                  </strong>
-                </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Pooled Tenders:
-                  </span>
-                  <span
-                    style={{ fontFamily: rawTokens.fontMono, fontWeight: 700 }}
-                  >
-                    2,950 units (14.2% off)
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onEnterDashboard("search", "PROCUREMENT_OFFICER")}
-              style={{
-                marginTop: "24px",
-                backgroundColor: rawTokens.textPrimary,
-                color: "#FFFFFF",
-                border: "none",
-                borderRadius: rawTokens.radiusFull,
-                padding: "12px",
-                fontSize: "13px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "6px",
-              }}
-            >
-              <span>Search Before Buy</span>
-              <ArrowRight size={14} />
-            </button>
-          </div>
-
-          {/* Pathway 3: Plant Maintenance Engineer */}
-          <div
-            style={{
-              backgroundColor: "#FFFFFF",
-              borderRadius: rawTokens.radiusLg,
-              border: `1px solid ${rawTokens.borderSubtle}`,
-              padding: "32px 28px",
-              boxShadow: rawTokens.shadowCard,
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "space-between",
-            }}
-          >
-            <div>
-              <div
-                style={{
-                  width: "44px",
-                  height: "44px",
-                  borderRadius: rawTokens.radiusMd,
-                  backgroundColor: "rgba(241, 204, 157, 0.4)",
-                  color: rawTokens.colorAnchor,
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  marginBottom: "18px",
-                }}
-              >
-                <Truck size={24} />
-              </div>
-
-              <h3
-                style={{
-                  fontSize: "18px",
-                  fontWeight: 800,
-                  color: rawTokens.textPrimary,
-                }}
-              >
-                I'm a Plant Engineer
-              </h3>
-              <p
-                style={{
-                  fontSize: "13px",
-                  color: rawTokens.textSecondary,
-                  marginTop: "8px",
-                  lineHeight: 1.5,
-                }}
-              >
-                Locate emergency insurance spares in neighboring refineries
-                within 6 hours. Initiate digital MTIRF requisitions with e-Sign.
-              </p>
-
-              <div
-                style={{
-                  marginTop: "20px",
-                  padding: "14px",
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  borderRadius: rawTokens.radiusSm,
-                  fontSize: "11px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "6px",
-                }}
-              >
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Hazira → Gujarat Ref.:
-                  </span>
-                  <strong
-                    style={{ fontFamily: rawTokens.fontMono, color: "#0D533A" }}
-                  >
-                    78 km • 14 units
-                  </strong>
-                </div>
-                <div
-                  style={{ display: "flex", justifyContent: "space-between" }}
-                >
-                  <span style={{ color: rawTokens.textMuted }}>
-                    Requisition Format:
-                  </span>
-                  <span
-                    style={{ fontFamily: rawTokens.fontMono, fontWeight: 700 }}
-                  >
-                    MoPNG MTIRF (5-Stage)
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            <button
-              onClick={() => onEnterDashboard("surplus", "PLANT_ENGINEER")}
-              style={{
-                marginTop: "24px",
-                backgroundColor: rawTokens.textPrimary,
-                color: "#FFFFFF",
-                border: "none",
-                borderRadius: rawTokens.radiusFull,
-                padding: "12px",
-                fontSize: "13px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "6px",
-              }}
-            >
-              <span>Locate Surplus Stock</span>
-              <ArrowRight size={14} />
-            </button>
+          <div style={styles.inkIllustration}>
+            <KoboyoButterfly />
           </div>
         </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* COMMODITIES HARMONIZED SECTION                                            */}
-      {/* ========================================================================= */}
-      <section
-        id="features"
-        style={{
-          padding: "60px 24px",
-          backgroundColor: "#FFFFFF",
-          borderTop: `1px solid ${rawTokens.borderSubtle}`,
-          borderBottom: `1px solid ${rawTokens.borderSubtle}`,
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "40px" }}>
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 800,
-                color: rawTokens.colorAction,
-                letterSpacing: "0.06em",
-              }}
-            >
-              STANDARDIZED OIL & GAS COMMODITY FAMILIES
-            </span>
-            <h2
-              style={{
-                fontSize: "28px",
-                fontWeight: 800,
-                color: rawTokens.textPrimary,
-                marginTop: "8px",
-              }}
-            >
-              Standardized Mechanical & Piping Equipment Classes
-            </h2>
-            <p
-              style={{
-                fontSize: "13px",
-                color: rawTokens.textSecondary,
-                marginTop: "6px",
-              }}
-            >
-              Cross-walked across Shell MESC, UNSPSC, and GeM categories with
-              exact engineering tolerances
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "16px",
-            }}
-          >
-            {[
-              {
-                title: "Ball Valves (API 6D)",
-                desc: 'Two-piece split body, floating/trunnion mounted, 2" - 24", Class 150 - 600, ASTM A105 / A216 WCB.',
-                code: "ONMC-MECH-VLV-BAL",
-                mesc: "74.16.XX",
-              },
-              {
-                title: "Gate Valves (API 600)",
-                desc: 'Bolted bonnet, flexible wedge, OS&Y, 2" - 36", Class 150 - 900, ASTM A216 WCB / WC6.',
-                code: "ONMC-MECH-VLV-GAT",
-                mesc: "74.02.XX",
-              },
-              {
-                title: "Weld Neck Flanges (ASME B16.5)",
-                desc: 'Raised face (RF), RTJ, SCH 40/80/160, 1/2" - 24", Class 150 - 2500, ASTM A105.',
-                code: "ONMC-PIP-FLG-WN",
-                mesc: "76.22.XX",
-              },
-              {
-                title: "Spiral Wound Gaskets (ASME B16.20)",
-                desc: "SS316L winding, flexible graphite filler, carbon steel outer ring, Class 150 - 600.",
-                code: "ONMC-GSK-SPW",
-                mesc: "81.12.XX",
-              },
-              {
-                title: "Seamless Line Pipe (API 5L)",
-                desc: "Grade B, X42, X52, PSL-1 / PSL-2 sour service certified, SCH 40/80, beveled ends.",
-                code: "ONMC-PIP-SML",
-                mesc: "78.10.XX",
-              },
-              {
-                title: "Globe Valves (BS 1873)",
-                desc: "Plug type disc, renewable seat ring, flanged ends, Class 150 - 300, ASTM A216 WCB.",
-                code: "ONMC-MECH-VLV-GLB",
-                mesc: "74.05.XX",
-              },
-            ].map((com, idx) => (
-              <div
-                key={idx}
-                style={{
-                  padding: "20px",
-                  borderRadius: rawTokens.radiusMd,
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  border: `1px solid ${rawTokens.borderSubtle}`,
-                }}
-              >
-                <div
-                  style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                  }}
-                >
-                  <h4
-                    style={{
-                      fontSize: "14px",
-                      fontWeight: 700,
-                      color: rawTokens.textPrimary,
-                    }}
-                  >
-                    {com.title}
-                  </h4>
-                  <span
-                    style={{
-                      fontSize: "10px",
-                      fontFamily: rawTokens.fontMono,
-                      color: rawTokens.textMuted,
-                    }}
-                  >
-                    MESC {com.mesc}
-                  </span>
-                </div>
-                <p
-                  style={{
-                    fontSize: "12px",
-                    color: rawTokens.textSecondary,
-                    marginTop: "6px",
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {com.desc}
-                </p>
-                <div
-                  style={{
-                    marginTop: "12px",
-                    fontSize: "11px",
-                    fontFamily: rawTokens.fontMono,
-                    color: rawTokens.colorAction,
-                    fontWeight: 700,
-                  }}
-                >
-                  {com.code}-*
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* DARK SOVEREIGN AUDIT VAULT SECTION (Humanto Dark Block)                   */}
-      {/* ========================================================================= */}
-      <section
-        id="safety"
-        style={{ padding: "80px 24px", maxWidth: "1200px", margin: "0 auto" }}
-      >
-        <div
-          style={{
-            backgroundColor: rawTokens.darkVaultBg,
-            borderRadius: rawTokens.radiusXl,
-            border: `1px solid ${rawTokens.darkVaultBorder}`,
-            padding: "48px",
-            color: "#FFFFFF",
-            boxShadow: rawTokens.shadowElevated,
-            display: "grid",
-            gridTemplateColumns: "1.2fr 0.8fr",
-            gap: "36px",
-            alignItems: "center",
-          }}
-        >
+        <div style={{ height: "400px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#593C32", padding: "40px" }}><KoboyoHarmonization /></div>
+        <div style={styles.threeColGrid}>
           <div>
-            <span
-              style={{
-                backgroundColor: "rgba(233, 67, 68, 0.2)",
-                color: "#FF8F8F",
-                fontSize: "10px",
-                fontWeight: 800,
-                padding: "3px 10px",
-                borderRadius: rawTokens.radiusFull,
-                letterSpacing: "0.06em",
-              }}
-            >
-              CVC SOVEREIGN TAMPER-EVIDENT VAULT
-            </span>
-            <h2
-              style={{
-                fontSize: "30px",
-                fontWeight: 800,
-                color: "#FFFFFF",
-                marginTop: "12px",
-                lineHeight: 1.2,
-              }}
-            >
-              Immutable Cryptographic Audit Trail for Every Catalog Action
-            </h2>
-            <p
-              style={{
-                fontSize: "14px",
-                color: "#CBD5E1",
-                marginTop: "12px",
-                lineHeight: 1.6,
-              }}
-            >
-              Compliance with Central Vigilance Commission (CVC)
-              anti-cartelization directives and MoPNG governance. Every decision
-              made by a human steward or automated AI gate generates an
-              append-only SHA-256 block hash.
-            </p>
-
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                marginTop: "24px",
-              }}
-            >
-              {[
-                "Deterministic ASME safety gate halts pressure class mismatches (Class 150 vs 300)",
-                "MeghRaj SSO cryptographic e-Sign binding with actor timestamps",
-                "Append-only ledger structure ensures zero post-facto modification",
-                "GFR Rule 149 compliance verification logged for every procurement action",
-              ].map((pt, i) => (
-                <div
-                  key={i}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "10px",
-                    fontSize: "13px",
-                    color: "#E2E8F0",
-                  }}
-                >
-                  <CheckCircle2 size={16} color="#A5D7C9" />
-                  <span>{pt}</span>
-                </div>
-              ))}
-            </div>
-
-            <button
-              onClick={() => onEnterDashboard("security", "AUDITOR")}
-              style={{
-                marginTop: "32px",
-                backgroundColor: rawTokens.colorAction,
-                color: "#FFFFFF",
-                border: "none",
-                borderRadius: rawTokens.radiusFull,
-                padding: "12px 28px",
-                fontSize: "13px",
-                fontWeight: 700,
-                cursor: "pointer",
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "8px",
-              }}
-            >
-              <span>Inspect CVC Audit Chain</span>
-              <ArrowRight size={14} />
-            </button>
+            <h3 style={styles.gridCardTitle}>Sub-50ms Discovery</h3>
+            <p style={styles.gridCardBody}>HNSW cosine distance search on pgvector ensures lightning-fast queries across millions of legacy items.</p>
+            <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
-
-          {/* Cryptographic Hash Card Mock */}
-          <div
-            style={{
-              backgroundColor: rawTokens.darkVaultCard,
-              border: `1px solid ${rawTokens.darkVaultBorder}`,
-              borderRadius: rawTokens.radiusLg,
-              padding: "24px",
-              fontFamily: rawTokens.fontMono,
-            }}
-          >
-            <div
-              style={{
-                fontSize: "11px",
-                color: "#A0AEC0",
-                textTransform: "uppercase",
-                marginBottom: "8px",
-              }}
-            >
-              Latest Verified Block #104,219
-            </div>
-            <div
-              style={{
-                fontSize: "11px",
-                color: "#FF8F8F",
-                wordBreak: "break-all",
-                lineHeight: 1.4,
-              }}
-            >
-              0x9b121e4a78c0245fd8841a052f9b2fa105150002...
-            </div>
-
-            <div
-              style={{
-                marginTop: "16px",
-                paddingTop: "14px",
-                borderTop: `1px solid ${rawTokens.darkVaultBorder}`,
-                fontSize: "12px",
-              }}
-            >
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "6px",
-                }}
-              >
-                <span style={{ color: "#A0AEC0" }}>Action:</span>
-                <span style={{ color: "#A5D7C9", fontWeight: 700 }}>
-                  APPROVE_MATCH
-                </span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "6px",
-                }}
-              >
-                <span style={{ color: "#A0AEC0" }}>Material:</span>
-                <span style={{ color: "#FFFFFF" }}>ONMC-MECH-VLV-BAL-002</span>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  marginBottom: "6px",
-                }}
-              >
-                <span style={{ color: "#A0AEC0" }}>Steward:</span>
-                <span style={{ color: "#FFFFFF" }}>
-                  data.steward@mopng.gov.in
-                </span>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between" }}>
-                <span style={{ color: "#A0AEC0" }}>Safety Status:</span>
-                <span style={{ color: "#A5D7C9" }}>VERIFIED PASSED</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* CPSE GEOSPATIAL LOGISTICS GRID                                            */}
-      {/* ========================================================================= */}
-      <section
-        id="network"
-        style={{
-          padding: "60px 24px",
-          backgroundColor: "#FFFFFF",
-          borderTop: `1px solid ${rawTokens.borderSubtle}`,
-        }}
-      >
-        <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-          <div style={{ textAlign: "center", marginBottom: "36px" }}>
-            <span
-              style={{
-                fontSize: "11px",
-                fontWeight: 800,
-                color: rawTokens.colorAction,
-                letterSpacing: "0.06em",
-              }}
-            >
-              INTER-REFINERY LOGISTICS TOPOLOGY
-            </span>
-            <h2
-              style={{
-                fontSize: "28px",
-                fontWeight: 800,
-                color: rawTokens.textPrimary,
-                marginTop: "8px",
-              }}
-            >
-              Interconnecting India's Oil & Gas Refineries & Terminals
-            </h2>
-            <p
-              style={{
-                fontSize: "13px",
-                color: rawTokens.textSecondary,
-                marginTop: "6px",
-              }}
-            >
-              Real-time transit distance and available insurance spare
-              allocations between neighboring operating sites
-            </p>
-          </div>
-
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(4, 1fr)",
-              gap: "16px",
-            }}
-          >
-            {[
-              {
-                source: "ONGC Hazira Gas Processing Plant",
-                dest: "IOCL Gujarat Refinery, Vadodara",
-                distance: "78 km",
-                transit: "4.5 hrs",
-                surplus: "14 Ball Valves available",
-              },
-              {
-                source: "BPCL Mumbai Refinery, Mahul",
-                dest: "HPCL Mumbai Refinery",
-                distance: "12 km",
-                transit: "1.5 hrs",
-                surplus: "24 Weld Neck Flanges available",
-              },
-              {
-                source: "GAIL Vijaipur Petrochemical Complex",
-                dest: "IOCL Mathura Refinery",
-                distance: "185 km",
-                transit: "6.5 hrs",
-                surplus: "8 Gate Valves available",
-              },
-              {
-                source: "HPCL Visakh Refinery",
-                dest: "IOCL Paradip Refinery",
-                distance: "520 km",
-                transit: "12 hrs",
-                surplus: "150 Spiral Gaskets available",
-              },
-            ].map((route, i) => (
-              <div
-                key={i}
-                style={{
-                  padding: "18px",
-                  borderRadius: rawTokens.radiusMd,
-                  backgroundColor: rawTokens.surfaceSubtle,
-                  border: `1px solid ${rawTokens.borderSubtle}`,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                <div>
-                  <div
-                    style={{
-                      fontSize: "11px",
-                      fontWeight: 800,
-                      color: rawTokens.colorAction,
-                    }}
-                  >
-                    {route.source.split(" ")[0]} &rarr;{" "}
-                    {route.dest.split(" ")[0]}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: 700,
-                      color: rawTokens.textPrimary,
-                      marginTop: "4px",
-                    }}
-                  >
-                    {route.distance} ({route.transit})
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "11px",
-                      color: rawTokens.textSecondary,
-                      marginTop: "6px",
-                    }}
-                  >
-                    {route.source}
-                  </div>
-                </div>
-
-                <div
-                  style={{
-                    marginTop: "14px",
-                    paddingTop: "10px",
-                    borderTop: `1px solid ${rawTokens.borderSubtle}`,
-                  }}
-                >
-                  <div
-                    style={{
-                      fontSize: "11px",
-                      fontWeight: 700,
-                      color: "#0D533A",
-                    }}
-                  >
-                    {route.surplus}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* FAQ SECTION (Humanto accordion)                                           */}
-      {/* ========================================================================= */}
-      <section
-        id="faq"
-        style={{ padding: "80px 24px", maxWidth: "900px", margin: "0 auto" }}
-      >
-        <div style={{ textAlign: "center", marginBottom: "40px" }}>
-          <span
-            style={{
-              fontSize: "11px",
-              fontWeight: 800,
-              color: rawTokens.colorAction,
-              letterSpacing: "0.06em",
-            }}
-          >
-            FREQUENTLY ASKED QUESTIONS
-          </span>
-          <h2
-            style={{
-              fontSize: "28px",
-              fontWeight: 800,
-              color: rawTokens.textPrimary,
-              marginTop: "8px",
-            }}
-          >
-            Everything you need to know about NUMM
-          </h2>
-        </div>
-
-        <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-          {faqs.map((faq, i) => {
-            const isOpen = activeFaq === i;
-
-            return (
-              <div
-                key={i}
-                style={{
-                  backgroundColor: "#FFFFFF",
-                  border: `1px solid ${rawTokens.borderSubtle}`,
-                  borderRadius: rawTokens.radiusMd,
-                  overflow: "hidden",
-                }}
-              >
-                <button
-                  onClick={() => setActiveFaq(isOpen ? null : i)}
-                  style={{
-                    width: "100%",
-                    padding: "16px 20px",
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    border: "none",
-                    backgroundColor: "transparent",
-                    textAlign: "left",
-                    cursor: "pointer",
-                    fontSize: "14px",
-                    fontWeight: 700,
-                    color: rawTokens.textPrimary,
-                  }}
-                >
-                  <span>{faq.q}</span>
-                  {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
-                </button>
-
-                {isOpen && (
-                  <div
-                    style={{
-                      padding: "0 20px 16px",
-                      fontSize: "13px",
-                      color: rawTokens.textSecondary,
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* ========================================================================= */}
-      {/* BOTTOM CTA BANNER & FOOTER                                                */}
-      {/* ========================================================================= */}
-      <section
-        style={{
-          backgroundColor: "#FFFFFF",
-          borderTop: `1px solid ${rawTokens.borderSubtle}`,
-          padding: "60px 24px 40px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <h2
-            style={{
-              fontSize: "32px",
-              fontWeight: 800,
-              color: rawTokens.textPrimary,
-            }}
-          >
-            Ready to unify catalog master data across CPSEs?
-          </h2>
-          <p
-            style={{
-              fontSize: "14px",
-              color: rawTokens.textSecondary,
-              marginTop: "10px",
-            }}
-          >
-            Launch the high-fidelity enterprise workspace to begin catalog
-            ingestion, triage borderline clusters, or search national inventory.
-          </p>
-
-          <button
-            onClick={() => onEnterDashboard("overview")}
-            style={{
-              marginTop: "24px",
-              backgroundColor: rawTokens.colorAction,
-              color: "#FFFFFF",
-              border: "none",
-              borderRadius: rawTokens.radiusFull,
-              padding: "14px 36px",
-              fontSize: "14px",
-              fontWeight: 700,
-              cursor: "pointer",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              boxShadow: "0 4px 14px rgba(233, 67, 68, 0.3)",
-            }}
-          >
-            <span>Launch Enterprise Workspace</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
-
-        {/* Minimal Footer Strip */}
-        <div
-          style={{
-            maxWidth: "1200px",
-            margin: "48px auto 0",
-            paddingTop: "24px",
-            borderTop: `1px solid ${rawTokens.borderSubtle}`,
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            fontSize: "11px",
-            color: rawTokens.textMuted,
-          }}
-        >
           <div>
-            <strong>NUMM</strong> • One Nation, One Material Code • Ministry of
-            Petroleum & Natural Gas (MoPNG) • SIH 26099
+            <h3 style={styles.gridCardTitle}>HITL Triage Interface</h3>
+            <p style={styles.gridCardBody}>Keyboard-driven split-layout cockpit lets stewards review over 1,000 matches per hour with ease.</p>
+            <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
-          <div style={{ display: "flex", gap: "16px" }}>
-            <span>Version 2.2.0</span>
-            <span>CVC Audit Compliant</span>
-            <span>NIC MeghRaj SSO</span>
+          <div>
+            <h3 style={styles.gridCardTitle}>Automated Extraction</h3>
+            <p style={styles.gridCardBody}>Expand 250+ Oil & Gas abbreviations and normalize dimensions dynamically during ingestion.</p>
+            <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
         </div>
       </section>
+
+      {/* 7. Feature section B */}
+      <section style={{...styles.sectionWhite, ...styles.featureSection, ...styles.cropMarksOrange}}>
+        <div style={styles.featureHeader}>
+          <div style={{...styles.eyebrow,  justifyContent: 'flex-start' }}>
+            <div style={styles.markerOrange} /> Inter-CPSE Transfer
+          </div>
+          <h2 style={styles.featureHeadline}>
+            Unlock hidden surplus <span style={styles.serifContrast}>inventory</span> instantly.
+          </h2>
+          <p style={styles.featureBody}>
+            Locate idle emergency spares at neighboring refineries and initiate CVC-compliant transfers to prevent critical plant downtime.
+          </p>
+          <div style={styles.inkIllustration}>
+            <KoboyoKite />
+          </div>
+        </div>
+        <div style={{ display: 'flex', gap: '32px' }}>
+          <div style={{ flex: 2, height: "400px", backgroundColor: "#faf8f5", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#E94344", border: "1px solid #E5E7EB", padding: "40px" }}><KoboyoTransfer /></div>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
+            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+              <h4 style={{ fontWeight: 600 }}>Zero-Downtime Routing</h4>
+              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Calculate transit times between asset bases to slash lead times from weeks to hours.</p>
+            </div>
+            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+              <h4 style={{ fontWeight: 600 }}>Automated Legal Forms</h4>
+              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Generate standardized MoPNG transfer agreements seamlessly.</p>
+            </div>
+            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+              <h4 style={{ fontWeight: 600 }}>Real-time SAP Sync</h4>
+              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Direct RFC integration keeps inventory states perfectly aligned.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Better together */}
+      <section style={{...styles.sectionCream, ...styles.featureSection}}>
+        <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+          <div style={styles.eyebrow}>
+            <div style={styles.markerBlue} />
+            <div style={styles.markerOrange} />
+            Pooled Procurement
+          </div>
+          <h2 style={styles.featureHeadline}>
+            Aggregate demand for <span style={styles.serifContrast}>maximum</span> leverage.
+          </h2>
+          <p style={styles.featureBody}>
+            Cluster scheduled commodity requirements across enterprises to unlock volume discounts on joint MoPNG tenders.
+          </p>
+          <div style={styles.buttonGroup}>
+            <button style={styles.btnSolid}>View cost savings</button>
+          </div>
+        </div>
+        <div style={styles.threeColGrid}>
+          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
+            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#5F978E" }}><KoboyoOverlap /></div>
+            <h3 style={styles.gridCardTitle}>Identify Overlap</h3>
+            <p style={styles.gridCardBody}>Scan annual procurement plans to pinpoint overlapping commodity needs.</p>
+          </div>
+          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
+            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#F1CC9D" }}><KoboyoBatch /></div>
+            <h3 style={styles.gridCardTitle}>Batch Tenders</h3>
+            <p style={styles.gridCardBody}>Combine requirements into unified GeM-compliant public tenders.</p>
+          </div>
+          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
+            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#A5D7C9" }}><KoboyoSavings /></div>
+            <h3 style={styles.gridCardTitle}>Realize Savings</h3>
+            <p style={styles.gridCardBody}>Drive 8-16% reductions on high-volume valves, piping, and steel.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* 9. Testimonial */}
+      <section style={{...styles.sectionWhite, ...styles.testimonial}}>
+        <div style={styles.tabsContainer}>
+          <button style={{...styles.tab, ...(activeTestimonial === "ioc" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("ioc")}>Mathura Refinery</button>
+          <button style={{...styles.tab, ...(activeTestimonial === "ongc" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("ongc")}>Hazira Plant</button>
+          <button style={{...styles.tab, ...(activeTestimonial === "bpcl" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("bpcl")}>Mumbai Refinery</button>
+        </div>
+        <div style={styles.testimonialPanel}>
+          <div style={{ flex: 1 }}>
+            <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '32px' }}>IOCL</div>
+            <p style={styles.testimonialQuote}>
+              "NUMM allowed us to <span style={styles.highlight}>reduce duplicate safety stock by 22%</span> in the first year, freeing up critical working capital while maintaining strict compliance with OISD standards."
+            </p>
+            <div style={styles.testimonialAuthor}>
+              Rameshwar Sharma<br/>
+              <span style={{ fontWeight: 400, color: '#4B5563', fontSize: '14px' }}>Chief Manager (Materials), IOCL Mathura</span>
+            </div>
+          </div>
+          <div style={{ width: "240px", height: "320px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B5563", padding: "40px" }}><KoboyoPortrait /></div>
+        </div>
+      </section>
+
+      {/* 10. Integrations */}
+      <section style={{...styles.sectionCream, ...styles.integrations}}>
+        <div>
+          <h2 style={styles.featureHeadline}>Works with the systems you already use</h2>
+          <p style={styles.featureBody}>Bi-directional cross-walk mapping hooks directly into standard ERP architectures and national e-procurement hubs.</p>
+          <div style={{...styles.buttonGroup,  justifyContent: 'flex-start' }}>
+            <button style={styles.btnOutline}>View documentation</button>
+          </div>
+        </div>
+        <div style={styles.integrationGrid}>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>SAP ECC 6.0</span>
+          </div>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>SAP S/4HANA</span>
+          </div>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>Oracle EBS</span>
+          </div>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#5F978E' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>GeM</span>
+          </div>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#E94344' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>Shell MESC</span>
+          </div>
+          <div style={styles.integrationCard}>
+            <div style={{ width: '40px', height: '40px', color: '#F1CC9D' }}><KoboyoSparkle /></div>
+            <span style={{ fontWeight: 500, fontSize: '14px' }}>UNSPSC</span>
+          </div>
+        </div>
+      </section>
+
+      {/* 11. Pricing -> Transparent Deployment */}
+      <section style={{...styles.sectionWhite, ...styles.pricing}}>
+        <h2 style={styles.featureHeadline}>Transparent deployment</h2>
+        <p style={styles.featureBody}>Standardized infrastructure limits across MeghRaj National Cloud.</p>
+        
+        <div style={styles.pricingCard}>
+          <div style={styles.halftonePattern} />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 600 }}>Enterprise Node</h3>
+            <p style={{ color: '#4B5563', marginTop: '8px' }}>Dedicated air-gapped instance per CPSE.</p>
+            <div style={styles.priceValue}>
+              Air-Gapped <span style={{ color: '#9CA3AF' }}>+</span> RFC
+            </div>
+            <div style={styles.buttonGroup}>
+              <button style={{...styles.btnSolid,  width: '100%' }}>Initialize tenant</button>
+            </div>
+            <button style={{...styles.btnOutline,  width: '100%', marginTop: '16px' }}>View security specs</button>
+          </div>
+        </div>
+        <p style={{ fontSize: '13px', color: '#9CA3AF', marginTop: '24px' }}>Deployments subject to MoPNG DGH clearance.</p>
+      </section>
+
+      {/* 12. Closing CTA */}
+      <section style={{...styles.sectionCream, ...styles.closing}}>
+        <h2 style={styles.closingTitle}>
+          Flawless supply chain <span style={styles.serifContrast}>synchronization</span>.
+        </h2>
+        <div style={styles.buttonGroup}>
+          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>Start deployment</button>
+          <button style={styles.btnOutline}>Contact sales</button>
+        </div>
+        
+        {/* Decorative photo fragments */}
+        <div style={{ position: 'absolute', top: '100px', left: '10%', width: '80px', height: '80px', backgroundColor: '#e5e7eb', borderRadius: '8px', transform: 'rotate(-10deg)' }} />
+        <div style={{ position: 'absolute', bottom: '100px', right: '15%', width: '120px', height: '120px', backgroundColor: '#e5e7eb', borderRadius: '8px', transform: 'rotate(5deg)' }} />
+      </section>
+
+      {/* 13. Footer */}
+      <footer style={styles.footer}>
+        <div style={styles.footerGrid}>
+          <div>
+            <h5 style={styles.footerColHeader}>Product</h5>
+            <a href="#" style={styles.footerLink}>Harmonization</a>
+            <a href="#" style={styles.footerLink}>Surplus Transfer</a>
+            <a href="#" style={styles.footerLink}>Procurement</a>
+            <a href="#" style={styles.footerLink}>Taxonomy</a>
+          </div>
+          <div>
+            <h5 style={styles.footerColHeader}>Learn</h5>
+            <a href="#" style={styles.footerLink}>Documentation</a>
+            <a href="#" style={styles.footerLink}>Architecture</a>
+            <a href="#" style={styles.footerLink}>CVC Norms</a>
+            <a href="#" style={styles.footerLink}>Blog</a>
+          </div>
+          <div>
+            <h5 style={styles.footerColHeader}>Support</h5>
+            <a href="#" style={styles.footerLink}>Help center</a>
+            <a href="#" style={styles.footerLink}>System status</a>
+            <a href="#" style={styles.footerLink}>Security</a>
+          </div>
+          <div>
+            <h5 style={styles.footerColHeader}>Agencies</h5>
+            <a href="#" style={styles.footerLink}>MoPNG</a>
+            <a href="#" style={styles.footerLink}>DGH</a>
+            <a href="#" style={styles.footerLink}>FIPI</a>
+          </div>
+          <div>
+            <h5 style={styles.footerColHeader}>Solutions</h5>
+            <a href="#" style={styles.footerLink}>For Refineries</a>
+            <a href="#" style={styles.footerLink}>For Pipelines</a>
+            <a href="#" style={styles.footerLink}>For E&P</a>
+          </div>
+        </div>
+        <div style={styles.footerLegal}>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <span>&copy; 2026 National Unified Material Master</span>
+            <a href="#" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Terms</a>
+            <a href="#" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Privacy</a>
+          </div>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+            <div style={{ width: '32px', height: '16px', backgroundColor: '#E5E7EB', borderRadius: '16px', position: 'relative' }}>
+              <div style={{ width: '12px', height: '12px', backgroundColor: '#fff', borderRadius: '50%', position: 'absolute', top: '2px', left: '2px' }} />
+            </div>
+            Privacy choices
+          </div>
+        </div>
+      </footer>
     </div>
   );
-};
+}
+
+
+
+
+
+

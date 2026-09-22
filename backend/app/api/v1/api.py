@@ -16,7 +16,10 @@ from backend.app.api.v1.endpoints import (
 )
 from backend.app.core.config import settings
 
-api_router = APIRouter()
+from fastapi import APIRouter, Depends
+from backend.app.core.security import get_current_user
+
+api_router = APIRouter(dependencies=[Depends(get_current_user)])
 
 
 @api_router.get("/health", tags=["system"])

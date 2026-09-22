@@ -219,7 +219,7 @@ export const CatalogIngestionView: React.FC = () => {
                 color: rawTokens.textPrimary,
               }}
             >
-              Catalog Ingestion & Harmonization Pipeline
+              Import & Harmonize Catalogs Instantly
             </h2>
             <div
               style={{ fontSize: rawTokens.textXs, color: rawTokens.textMuted }}
@@ -613,3 +613,4 @@ export const CatalogIngestionView: React.FC = () => {
     </div>
   );
 };
+
