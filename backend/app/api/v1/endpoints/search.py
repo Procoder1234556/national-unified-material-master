@@ -61,6 +61,7 @@ async def national_search(
             score = min(1.0, score + 0.10)
 
         query_words = set(req.query.lower().replace(",", " ").split())
+        canon_words = set(master.canonical_description.lower().replace(",", " ").split())
         overlap = len(query_words & canon_words)
 
         has_explicit_filter = bool(req.item_class or req.pressure_class or req.size_inch)

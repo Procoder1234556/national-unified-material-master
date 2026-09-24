@@ -9,8 +9,8 @@ from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from backend.app.schemas.auth import UserSession
 from backend.app.services.meghraj_auth_service import default_meghraj_auth
 
-# Auto-error True enforces auth presence at the schema level
-bearer_scheme = HTTPBearer(auto_error=True)
+# Auto-error False allows the dependency function to handle missing headers and return mock in dev
+bearer_scheme = HTTPBearer(auto_error=False)
 
 
 async def get_current_user(
@@ -20,6 +20,16 @@ async def get_current_user(
     Validates Bearer token from MeghRaj Gov Cloud or returns authenticated UserSession.
     """
     if not credentials or not credentials.credentials:
+        from backend.app.core.config import settings
+        if settings.ENVIRONMENT == "development":
+            return UserSession(
+                email="dev@numm.gov.in",
+                full_name="Dev User",
+                role="STEWARD",
+                organization_code="IOCL",
+                plant_code="1001",
+                clearance_level="CONFIDENTIAL"
+            )
         # Check if running in open evaluation mode or missing token
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,

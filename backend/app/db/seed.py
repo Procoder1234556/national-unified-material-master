@@ -37,13 +37,13 @@ POC_DATA = [
 ]
 
 SEEDS = [
-    {"desc": "VALVE BALL FLGD 2 INCH 150# CS ASTM A105 API 6D", "code": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F", "cls": "BALL VALVE", "size": 2.0, "p": 150, "met": "ASTM A105"},
-    {"desc": "FLANGE WELD NECK 6 INCH 150# RF CS ASTM A105 ASME B16.5", "code": "ONMC-PIPE-FLG-WNF-006-150-A105-4D1E", "cls": "WELD NECK FLANGE", "size": 6.0, "p": 150, "met": "ASTM A105"},
-    {"desc": "VALVE GATE FLANGED 4 INCH 300# CS ASTM A216 WCB ASME B16.34", "code": "ONMC-MECH-VLV-GAT-004-300-A216-7A3C", "cls": "GATE VALVE", "size": 4.0, "p": 300, "met": "ASTM A216"},
-    {"desc": "GASKET SPIRAL WOUND 2 INCH 150# SS316 GRAPHITE ASME B16.20", "code": "ONMC-STAT-GSK-SPW-002-150-SS316-2F88", "cls": "SPIRAL WOUND GASKET", "size": 2.0, "p": 150, "met": "SS316"},
-    {"desc": "VALVE CHECK SWING 2 INCH 150# CS ASTM A105 API 6D", "code": "ONMC-MECH-VLV-CHK-002-150-A105-1C9A", "cls": "CHECK VALVE", "size": 2.0, "p": 150, "met": "ASTM A105"},
-    {"desc": "PIPE LINE SEAMLESS 4 INCH SCH 40 CS ASTM A106 GR B API 5L", "code": "ONMC-PIPE-PIP-SML-004-040-A106-5E2B", "cls": "LINE PIPE", "size": 4.0, "p": None, "met": "ASTM A106"},
-    {"desc": "VALVE GLOBE FLANGED 3 INCH 150# CS ASTM A216 WCB", "code": "ONMC-MECH-VLV-GLB-003-150-A216-8D2A", "cls": "GLOBE VALVE", "size": 3.0, "p": 150, "met": "ASTM A216"}
+    {"desc": "VALVE BALL FLGD 2 INCH 150# CS ASTM A105 API 6D", "code": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F", "cls": "BALL_VALVE", "size": 2.0, "p": 150, "met": "ASTM A105"},
+    {"desc": "FLANGE WELD NECK 6 INCH 150# RF CS ASTM A105 ASME B16.5", "code": "ONMC-PIPE-FLG-WNF-006-150-A105-4D1E", "cls": "WELD_NECK_FLANGE", "size": 6.0, "p": 150, "met": "ASTM A105"},
+    {"desc": "VALVE GATE FLANGED 4 INCH 300# CS ASTM A216 WCB ASME B16.34", "code": "ONMC-MECH-VLV-GAT-004-300-A216-7A3C", "cls": "GATE_VALVE", "size": 4.0, "p": 300, "met": "ASTM A216"},
+    {"desc": "GASKET SPIRAL WOUND 2 INCH 150# SS316 GRAPHITE ASME B16.20", "code": "ONMC-STAT-GSK-SPW-002-150-SS316-2F88", "cls": "SPIRAL_WOUND_GASKET", "size": 2.0, "p": 150, "met": "SS316"},
+    {"desc": "VALVE CHECK SWING 2 INCH 150# CS ASTM A105 API 6D", "code": "ONMC-MECH-VLV-CHK-002-150-A105-1C9A", "cls": "CHECK_VALVE", "size": 2.0, "p": 150, "met": "ASTM A105"},
+    {"desc": "PIPE LINE SEAMLESS 4 INCH SCH 40 CS ASTM A106 GR B API 5L", "code": "ONMC-PIPE-PIP-SML-004-040-A106-5E2B", "cls": "LINE_PIPE", "size": 4.0, "p": None, "met": "ASTM A106"},
+    {"desc": "VALVE GLOBE FLANGED 3 INCH 150# CS ASTM A216 WCB", "code": "ONMC-MECH-VLV-GLB-003-150-A216-8D2A", "cls": "GLOBE_VALVE", "size": 3.0, "p": 150, "met": "ASTM A216"}
 ]
 
 async def seed_data():
