@@ -8,6 +8,12 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, List
 
+import asyncio
+from fastapi.responses import StreamingResponse
+from fastapi import BackgroundTasks
+from backend.app.db.session import AsyncSessionLocal
+
+
 from fastapi import APIRouter, File, HTTPException, UploadFile, Depends
 
 from backend.app.schemas.ingest import (
@@ -60,11 +66,23 @@ from backend.app.db.session import get_db
 from backend.app.models.models import Organization, RawMaterial, CleansedMaterial, MaterialEmbedding, UnifiedMasterCode, MaterialMapping
 from backend.app.services.embedding_generator import default_embedding_generator
 
+
+async def _background_ingest(job_id: str, org_code: str, items: List[RawMaterialIn]):
+    async with AsyncSessionLocal() as session:
+        try:
+            await _process_items_async(session, job_id, org_code, items)
+        except Exception as e:
+            print("Error in bg ingest:", e)
+            _JOB_STATUS_STORE[job_id].status = "FAILED"
+            _JOB_STATUS_STORE[job_id].current_stage = f"Error: {e}"
+
 async def _process_items_async(session: AsyncSession, job_id: str, org_code: str, items: List[RawMaterialIn]) -> IngestSummaryResponse:
     total_rows = len(items)
     auto_approved = 0
     review_required = 0
     novel_count = 0
+    
+    started_time = datetime.now(timezone.utc)
 
     # Ensure organization exists
     org_result = await session.execute(select(Organization).where(Organization.code == org_code))
@@ -78,7 +96,27 @@ async def _process_items_async(session: AsyncSession, job_id: str, org_code: str
     seeds_result = await session.execute(select(UnifiedMasterCode))
     seeds = seeds_result.scalars().all()
 
-    for item in items:
+    for idx, item in enumerate(items):
+        await asyncio.sleep(0.3)  # simulate real-time processing
+        
+        # update status
+        stage = "Stage 1: Parsing"
+        if idx > total_rows * 0.2: stage = "Stage 2: Token Cleansing"
+        if idx > total_rows * 0.4: stage = "Stage 3: Attribute Extraction"
+        if idx > total_rows * 0.6: stage = "Stage 4: BGE Embeddings"
+        if idx > total_rows * 0.8: stage = "Stage 5: Vector Search"
+        
+        _JOB_STATUS_STORE[job_id] = IngestJobStatusResponse(
+            job_id=job_id,
+            status="RUNNING",
+            current_stage=stage,
+            progress_pct=int(((idx + 1) / total_rows) * 100),
+            total_rows=total_rows,
+            processed_rows=idx + 1,
+            started_at=started_time,
+            completed_at=None,
+        )
+
         attrs = default_extractor.extract(item.raw_description)
 
         best_match = None
@@ -198,29 +236,29 @@ async def _process_items_async(session: AsyncSession, job_id: str, org_code: str
     return summary_resp
 
 
-@router.post("/batch", response_model=IngestSummaryResponse, summary="Ingest batch of CPSE catalog items")
+@router.post("/batch", summary="Ingest batch of CPSE catalog items")
 async def ingest_batch(
     req: BatchIngestRequest,
+    background_tasks: BackgroundTasks,
     session: AsyncSession = Depends(get_db)
 ):
-    """
-    Synchronously ingests and harmonizes a structured batch of legacy CPSE materials.
-    Runs NLP normalization, attribute extraction, and ASME safety gate matching.
-    """
     job_id = str(uuid.uuid4())
-    summary = await _process_items_async(session, job_id, req.organization_code, req.items)
-    return summary
+    _JOB_STATUS_STORE[job_id] = IngestJobStatusResponse(
+        job_id=job_id, status="PENDING", current_stage="Initializing",
+        progress_pct=0, total_rows=len(req.items), processed_rows=0,
+        started_at=datetime.now(timezone.utc), completed_at=None
+    )
+    background_tasks.add_task(_background_ingest, job_id, req.organization_code, req.items)
+    return {"job_id": job_id}
 
 
-@router.post("/upload", response_model=IngestSummaryResponse, summary="Upload CSV/JSON catalog file")
+@router.post("/upload", summary="Upload CSV/JSON catalog file")
 async def upload_catalog_file(
+    background_tasks: BackgroundTasks,
     file: UploadFile = File(...),
     organization_code: str = "IOCL",
     session: AsyncSession = Depends(get_db)
 ):
-    """
-    Parses and processes an uploaded CSV or JSON procurement catalog file.
-    """
     job_id = str(uuid.uuid4())
     content = await file.read()
     filename = file.filename.lower() if file.filename else "upload.csv"
@@ -246,7 +284,6 @@ async def upload_catalog_file(
         except Exception as e:
             raise HTTPException(status_code=400, detail=f"Failed to parse JSON file: {str(e)}")
     else:
-        # Default CSV parser
         try:
             text = content.decode("utf-8", errors="replace")
             reader = csv.DictReader(io.StringIO(text))
@@ -272,8 +309,13 @@ async def upload_catalog_file(
     if not items:
         raise HTTPException(status_code=400, detail="Uploaded file contains no valid material descriptions.")
 
-    summary = await _process_items_async(session, job_id, organization_code, items)
-    return summary
+    _JOB_STATUS_STORE[job_id] = IngestJobStatusResponse(
+        job_id=job_id, status="PENDING", current_stage="Initializing",
+        progress_pct=0, total_rows=len(items), processed_rows=0,
+        started_at=datetime.now(timezone.utc), completed_at=None
+    )
+    background_tasks.add_task(_background_ingest, job_id, organization_code, items)
+    return {"job_id": job_id}
 
 
 @router.get("/status/{job_id}", response_model=IngestJobStatusResponse, summary="Get ingestion job status")
@@ -294,3 +336,22 @@ async def get_ingest_summary(job_id: str):
     if job_id not in _JOB_SUMMARY_STORE:
         raise HTTPException(status_code=404, detail=f"Ingestion summary for {job_id} not found.")
     return _JOB_SUMMARY_STORE[job_id]
+
+@router.get("/stream/{job_id}", summary="Stream ingestion progress via SSE")
+async def stream_ingest_progress(job_id: str):
+    async def event_generator():
+        while True:
+            status = _JOB_STATUS_STORE.get(job_id)
+            if not status:
+                yield f"data: {json.dumps({'status': 'PENDING', 'progress_pct': 0})}\n\n"
+                await asyncio.sleep(0.5)
+                continue
+            
+            data = status.model_dump_json() if hasattr(status, 'model_dump_json') else status.json()
+            yield f"data: {data}\n\n"
+            
+            if status.status in ("COMPLETED", "FAILED"):
+                break
+            await asyncio.sleep(0.5)
+            
+    return StreamingResponse(event_generator(), media_type="text/event-stream")

@@ -2,6 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
+import { ensureAuth } from "./auth";
+
+// Auto-authenticate with a demo token before mounting so all API calls work
+ensureAuth().catch(console.warn);
+
 
 interface ErrorBoundaryProps {
   children: React.ReactNode;

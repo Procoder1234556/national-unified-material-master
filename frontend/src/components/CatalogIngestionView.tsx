@@ -9,7 +9,9 @@ import {
   CheckCircle2,
   Database,
 } from "lucide-react";
+import { apiFetch, getToken } from "../auth";
 import { API_BASE } from "../api";
+
 
 interface IngestionSummary {
   job_id: string;
@@ -83,21 +85,50 @@ export const CatalogIngestionView: React.FC = () => {
   const [activeStage, setActiveStage] = useState<number>(0);
   const [summary, setSummary] = useState<IngestionSummary | null>(null);
 
+  const [progressPct, setProgressPct] = useState<number>(0);
+
+  const listenToJob = (jobId: string) => {
+    const token = getToken();
+    const evtSource = new EventSource(`${API_BASE}/api/v1/ingest/stream/${jobId}?token=${token || ""}`);
+    evtSource.onmessage = (event) => {
+      try {
+        const status = JSON.parse(event.data);
+        if (status.progress_pct !== undefined) setProgressPct(status.progress_pct);
+        
+        if (status.current_stage?.includes('Stage 2')) setActiveStage(2);
+        if (status.current_stage?.includes('Stage 3')) setActiveStage(3);
+        if (status.current_stage?.includes('Stage 4')) setActiveStage(4);
+        if (status.current_stage?.includes('Stage 5')) setActiveStage(5);
+
+        if (status.status === 'COMPLETED') {
+          evtSource.close();
+          apiFetch(`${API_BASE}/api/v1/ingest/summary/${jobId}`)
+            .then(r => r.json())
+            .then(sum => {
+               setSummary(sum);
+               setActiveStage(6);
+               setLoading(false);
+            });
+        } else if (status.status === 'FAILED') {
+          evtSource.close();
+          setLoading(false);
+          console.error("Job failed:", status.current_stage);
+        }
+      } catch(e) {
+         console.error(e);
+      }
+    };
+  };
+
   const triggerIngestion = async (items = SAMPLE_CPSE_BATCH) => {
     setLoading(true);
     setSummary(null);
     setActiveStage(1);
-
-    // Simulate multi-stage pipeline transition for visual feedback
-    const stageTimer1 = setTimeout(() => setActiveStage(2), 300);
-    const stageTimer2 = setTimeout(() => setActiveStage(3), 600);
-    const stageTimer3 = setTimeout(() => setActiveStage(4), 900);
-    const stageTimer4 = setTimeout(() => setActiveStage(5), 1200);
+    setProgressPct(0);
 
     try {
-      const res = await fetch(`${API_BASE}/api/v1/ingest/batch`, {
+      const res = await apiFetch(`${API_BASE}/api/v1/ingest/batch`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           organization_code: selectedOrg,
           items: items,
@@ -105,15 +136,16 @@ export const CatalogIngestionView: React.FC = () => {
       });
 
       const data = await res.json();
-      setSummary(data);
-      setActiveStage(5);
+      if (data.job_id) {
+         listenToJob(data.job_id);
+      } else {
+         // Fallback if backend isn't updated
+         setSummary(data);
+         setActiveStage(6);
+         setLoading(false);
+      }
     } catch (e) {
       console.error("Ingestion failed", e);
-    } finally {
-      clearTimeout(stageTimer1);
-      clearTimeout(stageTimer2);
-      clearTimeout(stageTimer3);
-      clearTimeout(stageTimer4);
       setLoading(false);
     }
   };
@@ -125,19 +157,25 @@ export const CatalogIngestionView: React.FC = () => {
     setLoading(true);
     setSummary(null);
     setActiveStage(1);
+    setProgressPct(0);
 
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch(`${API_BASE}/api/v1/ingest/upload?organization_code=${selectedOrg}`, {
+    apiFetch(`${API_BASE}/api/v1/ingest/upload?organization_code=${selectedOrg}`, {
       method: "POST",
+      headers: {},  // let browser set multipart boundary
       body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
-        setSummary(data);
-        setActiveStage(5);
-        setLoading(false);
+        if (data.job_id) {
+           listenToJob(data.job_id);
+        } else {
+           setSummary(data);
+           setActiveStage(6);
+           setLoading(false);
+        }
       })
       .catch((err) => {
         console.error("File upload failed", err);

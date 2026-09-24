@@ -19,7 +19,9 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { DonutMicro, Sparkline } from "./MicroCharts";
+import { apiFetch } from "../auth";
 import { API_BASE } from "../api";
+
 
 export interface StockDistributionItem {
   organization_code: string;
@@ -230,9 +232,8 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
     if (pressureFilter) payload.pressure_class = parseInt(pressureFilter, 10);
     if (sizeFilter) payload.size_inch = parseFloat(sizeFilter);
 
-    fetch(`${API_BASE}/api/v1/search`, {
+    apiFetch(`${API_BASE}/api/v1/search`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())

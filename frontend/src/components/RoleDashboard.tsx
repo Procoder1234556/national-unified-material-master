@@ -1,7 +1,9 @@
 // ponytail: Role-Aware Enterprise Dashboard synthesizing Humanto editorial warmth with NUMM industrial density.
 // Features microcharts.dev sparklines, Watermelon UI stat cards, and dynamic persona-tailored operations.
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { apiFetch } from "../auth";
+import { API_BASE } from "../api";
 import { rawTokens } from "../tokens.stylex";
 import { Pagination } from "./Pagination";
 import {
@@ -51,6 +53,20 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
   onSearchQuery,
   onInspectONMC,
 }) => {
+  const [queueCount, setQueueCount] = useState<number>(0);
+  const [auditStats, setAuditStats] = useState<any>({ total_blocks: 2419, total_tamper_flags: 0 });
+
+  useEffect(() => {
+    apiFetch(`${API_BASE}/api/v1/steward/queue`)
+      .then((res) => res.json())
+      .then((data) => setQueueCount(data.total_items || data.length || 0))
+      .catch(console.error);
+
+    apiFetch(`${API_BASE}/api/v1/audit/stats`)
+      .then((res) => res.json())
+      .then((data) => setAuditStats(data))
+      .catch(console.error);
+  }, []);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchHeroText, setSearchHeroText] = useState(
     "2 inch 150# flanged ball valve CS A105"
@@ -300,9 +316,7 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
                       fontFamily: rawTokens.fontMono,
                       color: rawTokens.textPrimary,
                     }}
-                  >
-                    84
-                  </span>
+                  >{queueCount}</span>
                   <span
                     style={{
                       fontSize: "12px",
@@ -701,7 +715,7 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
                     },
                     {
                       label: "Steward Review (70-91%)",
-                      value: 84,
+                      value: queueCount,
                       color: rawTokens.colorHighlight,
                     },
                     {
@@ -2125,9 +2139,7 @@ export const RoleDashboard: React.FC<RoleDashboardProps> = ({
                   color: rawTokens.colorAction,
                   marginTop: "8px",
                 }}
-              >
-                2,419
-              </div>
+              >{auditStats.total_blocks.toLocaleString()}</div>
               <div
                 style={{
                   fontSize: "11px",

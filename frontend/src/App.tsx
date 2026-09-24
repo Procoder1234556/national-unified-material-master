@@ -1,7 +1,8 @@
 // ponytail: Sovereign industrial application shell integrating Humanto editorial design, microcharts, and Watermelon UI blocks.
 // Adheres strictly to NUMM color tokens, keyboard-first workflows, and deterministic ASME safety gates.
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
+import { apiFetch } from './auth';
 import { rawTokens } from "./tokens.stylex";
 import { AppShell, NavTabId, UserRole } from "./components/AppShell";
 import { RoleDashboard } from "./components/RoleDashboard";
@@ -29,12 +30,24 @@ import { API_BASE } from "./api";
 
 export const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
+  const [isDemoMode, setIsDemoMode] = useState<boolean>(false);
+  const [demoStep, setDemoStep] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<NavTabId>("overview");
   const [activeRole, setActiveRole] = useState<UserRole>("STEWARD");
   const [searchQuery, setSearchQuery] = useState<string>(
     "2 inch 150# flanged ball valve CS A105"
   );
   const [auditMessage, setAuditMessage] = useState<string | null>(null);
+  const [stewardPendingCount, setStewardPendingCount] = useState<number>(0);
+
+  useEffect(() => {
+    if (activeRole === "STEWARD") {
+      apiFetch(`${API_BASE}/api/v1/steward/queue`)
+        .then(res => res.json())
+        .then(data => setStewardPendingCount(data.total_items || data.length || 0))
+        .catch(console.error);
+    }
+  }, [activeRole]);
 
   // Global Modals State
   const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
@@ -153,6 +166,29 @@ export const App: React.FC = () => {
   }
 
   return (
+    <>
+      {isDemoMode && (
+        <div style={{ backgroundColor: "#141414", color: "white", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 9999, position: "relative" }}>
+          <div style={{ fontWeight: "bold" }}>SIH 26099 Demo - Step {demoStep}/5: {
+            demoStep === 1 ? "Flow A: Catalog Harmonization" : 
+            demoStep === 2 ? "Flow B: Safety Gate" : 
+            demoStep === 3 ? "Flow C: Inter-CPSE Surplus" : 
+            demoStep === 4 ? "Flow D: Demand Pooling" : 
+            "Flow E: Audit Trail"
+          }</div>
+          <div style={{ display: "flex", gap: "12px" }}>
+            <button onClick={() => {
+              if (demoStep === 1) { setDemoStep(2); setActiveTab("steward"); setActiveRole("STEWARD"); }
+              else if (demoStep === 2) { setDemoStep(3); setActiveTab("search"); setActiveRole("PLANT_ENGINEER"); }
+              else if (demoStep === 3) { setDemoStep(4); setActiveTab("demand"); setActiveRole("PROCUREMENT_OFFICER"); }
+              else if (demoStep === 4) { setDemoStep(5); setActiveTab("security"); setActiveRole("AUDITOR"); }
+              else { setIsDemoMode(false); setViewMode("landing"); }
+            }} style={{ backgroundColor: "white", color: "#141414", padding: "6px 12px", border: "none", borderRadius: "4px", cursor: "pointer", fontWeight: "bold" }}>
+              {demoStep === 5 ? "Finish Demo" : "Next Flow"}
+            </button>
+          </div>
+        </div>
+      )}
     <AppShell
       activeTab={activeTab}
       onSelectTab={(tab) => setActiveTab(tab)}
@@ -166,7 +202,7 @@ export const App: React.FC = () => {
       onOpenCommandPalette={() => setIsCommandOpen(true)}
       onOpenKeyboardHelp={() => setIsHelpOpen(true)}
       onBackToLanding={() => setViewMode("landing")}
-      stewardPendingCount={84}
+      stewardPendingCount={stewardPendingCount}
     >
       {/* CVC Tamper-Evident Audit Record Notification Toast */}
       {auditMessage && (
@@ -507,7 +543,10 @@ export const App: React.FC = () => {
         />
       )}
     </AppShell>
+    </>
   );
 };
 
 export default App;
+
+

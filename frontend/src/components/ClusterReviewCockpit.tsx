@@ -23,7 +23,8 @@ import {
   Flame,
 } from "lucide-react";
 import { DonutMicro, Sparkline, SegBar } from "./MicroCharts";
-import { API_BASE } from "../api";
+import { apiFetch } from '../auth';
+import { API_BASE } from '../api';
 
 export interface TriageItem {
   mapping_id: string;

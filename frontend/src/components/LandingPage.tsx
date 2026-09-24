@@ -375,7 +375,7 @@ const styles: Record<string, React.CSSProperties> = {
   }
 };
 
-interface LandingPageProps { onEnterDashboard: (targetTab?: string, targetRole?: string) => void; }
+interface LandingPageProps { onStartDemo?: () => void; onEnterDashboard: (targetTab?: string, targetRole?: string) => void; }
 
 
 const KoboyoDashboard = () => (
@@ -477,7 +477,7 @@ const KoboyoSparkle = () => (
   </svg>
 );
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onStartDemo }) => {
   const [activeTab, setActiveTab] = useState("harmonization");
   const [activeTestimonial, setActiveTestimonial] = useState("ioc");
 
@@ -517,7 +517,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard }) =>
           Unifying legacy catalogs across India's public sector supply chain.
         </p>
         <div style={styles.buttonGroup}>
-          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>Start deployment</button>
+          <button style={styles.btnSolid} onClick={() => onStartDemo ? onStartDemo() : onEnterDashboard()}>Start Demo</button>
           <button style={styles.btnOutline}>Read the PRD</button>
         </div>
         <div style={styles.reassurance}>Sovereign infrastructure, CVC-compliant.</div>
@@ -773,7 +773,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard }) =>
           Flawless supply chain <span style={styles.serifContrast}>synchronization</span>.
         </h2>
         <div style={styles.buttonGroup}>
-          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>Start deployment</button>
+          <button style={styles.btnSolid} onClick={() => onStartDemo ? onStartDemo() : onEnterDashboard()}>Start Demo</button>
           <button style={styles.btnOutline}>Contact sales</button>
         </div>
         

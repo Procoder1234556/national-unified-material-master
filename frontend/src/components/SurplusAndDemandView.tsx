@@ -14,7 +14,9 @@ import {
   FileSpreadsheet,
   X,
 } from "lucide-react";
+import { apiFetch } from "../auth";
 import { API_BASE } from "../api";
+
 
 interface PlantInfo {
   plant_key: string;
@@ -160,7 +162,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
 
   // Fetch plant directory and batches
   useEffect(() => {
-    fetch(`${API_BASE}/api/v1/surplus/plants`)
+    apiFetch(`${API_BASE}/api/v1/surplus/plants`)
       .then((res) => res.json())
       .then((data) => setPlants(data))
       .catch((err) => console.error("Failed to load CPSE plants", err));
@@ -169,7 +171,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   }, []);
 
   const fetchBatches = () => {
-    fetch(`${API_BASE}/api/v1/demand-pool/batches`)
+    apiFetch(`${API_BASE}/api/v1/demand-pool/batches`)
       .then((res) => res.json())
       .then((data) => setBatchData(data))
       .catch((err) => console.error("Failed to load pooled batches", err));
@@ -179,7 +181,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   useEffect(() => {
     if (!selectedPlant) return;
     setLoadingSurplus(true);
-    fetch(
+    apiFetch(
       `${API_BASE}/api/v1/surplus/nearby?destination_plant=${selectedPlant}&max_radius_km=${maxRadius}`
     )
       .then((res) => res.json())
@@ -212,7 +214,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/v1/surplus/mtirf/generate`, {
+      const res = await apiFetch(`${API_BASE}/api/v1/surplus/mtirf/generate`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -232,7 +234,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   // Handle MTIRF Approval
   const handleApproveMTIRF = async (reqNumber: string) => {
     try {
-      const res = await fetch(
+      const res = await apiFetch(
         `${API_BASE}/api/v1/surplus/mtirf/${reqNumber}/approve`,
         {
           method: "POST",
@@ -262,7 +264,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   // Handle GeM Tender Export View
   const handleViewGeMTender = async (batchId: string) => {
     try {
-      const res = await fetch(
+      const res = await apiFetch(
         `${API_BASE}/api/v1/demand-pool/batches/${batchId}/gem-tender`
       );
       const data = await res.json();
