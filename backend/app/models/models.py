@@ -236,7 +236,7 @@ class MaterialMapping(Base):
     mapping_status = Column(
         String(32),
         CheckConstraint(
-            "mapping_status IN ('AUTO_APPROVED', 'PENDING_REVIEW', 'MANUALLY_APPROVED', 'REJECTED', 'MINTED_NOVEL', 'OVERRIDDEN')",
+            "mapping_status IN ('AUTO_APPROVED', 'PENDING_REVIEW', 'MANUALLY_APPROVED', 'REJECTED', 'NOVEL_ITEM')",
             name="ck_mapping_status",
         ),
         nullable=False,

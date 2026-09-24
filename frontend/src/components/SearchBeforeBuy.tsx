@@ -19,9 +19,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { DonutMicro, Sparkline } from "./MicroCharts";
-import { apiFetch } from "../auth";
 import { API_BASE } from "../api";
-
 
 export interface StockDistributionItem {
   organization_code: string;
@@ -232,8 +230,9 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
     if (pressureFilter) payload.pressure_class = parseInt(pressureFilter, 10);
     if (sizeFilter) payload.size_inch = parseFloat(sizeFilter);
 
-    apiFetch(`${API_BASE}/api/v1/search`, {
+    fetch(`${API_BASE}/api/v1/search`, {
       method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     })
       .then((res) => res.json())
@@ -349,7 +348,9 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
             marginBottom: "18px",
           }}
         >
-          Query 104,000+ harmonized ONMC codes across all 10 CPSEs. Find exactly who has the surplus stock you need before you float a redundant purchase order.
+          Query 104,000+ harmonized ONMC codes across all 10 CPSEs. Find exactly
+          who has the surplus stock you need before you float a redundant
+          purchase order.
         </p>
 
         {/* Input Bar */}
@@ -515,7 +516,8 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
                 marginTop: "6px",
               }}
             >
-              Can't find it in the network? Submit this item for sovereign code minting so others can find it next time.
+              Can't find it in the network? Submit this item for sovereign code
+              minting so others can find it next time.
             </p>
           </div>
         ) : (
@@ -922,4 +924,3 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
     </div>
   );
 };
-

@@ -20,7 +20,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from fastapi import Depends
 from backend.app.db.session import get_db
-from backend.app.models.models import UnifiedMasterCode, MaterialMapping, RawMaterial, Organization
+from backend.app.models.models import UnifiedMasterCode, MaterialMapping, RawMaterial
 
 @router.post("", response_model=NationalSearchResponse, summary="Execute Search Before Buy query")
 async def national_search(
@@ -36,10 +36,9 @@ async def national_search(
 
     stmt = select(UnifiedMasterCode)
     if req.item_class:
-        stmt = stmt.where(UnifiedMasterCode.item_class.ilike(f"%{req.item_class.replace('_', ' ')}%"))
+        stmt = stmt.where(UnifiedMasterCode.item_class == req.item_class)
     elif query_attrs.get("item_class"):
-        val = query_attrs["item_class"].replace("_", " ")
-        stmt = stmt.where(UnifiedMasterCode.item_class.ilike(f"%{val}%"))
+        stmt = stmt.where(UnifiedMasterCode.item_class == query_attrs["item_class"])
         
     if req.pressure_class:
         stmt = stmt.where(UnifiedMasterCode.pressure_class == req.pressure_class)
@@ -62,42 +61,46 @@ async def national_search(
             score = min(1.0, score + 0.10)
 
         query_words = set(req.query.lower().replace(",", " ").split())
-        canon_words = set(master.canonical_description.lower().replace(",", " ").split())
         overlap = len(query_words & canon_words)
 
         has_explicit_filter = bool(req.item_class or req.pressure_class or req.size_inch)
         if has_explicit_filter or score >= 0.20 or overlap >= 1:
-            # Fetch real stock data for this master code
-            stock_stmt = (
-                select(RawMaterial.stock_quantity, Organization.code, Organization.name, RawMaterial.plant_location, RawMaterial.plant_code, RawMaterial.unit_price)
-                .select_from(MaterialMapping)
-                .join(RawMaterial, MaterialMapping.raw_material_id == RawMaterial.id)
-                .join(Organization, RawMaterial.organization_id == Organization.id)
+            from sqlalchemy.orm import selectinload
+            from backend.app.models.models import MaterialMapping, RawMaterial, Organization
+
+            # Fetch mapped raw materials to calculate real stock distribution
+            mappings_stmt = (
+                select(MaterialMapping)
                 .where(MaterialMapping.unified_master_id == master.id)
                 .where(MaterialMapping.mapping_status.in_(("AUTO_APPROVED", "MANUALLY_APPROVED")))
+                .options(selectinload(MaterialMapping.raw_material).selectinload(RawMaterial.organization))
             )
-            stock_res = await session.execute(stock_stmt)
-            stock_rows = stock_res.all()
+            mappings_res = await session.execute(mappings_stmt)
+            mappings = mappings_res.scalars().all()
 
+            dist = []
             total_stock = 0
-            dist_map = {}
-            for row in stock_rows:
-                qty = row.stock_quantity or 0
-                total_stock += qty
-                org_code = row.code
-                if org_code not in dist_map:
-                    dist_map[org_code] = {
-                        "organization_code": org_code,
-                        "organization_name": row.name,
-                        "plant_code": row.plant_code,
-                        "plant_location": row.plant_location,
-                        "available_stock": 0,
-                        "unit_price": float(row.unit_price) if row.unit_price else 0.0,
-                    }
-                dist_map[org_code]["available_stock"] += qty
+            cpses = set()
+            for m in mappings:
+                rm = m.raw_material
+                if rm and rm.stock_quantity > 0:
+                    org = rm.organization
+                    dist.append(
+                        NationalStockItem(
+                            organization_code=org.code,
+                            organization_name=org.name,
+                            plant_code=rm.plant_code,
+                            plant_location=rm.plant_location,
+                            available_stock=rm.stock_quantity,
+                            unit_price=float(rm.unit_price) if rm.unit_price else 0.0,
+                            currency=rm.currency,
+                            lead_time_days=2, # Mock lead time
+                            distance_km=78 if org.code == "ONGC" else None # Mock distance for UI
+                        )
+                    )
+                    total_stock += rm.stock_quantity
+                    cpses.add(org.code)
 
-            stock_dist = list(dist_map.values())
-            
             results.append(
                 NationalSearchItem(
                     onmc_code=master.onmc_code,
@@ -114,8 +117,8 @@ async def national_search(
                     gem_category_id=master.gem_category_id,
                     similarity_score=round(score, 4),
                     total_national_stock=total_stock,
-                    participating_cpse_count=len(dist_map),
-                    stock_distribution=stock_dist,
+                    participating_cpse_count=len(cpses),
+                    stock_distribution=dist,
                 )
             )
 

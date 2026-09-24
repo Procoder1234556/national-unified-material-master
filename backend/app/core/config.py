@@ -1,10 +1,6 @@
 # ponytail: Direct pydantic-settings config with automatic SQLite fallback for zero-Docker dev.
 # Upgrade path: add Vault / AWS Secrets Manager provider.
-from pathlib import Path
 from pydantic_settings import BaseSettings, SettingsConfigDict
-
-# Look for .env in repo root and backend/ subdirectory
-_env_files = [str(p) for p in [Path(".env"), Path("backend/.env")] if p.exists()]
 
 
 class Settings(BaseSettings):
@@ -12,15 +8,15 @@ class Settings(BaseSettings):
     API_V1_STR: str = "/api/v1"
     ENVIRONMENT: str = "development"
 
-    # Database configuration — SQLite is the default for hackathon (zero-Docker)
-    USE_SQLITE: bool = True
+    # Database configuration
+    USE_SQLITE: bool = False
     POSTGRES_USER: str = "numm_admin"
     POSTGRES_PASSWORD: str = ""
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "numm_master"
-
-    CORS_ORIGINS: list[str] = ["http://localhost:3000", "http://localhost:5173"]
+    
+    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
 
     # SQLite fallback file
     SQLITE_DB_PATH: str = "./numm_dev.db"
@@ -29,8 +25,7 @@ class Settings(BaseSettings):
     REDIS_HOST: str = "localhost"
     REDIS_PORT: int = 6379
 
-    model_config = SettingsConfigDict(env_file=_env_files or [".env"], env_file_encoding="utf-8", extra="ignore")
-
+    model_config = SettingsConfigDict(env_file=".env", env_file_encoding="utf-8", extra="ignore")
 
     @property
     def async_database_url(self) -> str:

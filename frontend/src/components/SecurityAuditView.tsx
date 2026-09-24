@@ -12,9 +12,7 @@ import {
   UserCheck,
   Zap,
 } from "lucide-react";
-import { apiFetch } from "../auth";
 import { API_BASE } from "../api";
-
 
 interface AuditBlock {
   index: number;
@@ -73,8 +71,8 @@ export const SecurityAuditView: React.FC<Props> = ({
     setLoading(true);
     try {
       const [chainRes, statsRes] = await Promise.all([
-        apiFetch(`${API_BASE}/api/v1/audit/chain?limit=50`),
-        apiFetch(`${API_BASE}/api/v1/audit/stats`),
+        fetch(`${API_BASE}/api/v1/audit/chain?limit=50`),
+        fetch(`${API_BASE}/api/v1/audit/stats`),
       ]);
       if (chainRes.ok) {
         const cData = await chainRes.json();
@@ -117,7 +115,7 @@ export const SecurityAuditView: React.FC<Props> = ({
   const handleVerifyChain = async () => {
     setVerifying(true);
     try {
-      const res = await apiFetch(`${API_BASE}/api/v1/audit/verify`);
+      const res = await fetch(`${API_BASE}/api/v1/audit/verify`);
       if (res.ok) {
         const data: VerificationResult = await res.json();
         setVerification(data);
@@ -142,7 +140,7 @@ export const SecurityAuditView: React.FC<Props> = ({
 
   const handleExportDossier = async () => {
     try {
-      const res = await apiFetch(`${API_BASE}/api/v1/audit/export`);
+      const res = await fetch(`${API_BASE}/api/v1/audit/export`);
       let blob: Blob;
       if (res.ok) {
         const data = await res.json();
@@ -232,7 +230,9 @@ export const SecurityAuditView: React.FC<Props> = ({
                 maxWidth: "720px",
               }}
             >
-              Sleep easy knowing every decision is auditable. Every catalog merge, new code mint, and inter-refinery transfer is permanently sealed into a tamper-proof cryptographic chain for CVC inspectors.
+              Sleep easy knowing every decision is auditable. Every catalog
+              merge, new code mint, and inter-refinery transfer is permanently
+              sealed into a tamper-proof cryptographic chain for CVC inspectors.
             </p>
           </div>
 
@@ -536,7 +536,8 @@ export const SecurityAuditView: React.FC<Props> = ({
                 marginTop: "2px",
               }}
             >
-              Every transaction locks in the history before it. Retroactive changes are mathematically impossible.
+              Every transaction locks in the history before it. Retroactive
+              changes are mathematically impossible.
             </p>
           </div>
           <button
@@ -820,4 +821,3 @@ export const SecurityAuditView: React.FC<Props> = ({
     </div>
   );
 };
-

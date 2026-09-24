@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 
-
-
 const styles: Record<string, React.CSSProperties> = {
   page: {
     backgroundColor: "#faf8f5",
@@ -17,13 +15,9 @@ const styles: Record<string, React.CSSProperties> = {
   },
   cropMarks: {
     position: "relative",
-    
-    
   },
   cropMarksOrange: {
     position: "relative",
-    
-    
   },
   announcementBar: {
     backgroundColor: "#141414",
@@ -372,14 +366,23 @@ const styles: Record<string, React.CSSProperties> = {
     color: "#9CA3AF",
     maxWidth: "1200px",
     margin: "0 auto",
-  }
+  },
 };
 
-interface LandingPageProps { onStartDemo?: () => void; onEnterDashboard: (targetTab?: string, targetRole?: string) => void; }
-
+interface LandingPageProps {
+  onEnterDashboard: (targetTab?: string, targetRole?: string) => void;
+}
 
 const KoboyoDashboard = () => (
-  <svg viewBox="0 0 400 300" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+  <svg
+    viewBox="0 0 400 300"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <rect x="20" y="20" width="360" height="260" rx="12" />
     <line x1="20" y1="60" x2="380" y2="60" />
     <circle cx="40" cy="40" r="5" fill="currentColor" />
@@ -396,8 +399,19 @@ const KoboyoDashboard = () => (
 );
 
 const KoboyoHarmonization = () => (
-  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
-    <path d="M40 100 C 20 80, 40 40, 70 50 C 90 20, 120 40, 110 70 C 140 60, 160 90, 140 120 C 160 150, 120 180, 100 150 C 70 170, 30 150, 50 120 C 20 120, 20 100, 40 100 Z" strokeDasharray="4 4" />
+  <svg
+    viewBox="0 0 200 200"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
+    <path
+      d="M40 100 C 20 80, 40 40, 70 50 C 90 20, 120 40, 110 70 C 140 60, 160 90, 140 120 C 160 150, 120 180, 100 150 C 70 170, 30 150, 50 120 C 20 120, 20 100, 40 100 Z"
+      strokeDasharray="4 4"
+    />
     <path d="M80 100 L120 100 M100 80 L100 120" />
     <rect x="60" y="80" width="16" height="16" />
     <rect x="124" y="104" width="16" height="16" />
@@ -406,7 +420,15 @@ const KoboyoHarmonization = () => (
 );
 
 const KoboyoTransfer = () => (
-  <svg viewBox="0 0 200 200" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+  <svg
+    viewBox="0 0 200 200"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <rect x="20" y="40" width="60" height="60" rx="4" />
     <polygon points="20,40 50,20 80,40" />
     <rect x="120" y="100" width="60" height="60" rx="4" />
@@ -417,7 +439,15 @@ const KoboyoTransfer = () => (
 );
 
 const KoboyoOverlap = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%", padding: "20px" }}
+  >
     <circle cx="40" cy="50" r="30" />
     <circle cx="60" cy="50" r="30" />
     <path d="M45 50 L50 55 L58 43" />
@@ -425,7 +455,15 @@ const KoboyoOverlap = () => (
 );
 
 const KoboyoBatch = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%", padding: "20px" }}
+  >
     <rect x="20" y="30" width="60" height="50" rx="4" />
     <line x1="20" y1="45" x2="80" y2="45" />
     <line x1="20" y1="60" x2="80" y2="60" />
@@ -434,7 +472,15 @@ const KoboyoBatch = () => (
 );
 
 const KoboyoSavings = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%", padding: "20px" }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%", padding: "20px" }}
+  >
     <line x1="20" y1="80" x2="80" y2="80" />
     <line x1="20" y1="80" x2="20" y2="20" />
     <path d="M20 70 L40 50 L60 60 L80 30" />
@@ -443,7 +489,15 @@ const KoboyoSavings = () => (
 );
 
 const KoboyoPortrait = () => (
-  <svg viewBox="0 0 200 300" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: "100%", height: "100%" }}>
+  <svg
+    viewBox="0 0 200 300"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <circle cx="100" cy="100" r="50" />
     <path d="M40 250 C 40 180, 160 180, 160 250 Z" />
     <path d="M80 90 Q 90 85 100 90 T 120 90" />
@@ -451,9 +505,16 @@ const KoboyoPortrait = () => (
   </svg>
 );
 
-
 const KoboyoButterfly = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <path d="M50 50 C 20 20, 10 40, 50 80 C 90 40, 80 20, 50 50 Z" />
     <path d="M50 50 C 30 10, 10 30, 40 60" />
     <path d="M50 50 C 70 10, 90 30, 60 60" />
@@ -463,7 +524,15 @@ const KoboyoButterfly = () => (
 );
 
 const KoboyoKite = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <polygon points="50,10 80,40 50,90 20,40" />
     <line x1="50" y1="10" x2="50" y2="90" />
     <line x1="20" y1="40" x2="80" y2="40" />
@@ -472,12 +541,22 @@ const KoboyoKite = () => (
 );
 
 const KoboyoSparkle = () => (
-  <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ width: '100%', height: '100%' }}>
+  <svg
+    viewBox="0 0 100 100"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    style={{ width: "100%", height: "100%" }}
+  >
     <path d="M50 10 Q 50 50 90 50 Q 50 50 50 90 Q 50 50 10 50 Q 50 50 50 10 Z" />
   </svg>
 );
 
-export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onStartDemo }) => {
+export const LandingPage: React.FC<LandingPageProps> = ({
+  onEnterDashboard,
+}) => {
   const [activeTab, setActiveTab] = useState("harmonization");
   const [activeTestimonial, setActiveTestimonial] = useState("ioc");
 
@@ -485,14 +564,26 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
     <div style={styles.page}>
       {/* 1. Announcement bar */}
       <div style={styles.announcementBar}>
-        <span>Version 2.2.0 (Enterprise Production) now deployed to MeghRaj Cloud.</span>
-        <a href="#" style={styles.announcementLink}>Read release notes &rarr;</a>
-        <span style={{ cursor: 'pointer', marginLeft: 'auto' }}>✕</span>
+        <span>
+          Version 2.2.0 (Enterprise Production) now deployed to MeghRaj Cloud.
+        </span>
+        <a href="#" style={styles.announcementLink}>
+          Read release notes &rarr;
+        </a>
+        <span style={{ cursor: "pointer", marginLeft: "auto" }}>✕</span>
       </div>
 
       {/* 2. Navbar */}
       <nav style={styles.navbar}>
-        <div style={{ fontWeight: 700, fontSize: "20px", letterSpacing: "-0.02em" }}>NUMM</div>
+        <div
+          style={{
+            fontWeight: 700,
+            fontSize: "20px",
+            letterSpacing: "-0.02em",
+          }}
+        >
+          NUMM
+        </div>
         <div style={styles.navLinks}>
           <span>Product</span>
           <span>Customers</span>
@@ -501,8 +592,15 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
         </div>
         <div style={styles.navActions}>
           <span style={{ fontWeight: 500, cursor: "pointer" }}>Log in</span>
-          <span style={{ fontWeight: 500, cursor: "pointer" }}>Contact DGH</span>
-          <button style={{...styles.btnSolid,  padding: "10px 20px" }} onClick={() => onEnterDashboard()}>View demo</button>
+          <span style={{ fontWeight: 500, cursor: "pointer" }}>
+            Contact DGH
+          </span>
+          <button
+            style={{ ...styles.btnSolid, padding: "10px 20px" }}
+            onClick={() => onEnterDashboard()}
+          >
+            View demo
+          </button>
         </div>
       </nav>
 
@@ -513,25 +611,53 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
           <span style={styles.serifContrast}>One Material Code</span>
         </h1>
         <p style={styles.heroSubtitle}>
-          The AI-powered enterprise data harmonization and collaborative procurement platform. 
-          Unifying legacy catalogs across India's public sector supply chain.
+          The AI-powered enterprise data harmonization and collaborative
+          procurement platform. Unifying legacy catalogs across India's public
+          sector supply chain.
         </p>
         <div style={styles.buttonGroup}>
-          <button style={styles.btnSolid} onClick={() => onStartDemo ? onStartDemo() : onEnterDashboard()}>Start Demo</button>
+          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>
+            Start deployment
+          </button>
           <button style={styles.btnOutline}>Read the PRD</button>
         </div>
-        <div style={styles.reassurance}>Sovereign infrastructure, CVC-compliant.</div>
-        
+        <div style={styles.reassurance}>
+          Sovereign infrastructure, CVC-compliant.
+        </div>
+
         {/* Floating Triage Widget */}
         <div style={styles.floatingWidget}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '16px' }}>
-            <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#5F978E' }} />
-            <span style={{ fontWeight: 600, fontSize: '14px' }}>Match Confidence: 96%</span>
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+              marginBottom: "16px",
+            }}
+          >
+            <div
+              style={{
+                width: "12px",
+                height: "12px",
+                borderRadius: "50%",
+                backgroundColor: "#5F978E",
+              }}
+            />
+            <span style={{ fontWeight: 600, fontSize: "14px" }}>
+              Match Confidence: 96%
+            </span>
           </div>
-          <div style={{ fontFamily: "'JetBrains Mono', monospace", fontSize: '12px', color: '#4B5563' }}>
-            ONMC-MECH-VLV-BAL-002-150-A105<br/>
-            = IOCL: 2" CL150 FLG RF BALL<br/>
-            = ONGC: VLV BL FLGD 50MM 150#
+          <div
+            style={{
+              fontFamily: "'JetBrains Mono', monospace",
+              fontSize: "12px",
+              color: "#4B5563",
+            }}
+          >
+            ONMC-MECH-VLV-BAL-002-150-A105
+            <br />
+            = IOCL: 2" CL150 FLG RF BALL
+            <br />= ONGC: VLV BL FLGD 50MM 150#
           </div>
         </div>
       </section>
@@ -539,14 +665,20 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
       {/* 4. Two-product tabs */}
       <section style={{ padding: "0 40px 120px" }}>
         <div style={styles.tabsContainer}>
-          <button 
-            style={{...styles.tab, ...(activeTab === "harmonization" ? styles.tabActive : {})}}
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeTab === "harmonization" ? styles.tabActive : {}),
+            }}
             onClick={() => setActiveTab("harmonization")}
           >
             Catalog Data Harmonization
           </button>
-          <button 
-            style={{...styles.tab, ...(activeTab === "surplus" ? styles.tabActive : {})}}
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeTab === "surplus" ? styles.tabActive : {}),
+            }}
             onClick={() => setActiveTab("surplus")}
           >
             Inter-CPSE Procurement
@@ -554,39 +686,60 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
         </div>
         <div style={styles.productPanel}>
           {/* Placeholder for dense product UI screenshot */}
-          <div style={{ width: "100%", height: "600px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#5F978E", padding: "40px" }}><KoboyoDashboard /></div>
+          <div
+            style={{
+              width: "100%",
+              height: "600px",
+              backgroundColor: "#e5e7eb",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#5F978E",
+              padding: "40px",
+            }}
+          >
+            <KoboyoDashboard />
+          </div>
         </div>
       </section>
 
       {/* 5. Logo cloud */}
-      <section style={{...styles.sectionWhite, ...styles.logoCloud}}>
-        <div style={styles.eyebrow}>
-          Trusted by India's leading CPSEs
-        </div>
+      <section style={{ ...styles.sectionWhite, ...styles.logoCloud }}>
+        <div style={styles.eyebrow}>Trusted by India's leading CPSEs</div>
         <div style={styles.logosGrid}>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>IOCL</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>ONGC</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>BPCL</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>HPCL</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>GAIL</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>OIL</span>
-          <span style={{ fontSize: '24px', fontWeight: 600 }}>EIL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>IOCL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>ONGC</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>BPCL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>HPCL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>GAIL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>OIL</span>
+          <span style={{ fontSize: "24px", fontWeight: 600 }}>EIL</span>
         </div>
       </section>
 
       {/* 6. Feature section A */}
-      <section style={{...styles.sectionCream, ...styles.featureSection, ...styles.cropMarks}}>
+      <section
+        style={{
+          ...styles.sectionCream,
+          ...styles.featureSection,
+          ...styles.cropMarks,
+        }}
+      >
         <div style={styles.featureHeader}>
-          <div style={{...styles.eyebrow,  justifyContent: 'flex-start' }}>
+          <div style={{ ...styles.eyebrow, justifyContent: "flex-start" }}>
             <div style={styles.markerBlue} /> AI Harmonization
           </div>
           <h2 style={styles.featureHeadline}>
-            Standardize catalogs with <span style={styles.serifContrast}>engineering</span> precision.
+            Standardize catalogs with{" "}
+            <span style={styles.serifContrast}>engineering</span> precision.
           </h2>
           <p style={styles.featureBody}>
-            Pair dense semantic vector embeddings with deterministic rule gating to map fragmented ERP entries into a single sovereign taxonomy. Zero false positives on pressure ratings.
+            Pair dense semantic vector embeddings with deterministic rule gating
+            to map fragmented ERP entries into a single sovereign taxonomy. Zero
+            false positives on pressure ratings.
           </p>
-          <div style={{...styles.buttonGroup,  justifyContent: 'flex-start' }}>
+          <div style={{ ...styles.buttonGroup, justifyContent: "flex-start" }}>
             <button style={styles.btnSolid}>Explore taxonomy</button>
             <button style={styles.btnOutline}>Read whitepaper</button>
           </div>
@@ -594,192 +747,466 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
             <KoboyoButterfly />
           </div>
         </div>
-        <div style={{ height: "400px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#593C32", padding: "40px" }}><KoboyoHarmonization /></div>
+        <div
+          style={{
+            height: "400px",
+            backgroundColor: "#e5e7eb",
+            borderRadius: "12px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            color: "#593C32",
+            padding: "40px",
+          }}
+        >
+          <KoboyoHarmonization />
+        </div>
         <div style={styles.threeColGrid}>
           <div>
             <h3 style={styles.gridCardTitle}>Sub-50ms Discovery</h3>
-            <p style={styles.gridCardBody}>HNSW cosine distance search on pgvector ensures lightning-fast queries across millions of legacy items.</p>
+            <p style={styles.gridCardBody}>
+              HNSW cosine distance search on pgvector ensures lightning-fast
+              queries across millions of legacy items.
+            </p>
             <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
           <div>
             <h3 style={styles.gridCardTitle}>HITL Triage Interface</h3>
-            <p style={styles.gridCardBody}>Keyboard-driven split-layout cockpit lets stewards review over 1,000 matches per hour with ease.</p>
+            <p style={styles.gridCardBody}>
+              Keyboard-driven split-layout cockpit lets stewards review over
+              1,000 matches per hour with ease.
+            </p>
             <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
           <div>
             <h3 style={styles.gridCardTitle}>Automated Extraction</h3>
-            <p style={styles.gridCardBody}>Expand 250+ Oil & Gas abbreviations and normalize dimensions dynamically during ingestion.</p>
+            <p style={styles.gridCardBody}>
+              Expand 250+ Oil & Gas abbreviations and normalize dimensions
+              dynamically during ingestion.
+            </p>
             <span style={styles.linkStyle}>Learn more &rarr;</span>
           </div>
         </div>
       </section>
 
       {/* 7. Feature section B */}
-      <section style={{...styles.sectionWhite, ...styles.featureSection, ...styles.cropMarksOrange}}>
+      <section
+        style={{
+          ...styles.sectionWhite,
+          ...styles.featureSection,
+          ...styles.cropMarksOrange,
+        }}
+      >
         <div style={styles.featureHeader}>
-          <div style={{...styles.eyebrow,  justifyContent: 'flex-start' }}>
+          <div style={{ ...styles.eyebrow, justifyContent: "flex-start" }}>
             <div style={styles.markerOrange} /> Inter-CPSE Transfer
           </div>
           <h2 style={styles.featureHeadline}>
-            Unlock hidden surplus <span style={styles.serifContrast}>inventory</span> instantly.
+            Unlock hidden surplus{" "}
+            <span style={styles.serifContrast}>inventory</span> instantly.
           </h2>
           <p style={styles.featureBody}>
-            Locate idle emergency spares at neighboring refineries and initiate CVC-compliant transfers to prevent critical plant downtime.
+            Locate idle emergency spares at neighboring refineries and initiate
+            CVC-compliant transfers to prevent critical plant downtime.
           </p>
           <div style={styles.inkIllustration}>
             <KoboyoKite />
           </div>
         </div>
-        <div style={{ display: 'flex', gap: '32px' }}>
-          <div style={{ flex: 2, height: "400px", backgroundColor: "#faf8f5", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#E94344", border: "1px solid #E5E7EB", padding: "40px" }}><KoboyoTransfer /></div>
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: '24px' }}>
-            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+        <div style={{ display: "flex", gap: "32px" }}>
+          <div
+            style={{
+              flex: 2,
+              height: "400px",
+              backgroundColor: "#faf8f5",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#E94344",
+              border: "1px solid #E5E7EB",
+              padding: "40px",
+            }}
+          >
+            <KoboyoTransfer />
+          </div>
+          <div
+            style={{
+              flex: 1,
+              display: "flex",
+              flexDirection: "column",
+              gap: "24px",
+            }}
+          >
+            <div
+              style={{
+                padding: "24px",
+                border: "1px solid #E5E7EB",
+                borderRadius: "12px",
+              }}
+            >
               <h4 style={{ fontWeight: 600 }}>Zero-Downtime Routing</h4>
-              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Calculate transit times between asset bases to slash lead times from weeks to hours.</p>
+              <p
+                style={{ fontSize: "14px", color: "#4B5563", marginTop: "8px" }}
+              >
+                Calculate transit times between asset bases to slash lead times
+                from weeks to hours.
+              </p>
             </div>
-            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+            <div
+              style={{
+                padding: "24px",
+                border: "1px solid #E5E7EB",
+                borderRadius: "12px",
+              }}
+            >
               <h4 style={{ fontWeight: 600 }}>Automated Legal Forms</h4>
-              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Generate standardized MoPNG transfer agreements seamlessly.</p>
+              <p
+                style={{ fontSize: "14px", color: "#4B5563", marginTop: "8px" }}
+              >
+                Generate standardized MoPNG transfer agreements seamlessly.
+              </p>
             </div>
-            <div style={{ padding: '24px', border: '1px solid #E5E7EB', borderRadius: '12px' }}>
+            <div
+              style={{
+                padding: "24px",
+                border: "1px solid #E5E7EB",
+                borderRadius: "12px",
+              }}
+            >
               <h4 style={{ fontWeight: 600 }}>Real-time SAP Sync</h4>
-              <p style={{ fontSize: '14px', color: '#4B5563', marginTop: '8px' }}>Direct RFC integration keeps inventory states perfectly aligned.</p>
+              <p
+                style={{ fontSize: "14px", color: "#4B5563", marginTop: "8px" }}
+              >
+                Direct RFC integration keeps inventory states perfectly aligned.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
       {/* 8. Better together */}
-      <section style={{...styles.sectionCream, ...styles.featureSection}}>
-        <div style={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
+      <section style={{ ...styles.sectionCream, ...styles.featureSection }}>
+        <div
+          style={{ textAlign: "center", maxWidth: "800px", margin: "0 auto" }}
+        >
           <div style={styles.eyebrow}>
             <div style={styles.markerBlue} />
             <div style={styles.markerOrange} />
             Pooled Procurement
           </div>
           <h2 style={styles.featureHeadline}>
-            Aggregate demand for <span style={styles.serifContrast}>maximum</span> leverage.
+            Aggregate demand for{" "}
+            <span style={styles.serifContrast}>maximum</span> leverage.
           </h2>
           <p style={styles.featureBody}>
-            Cluster scheduled commodity requirements across enterprises to unlock volume discounts on joint MoPNG tenders.
+            Cluster scheduled commodity requirements across enterprises to
+            unlock volume discounts on joint MoPNG tenders.
           </p>
           <div style={styles.buttonGroup}>
             <button style={styles.btnSolid}>View cost savings</button>
           </div>
         </div>
         <div style={styles.threeColGrid}>
-          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
-            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#5F978E" }}><KoboyoOverlap /></div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "24px",
+              borderRadius: "12px",
+              border: "1px solid #E5E7EB",
+            }}
+          >
+            <div
+              style={{
+                height: "160px",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "8px",
+                marginBottom: "24px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#5F978E",
+              }}
+            >
+              <KoboyoOverlap />
+            </div>
             <h3 style={styles.gridCardTitle}>Identify Overlap</h3>
-            <p style={styles.gridCardBody}>Scan annual procurement plans to pinpoint overlapping commodity needs.</p>
+            <p style={styles.gridCardBody}>
+              Scan annual procurement plans to pinpoint overlapping commodity
+              needs.
+            </p>
           </div>
-          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
-            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#F1CC9D" }}><KoboyoBatch /></div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "24px",
+              borderRadius: "12px",
+              border: "1px solid #E5E7EB",
+            }}
+          >
+            <div
+              style={{
+                height: "160px",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "8px",
+                marginBottom: "24px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#F1CC9D",
+              }}
+            >
+              <KoboyoBatch />
+            </div>
             <h3 style={styles.gridCardTitle}>Batch Tenders</h3>
-            <p style={styles.gridCardBody}>Combine requirements into unified GeM-compliant public tenders.</p>
+            <p style={styles.gridCardBody}>
+              Combine requirements into unified GeM-compliant public tenders.
+            </p>
           </div>
-          <div style={{ backgroundColor: '#fff', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
-            <div style={{ height: "160px", backgroundColor: "#f0f0f0", borderRadius: "8px", marginBottom: "24px", display: "flex", alignItems: "center", justifyContent: "center", color: "#A5D7C9" }}><KoboyoSavings /></div>
+          <div
+            style={{
+              backgroundColor: "#fff",
+              padding: "24px",
+              borderRadius: "12px",
+              border: "1px solid #E5E7EB",
+            }}
+          >
+            <div
+              style={{
+                height: "160px",
+                backgroundColor: "#f0f0f0",
+                borderRadius: "8px",
+                marginBottom: "24px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#A5D7C9",
+              }}
+            >
+              <KoboyoSavings />
+            </div>
             <h3 style={styles.gridCardTitle}>Realize Savings</h3>
-            <p style={styles.gridCardBody}>Drive 8-16% reductions on high-volume valves, piping, and steel.</p>
+            <p style={styles.gridCardBody}>
+              Drive 8-16% reductions on high-volume valves, piping, and steel.
+            </p>
           </div>
         </div>
       </section>
 
       {/* 9. Testimonial */}
-      <section style={{...styles.sectionWhite, ...styles.testimonial}}>
+      <section style={{ ...styles.sectionWhite, ...styles.testimonial }}>
         <div style={styles.tabsContainer}>
-          <button style={{...styles.tab, ...(activeTestimonial === "ioc" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("ioc")}>Mathura Refinery</button>
-          <button style={{...styles.tab, ...(activeTestimonial === "ongc" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("ongc")}>Hazira Plant</button>
-          <button style={{...styles.tab, ...(activeTestimonial === "bpcl" ? styles.tabActive : {})}} onClick={() => setActiveTestimonial("bpcl")}>Mumbai Refinery</button>
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeTestimonial === "ioc" ? styles.tabActive : {}),
+            }}
+            onClick={() => setActiveTestimonial("ioc")}
+          >
+            Mathura Refinery
+          </button>
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeTestimonial === "ongc" ? styles.tabActive : {}),
+            }}
+            onClick={() => setActiveTestimonial("ongc")}
+          >
+            Hazira Plant
+          </button>
+          <button
+            style={{
+              ...styles.tab,
+              ...(activeTestimonial === "bpcl" ? styles.tabActive : {}),
+            }}
+            onClick={() => setActiveTestimonial("bpcl")}
+          >
+            Mumbai Refinery
+          </button>
         </div>
         <div style={styles.testimonialPanel}>
           <div style={{ flex: 1 }}>
-            <div style={{ fontSize: '20px', fontWeight: 700, marginBottom: '32px' }}>IOCL</div>
+            <div
+              style={{
+                fontSize: "20px",
+                fontWeight: 700,
+                marginBottom: "32px",
+              }}
+            >
+              IOCL
+            </div>
             <p style={styles.testimonialQuote}>
-              "NUMM allowed us to <span style={styles.highlight}>reduce duplicate safety stock by 22%</span> in the first year, freeing up critical working capital while maintaining strict compliance with OISD standards."
+              "NUMM allowed us to{" "}
+              <span style={styles.highlight}>
+                reduce duplicate safety stock by 22%
+              </span>{" "}
+              in the first year, freeing up critical working capital while
+              maintaining strict compliance with OISD standards."
             </p>
             <div style={styles.testimonialAuthor}>
-              Rameshwar Sharma<br/>
-              <span style={{ fontWeight: 400, color: '#4B5563', fontSize: '14px' }}>Chief Manager (Materials), IOCL Mathura</span>
+              Rameshwar Sharma
+              <br />
+              <span
+                style={{ fontWeight: 400, color: "#4B5563", fontSize: "14px" }}
+              >
+                Chief Manager (Materials), IOCL Mathura
+              </span>
             </div>
           </div>
-          <div style={{ width: "240px", height: "320px", backgroundColor: "#e5e7eb", borderRadius: "12px", display: "flex", alignItems: "center", justifyContent: "center", color: "#4B5563", padding: "40px" }}><KoboyoPortrait /></div>
+          <div
+            style={{
+              width: "240px",
+              height: "320px",
+              backgroundColor: "#e5e7eb",
+              borderRadius: "12px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              color: "#4B5563",
+              padding: "40px",
+            }}
+          >
+            <KoboyoPortrait />
+          </div>
         </div>
       </section>
 
       {/* 10. Integrations */}
-      <section style={{...styles.sectionCream, ...styles.integrations}}>
+      <section style={{ ...styles.sectionCream, ...styles.integrations }}>
         <div>
-          <h2 style={styles.featureHeadline}>Works with the systems you already use</h2>
-          <p style={styles.featureBody}>Bi-directional cross-walk mapping hooks directly into standard ERP architectures and national e-procurement hubs.</p>
-          <div style={{...styles.buttonGroup,  justifyContent: 'flex-start' }}>
+          <h2 style={styles.featureHeadline}>
+            Works with the systems you already use
+          </h2>
+          <p style={styles.featureBody}>
+            Bi-directional cross-walk mapping hooks directly into standard ERP
+            architectures and national e-procurement hubs.
+          </p>
+          <div style={{ ...styles.buttonGroup, justifyContent: "flex-start" }}>
             <button style={styles.btnOutline}>View documentation</button>
           </div>
         </div>
         <div style={styles.integrationGrid}>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>SAP ECC 6.0</span>
+            <div style={{ width: "40px", height: "40px", color: "#141414" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>
+              SAP ECC 6.0
+            </span>
           </div>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>SAP S/4HANA</span>
+            <div style={{ width: "40px", height: "40px", color: "#141414" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>
+              SAP S/4HANA
+            </span>
           </div>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#141414' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>Oracle EBS</span>
+            <div style={{ width: "40px", height: "40px", color: "#141414" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>
+              Oracle EBS
+            </span>
           </div>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#5F978E' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>GeM</span>
+            <div style={{ width: "40px", height: "40px", color: "#5F978E" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>GeM</span>
           </div>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#E94344' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>Shell MESC</span>
+            <div style={{ width: "40px", height: "40px", color: "#E94344" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>
+              Shell MESC
+            </span>
           </div>
           <div style={styles.integrationCard}>
-            <div style={{ width: '40px', height: '40px', color: '#F1CC9D' }}><KoboyoSparkle /></div>
-            <span style={{ fontWeight: 500, fontSize: '14px' }}>UNSPSC</span>
+            <div style={{ width: "40px", height: "40px", color: "#F1CC9D" }}>
+              <KoboyoSparkle />
+            </div>
+            <span style={{ fontWeight: 500, fontSize: "14px" }}>UNSPSC</span>
           </div>
         </div>
       </section>
 
       {/* 11. Pricing -> Transparent Deployment */}
-      <section style={{...styles.sectionWhite, ...styles.pricing}}>
+      <section style={{ ...styles.sectionWhite, ...styles.pricing }}>
         <h2 style={styles.featureHeadline}>Transparent deployment</h2>
-        <p style={styles.featureBody}>Standardized infrastructure limits across MeghRaj National Cloud.</p>
-        
+        <p style={styles.featureBody}>
+          Standardized infrastructure limits across MeghRaj National Cloud.
+        </p>
+
         <div style={styles.pricingCard}>
           <div style={styles.halftonePattern} />
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <h3 style={{ fontSize: '24px', fontWeight: 600 }}>Enterprise Node</h3>
-            <p style={{ color: '#4B5563', marginTop: '8px' }}>Dedicated air-gapped instance per CPSE.</p>
+          <div style={{ position: "relative", zIndex: 1 }}>
+            <h3 style={{ fontSize: "24px", fontWeight: 600 }}>
+              Enterprise Node
+            </h3>
+            <p style={{ color: "#4B5563", marginTop: "8px" }}>
+              Dedicated air-gapped instance per CPSE.
+            </p>
             <div style={styles.priceValue}>
-              Air-Gapped <span style={{ color: '#9CA3AF' }}>+</span> RFC
+              Air-Gapped <span style={{ color: "#9CA3AF" }}>+</span> RFC
             </div>
             <div style={styles.buttonGroup}>
-              <button style={{...styles.btnSolid,  width: '100%' }}>Initialize tenant</button>
+              <button style={{ ...styles.btnSolid, width: "100%" }}>
+                Initialize tenant
+              </button>
             </div>
-            <button style={{...styles.btnOutline,  width: '100%', marginTop: '16px' }}>View security specs</button>
+            <button
+              style={{ ...styles.btnOutline, width: "100%", marginTop: "16px" }}
+            >
+              View security specs
+            </button>
           </div>
         </div>
-        <p style={{ fontSize: '13px', color: '#9CA3AF', marginTop: '24px' }}>Deployments subject to MoPNG DGH clearance.</p>
+        <p style={{ fontSize: "13px", color: "#9CA3AF", marginTop: "24px" }}>
+          Deployments subject to MoPNG DGH clearance.
+        </p>
       </section>
 
       {/* 12. Closing CTA */}
-      <section style={{...styles.sectionCream, ...styles.closing}}>
+      <section style={{ ...styles.sectionCream, ...styles.closing }}>
         <h2 style={styles.closingTitle}>
-          Flawless supply chain <span style={styles.serifContrast}>synchronization</span>.
+          Flawless supply chain{" "}
+          <span style={styles.serifContrast}>synchronization</span>.
         </h2>
         <div style={styles.buttonGroup}>
-          <button style={styles.btnSolid} onClick={() => onStartDemo ? onStartDemo() : onEnterDashboard()}>Start Demo</button>
+          <button style={styles.btnSolid} onClick={() => onEnterDashboard()}>
+            Start deployment
+          </button>
           <button style={styles.btnOutline}>Contact sales</button>
         </div>
-        
+
         {/* Decorative photo fragments */}
-        <div style={{ position: 'absolute', top: '100px', left: '10%', width: '80px', height: '80px', backgroundColor: '#e5e7eb', borderRadius: '8px', transform: 'rotate(-10deg)' }} />
-        <div style={{ position: 'absolute', bottom: '100px', right: '15%', width: '120px', height: '120px', backgroundColor: '#e5e7eb', borderRadius: '8px', transform: 'rotate(5deg)' }} />
+        <div
+          style={{
+            position: "absolute",
+            top: "100px",
+            left: "10%",
+            width: "80px",
+            height: "80px",
+            backgroundColor: "#e5e7eb",
+            borderRadius: "8px",
+            transform: "rotate(-10deg)",
+          }}
+        />
+        <div
+          style={{
+            position: "absolute",
+            bottom: "100px",
+            right: "15%",
+            width: "120px",
+            height: "120px",
+            backgroundColor: "#e5e7eb",
+            borderRadius: "8px",
+            transform: "rotate(5deg)",
+          }}
+        />
       </section>
 
       {/* 13. Footer */}
@@ -787,46 +1214,109 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
         <div style={styles.footerGrid}>
           <div>
             <h5 style={styles.footerColHeader}>Product</h5>
-            <a href="#" style={styles.footerLink}>Harmonization</a>
-            <a href="#" style={styles.footerLink}>Surplus Transfer</a>
-            <a href="#" style={styles.footerLink}>Procurement</a>
-            <a href="#" style={styles.footerLink}>Taxonomy</a>
+            <a href="#" style={styles.footerLink}>
+              Harmonization
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Surplus Transfer
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Procurement
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Taxonomy
+            </a>
           </div>
           <div>
             <h5 style={styles.footerColHeader}>Learn</h5>
-            <a href="#" style={styles.footerLink}>Documentation</a>
-            <a href="#" style={styles.footerLink}>Architecture</a>
-            <a href="#" style={styles.footerLink}>CVC Norms</a>
-            <a href="#" style={styles.footerLink}>Blog</a>
+            <a href="#" style={styles.footerLink}>
+              Documentation
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Architecture
+            </a>
+            <a href="#" style={styles.footerLink}>
+              CVC Norms
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Blog
+            </a>
           </div>
           <div>
             <h5 style={styles.footerColHeader}>Support</h5>
-            <a href="#" style={styles.footerLink}>Help center</a>
-            <a href="#" style={styles.footerLink}>System status</a>
-            <a href="#" style={styles.footerLink}>Security</a>
+            <a href="#" style={styles.footerLink}>
+              Help center
+            </a>
+            <a href="#" style={styles.footerLink}>
+              System status
+            </a>
+            <a href="#" style={styles.footerLink}>
+              Security
+            </a>
           </div>
           <div>
             <h5 style={styles.footerColHeader}>Agencies</h5>
-            <a href="#" style={styles.footerLink}>MoPNG</a>
-            <a href="#" style={styles.footerLink}>DGH</a>
-            <a href="#" style={styles.footerLink}>FIPI</a>
+            <a href="#" style={styles.footerLink}>
+              MoPNG
+            </a>
+            <a href="#" style={styles.footerLink}>
+              DGH
+            </a>
+            <a href="#" style={styles.footerLink}>
+              FIPI
+            </a>
           </div>
           <div>
             <h5 style={styles.footerColHeader}>Solutions</h5>
-            <a href="#" style={styles.footerLink}>For Refineries</a>
-            <a href="#" style={styles.footerLink}>For Pipelines</a>
-            <a href="#" style={styles.footerLink}>For E&P</a>
+            <a href="#" style={styles.footerLink}>
+              For Refineries
+            </a>
+            <a href="#" style={styles.footerLink}>
+              For Pipelines
+            </a>
+            <a href="#" style={styles.footerLink}>
+              For E&P
+            </a>
           </div>
         </div>
         <div style={styles.footerLegal}>
-          <div style={{ display: 'flex', gap: '24px' }}>
+          <div style={{ display: "flex", gap: "24px" }}>
             <span>&copy; 2026 National Unified Material Master</span>
-            <a href="#" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Terms</a>
-            <a href="#" style={{ color: '#9CA3AF', textDecoration: 'none' }}>Privacy</a>
+            <a href="#" style={{ color: "#9CA3AF", textDecoration: "none" }}>
+              Terms
+            </a>
+            <a href="#" style={{ color: "#9CA3AF", textDecoration: "none" }}>
+              Privacy
+            </a>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
-            <div style={{ width: '32px', height: '16px', backgroundColor: '#E5E7EB', borderRadius: '16px', position: 'relative' }}>
-              <div style={{ width: '12px', height: '12px', backgroundColor: '#fff', borderRadius: '50%', position: 'absolute', top: '2px', left: '2px' }} />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              cursor: "pointer",
+            }}
+          >
+            <div
+              style={{
+                width: "32px",
+                height: "16px",
+                backgroundColor: "#E5E7EB",
+                borderRadius: "16px",
+                position: "relative",
+              }}
+            >
+              <div
+                style={{
+                  width: "12px",
+                  height: "12px",
+                  backgroundColor: "#fff",
+                  borderRadius: "50%",
+                  position: "absolute",
+                  top: "2px",
+                  left: "2px",
+                }}
+              />
             </div>
             Privacy choices
           </div>
@@ -834,10 +1324,4 @@ export const LandingPage: React.FC<LandingPageProps> = ({ onEnterDashboard, onSt
       </footer>
     </div>
   );
-}
-
-
-
-
-
-
+};

@@ -3,29 +3,23 @@
 
 from typing import List, Optional
 
-from fastapi import Depends, HTTPException, Security, status, Request
+from fastapi import Depends, HTTPException, Security, status
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 
 from backend.app.schemas.auth import UserSession
 from backend.app.services.meghraj_auth_service import default_meghraj_auth
 
-bearer_scheme = HTTPBearer(auto_error=False)
+# Auto-error True enforces auth presence at the schema level
+bearer_scheme = HTTPBearer(auto_error=True)
 
 
 async def get_current_user(
-    request: Request,
     credentials: Optional[HTTPAuthorizationCredentials] = Security(bearer_scheme),
 ) -> UserSession:
     """
     Validates Bearer token from MeghRaj Gov Cloud or returns authenticated UserSession.
     """
-    token = None
-    if credentials and credentials.credentials:
-        token = credentials.credentials
-    elif request.query_params.get("token"):
-        token = request.query_params.get("token")
-
-    if not token:
+    if not credentials or not credentials.credentials:
         # Check if running in open evaluation mode or missing token
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
@@ -33,6 +27,7 @@ async def get_current_user(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+    token = credentials.credentials
     payload = default_meghraj_auth.verify_and_decode_jwt(token)
     if not payload:
         raise HTTPException(
@@ -52,21 +47,13 @@ async def get_current_user(
 
 
 async def get_optional_user(
-    request: Request,
     credentials: Optional[HTTPAuthorizationCredentials] = Security(bearer_scheme),
 ) -> Optional[UserSession]:
     """Extracts user if token present; returns None if anonymous."""
-    token = None
-    if credentials and credentials.credentials:
-        token = credentials.credentials
-    elif request.query_params.get("token"):
-        token = request.query_params.get("token")
-        
-    if not token:
+    if not credentials or not credentials.credentials:
         return None
-        
     try:
-        return await get_current_user(request, credentials)
+        return await get_current_user(credentials)
     except HTTPException:
         return None
 

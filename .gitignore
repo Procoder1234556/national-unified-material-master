@@ -54,7 +54,3 @@ Thumbs.db
 Desktop.ini
 .DS_Store
 *.tsbuildinfo
-
-*.db
-inject_*.py
-test_extract.py
