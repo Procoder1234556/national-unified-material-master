@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NUMM Material Master · CPSE Plant Stewards</title>
+<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="module" src="/src/main-v4.js"></script>
+</head>
+<body data-shell="admin" data-page="users" data-breadcrumb="Home > Catalogs > CPSE Plant Masters">
+
+<main class="main">
+<div class="page-wrapper">
+
+  <div class="page-header">
+    <div class="page-header-row">
+      <div>
+        <div class="page-pretitle">National Unified Material Master · Governance</div>
+        <h1 class="page-title">CPSE Plant Masters &amp; Catalog Stewards</h1>
+      </div>
+      <div class="page-actions">
+        <a href="tables.html" class="btn btn-outline">Audit Records</a>
+        <a href="/" class="btn btn-primary">Open NUMM Portal</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="row col-3" id="contacts-grid"></div>
+
+</div>
+</main>
+
+<script type="module">
+const people = [
+  ['Rameshwar Sharma','RS','primary','Chief Manager (Materials) · IOCL Mathura','1,420','12','34'],
+  ['Priya Venkatraman','PV','purple','GM (Central Procurement) · MoPNG / EIL','3,890','24','88'],
+  ['Harpreet Singh','HS','red','DGM (Maintenance) · ONGC Hazira Plant','980','8','19'],
+  ['S. K. Gupta','SG','primary','Chief Materials Manager · IOCL Refineries HQ','2,110','15','42'],
+  ['A. K. Mehta','AM','azure','ED (Materials Mgmt) · ONGC Western Onshore','1,850','19','56'],
+  ['Vikram Malhotra','VM','yellow','DGM (Piping & Warehousing) · BPCL Mumbai','1,140','9','21'],
+  ['Ananya Deshmukh','AD','green','Senior Procurement Officer · HPCL Visakh','760','6','14'],
+  ['Rajeev Nair','RN','blue','Chief Manager (Pipeline Spares) · GAIL Vijaipur','890','11','27'],
+  ['Bhaben Baruah','BB','primary','Head of Materials · OIL Duliajan Fields','640','5','12']
+];
+const colorMap = { primary:'linear-gradient(135deg,#065f46,#047857)', azure:'linear-gradient(135deg,#1d4ed8,#2563eb)', purple:'linear-gradient(135deg,#581c87,#7e22ce)', yellow:'linear-gradient(135deg,#854d0e,#a16207)', red:'linear-gradient(135deg,#991b1b,#dc2626)', green:'linear-gradient(135deg,#166534,#15803d)', blue:'linear-gradient(135deg,#0e7490,#0284c7)' };
+
+const grid = document.getElementById('contacts-grid');
+grid.innerHTML = people.map(([name, ini, col, role, projects, tasks, msgs], idx) => `
+  <div class="contact-card" data-idx="${idx}">
+    <div class="av" style="background:${colorMap[col]}">${ini}</div>
+    <div class="name">${name}</div>
+    <div class="role" style="font-size:12px;color:var(--text-secondary);text-align:center">${role}</div>
+    <div style="display:flex;gap:6px;justify-content:center;margin:12px 0">
+      <a href="tables.html" class="btn btn-outline btn-sm">Audit Trail</a>
+      <a href="/" class="btn btn-primary btn-sm">Steward Cockpit</a>
+    </div>
+    <div class="stats">
+      <div><strong>${projects}</strong>Harmonized</div>
+      <div><strong>${tasks}</strong>Pending HITL</div>
+      <div><strong>${msgs}</strong>MTIRF Loans</div>
+    </div>
+  </div>
+`).join('');
+
+import('/src/v4/details.js').then(({ openContactModal }) => {
+  grid.addEventListener('click', (e) => {
+    const card = e.target.closest('.contact-card');
+    if (!card) return;
+    const idx = parseInt(card.dataset.idx, 10);
+    const p = people[idx];
+    if (!p) return;
+    const action = e.target.closest('[data-action]')?.dataset.action;
+    const [name, ini, col, role, projectsCount, tasks, msgs] = p;
+    if (action === 'message' || action === 'view' || !e.target.closest('a')) {
+      e.preventDefault();
+      openContactModal({ name, ini, color: col, role, projects: projectsCount, tasks, msgs });
+    }
+  });
+});
+</script>
+
+</body>
+</html>

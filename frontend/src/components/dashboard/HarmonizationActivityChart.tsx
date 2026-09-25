@@ -1,5 +1,4 @@
-// ponytail: Clean SVG line/area chart representing Harmonization Activity over time.
-// Upgrade path: add multi-series zoom and brush selection when time window exceeds 90 days.
+// ponytail: Pilot-week harmonization activity — POC catalog throughput (not national fantasy volume).
 
 import React, { useState } from "react";
 import { rawTokens } from "../../tokens.stylex";
@@ -14,22 +13,21 @@ export interface DataPoint {
 export const HarmonizationActivityChart: React.FC = () => {
   const [hoverIndex, setHoverIndex] = useState<number | null>(null);
 
-  // Realistic data points matching the chart in screenshot
+  // POC-scale daily throughput (24-line multi-CPSE seed over pilot week)
   const data: DataPoint[] = [
-    { date: "28 Jan", processed: 2850, approved: 2620, review: 190 },
-    { date: "29 Jan", processed: 2710, approved: 2490, review: 180 },
-    { date: "30 Jan", processed: 1820, approved: 1670, review: 120 },
-    { date: "31 Jan", processed: 1390, approved: 1280, review: 95 },
-    { date: "1 Feb", processed: 1340, approved: 1225, review: 90 },
-    { date: "2 Feb", processed: 1720, approved: 1580, review: 115 },
-    { date: "3 Feb", processed: 980, approved: 895, review: 68 },
+    { date: "19 Sep", processed: 4, approved: 2, review: 2 },
+    { date: "20 Sep", processed: 3, approved: 2, review: 1 },
+    { date: "21 Sep", processed: 5, approved: 3, review: 2 },
+    { date: "22 Sep", processed: 4, approved: 3, review: 1 },
+    { date: "23 Sep", processed: 3, approved: 2, review: 1 },
+    { date: "24 Sep", processed: 3, approved: 2, review: 1 },
+    { date: "25 Sep", processed: 2, approved: 1, review: 1 },
   ];
 
-  const yTicks = [3000, 2500, 2000, 1500, 1000, 500];
-  const maxVal = 3200;
+  const yTicks = [6, 5, 4, 3, 2, 1];
+  const maxVal = 7;
   const minVal = 0;
 
-  // SVG dimensions
   const width = 640;
   const height = 210;
   const paddingLeft = 42;
@@ -40,15 +38,12 @@ export const HarmonizationActivityChart: React.FC = () => {
   const chartWidth = width - paddingLeft - paddingRight;
   const chartHeight = height - paddingTop - paddingBottom;
 
-  const getX = (index: number) => {
-    return paddingLeft + (index / (data.length - 1)) * chartWidth;
-  };
+  const getX = (index: number) =>
+    paddingLeft + (index / (data.length - 1)) * chartWidth;
 
-  const getY = (val: number) => {
-    return paddingTop + (1 - (val - minVal) / (maxVal - minVal)) * chartHeight;
-  };
+  const getY = (val: number) =>
+    paddingTop + (1 - (val - minVal) / (maxVal - minVal)) * chartHeight;
 
-  // Generate smooth cubic bezier SVG path
   const makeSmoothPath = (values: number[]) => {
     if (values.length === 0) return "";
     let d = `M ${getX(0)},${getY(values[0])}`;
@@ -70,8 +65,6 @@ export const HarmonizationActivityChart: React.FC = () => {
   const processedLine = makeSmoothPath(processedValues);
   const approvedLine = makeSmoothPath(approvedValues);
   const reviewLine = makeSmoothPath(reviewValues);
-
-  // Closed area path for primary line
   const processedArea = `${processedLine} L ${getX(data.length - 1)},${paddingTop + chartHeight} L ${getX(0)},${paddingTop + chartHeight} Z`;
 
   return (
@@ -87,7 +80,6 @@ export const HarmonizationActivityChart: React.FC = () => {
         position: "relative",
       }}
     >
-      {/* Header */}
       <div
         style={{
           display: "flex",
@@ -99,11 +91,9 @@ export const HarmonizationActivityChart: React.FC = () => {
         <div>
           <h2
             style={{
-              fontSize: "16px",
+              fontSize: "15px",
               fontWeight: 700,
-              fontFamily: rawTokens.fontCalligraphy,
-              letterSpacing: "0em",
-              textTransform: "none",
+              fontFamily: rawTokens.fontSans,
               color: rawTokens.textPrimary,
               margin: 0,
             }}
@@ -117,11 +107,10 @@ export const HarmonizationActivityChart: React.FC = () => {
               margin: "2px 0 0 0",
             }}
           >
-            Material records processed over the selected period
+            POC catalog lines processed (24-record multi-CPSE seed)
           </p>
         </div>
 
-        {/* Legend */}
         <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <span
@@ -139,10 +128,9 @@ export const HarmonizationActivityChart: React.FC = () => {
                 color: rawTokens.textSecondary,
               }}
             >
-              Materials Processed
+              Processed
             </span>
           </div>
-
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <span
               style={{
@@ -159,10 +147,9 @@ export const HarmonizationActivityChart: React.FC = () => {
                 color: rawTokens.textSecondary,
               }}
             >
-              Matches Approved
+              Auto-approved
             </span>
           </div>
-
           <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
             <span
               style={{
@@ -179,13 +166,12 @@ export const HarmonizationActivityChart: React.FC = () => {
                 color: rawTokens.textSecondary,
               }}
             >
-              Review Required
+              Review
             </span>
           </div>
         </div>
       </div>
 
-      {/* SVG Container */}
       <div style={{ position: "relative", width: "100%", height: "210px" }}>
         <svg
           viewBox={`0 0 ${width} ${height}`}
@@ -193,7 +179,6 @@ export const HarmonizationActivityChart: React.FC = () => {
           onMouseLeave={() => setHoverIndex(null)}
         >
           <defs>
-            {/* Soft terracotta gradient fill */}
             <linearGradient id="terracottaGradient" x1="0" y1="0" x2="0" y2="1">
               <stop
                 offset="0%"
@@ -208,7 +193,6 @@ export const HarmonizationActivityChart: React.FC = () => {
             </linearGradient>
           </defs>
 
-          {/* Horizontal gridlines and Y axis ticks */}
           {yTicks.map((tick) => {
             const y = getY(tick);
             return (
@@ -230,16 +214,13 @@ export const HarmonizationActivityChart: React.FC = () => {
                   fill="#94A3B8"
                   fontFamily={rawTokens.fontSans}
                 >
-                  {tick >= 1000 ? `${tick / 1000}K` : tick}
+                  {tick}
                 </text>
               </g>
             );
           })}
 
-          {/* Area fill under primary curve */}
           <path d={processedArea} fill="url(#terracottaGradient)" />
-
-          {/* Curve 3: Review required (sandstone/amber) */}
           <path
             d={reviewLine}
             fill="none"
@@ -247,8 +228,6 @@ export const HarmonizationActivityChart: React.FC = () => {
             strokeWidth="1.8"
             strokeLinecap="round"
           />
-
-          {/* Curve 2: Approved (sage/mint) */}
           <path
             d={approvedLine}
             fill="none"
@@ -256,8 +235,6 @@ export const HarmonizationActivityChart: React.FC = () => {
             strokeWidth="1.8"
             strokeLinecap="round"
           />
-
-          {/* Curve 1: Processed (terracotta primary) */}
           <path
             d={processedLine}
             fill="none"
@@ -266,13 +243,11 @@ export const HarmonizationActivityChart: React.FC = () => {
             strokeLinecap="round"
           />
 
-          {/* X axis labels and vertical hover detection zones */}
           {data.map((d, i) => {
             const x = getX(i);
             const isHovered = hoverIndex === i;
             return (
               <g key={d.date}>
-                {/* Vertical hover guide */}
                 {isHovered && (
                   <line
                     x1={x}
@@ -284,8 +259,6 @@ export const HarmonizationActivityChart: React.FC = () => {
                     strokeDasharray="2 2"
                   />
                 )}
-
-                {/* X-axis label */}
                 <text
                   x={x}
                   y={paddingTop + chartHeight + 16}
@@ -297,8 +270,6 @@ export const HarmonizationActivityChart: React.FC = () => {
                 >
                   {d.date}
                 </text>
-
-                {/* Indicator dot on primary line */}
                 <circle
                   cx={x}
                   cy={getY(d.processed)}
@@ -307,8 +278,6 @@ export const HarmonizationActivityChart: React.FC = () => {
                   stroke={rawTokens.colorAction}
                   strokeWidth="2"
                 />
-
-                {/* Transparent hit target for hover */}
                 <rect
                   x={x - chartWidth / (data.length * 2)}
                   y={paddingTop}
@@ -323,15 +292,11 @@ export const HarmonizationActivityChart: React.FC = () => {
           })}
         </svg>
 
-        {/* Hover Tooltip Box */}
         {hoverIndex !== null && (
           <div
             style={{
               position: "absolute",
-              left: `${Math.min(
-                Math.max((getX(hoverIndex) / width) * 100, 18),
-                82
-              )}%`,
+              left: `${Math.min(Math.max((getX(hoverIndex) / width) * 100, 18), 82)}%`,
               top: "20px",
               transform: "translateX(-50%)",
               backgroundColor: "rgba(15, 23, 42, 0.94)",
@@ -351,7 +316,6 @@ export const HarmonizationActivityChart: React.FC = () => {
                 borderBottom: "1px solid rgba(255,255,255,0.15)",
                 paddingBottom: "4px",
                 marginBottom: "4px",
-                fontSize: "11px",
               }}
             >
               {data[hoverIndex].date}, 2026
@@ -364,7 +328,7 @@ export const HarmonizationActivityChart: React.FC = () => {
               }}
             >
               <span style={{ color: "#FDA4AF" }}>Processed:</span>
-              <strong>{data[hoverIndex].processed.toLocaleString()}</strong>
+              <strong>{data[hoverIndex].processed}</strong>
             </div>
             <div
               style={{
@@ -374,7 +338,7 @@ export const HarmonizationActivityChart: React.FC = () => {
               }}
             >
               <span style={{ color: "#A5D7C9" }}>Approved:</span>
-              <strong>{data[hoverIndex].approved.toLocaleString()}</strong>
+              <strong>{data[hoverIndex].approved}</strong>
             </div>
             <div
               style={{
@@ -384,7 +348,7 @@ export const HarmonizationActivityChart: React.FC = () => {
               }}
             >
               <span style={{ color: "#FDE68A" }}>Review:</span>
-              <strong>{data[hoverIndex].review.toLocaleString()}</strong>
+              <strong>{data[hoverIndex].review}</strong>
             </div>
           </div>
         )}

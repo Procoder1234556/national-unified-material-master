@@ -1,11 +1,10 @@
 import requests
-import json
-import os
 
 # Firecrawl MCP Prototype
 # This prototype demonstrates interacting with the Firecrawl MCP over HTTP (SSE/JSON-RPC).
 
 FIRECRAWL_MCP_URL = "https://mcp.firecrawl.dev/fc-97b7b6702407420a827da94351939e03/v2/mcp"
+
 
 def test_firecrawl_mcp():
     print(f"Testing Firecrawl MCP at {FIRECRAWL_MCP_URL}...")
@@ -19,6 +18,7 @@ def test_firecrawl_mcp():
             print(f"Unexpected status: {response.text}")
     except Exception as e:
         print(f"Error reaching Firecrawl MCP: {e}")
+
 
 if __name__ == "__main__":
     test_firecrawl_mcp()

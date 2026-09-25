@@ -37,16 +37,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     "OIL",
     "EIL",
     "NRL",
+    "MRPL",
+    "CPCL",
   ];
 
   const plantOptions = [
     "All Plants",
+    "Mathura Refinery (IOCL)",
     "Gujarat Refinery (IOCL)",
     "Hazira Complex (ONGC)",
     "Mumbai Refinery (BPCL)",
     "Visakh Refinery (HPCL)",
-    "Pata Petrochem (GAIL)",
+    "Vijaipur Complex (GAIL)",
     "Duliajan Fields (OIL)",
+    "Numaligarh Refinery (NRL)",
+    "Mangalore Refinery (MRPL)",
+    "Manali Refinery (CPCL)",
   ];
 
   const classOptions = [

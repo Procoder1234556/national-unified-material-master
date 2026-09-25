@@ -4,7 +4,7 @@
 import React, { useEffect, useState } from "react";
 import { rawTokens } from "./tokens.stylex";
 import { AppShell, NavTabId, UserRole } from "./components/AppShell";
-import { RoleDashboard } from "./components/RoleDashboard";
+import { NummDashboard } from "./components/dashboard/NummDashboard";
 import { ClusterReviewCockpit } from "./components/ClusterReviewCockpit";
 import { SearchBeforeBuy } from "./components/SearchBeforeBuy";
 import { CatalogIngestionView } from "./components/CatalogIngestionView";
@@ -25,12 +25,16 @@ import {
   Layers,
   CheckCircle2,
 } from "lucide-react";
-import { API_BASE } from "./api";
+import { authenticateAsRole, AuthRole, getAuthSession } from "./api";
 
 export const App: React.FC = () => {
   const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
   const [activeTab, setActiveTab] = useState<NavTabId>("overview");
   const [activeRole, setActiveRole] = useState<UserRole>("STEWARD");
+  const [authEmail, setAuthEmail] = useState<string>(
+    "steward.iocl@numm.gov.in"
+  );
+  const [stewardPendingCount, setStewardPendingCount] = useState<number>(0);
   const [searchQuery, setSearchQuery] = useState<string>(
     "2 inch 150# flanged ball valve CS A105"
   );
@@ -43,6 +47,30 @@ export const App: React.FC = () => {
   const [isDrawerOpen, setIsDrawerOpen] = useState<boolean>(false);
   const [transferData, setTransferData] = useState<any>(null);
   const [isTransferOpen, setIsTransferOpen] = useState<boolean>(false);
+
+  const handleShowAudit = (msg: string) => {
+    setAuditMessage(msg);
+    setTimeout(() => setAuditMessage(null), 7000);
+  };
+
+  // MeghRaj demo JWT for active persona
+  useEffect(() => {
+    let cancelled = false;
+    authenticateAsRole(activeRole as AuthRole)
+      .then((s) => {
+        if (cancelled) return;
+        setAuthEmail(s.email);
+        handleShowAudit(
+          `SIH demo persona: ${s.fullName} (${s.role}) · ${s.organizationCode} · simulated MeghRaj JWT`
+        );
+      })
+      .catch((err) => {
+        console.error("Auth bootstrap failed", err);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [activeRole]);
 
   // Global hotkeys: Ctrl+K / Cmd+K and ?
   useEffect(() => {
@@ -71,11 +99,6 @@ export const App: React.FC = () => {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isCommandOpen, isDrawerOpen, isTransferOpen]);
-
-  const handleShowAudit = (msg: string) => {
-    setAuditMessage(msg);
-    setTimeout(() => setAuditMessage(null), 7000);
-  };
 
   const handleOpenDetailDrawer = (onmcCode: string) => {
     // Generate contextual detail for the requested code
@@ -159,14 +182,11 @@ export const App: React.FC = () => {
       activeRole={activeRole}
       onSelectRole={(role) => {
         setActiveRole(role);
-        handleShowAudit(
-          `Authenticated as ${role} via MeghRaj SSO: Token Validated.`
-        );
       }}
       onOpenCommandPalette={() => setIsCommandOpen(true)}
       onOpenKeyboardHelp={() => setIsHelpOpen(true)}
       onBackToLanding={() => setViewMode("landing")}
-      stewardPendingCount={84}
+      stewardPendingCount={stewardPendingCount}
     >
       {/* CVC Tamper-Evident Audit Record Notification Toast */}
       {auditMessage && (
@@ -197,20 +217,24 @@ export const App: React.FC = () => {
 
       {/* Main Tab Panes */}
       {activeTab === "overview" && (
-        <RoleDashboard
+        <NummDashboard
           activeRole={activeRole}
-          onSelectRole={(role) => setActiveRole(role)}
-          onNavigate={(tabId) => setActiveTab(tabId as NavTabId)}
-          onSearchQuery={(q) => {
-            setSearchQuery(q);
-            setActiveTab("search");
+          onSelectRole={(role) => setActiveRole(role as UserRole)}
+          onNavigateView={(view, q) => {
+            if (q) setSearchQuery(q);
+            setActiveTab(view as NavTabId);
           }}
+          onShowAudit={handleShowAudit}
           onInspectONMC={handleOpenDetailDrawer}
+          stewardPendingCount={stewardPendingCount}
+          onQueueCountChange={setStewardPendingCount}
         />
       )}
 
       {activeTab === "steward" && (
         <ClusterReviewCockpit
+          actorEmail={authEmail || getAuthSession()?.email}
+          onQueueCountChange={setStewardPendingCount}
           onNavigateToSearch={(q) => {
             setSearchQuery(q);
             setActiveTab("search");
@@ -316,15 +340,106 @@ export const App: React.FC = () => {
               style={{
                 fontSize: "13px",
                 color: rawTokens.textSecondary,
-                marginBottom: "24px",
+                marginBottom: "16px",
                 lineHeight: 1.5,
               }}
             >
-              Production architecture deployed across 10 CPSEs in compliance
-              with MoPNG SIH 26099. Combines dense relational ACID storage in
-              PostgreSQL 16 with HNSW cosine vector index (1024-dim),
-              asynchronous Redis ARQ workers, and deterministic ASME safety
-              gates.
+              SIH 26099 evaluation build. Core harmonization engine runs fully
+              offline (SQLite + FastAPI + React). NIC MeghRaj SSO and CPSE SAP
+              are <strong>simulated integration seams</strong> — no cloud or ERP
+              credentials required to win the demo. Production adapters plug
+              into the same API surface (see <code>SIH_DEMO.md</code>).
+            </p>
+
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "12px",
+                marginBottom: "20px",
+              }}
+            >
+              <div
+                style={{
+                  backgroundColor: "rgba(165, 215, 201, 0.25)",
+                  border: `1px solid ${rawTokens.colorVerified}`,
+                  borderRadius: rawTokens.radiusMd,
+                  padding: "14px 16px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: 800,
+                    color: rawTokens.colorVerified,
+                    textTransform: "uppercase",
+                    marginBottom: "8px",
+                  }}
+                >
+                  Live on this laptop (judge demo)
+                </div>
+                <ul
+                  style={{
+                    margin: 0,
+                    paddingLeft: "18px",
+                    fontSize: "12px",
+                    color: rawTokens.textPrimary,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <li>Ingest · normalize · safety gate · ONMC mint</li>
+                  <li>Steward HITL · Search Before Buy</li>
+                  <li>Surplus / MTIRF · pooled demand / GeM package</li>
+                  <li>CVC SHA-256 audit verify + export</li>
+                </ul>
+              </div>
+              <div
+                style={{
+                  backgroundColor: "rgba(241, 204, 157, 0.35)",
+                  border: `1px solid ${rawTokens.colorHighlight}`,
+                  borderRadius: rawTokens.radiusMd,
+                  padding: "14px 16px",
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: "11px",
+                    fontWeight: 800,
+                    color: rawTokens.colorAnchor,
+                    textTransform: "uppercase",
+                    marginBottom: "8px",
+                  }}
+                >
+                  Simulated for SIH (production upgrade)
+                </div>
+                <ul
+                  style={{
+                    margin: 0,
+                    paddingLeft: "18px",
+                    fontSize: "12px",
+                    color: rawTokens.textPrimary,
+                    lineHeight: 1.55,
+                  }}
+                >
+                  <li>MeghRaj SSO → local signed demo JWTs</li>
+                  <li>SAP VL01N / ME21N / BAPI → document IDs + toast</li>
+                  <li>GeM portal push → in-app tender package</li>
+                  <li>Postgres HNSW / Redis ARQ → SQLite in-process</li>
+                </ul>
+              </div>
+            </div>
+
+            <p
+              style={{
+                fontSize: "12px",
+                color: rawTokens.textMuted,
+                marginBottom: "24px",
+                lineHeight: 1.45,
+              }}
+            >
+              Target production stack (TECH_STACK.md): PostgreSQL 16 + pgvector,
+              Redis workers, real NIC MeghRaj SAML/OIDC, steward-gated SAP RFC.
+              Not required for SIH evaluation.
             </p>
 
             <div
@@ -350,7 +465,7 @@ export const App: React.FC = () => {
                     textTransform: "uppercase",
                   }}
                 >
-                  Relational & Vector Storage
+                  Demo storage
                 </div>
                 <div
                   style={{
@@ -360,7 +475,7 @@ export const App: React.FC = () => {
                     marginTop: "4px",
                   }}
                 >
-                  PostgreSQL 16 + pgvector
+                  SQLite · Postgres-ready
                 </div>
                 <div
                   style={{
@@ -370,9 +485,8 @@ export const App: React.FC = () => {
                     lineHeight: 1.4,
                   }}
                 >
-                  10 core ACID relational tables + HNSW cosine index (1024-dim,
-                  m=16, ef=64) for sub-50ms catalog retrieval across 104,000+
-                  items.
+                  Zero-Docker laptop demo. Same schema + Alembic path for
+                  PostgreSQL 16 + pgvector when MoPNG cloud is available.
                 </div>
               </div>
 
@@ -501,7 +615,7 @@ export const App: React.FC = () => {
           onClose={() => setIsTransferOpen(false)}
           onComplete={(docNumber) => {
             handleShowAudit(
-              `Dispatched MTIRF ${docNumber} via MeghRaj SSO e-Sign.`
+              `MTIRF ${docNumber} approved · simulated MeghRaj e-Sign · simulated SAP VL01N/ME21N.`
             );
           }}
         />

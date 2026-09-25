@@ -1,17 +1,17 @@
-import sys
-
-with open('frontend/src/App.tsx', 'r', encoding='utf-8') as f:
+with open("frontend/src/App.tsx", "r", encoding="utf-8") as f:
     content = f.read()
 
-content = content.replace('return (\n    <AppShell', '''return (
+content = content.replace(
+    "return (\n    <AppShell",
+    """return (
     <>
       {isDemoMode && (
         <div style={{ backgroundColor: "#141414", color: "white", padding: "12px 24px", display: "flex", justifyContent: "space-between", alignItems: "center", zIndex: 9999, position: "relative" }}>
           <div style={{ fontWeight: "bold" }}>SIH 26099 Demo - Step {demoStep}/5: {
-            demoStep === 1 ? "Flow A: Catalog Harmonization" : 
-            demoStep === 2 ? "Flow B: Safety Gate" : 
-            demoStep === 3 ? "Flow C: Inter-CPSE Surplus" : 
-            demoStep === 4 ? "Flow D: Demand Pooling" : 
+            demoStep === 1 ? "Flow A: Catalog Harmonization" :
+            demoStep === 2 ? "Flow B: Safety Gate" :
+            demoStep === 3 ? "Flow C: Inter-CPSE Surplus" :
+            demoStep === 4 ? "Flow D: Demand Pooling" :
             "Flow E: Audit Trail"
           }</div>
           <div style={{ display: "flex", gap: "12px" }}>
@@ -27,9 +27,10 @@ content = content.replace('return (\n    <AppShell', '''return (
           </div>
         </div>
       )}
-    <AppShell''')
+    <AppShell""",
+)
 
-content = content.replace('</AppShell>\n  );', '''</AppShell>\n    </>\n  );''')
+content = content.replace("</AppShell>\n  );", """</AppShell>\n    </>\n  );""")
 
-with open('frontend/src/App.tsx', 'w', encoding='utf-8') as f:
+with open("frontend/src/App.tsx", "w", encoding="utf-8") as f:
     f.write(content)

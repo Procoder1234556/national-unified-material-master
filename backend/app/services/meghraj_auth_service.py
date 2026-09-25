@@ -67,6 +67,16 @@ class MeghRajAuthService:
             "clearance_level": "OFFICIAL_AUDITOR",
             "description": "Central Vigilance Commission Inspector verifying cryptographic chain integrity.",
         },
+        "plant.ongc@numm.gov.in": {
+            "email": "plant.ongc@numm.gov.in",
+            "password": "PlantPass@2026",
+            "full_name": "Harpreet Singh (Maintenance Superintendent)",
+            "role": "PLANT_ENGINEER",
+            "organization_code": "ONGC",
+            "plant_code": "HAZIRA-01",
+            "clearance_level": "SECRET",
+            "description": "Plant maintenance engineer discovering emergency surplus and initiating MTIRF transfers.",
+        },
     }
 
     @classmethod
@@ -147,12 +157,16 @@ class MeghRajAuthService:
         code_lower = auth_code.lower()
         if "admin" in code_lower:
             matched_email = "admin@numm.gov.in"
-        elif "procure" in code_lower or "ongc" in code_lower:
+        elif "plant" in code_lower or "engineer" in code_lower:
+            matched_email = "plant.ongc@numm.gov.in"
+        elif "procure" in code_lower:
             matched_email = "procurement.ongc@numm.gov.in"
         elif "audit" in code_lower or "cvc" in code_lower:
             matched_email = "auditor.cvc@nic.in"
         elif "steward" in code_lower or "iocl" in code_lower:
             matched_email = "steward.iocl@numm.gov.in"
+        elif "ongc" in code_lower:
+            matched_email = "procurement.ongc@numm.gov.in"
 
         user_info = self.PRESET_PERSONAS[matched_email]
         return self._issue_token_for_user(user_info)

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUMM | National Unified Material Master</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#E94344',
+            darkText: '#141414',
+            secText: '#4A4A4A',
+            softBg: '#F8F7F5',
+            borderC: '#E5E2DE',
+            sage: '#5F978E',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['ui-monospace', 'monospace']
+          },
+          transitionTimingFunction: {
+            'out-expo': 'cubic-bezier(0.19, 1, 0.22, 1)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      scroll-behavior: smooth;
+    }
+    
+    /* Scroll animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    
+    .fade-up.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered delays */
+    .delay-100 { transition-delay: 100ms; }
+    .delay-200 { transition-delay: 200ms; }
+    .delay-300 { transition-delay: 300ms; }
+    .delay-400 { transition-delay: 400ms; }
+
+    /* Button hover scaling */
+    .btn-scale {
+      transition: all 0.25s ease-out;
+    }
+    .btn-scale:hover {
+      transform: scale(1.03);
+    }
+    
+    .card-hover {
+      transition: all 0.25s ease-out;
+    }
+    .card-hover:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Navbar shadow on scroll */
+    .nav-scrolled {
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+  </style>
+</head>
+<body class="font-sans text-secText bg-white antialiased">
+
+  <!-- 01 - Navigation Bar -->
+  <nav id="navbar" class="sticky top-0 z-50 bg-white border-b border-borderC h-[72px] transition-shadow duration-300">
+    <div class="max-w-[1200px] mx-auto px-6 h-full flex justify-between items-center">
+      <div class="flex flex-col justify-center">
+        <span class="text-darkText font-black text-xl leading-none">NUMM</span>
+        <span class="text-[10px] font-medium text-secText mt-1 hidden sm:block">National Unified Material Master</span>
+      </div>
+      <div class="flex items-center gap-3">
+        <a href="#" class="hidden md:inline-block px-5 py-2.5 rounded-md border border-borderC text-darkText font-medium text-sm btn-scale hover:bg-gray-50">
+          Architecture
+        </a>
+        <a href="#" class="inline-block px-6 py-2.5 rounded-md bg-primary text-white font-semibold text-sm btn-scale shadow-sm hover:brightness-105">
+          Enter Dashboard
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- 02 - Hero Section -->
+  <header class="w-full min-h-[620px] min-h-[85vh] flex items-center bg-gradient-to-b from-white to-softBg pt-[80px] md:pt-[120px] pb-[80px] px-6">
+    <div class="max-w-[1200px] mx-auto w-full">
+      <div class="max-w-[780px] mx-auto text-center fade-up in-view">
+        <p class="text-primary text-[13px] font-semibold uppercase tracking-widest mb-4">
+          SIH 26099 &nbsp;|&nbsp; Ministry of Petroleum &amp; Natural Gas
+        </p>
+        <h1 class="text-3xl md:text-5xl lg:text-[56px] font-extrabold text-darkText leading-[1.1] mb-6">
+          Unify India’s energy procurement.
+        </h1>
+        <p class="text-[18px] leading-relaxed text-secText max-w-[640px] mx-auto mb-10">
+          NUMM is the AI-powered National Unified Material Master that turns fragmented CPSE catalogs into one sovereign standard — ONMC — with zero false-positive safety mismatches.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="#" class="w-full sm:w-auto px-8 py-4 rounded-lg bg-primary text-white font-semibold text-[16px] btn-scale shadow-sm hover:brightness-105">
+            Enter Live Demo
+          </a>
+          <a href="#" class="w-full sm:w-auto px-8 py-4 rounded-lg border border-borderC text-darkText font-semibold text-[16px] bg-transparent btn-scale hover:bg-white">
+            Watch 5-min Pitch
+          </a>
+        </div>
+
+        <p class="text-[14px] text-[#6B6B6B] mt-10 font-medium">
+          Built for IOCL &nbsp;|&nbsp; ONGC &nbsp;|&nbsp; BPCL &nbsp;|&nbsp; HPCL &nbsp;|&nbsp; GAIL &nbsp;|&nbsp; OIL &nbsp;|&nbsp; EIL &nbsp;|&nbsp; NRL
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <!-- 03 - Logo Cloud -->
+  <section class="bg-softBg py-16 px-6 fade-up">
+    <div class="max-w-[1100px] mx-auto">
+      <h3 class="text-[14px] text-[#6B6B6B] text-center mb-8 font-medium">
+        Designed under the vision of Ministry of Petroleum &amp; Natural Gas
+      </h3>
+      <div class="flex flex-wrap justify-center items-center gap-x-6 gap-y-4 md:gap-x-10">
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">IOCL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">ONGC</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">BPCL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">HPCL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">GAIL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">OIL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">EIL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">NRL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">MRPL</span>
+        <span class="font-semibold text-[15px] text-secText hover:text-primary transition-colors cursor-default">CPCL</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 - Problem -> Solution -->
+  <section class="bg-white py-[80px] md:py-[100px] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="fade-up">
+        <h2 class="text-3xl md:text-[36px] font-extrabold text-darkText text-center mb-4 leading-tight">
+          The sovereign solution for India’s energy procurement
+        </h2>
+        <p class="text-[17px] text-secText text-center mb-14">
+          From fragmented catalogs to One Nation, One Material Code
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-7">
+        <!-- Card 1 -->
+        <div class="bg-white border border-borderC rounded-xl p-8 shadow-sm card-hover fade-up delay-100">
+          <i data-lucide="database" class="text-primary w-10 h-10 mb-5"></i>
+          <h3 class="text-xl font-bold text-darkText mb-3">Multi-CPSE Ingestion</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            Ingest messy free-text descriptions from IOCL, ONGC, BPCL, HPCL and others. Automatically expand 250+ petroleum acronyms and normalize units.
+          </p>
+        </div>
+        <!-- Card 2 -->
+        <div class="bg-white border border-borderC rounded-xl p-8 shadow-sm card-hover fade-up delay-200">
+          <i data-lucide="shield-check" class="text-primary w-10 h-10 mb-5"></i>
+          <h3 class="text-xl font-bold text-darkText mb-3">Zero False-Positive Safety Gate</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            Hybrid lexical + semantic matching protected by hard ASME B16.5, B16.34 and API 6D rules. Different pressure class or size? Instantly rejected.
+          </p>
+        </div>
+        <!-- Card 3 -->
+        <div class="bg-white border border-borderC rounded-xl p-8 shadow-sm card-hover fade-up delay-300">
+          <i data-lucide="layers" class="text-primary w-10 h-10 mb-5"></i>
+          <h3 class="text-xl font-bold text-darkText mb-3">Surplus &amp; Demand Pooling</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            Surface idle stock across sister CPSEs and aggregate demand for volume discounts. Turn fragmentation into shared national savings.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 - Metrics -->
+  <section class="bg-softBg py-[80px] md:py-[90px] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <h2 class="text-[32px] font-extrabold text-darkText text-center mb-12 fade-up">
+        The economic case is already clear
+      </h2>
+      
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-white rounded-xl py-8 px-6 text-center border border-transparent shadow-sm fade-up delay-100">
+          <div class="text-4xl font-extrabold text-primary mb-2">₹14,200 Cr</div>
+          <div class="text-[14px] text-secText font-medium">Annual economic drag addressed</div>
+        </div>
+        <div class="bg-white rounded-xl py-8 px-6 text-center border border-transparent shadow-sm fade-up delay-200">
+          <div class="text-4xl font-extrabold text-primary mb-2">₹13.5 Lakh Cr</div>
+          <div class="text-[14px] text-secText font-medium">Procurement volume in scope</div>
+        </div>
+        <div class="bg-white rounded-xl py-8 px-6 text-center border border-transparent shadow-sm fade-up delay-300">
+          <div class="text-4xl font-extrabold text-primary mb-2">0.0%</div>
+          <div class="text-[14px] text-secText font-medium">False-positive safety mismatches</div>
+        </div>
+        <div class="bg-white rounded-xl py-8 px-6 text-center border border-transparent shadow-sm fade-up delay-400">
+          <div class="text-4xl font-extrabold text-primary mb-2">&lt; 50 ms</div>
+          <div class="text-[14px] text-secText font-medium">Target search latency (p95)</div>
+        </div>
+      </div>
+      
+      <p class="text-[15px] text-[#6B6B6B] text-center mt-12 fade-up">
+        Built for pilot deployment at IOCL Mathura, ONGC Hazira, BPCL Mumbai and HPCL Visakhapatnam.
+      </p>
+    </div>
+  </section>
+
+  <!-- 06 - Features -->
+  <section class="bg-white py-[80px] md:py-[100px] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <h2 class="text-3xl md:text-[34px] font-extrabold text-center text-darkText mb-14 fade-up">
+        Everything required for a national material master
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Feature 1 -->
+        <div class="bg-softBg border border-borderC rounded-xl p-9 card-hover fade-up delay-100">
+          <i data-lucide="hash" class="text-primary w-10 h-10 mb-4"></i>
+          <h3 class="text-[20px] font-bold text-darkText mb-3">Mint canonical ONMC codes in milliseconds</h3>
+          <p class="text-[15px] leading-relaxed text-secText font-mono text-sm bg-white p-3 rounded-md border border-borderC mt-3">
+            Every matched cluster receives a sovereign One Nation, One Material Code such as ONMC-MECH-VLV-BAL-002-150-A105-9B2F with bidirectional cross-walks to Shell MESC, UNSPSC and GeM.
+          </p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="bg-softBg border border-borderC rounded-xl p-9 card-hover fade-up delay-200">
+          <i data-lucide="shield" class="text-primary w-10 h-10 mb-4"></i>
+          <h3 class="text-[20px] font-bold text-darkText mb-3">0.0% false-positive safety mismatches</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            Engineering rules from ASME and API are non-negotiable. Vector search is only allowed to propose candidates that pass all physical constraints on size, pressure class and metallurgy.
+          </p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="bg-softBg border border-borderC rounded-xl p-9 card-hover fade-up delay-100">
+          <i data-lucide="arrow-right-left" class="text-primary w-10 h-10 mb-4"></i>
+          <h3 class="text-[20px] font-bold text-darkText mb-3">See idle stock across the nation</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            When Mathura searches for a 2-inch Class 150 ball valve, NUMM instantly surfaces 14 available units at ONGC Hazira — only 78 km away — instead of placing a new foreign order.
+          </p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="bg-softBg border border-borderC rounded-xl p-9 card-hover fade-up delay-200">
+          <i data-lucide="lock" class="text-primary w-10 h-10 mb-4"></i>
+          <h3 class="text-[20px] font-bold text-darkText mb-3">Immutable cryptographic audit trail</h3>
+          <p class="text-[15px] leading-relaxed text-secText">
+            Every steward approval and inter-CPSE transfer is recorded in an append-only SHA-256 ledger ready for Central Vigilance Commission verification.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 - Standards -->
+  <section class="bg-softBg py-[80px] px-6">
+    <div class="max-w-[1000px] mx-auto text-center">
+      <h2 class="text-[28px] font-extrabold text-darkText mb-4 fade-up">
+        Cross-walked to the standards that matter
+      </h2>
+      <p class="text-[16px] text-secText max-w-[600px] mx-auto mb-10 fade-up">
+        Bidirectional mapping ensures every ONMC code can be traced to international catalogs and Indian public procurement platforms.
+      </p>
+      
+      <div class="flex flex-wrap justify-center gap-3 fade-up delay-100">
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">Shell MESC (10-digit)</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">UNSPSC (8-digit)</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">Government e-Marketplace (GeM)</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">ASME B16.5 / B16.34</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">API 6D</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">ASTM Material Grades</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">CVC Audit Ready</span>
+        <span class="bg-white border border-borderC rounded-full px-5 py-2.5 text-[14px] font-medium text-darkText hover:border-primary transition-colors cursor-default">NIC MeghRaj Cloud Ready</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 - Final CTA -->
+  <section class="bg-[#141414] py-[100px] px-6 text-center text-white">
+    <div class="max-w-[700px] mx-auto fade-up">
+      <h2 class="text-[42px] font-extrabold mb-5 leading-tight">Unify. Standardize. Save.</h2>
+      <p class="text-[17px] text-[#D0D0D0] leading-relaxed mb-10 max-w-[500px] mx-auto">
+        The sovereign material master for India’s energy CPSEs.<br>
+        Built for the Ministry of Petroleum &amp; Natural Gas.<br>
+        Ready for pilot.
+      </p>
+      
+      <a href="#" class="inline-block bg-primary text-white px-10 py-4 rounded-lg text-[17px] font-semibold btn-scale hover:brightness-110">
+        Enter Live Demo
+      </a>
+      <a href="#" class="block text-[#A0A0A0] text-[15px] mt-6 hover:text-white transition-colors">
+        View Technical Architecture &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- 09 - Footer -->
+  <footer class="bg-[#141414] pt-[60px] pb-[40px] px-6">
+    <div class="max-w-[1100px] mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-6 text-[#A0A0A0] text-sm">
+        
+        <!-- Col 1 -->
+        <div>
+          <div class="text-white font-black text-xl mb-3">NUMM</div>
+          <div class="mb-1">National Unified Material Master</div>
+          <div>One Nation, One Material Code</div>
+        </div>
+
+        <!-- Col 2 -->
+        <div class="flex flex-col space-y-3">
+          <a href="#" class="hover:text-white transition-colors">Problem Statement (SIH 26099)</a>
+          <a href="#" class="hover:text-white transition-colors">Architecture</a>
+          <a href="#" class="hover:text-white transition-colors">Live Demo</a>
+          <a href="#" class="hover:text-white transition-colors">GitHub Repository</a>
+        </div>
+
+        <!-- Col 3 -->
+        <div class="md:text-right">
+          <div class="mb-1">Smart India Hackathon 2026</div>
+          <div class="mb-1">Ministry of Petroleum &amp; Natural Gas</div>
+          <div>Government of India</div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="mt-12 pt-6 border-t border-[#2A2A2A] text-center text-[13px] text-[#A0A0A0]">
+        &copy; 2026 NUMM Framework &nbsp;|&nbsp; Built for SIH 26099 &nbsp;|&nbsp; Sovereign by design
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // Navbar scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        navbar.classList.add('nav-scrolled');
+      } else {
+        navbar.classList.remove('nav-scrolled');
+      }
+    });
+
+    // Intersection Observer for scroll animations
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.fade-up').forEach((el) => {
+      observer.observe(el);
+    });
+    
+    // Trigger initial hero animation immediately
+    setTimeout(() => {
+      document.querySelectorAll('header .fade-up').forEach(el => el.classList.add('in-view'));
+    }, 100);
+  </script>
+</body>
+</html>

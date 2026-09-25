@@ -21,6 +21,7 @@ async def get_current_user(
     """
     if not credentials or not credentials.credentials:
         from backend.app.core.config import settings
+
         if settings.ENVIRONMENT == "development":
             return UserSession(
                 email="dev@numm.gov.in",
@@ -28,7 +29,7 @@ async def get_current_user(
                 role="STEWARD",
                 organization_code="IOCL",
                 plant_code="1001",
-                clearance_level="CONFIDENTIAL"
+                clearance_level="CONFIDENTIAL",
             )
         # Check if running in open evaluation mode or missing token
         raise HTTPException(
@@ -85,8 +86,9 @@ def require_roles(allowed_roles: List[str]):
     return _role_checker
 
 
-# Convenient role guards
+# Convenient role guards (PLANT_ENGINEER shares procurement/surplus mutations)
 require_steward = require_roles(["STEWARD", "ADMIN"])
-require_procurement = require_roles(["PROCUREMENT_OFFICER", "ADMIN"])
+require_procurement = require_roles(["PROCUREMENT_OFFICER", "PLANT_ENGINEER", "ADMIN"])
 require_auditor = require_roles(["AUDITOR", "ADMIN"])
 require_admin = require_roles(["ADMIN"])
+require_ingest = require_roles(["STEWARD", "ADMIN", "PROCUREMENT_OFFICER"])

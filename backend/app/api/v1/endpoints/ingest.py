@@ -8,8 +8,21 @@ import uuid
 from datetime import datetime, timezone
 from typing import Dict, List
 
-from fastapi import APIRouter, File, HTTPException, UploadFile, Depends
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
 
+from backend.app.core.security import require_ingest
+from backend.app.db.session import get_db
+from backend.app.models.models import (
+    CleansedMaterial,
+    MaterialEmbedding,
+    MaterialMapping,
+    Organization,
+    RawMaterial,
+    UnifiedMasterCode,
+)
+from backend.app.schemas.auth import UserSession
 from backend.app.schemas.ingest import (
     BatchIngestRequest,
     IngestJobStatusResponse,
@@ -17,9 +30,11 @@ from backend.app.schemas.ingest import (
     RawMaterialIn,
 )
 from backend.app.services.attribute_extractor import default_extractor
+from backend.app.services.embedding_generator import default_embedding_generator
 from backend.app.services.hybrid_matcher import default_matcher
 
 router = APIRouter()
+
 
 # In-memory storage for jobs and summaries
 _JOB_STATUS_STORE: Dict[str, IngestJobStatusResponse] = {}
@@ -54,13 +69,9 @@ CANONICAL_SEED_RECORDS = [
 ]
 
 
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select
-from backend.app.db.session import get_db
-from backend.app.models.models import Organization, RawMaterial, CleansedMaterial, MaterialEmbedding, UnifiedMasterCode, MaterialMapping
-from backend.app.services.embedding_generator import default_embedding_generator
-
-async def _process_items_async(session: AsyncSession, job_id: str, org_code: str, items: List[RawMaterialIn]) -> IngestSummaryResponse:
+async def _process_items_async(
+    session: AsyncSession, job_id: str, org_code: str, items: List[RawMaterialIn]
+) -> IngestSummaryResponse:
     total_rows = len(items)
     auto_approved = 0
     review_required = 0
@@ -141,11 +152,8 @@ async def _process_items_async(session: AsyncSession, job_id: str, org_code: str
             emb_vector = emb_vector + [0.0] * (1024 - len(emb_vector))
         elif len(emb_vector) > 1024:
             emb_vector = emb_vector[:1024]
-            
-        embedding = MaterialEmbedding(
-            cleansed_material_id=clean_mat.id,
-            embedding_1024=emb_vector
-        )
+
+        embedding = MaterialEmbedding(cleansed_material_id=clean_mat.id, embedding_1024=emb_vector)
         session.add(embedding)
 
         # 4. MaterialMapping
@@ -156,10 +164,10 @@ async def _process_items_async(session: AsyncSession, job_id: str, org_code: str
             lexical_similarity=best_match.lexical_similarity if best_match else 0.0,
             semantic_similarity=best_match.semantic_similarity if best_match else 0.0,
             rule_gate_passed=best_match.gate_result.passed if best_match else False,
-            mapping_status=status
+            mapping_status=status,
         )
         session.add(mapping)
-        
+
     await session.commit()
 
     auto_pct = round((auto_approved / total_rows) * 100, 2) if total_rows > 0 else 0.0
@@ -201,7 +209,8 @@ async def _process_items_async(session: AsyncSession, job_id: str, org_code: str
 @router.post("/batch", response_model=IngestSummaryResponse, summary="Ingest batch of CPSE catalog items")
 async def ingest_batch(
     req: BatchIngestRequest,
-    session: AsyncSession = Depends(get_db)
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_ingest),
 ):
     """
     Synchronously ingests and harmonizes a structured batch of legacy CPSE materials.
@@ -216,7 +225,8 @@ async def ingest_batch(
 async def upload_catalog_file(
     file: UploadFile = File(...),
     organization_code: str = "IOCL",
-    session: AsyncSession = Depends(get_db)
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_ingest),
 ):
     """
     Parses and processes an uploaded CSV or JSON procurement catalog file.

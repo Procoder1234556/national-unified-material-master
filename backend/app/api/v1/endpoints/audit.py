@@ -1,16 +1,18 @@
 # ponytail: CVC/CAG append-only cryptographic audit chain and statutory verification endpoints.
 # Upgrade path: add automated digital timestamp notary receipt export.
 
-from fastapi import APIRouter, Query, Depends
+from fastapi import APIRouter, Depends, Query
 from sqlalchemy.ext.asyncio import AsyncSession
-from backend.app.db.session import get_db
 
+from backend.app.core.security import require_auditor
+from backend.app.db.session import get_db
 from backend.app.schemas.audit import (
     AuditChainResponse,
     AuditChainVerificationResponse,
     AuditStatsResponse,
     CVCDossierExportResponse,
 )
+from backend.app.schemas.auth import UserSession
 from backend.app.services.cvc_audit_service import default_cvc_audit_service
 
 router = APIRouter()
@@ -20,7 +22,7 @@ router = APIRouter()
 async def get_audit_chain(
     limit: int = Query(50, ge=1, le=500, description="Max blocks to return"),
     offset: int = Query(0, ge=0, description="Pagination offset"),
-    session: AsyncSession = Depends(get_db)
+    session: AsyncSession = Depends(get_db),
 ):
     """
     Returns sequential cryptographic blocks from the immutable append-only ledger.
@@ -32,7 +34,10 @@ async def get_audit_chain(
 @router.get(
     "/verify", response_model=AuditChainVerificationResponse, summary="Execute full cryptographic chain verification"
 )
-async def verify_chain(session: AsyncSession = Depends(get_db)):
+async def verify_chain(
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_auditor),
+):
     """
     Traverses the entire ledger from Genesis Root to the current Tip.
     Validates all hash pointers and recomputes block hashes to guarantee zero tampering.
@@ -51,7 +56,10 @@ async def get_audit_stats(session: AsyncSession = Depends(get_db)):
 @router.get(
     "/export", response_model=CVCDossierExportResponse, summary="Export formal CVC audit inspection certificate"
 )
-async def export_cvc_dossier(session: AsyncSession = Depends(get_db)):
+async def export_cvc_dossier(
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_auditor),
+):
     """
     Synthesizes official Central Vigilance Commission (CVC) & CAG compliance dossier
     with complete cryptographic provenance for sovereign audit inspection.

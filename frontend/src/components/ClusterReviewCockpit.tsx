@@ -21,9 +21,12 @@ import {
   ExternalLink,
   Edit2,
   Flame,
+  Copy,
+  Building2,
+  Database,
 } from "lucide-react";
 import { DonutMicro, Sparkline, SegBar } from "./MicroCharts";
-import { API_BASE } from "../api";
+import { apiFetch, getAuthSession } from "../api";
 
 export interface TriageItem {
   mapping_id: string;
@@ -54,6 +57,63 @@ interface ClusterReviewCockpitProps {
   onShowAuditMessage?: (msg: string) => void;
   onInspectONMC?: (code: string) => void;
   onOpenKeyboardHelp?: () => void;
+  actorEmail?: string;
+  onQueueCountChange?: (count: number) => void;
+}
+
+function mapApiItem(raw: any): TriageItem {
+  const conf = Number(raw.confidence_score ?? 0);
+  const gate = Boolean(raw.rule_gate_passed);
+  let mapping_status: string = "REVIEW";
+  if (!gate) mapping_status = "CONFLICT";
+  else if (conf >= 0.88) mapping_status = "MATCH";
+  else mapping_status = "REVIEW";
+
+  const diffs = (raw.attribute_diffs || []).map((d: any) => ({
+    attribute_name: d.attribute_name,
+    raw_value: d.raw_value,
+    canonical_value: d.canonical_value,
+    status: d.status,
+  }));
+
+  const byName = (n: string) =>
+    diffs.find((d: AttributeDiff) =>
+      d.attribute_name.toLowerCase().includes(n)
+    );
+
+  return {
+    mapping_id: String(raw.mapping_id),
+    organization_code: raw.organization_code || "UNKNOWN",
+    plant_location: raw.plant_location || "",
+    source_item_code: raw.source_item_code || "",
+    raw_description: raw.raw_description || "",
+    onmc_candidate_code: raw.onmc_candidate_code || "",
+    canonical_description: raw.canonical_description || "",
+    confidence_score: conf,
+    lexical_similarity: Number(raw.lexical_similarity ?? 0),
+    semantic_similarity: Number(raw.semantic_similarity ?? 0),
+    rule_gate_passed: gate,
+    rejection_reasons: raw.rejection_reasons || [],
+    shell_mesc_code: raw.shell_mesc_code,
+    unspsc_code: raw.unspsc_code,
+    gem_category_id: raw.gem_category_id,
+    attribute_diffs: diffs,
+    mapping_status,
+    item_class:
+      byName("item")?.canonical_value || byName("item")?.raw_value || undefined,
+    size_val:
+      byName("diameter")?.canonical_value ||
+      byName("diameter")?.raw_value ||
+      undefined,
+    pressure_val:
+      byName("pressure")?.canonical_value ||
+      byName("pressure")?.raw_value ||
+      undefined,
+    metallurgy_val:
+      byName("metallurgy")?.canonical_value ||
+      byName("metallurgy")?.raw_value ||
+      undefined,
+  };
 }
 
 const DEFAULT_TRIAGE_ITEMS: TriageItem[] = [
@@ -422,40 +482,164 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
   onShowAuditMessage,
   onInspectONMC,
   onOpenKeyboardHelp,
+  actorEmail,
+  onQueueCountChange,
 }) => {
-  const [items, setItems] = useState<TriageItem[]>(DEFAULT_TRIAGE_ITEMS);
+  const [items, setItems] = useState<TriageItem[]>([]);
   const [selectedIndex, setSelectedIndex] = useState<number>(0);
   const [filterState, setFilterState] = useState<string>("ALL");
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [showEditModal, setShowEditModal] = useState<boolean>(false);
   const [editAttrs, setEditAttrs] = useState<{ [key: string]: string }>({});
+  const [mintedDossier, setMintedDossier] = useState<any | null>(null);
+  const [copiedDossierCode, setCopiedDossierCode] = useState<boolean>(false);
+  const [loadError, setLoadError] = useState<string | null>(null);
 
   const activeItem = items[selectedIndex] || items[0] || null;
+
+  const refreshQueue = useCallback(async () => {
+    setLoading(true);
+    setLoadError(null);
+    try {
+      const res = await apiFetch("/api/v1/steward/queue");
+      if (!res.ok) {
+        throw new Error(`queue ${res.status}`);
+      }
+      const data = await res.json();
+      const mapped = (data.items || []).map(mapApiItem);
+      setItems(mapped);
+      setSelectedIndex(0);
+      onQueueCountChange?.(mapped.length);
+    } catch (err) {
+      console.error("Steward queue load failed, using local fallback", err);
+      setLoadError("API unavailable — showing offline triage fallback");
+      setItems(DEFAULT_TRIAGE_ITEMS);
+      onQueueCountChange?.(DEFAULT_TRIAGE_ITEMS.length);
+    } finally {
+      setLoading(false);
+    }
+  }, [onQueueCountChange]);
+
+  useEffect(() => {
+    void refreshQueue();
+  }, [refreshQueue]);
 
   const handleDecision = useCallback(
     async (decision: "APPROVE" | "REJECT" | "MINT" | "OVERRIDE") => {
       if (!activeItem) return;
 
-      const shaMock = `0x${Array.from({ length: 64 }, () => Math.floor(Math.random() * 16).toString(16)).join("")}`;
+      const email =
+        actorEmail || getAuthSession()?.email || "steward@numm.gov.in";
 
-      if (onShowAuditMessage) {
-        onShowAuditMessage(
-          `[${decision}] Item ${activeItem.source_item_code} → SHA-256: ${shaMock.substring(0, 16)}...`
+      try {
+        const res = await apiFetch("/api/v1/steward/decision", {
+          method: "POST",
+          body: JSON.stringify({
+            mapping_id: activeItem.mapping_id,
+            decision,
+            justification: `${decision} by steward via HITL cockpit for ${activeItem.source_item_code}`,
+            actor_email: email,
+          }),
+        });
+
+        if (!res.ok) {
+          const errBody = await res.json().catch(() => ({}));
+          const detail =
+            typeof errBody.detail === "string"
+              ? errBody.detail
+              : `Decision failed (${res.status})`;
+          onShowAuditMessage?.(detail);
+          return;
+        }
+
+        const data = await res.json();
+        const shaHex = String(data.sha256_hash || "");
+
+        if (decision === "MINT") {
+          const mintedCode = data.onmc_code || activeItem.onmc_candidate_code;
+          setMintedDossier({
+            onmc_code: mintedCode,
+            item: activeItem,
+            sha256_seal: shaHex,
+            timestamp: data.timestamp || new Date().toISOString(),
+            segments: [
+              {
+                label: "Discipline",
+                code: "MECH",
+                desc: "Mechanical Equipment & Piping Components",
+              },
+              {
+                label: "Category",
+                code: "VLV",
+                desc: "Industrial Valves & Actuation",
+              },
+              {
+                label: "Sub-Family",
+                code: "BAL",
+                desc: "Ball Valve (Full Bore, 2-Piece / 3-Piece)",
+              },
+              {
+                label: "Nominal Size",
+                code: "002",
+                desc: '2.00" Nominal Bore (50 mm DN)',
+              },
+              {
+                label: "Pressure Rating",
+                code: "NEW",
+                desc: "Minted from raw attributes",
+              },
+              {
+                label: "Metallurgy",
+                code: "NEW",
+                desc: "Extracted from CPSE description",
+              },
+              {
+                label: "Deterministic Suffix",
+                code: mintedCode.split("-").pop() || "HASH",
+                desc: "Verification hash",
+              },
+            ],
+            plant_matters: {
+              organization: activeItem.organization_code,
+              location: activeItem.plant_location,
+              plant_code:
+                activeItem.organization_code === "ONGC" ? "1100" : "1001",
+              distance_to_hub: "—",
+              in_plant_stock: "—",
+              book_valuation: "—",
+              officer_name: getAuthSession()?.fullName || "Data Steward",
+              officer_title: "NUMM Data Steward",
+            },
+          });
+        }
+
+        onShowAuditMessage?.(
+          data.message ||
+            `[${decision}] ${activeItem.source_item_code} → SHA-256: ${shaHex.substring(0, 16)}...`
         );
-      }
 
-      setItems((prev) => {
-        const next = prev.filter(
-          (it) => it.mapping_id !== activeItem.mapping_id
+        setItems((prev) => {
+          const next = prev.filter(
+            (it) => it.mapping_id !== activeItem.mapping_id
+          );
+          onQueueCountChange?.(next.length);
+          return next;
+        });
+        setSelectedIndex((prev) =>
+          Math.max(0, Math.min(prev, items.length - 2))
         );
-        return next;
-      });
-
-      if (selectedIndex >= items.length - 1) {
-        setSelectedIndex(Math.max(0, items.length - 2));
+      } catch (err) {
+        console.error("Steward decision failed", err);
+        onShowAuditMessage?.("Steward decision API unreachable");
       }
     },
-    [activeItem, selectedIndex, items.length, onShowAuditMessage]
+    [
+      activeItem,
+      actorEmail,
+      items.length,
+      onQueueCountChange,
+      onShowAuditMessage,
+    ]
   );
 
   // Keyboard navigation listener
@@ -578,6 +762,8 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
             <div style={{ fontSize: "12px", color: rawTokens.textSecondary }}>
               Asymmetric triage inspector • Single-key keyboard ergonomics •
               Deterministic ASME safety gating
+              {loading ? " • Loading queue…" : ` • ${items.length} pending`}
+              {loadError ? ` • ${loadError}` : ""}
             </div>
           </div>
         </div>
@@ -838,6 +1024,214 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
                   {activeItem.rejection_reasons[0]}
                 </div>
               )}
+
+              {/* Pinned Primary Action Bar at Top of Inspector */}
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "6px",
+                  backgroundColor: rawTokens.surfaceSubtle,
+                  border: `1px solid ${rawTokens.borderStrong}`,
+                  borderRadius: rawTokens.radiusMd,
+                  padding: "10px",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    marginBottom: "2px",
+                  }}
+                >
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      fontWeight: 700,
+                      color: rawTokens.textMuted,
+                      textTransform: "uppercase",
+                      letterSpacing: "0.05em",
+                    }}
+                  >
+                    Steward Triage Action
+                  </span>
+                  <span
+                    style={{
+                      fontSize: "10px",
+                      color: rawTokens.textSecondary,
+                      fontFamily: rawTokens.fontMono,
+                    }}
+                  >
+                    Shortcuts: A / R / N / E
+                  </span>
+                </div>
+
+                {activeItem.mapping_status === "CONFLICT" ||
+                activeItem.mapping_status === "BLOCKED" ? (
+                  // Safety Conflict Mode: Approve is strictly locked!
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "6px",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleDecision("REJECT")}
+                      title="Reject candidate and maintain physical segregation"
+                      style={{
+                        backgroundColor: rawTokens.colorConflict,
+                        color: "#FFFFFF",
+                        border: "none",
+                        borderRadius: rawTokens.radiusSm,
+                        padding: "8px 10px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <X size={13} />
+                      <span>Split / Reject (R)</span>
+                    </button>
+                    <button
+                      onClick={() => handleDecision("MINT")}
+                      title="Mint a new sovereign ONMC code with correct parameters"
+                      style={{
+                        backgroundColor: "#111315",
+                        color: "#FFFFFF",
+                        border: `1px solid ${rawTokens.borderStrong}`,
+                        borderRadius: rawTokens.radiusSm,
+                        padding: "8px 10px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <Sparkles size={13} color="#F1CC9D" />
+                      <span>Mint Code (N)</span>
+                    </button>
+                  </div>
+                ) : (
+                  // Normal Review Mode
+                  <div
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1fr 1fr",
+                      gap: "6px",
+                    }}
+                  >
+                    <button
+                      onClick={() => handleDecision("APPROVE")}
+                      style={{
+                        backgroundColor: "#0D533A",
+                        color: "#FFFFFF",
+                        border: "none",
+                        borderRadius: rawTokens.radiusSm,
+                        padding: "8px 10px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <Check size={13} />
+                      <span>Approve (A)</span>
+                    </button>
+                    <button
+                      onClick={() => handleDecision("REJECT")}
+                      style={{
+                        backgroundColor: rawTokens.surfaceCard,
+                        border: `1px solid ${rawTokens.borderStrong}`,
+                        borderRadius: rawTokens.radiusSm,
+                        padding: "8px 10px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        color: rawTokens.textPrimary,
+                        cursor: "pointer",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        gap: "5px",
+                      }}
+                    >
+                      <X size={13} />
+                      <span>Reject (R)</span>
+                    </button>
+                  </div>
+                )}
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "6px",
+                  }}
+                >
+                  <button
+                    onClick={() => {
+                      const init: Record<string, string> = {};
+                      activeItem.attribute_diffs.forEach((d) => {
+                        init[d.attribute_name] = d.raw_value || "";
+                      });
+                      setEditAttrs(init);
+                      setShowEditModal(true);
+                    }}
+                    style={{
+                      backgroundColor: rawTokens.surfaceCard,
+                      border: `1px solid ${rawTokens.borderSubtle}`,
+                      borderRadius: rawTokens.radiusSm,
+                      padding: "6px",
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      color: rawTokens.textSecondary,
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <Edit2 size={11} />
+                    <span>Edit (E)</span>
+                  </button>
+                  <button
+                    onClick={() => {
+                      if (onNavigateToSearch) {
+                        onNavigateToSearch(activeItem.raw_description);
+                      }
+                    }}
+                    style={{
+                      backgroundColor: rawTokens.surfaceCard,
+                      border: `1px solid ${rawTokens.borderSubtle}`,
+                      borderRadius: rawTokens.radiusSm,
+                      padding: "6px",
+                      fontSize: "10px",
+                      fontWeight: 600,
+                      color: rawTokens.textSecondary,
+                      cursor: "pointer",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      gap: "4px",
+                    }}
+                  >
+                    <Search size={11} />
+                    <span>Search (S)</span>
+                  </button>
+                </div>
+              </div>
 
               {/* Raw vs Candidate Specs */}
               <div>
@@ -1239,6 +1633,8 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
                 return (
                   <div
                     key={item.mapping_id}
+                    id={`queue-row-${item.mapping_id}`}
+                    data-mapping-id={item.mapping_id}
                     onClick={() => {
                       const realIndex = items.findIndex(
                         (it) => it.mapping_id === item.mapping_id
@@ -1691,7 +2087,515 @@ export const ClusterReviewCockpit: React.FC<ClusterReviewCockpitProps> = ({
           </div>
         </div>
       )}
+
+      {/* Minted Sovereign ONMC Code Dossier Modal */}
+      {mintedDossier && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(17, 19, 21, 0.75)",
+            backdropFilter: "blur(4px)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+            padding: "20px",
+          }}
+        >
+          <div
+            style={{
+              backgroundColor: "#FFFFFF",
+              borderRadius: rawTokens.radiusLg,
+              width: "100%",
+              maxWidth: "720px",
+              padding: "28px",
+              boxShadow: rawTokens.shadowElevated,
+              border: `1px solid ${rawTokens.borderStrong}`,
+              display: "flex",
+              flexDirection: "column",
+              gap: "20px",
+              maxHeight: "90vh",
+              overflowY: "auto",
+            }}
+          >
+            {/* Modal Header */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                borderBottom: `1px solid ${rawTokens.borderSubtle}`,
+                paddingBottom: "16px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    marginBottom: "4px",
+                  }}
+                >
+                  <span
+                    style={{
+                      backgroundColor: "rgba(165, 215, 201, 0.35)",
+                      color: "#0D533A",
+                      fontSize: "11px",
+                      fontWeight: 800,
+                      padding: "3px 8px",
+                      borderRadius: "4px",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    MoPNG Sovereign Catalog
+                  </span>
+                  <span
+                    style={{
+                      backgroundColor: "rgba(233, 67, 68, 0.12)",
+                      color: "#9B121E",
+                      fontSize: "11px",
+                      fontWeight: 800,
+                      padding: "3px 8px",
+                      borderRadius: "4px",
+                    }}
+                  >
+                    SIH 26099 MINTED
+                  </span>
+                </div>
+                <h2
+                  style={{
+                    fontSize: "20px",
+                    fontWeight: 800,
+                    color: rawTokens.textPrimary,
+                    margin: 0,
+                  }}
+                >
+                  Sovereign ONMC Master Code Dossier
+                </h2>
+                <div
+                  style={{
+                    fontSize: "12px",
+                    color: rawTokens.textMuted,
+                    marginTop: "2px",
+                  }}
+                >
+                  Statutory Codification under National Unified Material Master
+                  (NUMM) Framework
+                </div>
+              </div>
+              <button
+                onClick={() => setMintedDossier(null)}
+                style={{
+                  background: "none",
+                  border: "none",
+                  cursor: "pointer",
+                  color: rawTokens.textMuted,
+                }}
+              >
+                <X size={20} />
+              </button>
+            </div>
+
+            {/* Minted Code Showcase Banner */}
+            <div
+              style={{
+                backgroundColor: "#111315",
+                borderRadius: rawTokens.radiusMd,
+                padding: "20px",
+                color: "#FFFFFF",
+                display: "flex",
+                flexDirection: "column",
+                gap: "10px",
+              }}
+            >
+              <div
+                style={{
+                  fontSize: "11px",
+                  color: "#94A3B8",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.06em",
+                  fontWeight: 700,
+                }}
+              >
+                Assigned Sovereign Material Code
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                  gap: "12px",
+                }}
+              >
+                <div
+                  style={{
+                    fontFamily: rawTokens.fontMono,
+                    fontSize: "20px",
+                    fontWeight: 800,
+                    color: "#F1CC9D",
+                    letterSpacing: "0.04em",
+                  }}
+                >
+                  {mintedDossier.onmc_code}
+                </div>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(mintedDossier.onmc_code);
+                    setCopiedDossierCode(true);
+                    setTimeout(() => setCopiedDossierCode(false), 2000);
+                  }}
+                  style={{
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: "6px",
+                    backgroundColor: copiedDossierCode
+                      ? "#0D533A"
+                      : "rgba(255, 255, 255, 0.15)",
+                    border: "1px solid rgba(255, 255, 255, 0.25)",
+                    borderRadius: rawTokens.radiusSm,
+                    padding: "6px 14px",
+                    color: "#FFFFFF",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    cursor: "pointer",
+                  }}
+                >
+                  {copiedDossierCode ? <Check size={14} /> : <Copy size={14} />}
+                  <span>
+                    {copiedDossierCode
+                      ? "Copied to Clipboard"
+                      : "Copy ONMC Code"}
+                  </span>
+                </button>
+              </div>
+              <div
+                style={{
+                  fontSize: "12px",
+                  color: "#CBD5E1",
+                  fontFamily: rawTokens.fontMono,
+                  marginTop: "4px",
+                }}
+              >
+                Raw Source: {mintedDossier.item?.source_item_code} •{" "}
+                {mintedDossier.item?.raw_description}
+              </div>
+            </div>
+
+            {/* Deterministic Segment Breakdown */}
+            <div>
+              <div
+                style={{
+                  fontSize: "12px",
+                  fontWeight: 800,
+                  color: rawTokens.textPrimary,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  marginBottom: "8px",
+                }}
+              >
+                Deterministic Code Architecture Breakdown
+              </div>
+              <div
+                style={{
+                  border: `1px solid ${rawTokens.borderSubtle}`,
+                  borderRadius: rawTokens.radiusMd,
+                  overflow: "hidden",
+                }}
+              >
+                <table
+                  style={{
+                    width: "100%",
+                    borderCollapse: "collapse",
+                    fontSize: "12px",
+                  }}
+                >
+                  <thead>
+                    <tr
+                      style={{
+                        backgroundColor: rawTokens.surfaceSubtle,
+                        borderBottom: `1px solid ${rawTokens.borderSubtle}`,
+                      }}
+                    >
+                      <th
+                        style={{
+                          padding: "8px 12px",
+                          textAlign: "left",
+                          color: rawTokens.textMuted,
+                        }}
+                      >
+                        Segment
+                      </th>
+                      <th
+                        style={{
+                          padding: "8px 12px",
+                          textAlign: "left",
+                          color: rawTokens.textMuted,
+                        }}
+                      >
+                        Token
+                      </th>
+                      <th
+                        style={{
+                          padding: "8px 12px",
+                          textAlign: "left",
+                          color: rawTokens.textMuted,
+                        }}
+                      >
+                        Engineering Specification
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {mintedDossier.segments.map((seg: any, sIdx: number) => (
+                      <tr
+                        key={sIdx}
+                        style={{
+                          borderBottom:
+                            sIdx === mintedDossier.segments.length - 1
+                              ? "none"
+                              : `1px solid ${rawTokens.borderSubtle}`,
+                        }}
+                      >
+                        <td
+                          style={{
+                            padding: "8px 12px",
+                            fontWeight: 700,
+                            color: rawTokens.textSecondary,
+                          }}
+                        >
+                          {seg.label}
+                        </td>
+                        <td
+                          style={{
+                            padding: "8px 12px",
+                            fontFamily: rawTokens.fontMono,
+                            fontWeight: 800,
+                            color: rawTokens.colorAction,
+                          }}
+                        >
+                          {seg.code}
+                        </td>
+                        <td
+                          style={{
+                            padding: "8px 12px",
+                            color: rawTokens.textPrimary,
+                          }}
+                        >
+                          {seg.desc}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* CPSE Plant Matters & Stock Overview */}
+            <div
+              style={{
+                backgroundColor: rawTokens.surfaceSubtle,
+                border: `1px solid ${rawTokens.borderStrong}`,
+                borderRadius: rawTokens.radiusMd,
+                padding: "16px",
+                display: "grid",
+                gridTemplateColumns: "1fr 1fr",
+                gap: "14px",
+                fontSize: "12px",
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    color: rawTokens.textMuted,
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Originating CPSE Plant
+                </div>
+                <div
+                  style={{
+                    fontWeight: 800,
+                    color: rawTokens.textPrimary,
+                    marginTop: "2px",
+                  }}
+                >
+                  {mintedDossier.plant_matters.organization} •{" "}
+                  {mintedDossier.plant_matters.location} (Plant{" "}
+                  {mintedDossier.plant_matters.plant_code})
+                </div>
+                <div
+                  style={{ color: rawTokens.textSecondary, marginTop: "4px" }}
+                >
+                  Distance to Hub:{" "}
+                  <strong>{mintedDossier.plant_matters.distance_to_hub}</strong>
+                </div>
+                <div
+                  style={{
+                    color: "#0D533A",
+                    fontWeight: 700,
+                    marginTop: "2px",
+                  }}
+                >
+                  Stock Position: {mintedDossier.plant_matters.in_plant_stock}
+                </div>
+              </div>
+
+              <div>
+                <div
+                  style={{
+                    color: rawTokens.textMuted,
+                    fontSize: "11px",
+                    fontWeight: 700,
+                    textTransform: "uppercase",
+                  }}
+                >
+                  Statutory Sign-Off
+                </div>
+                <div
+                  style={{
+                    fontWeight: 800,
+                    color: rawTokens.textPrimary,
+                    marginTop: "2px",
+                  }}
+                >
+                  {mintedDossier.plant_matters.officer_name}
+                </div>
+                <div
+                  style={{ color: rawTokens.textSecondary, marginTop: "2px" }}
+                >
+                  {mintedDossier.plant_matters.officer_title}
+                </div>
+                <div
+                  style={{
+                    color: rawTokens.colorAction,
+                    fontWeight: 700,
+                    marginTop: "4px",
+                  }}
+                >
+                  Book Valuation: {mintedDossier.plant_matters.book_valuation}
+                </div>
+              </div>
+            </div>
+
+            {/* CVC Cryptographic SHA-256 Provenance Seal */}
+            <div
+              style={{
+                backgroundColor: "rgba(95, 151, 142, 0.08)",
+                border: "1px solid rgba(95, 151, 142, 0.3)",
+                borderRadius: rawTokens.radiusSm,
+                padding: "10px 14px",
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                fontFamily: rawTokens.fontMono,
+                fontSize: "11px",
+              }}
+            >
+              <ShieldCheck size={18} color="#0D533A" />
+              <div
+                style={{
+                  flex: 1,
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <strong style={{ color: "#0D533A" }}>
+                  FIPS 180-4 SHA-256 AUDIT SEAL:
+                </strong>{" "}
+                <span style={{ color: rawTokens.textPrimary }}>
+                  {mintedDossier.sha256_seal}
+                </span>
+              </div>
+            </div>
+
+            {/* Modal Actions */}
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                borderTop: `1px solid ${rawTokens.borderSubtle}`,
+                paddingTop: "16px",
+              }}
+            >
+              <div style={{ display: "flex", gap: "8px" }}>
+                <button
+                  onClick={() => {
+                    const code = mintedDossier.onmc_code;
+                    setMintedDossier(null);
+                    if (onNavigateToSearch) onNavigateToSearch(code);
+                  }}
+                  style={{
+                    backgroundColor: "transparent",
+                    border: `1px solid ${rawTokens.borderStrong}`,
+                    borderRadius: rawTokens.radiusFull,
+                    padding: "8px 16px",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: rawTokens.textPrimary,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                >
+                  <Search size={13} />
+                  <span>Search National Stock</span>
+                </button>
+                <button
+                  onClick={() => {
+                    if (onShowAuditMessage) {
+                      onShowAuditMessage(
+                        `SIH: Simulated SAP BAPI_MATERIAL_SAVEDATA for ${mintedDossier.plant_matters.organization} plant ${mintedDossier.plant_matters.plant_code} (no live RFC — production adapter seam).`
+                      );
+                    }
+                  }}
+                  style={{
+                    backgroundColor: "transparent",
+                    border: `1px solid ${rawTokens.borderStrong}`,
+                    borderRadius: rawTokens.radiusFull,
+                    padding: "8px 16px",
+                    fontSize: "12px",
+                    fontWeight: 700,
+                    color: rawTokens.colorAction,
+                    cursor: "pointer",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "6px",
+                  }}
+                >
+                  <Database size={13} />
+                  <span>Simulate SAP Sync</span>
+                </button>
+              </div>
+
+              <button
+                onClick={() => setMintedDossier(null)}
+                style={{
+                  backgroundColor: "#0D533A",
+                  color: "#FFFFFF",
+                  border: "none",
+                  borderRadius: rawTokens.radiusFull,
+                  padding: "10px 24px",
+                  fontSize: "13px",
+                  fontWeight: 800,
+                  cursor: "pointer",
+                }}
+              >
+                Proceed to Next Item →
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
-

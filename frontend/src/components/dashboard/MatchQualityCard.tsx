@@ -31,18 +31,17 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
     >
       {/* Title */}
       <div>
-          <div
-            style={{
-              fontSize: "16px",
-              fontWeight: 700,
-              fontFamily: rawTokens.fontCalligraphy,
-              letterSpacing: "0em",
-              color: rawTokens.textPrimary,
-              marginBottom: "12px",
-            }}
-          >
-            Match Quality
-          </div>
+        <div
+          style={{
+            fontSize: "15px",
+            fontWeight: 700,
+            fontFamily: rawTokens.fontSans,
+            color: rawTokens.textPrimary,
+            marginBottom: "12px",
+          }}
+        >
+          Match Quality
+        </div>
 
         {/* Three Large Metrics Row */}
         <div
@@ -68,7 +67,7 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
                 letterSpacing: "-0.02em",
               }}
             >
-              91.6%
+              58%
             </div>
             <div
               style={{
@@ -101,7 +100,7 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
                 letterSpacing: "-0.02em",
               }}
             >
-              6.8%
+              33%
             </div>
             <div
               style={{
@@ -134,7 +133,7 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
                 letterSpacing: "-0.02em",
               }}
             >
-              1.6%
+              9%
             </div>
             <div
               style={{
@@ -159,11 +158,11 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
             segments={[
               {
                 label: "Approved",
-                value: 91.6,
+                value: 58,
                 color: rawTokens.colorVerified,
               },
-              { label: "Review", value: 6.8, color: rawTokens.colorHighlight },
-              { label: "Novel", value: 1.6, color: rawTokens.colorAction },
+              { label: "Review", value: 33, color: rawTokens.colorHighlight },
+              { label: "Novel", value: 9, color: rawTokens.colorAction },
             ]}
             height={8}
             showLegend={false}
@@ -179,7 +178,8 @@ export const MatchQualityCard: React.FC<MatchQualityCardProps> = ({
           marginTop: "10px",
         }}
       >
-        based on current harmonization jobs
+        Pilot seed tiers · ≥92% auto · 70–91% HITL · &lt;70% novel (BACKEND
+        thresholds)
       </div>
     </div>
   );

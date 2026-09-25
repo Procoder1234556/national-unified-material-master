@@ -3,7 +3,12 @@
 
 from typing import List
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from backend.app.core.security import require_procurement
+from backend.app.db.session import get_db
+from backend.app.schemas.auth import UserSession
 from backend.app.schemas.demand_pool import (
     DemandAggregationRequest,
     GeMTenderPackage,
@@ -16,10 +21,6 @@ from backend.app.services.gem_compliance import default_gem_engine
 
 router = APIRouter()
 
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Depends
-from backend.app.db.session import get_db
 
 @router.get("/tiers", response_model=List[VolumeTierInfo], summary="Get volume discount scale tiers")
 async def get_discount_tiers():
@@ -38,7 +39,11 @@ async def list_pooled_batches(session: AsyncSession = Depends(get_db)):
 @router.post(
     "/aggregate", response_model=PooledBatchSummary, summary="Aggregate CPSE purchase demands into pooled tender"
 )
-async def aggregate_demands(req: DemandAggregationRequest, session: AsyncSession = Depends(get_db)):
+async def aggregate_demands(
+    req: DemandAggregationRequest,
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_procurement),
+):
     """
     Combines individual CPSE demand projections for identical canonical ONMC materials
     and computes volume discount tier and projected INR savings.
@@ -64,7 +69,11 @@ async def get_pooled_batch(batch_id: str, session: AsyncSession = Depends(get_db
     response_model=GeMTenderPackage,
     summary="Generate GeM Rule 149 compliant tender package",
 )
-async def generate_gem_tender(batch_id: str, session: AsyncSession = Depends(get_db)):
+async def generate_gem_tender(
+    batch_id: str,
+    session: AsyncSession = Depends(get_db),
+    _user: UserSession = Depends(require_procurement),
+):
     """
     Exports an official GeM-ready tender dossier including GFR Rule 149 justification,
     per-CPSE delivery schedules, and CVC anti-cartelization undertaking.

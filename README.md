@@ -31,12 +31,17 @@ All core system specifications are maintained directly in the project root direc
 | **[`DESIGN.md`](file:///d:/oil/DESIGN.md)**                           | **Aesthetic & Layout Specification**: Humanto-inspired warm sovereign industrial theme (`#E94344` terracotta, `#9B121E` crimson, `#5F978E` petroleum sage) with sticky split layout.                         | Visual Design        |
 | **[`APP_FLOW.md`](file:///d:/oil/APP_FLOW.md)**                       | **Application Flow & Navigation**: Complete sequence diagrams, page transitions, state machines, and edge-case protocols for all 5 core user journeys.                                                       | Flow & UX            |
 | **[`IMPLEMENTATION_PLAN.md`](file:///d:/oil/IMPLEMENTATION_PLAN.md)** | **Six-Phase Delivery Sequence**: Phased build plan from container foundation to pilot rollout with automated verification gates.                                                                             | Project Execution    |
+| **[`SIH_DEMO.md`](SIH_DEMO.md)**                                      | **SIH evaluation mode**: What works offline without MeghRaj/SAP; judge FAQ; 5-minute demo path. Simulated SSO + SAP seams are intentional.                                                                   | Hackathon Pitch      |
 | **[`POC.md`](file:///d:/oil/POC.md)**                                 | **Proof of Concept & Demo Script**: Rapid AI engine specification, 30-item multi-CPSE benchmark dataset, and 5-minute hackathon live pitch script.                                                           | Verification & Pitch |
 | **[`TEST_CASES.md`](file:///d:/oil/TEST_CASES.md)**                   | **PR Test Matrix & Loop Engineering**: Exhaustive verification tests across PR 1 through PR 8 with physical safety convergence criteria.                                                                     | Quality & Testing    |
 
 ---
 
 ## Quickstart & Verification
+
+### SIH laptop demo (no MeghRaj, no SAP, no Docker required)
+
+See **[`SIH_DEMO.md`](SIH_DEMO.md)**. Default backend uses SQLite + auto-seed. Role switcher issues **simulated MeghRaj JWTs**. MTIRF approve emits **simulated SAP VL01N/ME21N** IDs. Full product path runs offline for jury evaluation.
 
 ### 1. Run Automated Loop Engineering Test Runner
 

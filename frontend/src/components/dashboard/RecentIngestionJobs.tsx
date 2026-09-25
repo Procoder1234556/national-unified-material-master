@@ -17,32 +17,32 @@ export const RecentIngestionJobs: React.FC<RecentIngestionJobsProps> = ({
     {
       id: "job-1",
       cpse: "IOCL",
-      plant: "Gujarat Refinery",
-      records: "24,820 records",
-      progress: 98.2,
-      velocity: [1200, 1450, 1900, 2400, 3100, 2800],
-      status: "In Progress",
-      time: "2m ago",
+      plant: "Mathura / Panipat / Paradip / Gujarat",
+      records: "6 POC catalog lines",
+      progress: 100.0,
+      velocity: [1, 1, 1, 1, 1, 1],
+      status: "Complete",
+      time: "seed",
     },
     {
       id: "job-2",
       cpse: "ONGC",
-      plant: "Hazira Plant",
-      records: "18,420 records",
-      progress: 94.7,
-      velocity: [800, 950, 1200, 1600, 1950, 2100],
-      status: "In Progress",
-      time: "8m ago",
+      plant: "Hazira / Uran / Ankleshwar",
+      records: "6 POC catalog lines",
+      progress: 100.0,
+      velocity: [1, 1, 1, 1, 1, 1],
+      status: "Complete",
+      time: "seed",
     },
     {
       id: "job-3",
       cpse: "BPCL",
-      plant: "Mumbai Refinery",
-      records: "12,640 records",
+      plant: "Mumbai / Kochi",
+      records: "5 POC catalog lines",
       progress: 100.0,
-      velocity: [1500, 1800, 2200, 2400, 2600, 2640],
+      velocity: [1, 1, 1, 1, 1, 0],
       status: "Complete",
-      time: "24m ago",
+      time: "seed",
     },
   ];
 
@@ -70,10 +70,9 @@ export const RecentIngestionJobs: React.FC<RecentIngestionJobsProps> = ({
       >
         <div
           style={{
-            fontSize: "16px",
+            fontSize: "15px",
             fontWeight: 700,
-            fontFamily: rawTokens.fontCalligraphy,
-            letterSpacing: "0em",
+            fontFamily: rawTokens.fontSans,
             color: rawTokens.textPrimary,
           }}
         >

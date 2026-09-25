@@ -1,0 +1,226 @@
+[
+  {
+    "index": 0,
+    "audit_id": "edfc8dfa-f540-4e03-a4c4-8d8bc26130d0",
+    "timestamp": "2026-09-25T08:34:47.942278+00:00",
+    "actor_email": "system.genesis@numm.gov.in",
+    "actor_role": "SYSTEM",
+    "action": "GENESIS_BLOCK",
+    "entity_type": "SYSTEM",
+    "entity_id": "ROOT_MoPNG_SIH26099",
+    "payload_digest": "686fbcba41f8a5d7fdc5fae6d27277d240eb488c3c006cc2582276a264e5cc32",
+    "previous_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "block_hash": "6e065d1473029d365cdb025bb3cd8d68a26f16ee76b0a37fc9c607229abdfd7d",
+    "details": {
+      "framework": "National Unified Material Master (NUMM)",
+      "standard": "One Nation, One Material Code (ONMC) Specification v2.2.0",
+      "mandate": "Ministry of Petroleum & Natural Gas (MoPNG) SIH-26099",
+      "governance": "CVC Circular No. 01/01/2021 & GFR Rule 149",
+      "cloud_deployment": "NIC National Cloud (MeghRaj) Air-Gapped PSU Enclave",
+      "participating_cpse_count": 10
+    }
+  },
+  {
+    "index": 1,
+    "audit_id": "b70f5f2b-27df-4818-8178-36522a755c4b",
+    "timestamp": "2026-09-25T08:34:47.948185+00:00",
+    "actor_email": "rameshwar.sharma@iocl.co.in",
+    "actor_role": "STEWARD",
+    "action": "STEWARD_APPROVE",
+    "entity_type": "MAPPING",
+    "entity_id": "IOC-100482",
+    "payload_digest": "0dbd0f4f2ea2de9b5eff2c820530aad2b8c5d6020939c2ea8e882ff4f17cb860",
+    "previous_hash": "6e065d1473029d365cdb025bb3cd8d68a26f16ee76b0a37fc9c607229abdfd7d",
+    "block_hash": "124765ba53904e55453869634b1cf0a1770e6c383cef20b35d3c2cbf26385b4c",
+    "details": {
+      "source_code": "IOC-100482",
+      "raw_description": "VALVE, BALL, 2\", CL150, FLG RF, ASTM A105, API 6D",
+      "cpse": "IOCL",
+      "plant_location": "Mathura Refinery, UP",
+      "canonical_onmc": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F",
+      "shell_mesc": "74.16.01.015.1",
+      "unspsc": "40141607",
+      "gem_category": "GeM-CAT-VLV-BALL-01",
+      "safety_verification": "ASME B16.34 & API 6D 100% compliant",
+      "justification": "Verified full metallurgy ASTM A105 and Class 150 pressure rating."
+    }
+  },
+  {
+    "index": 2,
+    "audit_id": "06966c6d-ccbe-4928-a28a-042d13f880f0",
+    "timestamp": "2026-09-25T08:34:47.951444+00:00",
+    "actor_email": "rameshwar.sharma@iocl.co.in",
+    "actor_role": "STEWARD",
+    "action": "STEWARD_APPROVE",
+    "entity_type": "CLUSTER",
+    "entity_id": "CLUST-BALL-VALVE-002-150",
+    "payload_digest": "b575d4f916232b6454f38cb19be65d558965bef30dea77b57f0357bde98588ea",
+    "previous_hash": "124765ba53904e55453869634b1cf0a1770e6c383cef20b35d3c2cbf26385b4c",
+    "block_hash": "ff0264743b142374934aa4271c7e87dae6f4e02956579dcbac899ed4774fa6b9",
+    "details": {
+      "canonical_onmc": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F",
+      "harmonized_items": [
+        {
+          "cpse": "ONGC",
+          "source_code": "ONG-992144",
+          "raw": "VLV BL FLGD 50MM NB 150# CS BODY A105 LEVER OP",
+          "plant": "Hazira Processing Plant, GJ"
+        },
+        {
+          "cpse": "BPCL",
+          "source_code": "BPC-402910",
+          "raw": "2IN 150LB BALL VALVE FLANGED WCB/A105 TRIM 316",
+          "plant": "Mumbai Refinery, MH"
+        },
+        {
+          "cpse": "HPCL",
+          "source_code": "HPC-773102",
+          "raw": "VALVE BALL FLG 2INCH 150# CS ASTM A-105",
+          "plant": "Visakhapatnam Refinery, AP"
+        },
+        {
+          "cpse": "GAIL",
+          "source_code": "GAL-110294",
+          "raw": "BALL VLV, 2 IN, ASME 150, FLANGED, CS BODY",
+          "plant": "Vijaipur Compressor Station, MP"
+        },
+        {
+          "cpse": "OIL",
+          "source_code": "OIL-550192",
+          "raw": "2\" NB BALL VALVE 150 CLASS FLANGED CS A105",
+          "plant": "Duliajan Field HQ, AS"
+        }
+      ],
+      "confidence_score": 98.4,
+      "metric_conversion": "50MM NB standardized to 2.00 INCH NPS",
+      "sap_cycle_reduction": "Reduced SAP MM01 lead time from 14 days to 6.2 minutes"
+    }
+  },
+  {
+    "index": 3,
+    "audit_id": "c9fa9ff3-9e28-4c81-8df8-2c8a63da949f",
+    "timestamp": "2026-09-25T08:34:47.955125+00:00",
+    "actor_email": "safety.gate@numm.gov.in",
+    "actor_role": "STEWARD",
+    "action": "SAFETY_GATE_TRIGGERED",
+    "entity_type": "MAPPING_REJECTED",
+    "entity_id": "IOC-200911",
+    "payload_digest": "3979b0d7bf368ff996b6317c2bbd4c59ba65d7905b5391eff462f4ec68e07074",
+    "previous_hash": "ff0264743b142374934aa4271c7e87dae6f4e02956579dcbac899ed4774fa6b9",
+    "block_hash": "ef6789034035340037b4a06df87ef251c609c40721c4cfcd40567c1f99684471",
+    "details": {
+      "source_code": "IOC-200911",
+      "raw_description": "VALVE, GATE, 4\", CL300, FLG RF, ASTM A216 WCB",
+      "cpse": "IOCL",
+      "plant_location": "Panipat Refinery, HR",
+      "candidate_target": "ONMC-MECH-VLV-GAT-004-150-A216-11B2",
+      "conflict_type": "Inviolable Safety Gate E-01: Pressure Class Incompatibility",
+      "violation_details": "Raw description specifies Class 300 (PN50) whereas candidate target is Class 150 (PN20). Hydrostatic threshold violation.",
+      "enforcement_standard": "ASME B16.34 Section 2.1 Pressure-Temperature Ratings",
+      "resolution": "Automated cluster merge prohibited. Item quarantined for dedicated Class 300 ONMC minting."
+    }
+  },
+  {
+    "index": 4,
+    "audit_id": "5a9ccd4a-56d8-4fd3-93a6-2eb42cab70de",
+    "timestamp": "2026-09-25T08:34:47.958834+00:00",
+    "actor_email": "rameshwar.sharma@iocl.co.in",
+    "actor_role": "STEWARD",
+    "action": "ONMC_MINT",
+    "entity_type": "UNIFIED_MASTER_CODE",
+    "entity_id": "ONMC-MECH-VLV-GAT-004-300-A216-7A3C",
+    "payload_digest": "a5172cc25ddc3fc16f633dabd9627027396b0afae04ea5711281efdf1d7c3ddf",
+    "previous_hash": "ef6789034035340037b4a06df87ef251c609c40721c4cfcd40567c1f99684471",
+    "block_hash": "065067c9c5367717f9ae3f9efcec3845c719098120ca7888ac931753a3a1947f",
+    "details": {
+      "minted_onmc": "ONMC-MECH-VLV-GAT-004-300-A216-7A3C",
+      "canonical_description": "VALVE GATE FLANGED 4 INCH 300# CS ASTM A216 WCB ASME B16.34",
+      "item_class": "GATE_VALVE",
+      "size_inch": 4.0,
+      "pressure_class": 300,
+      "metallurgy": "ASTM A216 WCB",
+      "shell_mesc": "74.20.02.040.1",
+      "unspsc": "40141611",
+      "participating_records": [
+        "IOC-200911",
+        "ONG-881023",
+        "BPC-501239",
+        "HPC-881920"
+      ]
+    }
+  },
+  {
+    "index": 5,
+    "audit_id": "4114b81c-a5c4-4a05-8268-f973d803a230",
+    "timestamp": "2026-09-25T08:34:47.961954+00:00",
+    "actor_email": "harpreet.singh@ongc.co.in",
+    "actor_role": "PLANT_ENGINEER",
+    "action": "MTIRF_DISPATCH",
+    "entity_type": "TRANSFER_REQUISITION",
+    "entity_id": "MoPNG/OM/2026/NUMM-149",
+    "payload_digest": "a3a0fd52dabe556404206a2b7c414e14cdee36cd853954aa5047d7d10728831f",
+    "previous_hash": "065067c9c5367717f9ae3f9efcec3845c719098120ca7888ac931753a3a1947f",
+    "block_hash": "b3747d4aef4df56e4cf2a21ef609dd772f6386ca88ac21915fe8bbac65658410",
+    "details": {
+      "requisition_number": "MoPNG/OM/2026/NUMM-149",
+      "source_plant": "ONGC Hazira Processing Plant, GJ",
+      "destination_plant": "IOCL Gujarat Refinery, Vadodara, GJ",
+      "pipeline_distance_km": 78.4,
+      "material_code": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F",
+      "quantity_transferred": 14,
+      "book_valuation_inr": 399000.0,
+      "procurement_cost_avoided_inr": 420000.0,
+      "delivery_lead_time_saved": "16 weeks lead time reduced to 24 hours dispatch",
+      "sap_integration": "Outbound delivery VL01N created in ONGC SAP; Inbound PO ME21N created in IOCL SAP"
+    }
+  },
+  {
+    "index": 6,
+    "audit_id": "a289ffb4-5731-4b47-b046-1deb4b4d8d55",
+    "timestamp": "2026-09-25T08:34:47.965011+00:00",
+    "actor_email": "priya.venkatraman@eil.co.in",
+    "actor_role": "PROCUREMENT_OFFICER",
+    "action": "POOLED_TENDER_BATCH",
+    "entity_type": "JOINT_TENDER",
+    "entity_id": "MoPNG/CPD/2026/VALVE-POOL-01",
+    "payload_digest": "f1f1139307c893916bf9b73839202f0449c57b8ed4a6ed620c2ea076df4e6da7",
+    "previous_hash": "b3747d4aef4df56e4cf2a21ef609dd772f6386ca88ac21915fe8bbac65658410",
+    "block_hash": "a05569a81353961aa01b73a283c8825f00d5915b00e6456a2abe2ea23618d5cc",
+    "details": {
+      "tender_ref": "MoPNG/CPD/2026/VALVE-POOL-01",
+      "commodity": "2 INCH 150# FLANGED BALL VALVES CS A105 API 6D",
+      "canonical_onmc": "ONMC-MECH-VLV-BAL-002-150-A105-9B2F",
+      "breakdown_by_cpse": {
+        "IOCL_Mathura": 1200,
+        "BPCL_Mumbai": 850,
+        "HPCL_Vizag": 900
+      },
+      "total_pooled_units": 2950,
+      "baseline_aggregate_value_inr": 84075000.0,
+      "bulk_negotiated_discount_pct": 14.2,
+      "net_procurement_savings_inr": 11400000.0,
+      "regulatory_undertaking": "CVC Anti-Cartelization Undertaking compliant with GeM Rule 149 GFR 2017"
+    }
+  },
+  {
+    "index": 7,
+    "audit_id": "33d9e9a5-2e33-4f69-b5ae-968aad78503c",
+    "timestamp": "2026-09-25T08:34:47.968027+00:00",
+    "actor_email": "sk.gupta@cvc.gov.in",
+    "actor_role": "AUDITOR",
+    "action": "CVC_VIGILANCE_INSPECTION",
+    "entity_type": "AUDIT_DOSSIER",
+    "entity_id": "CVC-NUMM-CERT-2026-02-25",
+    "payload_digest": "e93f3714c55b37a62620e1895322cbcb1914b961f156de144b7307ca970d030b",
+    "previous_hash": "a05569a81353961aa01b73a283c8825f00d5915b00e6456a2abe2ea23618d5cc",
+    "block_hash": "535d64f7d318054c1e6747262436ece068746adcf72e65eaf6f133efcfd1b0df",
+    "details": {
+      "statutory_standard": "Central Vigilance Commission Circular No. 01/01/2021 & GFR 2017 Rule 149",
+      "total_blocks_verified": 4829,
+      "verification_algorithm": "FIPS 180-4 SHA-256 Sequential Hash Pointer Traversal",
+      "tamper_evidence_status": "100% INTACT - ZERO COLLISION - ZERO UNAUTHORIZED MUTATION",
+      "price_divergence_scrutiny": "Zero supplier price cartelization across 10 CPSEs; all inter-CPSE valuations transparent",
+      "sign_off": "Approved for sovereign air-gapped production operation across all CPSEs."
+    }
+  }
+]

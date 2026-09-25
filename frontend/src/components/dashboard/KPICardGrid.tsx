@@ -1,5 +1,5 @@
-// ponytail: High-density operational KPI cards upgraded with microcharts.dev and watermelon.sh design patterns.
-// Upgrade path: add real-time websocket pulse counters for live streaming CPSE pipelines.
+// ponytail: Operational KPI cards — POC/pilot scale grounded in PRD.md + seed catalog.
+// Upgrade path: live aggregates from /api/v1 when national volumes land.
 
 import React from "react";
 import { rawTokens } from "../../tokens.stylex";
@@ -14,22 +14,34 @@ import { Sparkline, SparkBar, DonutMicro, RugPlot } from "../MicroCharts";
 
 export interface KPICardGridProps {
   onCardClick?: (metricKey: string) => void;
+  reviewPending?: number;
+  materialsInPilot?: number;
+  autoApprovedPct?: number;
+  safetyConflicts?: number;
+  surplusUnits?: number;
 }
 
-export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
+export const KPICardGrid: React.FC<KPICardGridProps> = ({
+  onCardClick,
+  reviewPending = 6,
+  materialsInPilot = 24,
+  autoApprovedPct = 58,
+  safetyConflicts = 1,
+  surplusUnits = 14,
+}) => {
   const cards = [
     {
       id: "harmonized",
-      title: "MATERIALS HARMONIZED",
-      value: "12.6K",
-      indicator: "↑ 8.4%",
-      indicatorType: "positive",
-      caption: "compared to previous 7 days",
+      title: "PILOT CATALOG LINES",
+      value: String(materialsInPilot),
+      indicator: "POC.md",
+      indicatorType: "positive" as const,
+      caption: "Multi-CPSE benchmark dataset (SIH 26099)",
       accentColor: rawTokens.colorAction,
       icon: TrendingUp,
       renderMicro: () => (
         <Sparkline
-          data={[9.8, 10.4, 10.9, 11.2, 11.8, 12.1, 12.6]}
+          data={[4, 8, 12, 16, 20, 22, materialsInPilot]}
           width={64}
           height={20}
           color={rawTokens.colorAction}
@@ -41,11 +53,11 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
     {
       id: "review",
       title: "REVIEW REQUIRED",
-      value: "1,284",
-      indicator: "↓ 12.6%",
-      indicatorType: "neutral",
-      caption: "borderline clusters awaiting stewardship",
-      accentColor: "#D97706", // warm amber/sandstone
+      value: reviewPending.toLocaleString(),
+      indicator: "70–91%",
+      indicatorType: "neutral" as const,
+      caption: "PENDING_REVIEW mappings (steward queue)",
+      accentColor: "#D97706",
       badgeStyle: {
         backgroundColor: "rgba(241, 204, 157, 0.4)",
         color: rawTokens.colorAnchor,
@@ -53,7 +65,7 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
       icon: TrendingDown,
       renderMicro: () => (
         <SparkBar
-          data={[240, 210, 195, 230, 180, 160, 140]}
+          data={[2, 3, 4, 5, 4, 5, reviewPending]}
           width={60}
           height={18}
           barColor="#F1CC9D"
@@ -64,10 +76,10 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
     {
       id: "approved",
       title: "AUTO-APPROVED",
-      value: "91.6%",
-      indicator: "SAFE MATCH",
-      indicatorType: "verified",
-      caption: "engineering safety gate passed",
+      value: `${autoApprovedPct}%`,
+      indicator: "≥92% + GATE",
+      indicatorType: "verified" as const,
+      caption: "Safety gate passed · ASME / API hard rules",
       accentColor: rawTokens.colorVerified,
       badgeStyle: {
         backgroundColor: "rgba(165, 215, 201, 0.35)",
@@ -76,7 +88,7 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
       icon: ShieldCheck,
       renderMicro: () => (
         <DonutMicro
-          value={91.6}
+          value={autoApprovedPct}
           size={24}
           strokeWidth={3}
           color={rawTokens.colorVerified}
@@ -87,10 +99,10 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
     {
       id: "conflicts",
       title: "SAFETY CONFLICTS",
-      value: "46",
-      indicator: "ACTION REQUIRED",
-      indicatorType: "conflict",
-      caption: "pressure, size or metallurgy conflicts",
+      value: String(safetyConflicts),
+      indicator: "GATE BLOCK",
+      indicatorType: "conflict" as const,
+      caption: "Pressure / size / metallurgy hard mismatches",
       accentColor: rawTokens.colorConflict,
       badgeStyle: {
         backgroundColor: "rgba(155, 18, 30, 0.12)",
@@ -99,7 +111,7 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
       icon: AlertOctagon,
       renderMicro: () => (
         <RugPlot
-          values={[0.08, 0.14, 0.22, 0.35, 0.48, 0.62, 0.78, 0.88, 0.96]}
+          values={[0.2, 0.35, 0.5, 0.72, 0.9]}
           width={60}
           height={16}
           color={rawTokens.colorConflict}
@@ -108,11 +120,11 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
     },
     {
       id: "surplus",
-      title: "SURPLUS STOCK",
-      value: "10.4K",
-      indicator: "UNITS AVAILABLE",
-      indicatorType: "verified",
-      caption: "across participating CPSEs",
+      title: "SURPLUS UNITS",
+      value: String(surplusUnits),
+      indicator: "ONGC HAZIRA",
+      indicatorType: "verified" as const,
+      caption: 'APP_FLOW SBB: 2" Class 150 ball valve (78 km)',
       accentColor: rawTokens.colorVerified,
       badgeStyle: {
         backgroundColor: "rgba(95, 151, 142, 0.12)",
@@ -121,7 +133,7 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
       icon: Boxes,
       renderMicro: () => (
         <Sparkline
-          data={[7.2, 7.8, 8.4, 8.9, 9.5, 9.9, 10.4]}
+          data={[14, 14, 14, 14, 14, 14, surplusUnits]}
           width={64}
           height={20}
           color={rawTokens.colorVerified}
@@ -172,7 +184,6 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
                 "0 1px 3px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(226, 232, 240, 0.4)";
             }}
           >
-            {/* Header: Title + Micro Icon */}
             <div
               style={{
                 display: "flex",
@@ -195,7 +206,6 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
               <Icon size={13} color={card.accentColor} strokeWidth={2.2} />
             </div>
 
-            {/* Middle: Big Metric + MicroChart + Supporting Indicator */}
             <div
               style={{
                 display: "flex",
@@ -217,13 +227,10 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
                 {card.value}
               </div>
 
-              {/* Watermelon UI / MicroCharts inline preview */}
               <div
                 style={{ display: "flex", alignItems: "center", gap: "6px" }}
               >
                 {card.renderMicro && card.renderMicro()}
-
-                {/* Supporting badge */}
                 <div
                   style={{
                     display: "inline-flex",
@@ -246,28 +253,20 @@ export const KPICardGrid: React.FC<KPICardGridProps> = ({ onCardClick }) => {
                     }),
                   }}
                 >
-                  {card.indicator.startsWith("↑") ||
-                  card.indicator.startsWith("↓") ? (
-                    <span>{card.indicator}</span>
-                  ) : (
-                    <>
-                      <span
-                        style={{
-                          width: "4px",
-                          height: "4px",
-                          borderRadius: "50%",
-                          backgroundColor: card.accentColor,
-                          display: "inline-block",
-                        }}
-                      />
-                      <span>{card.indicator}</span>
-                    </>
-                  )}
+                  <span
+                    style={{
+                      width: "4px",
+                      height: "4px",
+                      borderRadius: "50%",
+                      backgroundColor: card.accentColor,
+                      display: "inline-block",
+                    }}
+                  />
+                  <span>{card.indicator}</span>
                 </div>
               </div>
             </div>
 
-            {/* Caption */}
             <div
               style={{
                 fontSize: "10.5px",

@@ -1,23 +1,26 @@
-from bs4 import BeautifulSoup, Comment, NavigableString
 import re
 
-with open('landing_page_edited.html', 'r', encoding='utf-8') as f:
-    soup = BeautifulSoup(f.read(), 'html.parser')
+from bs4 import BeautifulSoup, Comment, NavigableString
+
+with open("landing_page_edited.html", "r", encoding="utf-8") as f:
+    soup = BeautifulSoup(f.read(), "html.parser")
 
 body = soup.body
 
-for script in body.find_all('script'):
+for script in body.find_all("script"):
     script.decompose()
+
 
 def reactify_style(style_str):
     styles = []
-    for decl in style_str.split(';'):
-        if ':' in decl:
-            k, v = decl.split(':', 1)
+    for decl in style_str.split(";"):
+        if ":" in decl:
+            k, v = decl.split(":", 1)
             k = k.strip()
-            k = re.sub(r'-([a-z])', lambda m: m.group(1).upper(), k)
+            k = re.sub(r"-([a-z])", lambda m: m.group(1).upper(), k)
             styles.append(f'{k}: "{v.strip()}"')
     return "{" + ", ".join(styles) + "}"
+
 
 def node_to_jsx(node):
     if isinstance(node, Comment):
@@ -26,62 +29,88 @@ def node_to_jsx(node):
         text = str(node)
         if text.strip() == "":
             return text
-        return text.replace('{', '&#123;').replace('}', '&#125;')
+        return text.replace("{", "&#123;").replace("}", "&#125;")
 
     tag = node.name
-    
-    if tag == 'section' and node.get('id') == 'hero-section':
-        tag = 'motion.section'
-    
-    is_motion_card = 'motion-card' in node.get('class', [])
-    if is_motion_card:
-        tag = 'motion.div'
 
-    if tag == 'div' and node.get('id') == 'faqAccordion':
+    if tag == "section" and node.get("id") == "hero-section":
+        tag = "motion.section"
+
+    is_motion_card = "motion-card" in node.get("class", [])
+    if is_motion_card:
+        tag = "motion.div"
+
+    if tag == "div" and node.get("id") == "faqAccordion":
         return "{/* FAQ Component */}<FaqAccordion />"
 
-    if tag == 'section' and node.get('id') == 'pricing-calculator':
+    if tag == "section" and node.get("id") == "pricing-calculator":
         return "{/* Pricing Component */}<PricingCalculator />"
 
     attrs = []
     for k, v in node.attrs.items():
-        if k == 'class':
-            k = 'className'
+        if k == "class":
+            k = "className"
             if isinstance(v, list):
                 v = " ".join(v)
-        elif k == 'for':
-            k = 'htmlFor'
-        elif k == 'style':
-            attrs.append(f'style={{{reactify_style(v)}}}')
+        elif k == "for":
+            k = "htmlFor"
+        elif k == "style":
+            attrs.append(f"style={{{reactify_style(v)}}}")
             continue
-        elif k in ['stroke-width', 'stroke-linecap', 'stroke-linejoin', 'fill-rule', 'clip-rule', 'stroke-miterlimit', 'stop-color', 'stop-opacity', 'stroke-dasharray']:
-            k = re.sub(r'-([a-z])', lambda m: m.group(1).upper(), k)
-        elif k.startswith('xmlns') or (":" in k and not k.startswith("xmlns")):
+        elif k in [
+            "stroke-width",
+            "stroke-linecap",
+            "stroke-linejoin",
+            "fill-rule",
+            "clip-rule",
+            "stroke-miterlimit",
+            "stop-color",
+            "stop-opacity",
+            "stroke-dasharray",
+        ]:
+            k = re.sub(r"-([a-z])", lambda m: m.group(1).upper(), k)
+        elif k.startswith("xmlns") or (":" in k and not k.startswith("xmlns")):
             continue
 
         if isinstance(v, list):
             v = " ".join(v)
-        
+
         if v:
-            v = v.replace('"', '&quot;')
+            v = v.replace('"', "&quot;")
         attrs.append(f'{k}="{v}"')
-        
-    if tag == 'motion.section':
-        attrs.append('initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}')
+
+    if tag == "motion.section":
+        attrs.append("initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}")
     if is_motion_card:
-        attrs.append('initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}')
+        attrs.append(
+            "initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}"
+        )
 
     attr_str = " ".join(attrs)
     if attr_str:
         attr_str = " " + attr_str
-        
-    void_elements = ['img', 'input', 'br', 'hr', 'path', 'circle', 'line', 'rect', 'polygon', 'polyline', 'ellipse', 'stop']
+
+    void_elements = [
+        "img",
+        "input",
+        "br",
+        "hr",
+        "path",
+        "circle",
+        "line",
+        "rect",
+        "polygon",
+        "polyline",
+        "ellipse",
+        "stop",
+    ]
     if tag in void_elements:
         if not list(node.children):
-            return f'<{tag}{attr_str} />'
-            
+            return f"<{tag}{attr_str} />"
+
     children_jsx = "".join(node_to_jsx(c) for c in node.children)
-    return f'<{tag}{attr_str}>{children_jsx}</{tag}>'
+    return f"<{tag}{attr_str}>{children_jsx}</{tag}>"
+
 
 main_content = "".join(node_to_jsx(c) for c in body.children)
 
@@ -104,7 +133,7 @@ const PricingCalculator = () => {{
                     <p className="text-base text-[#4e4541] max-w-2xl mx-auto">Estimate your monthly investment based on your team size and strategic HR needs.</p>
                 </div>
                 <div className="bg-white rounded-[2rem] p-8 shadow-[0_12px_32px_rgba(30,23,20,0.04)] border border-white/80 max-w-4xl mx-auto flex flex-col md:flex-row gap-12">
-                    
+
                     <div className="flex-1 space-y-8">
                         <div>
                             <label className="block text-sm font-semibold text-[#1e1714] mb-2">Team Size</label>
@@ -190,7 +219,7 @@ export const LandingPage = () => {{
 }};
 """
 
-with open('frontend/src/components/LandingPage.tsx', 'w', encoding='utf-8') as f:
+with open("frontend/src/components/LandingPage.tsx", "w", encoding="utf-8") as f:
     f.write(react_code)
 
 print("LandingPage.tsx updated!")

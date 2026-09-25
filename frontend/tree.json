@@ -1,0 +1,2708 @@
+{
+  "sha": "13ac0ec7e148655948100b6396439e481361d690",
+  "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/13ac0ec7e148655948100b6396439e481361d690",
+  "tree": [
+    {
+      "path": ".gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2a1e77309ce56fb59f9c12569385b5416cc82325",
+      "size": 1567,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2a1e77309ce56fb59f9c12569385b5416cc82325"
+    },
+    {
+      "path": "LICENSE",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f4bfc53d8d773d3b10d95c2d58a5773dd4e2f3aa",
+      "size": 1078,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f4bfc53d8d773d3b10d95c2d58a5773dd4e2f3aa"
+    },
+    {
+      "path": "README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "974d732e5502dd42b74d388ec54911b9aab2ba95",
+      "size": 6321,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/974d732e5502dd42b74d388ec54911b9aab2ba95"
+    },
+    {
+      "path": "ROADMAP.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "231bbb9de45521826a4682da70792cfe52c72df2",
+      "size": 3928,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/231bbb9de45521826a4682da70792cfe52c72df2"
+    },
+    {
+      "path": "docs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "615a2aa49cfe6663c05033dc979c9c07f1c29218",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/615a2aa49cfe6663c05033dc979c9c07f1c29218"
+    },
+    {
+      "path": "docs/recipes.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5cca1cc5bab91b1472deb1bae5b27951536cbfe8",
+      "size": 13097,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5cca1cc5bab91b1472deb1bae5b27951536cbfe8"
+    },
+    {
+      "path": "docs/screenshots",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "65e14b5adcb1cc548e131be42d7c760eb7a5aaff",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/65e14b5adcb1cc548e131be42d7c760eb7a5aaff"
+    },
+    {
+      "path": "docs/screenshots/hero-anya.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "86f098ed7aba652d8c27791d19b4380c384cf713",
+      "size": 211700,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/86f098ed7aba652d8c27791d19b4380c384cf713"
+    },
+    {
+      "path": "docs/screenshots/hero-bananastudio.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "793c55386828ac3019396ca71efd65fc13c55d00",
+      "size": 164776,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/793c55386828ac3019396ca71efd65fc13c55d00"
+    },
+    {
+      "path": "docs/screenshots/hero-carnival-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cd1bcb77a2306448832e52e2b744460a51cd1a6e",
+      "size": 147978,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cd1bcb77a2306448832e52e2b744460a51cd1a6e"
+    },
+    {
+      "path": "docs/screenshots/hero-cobalt-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "add204d9bc18ac5de58a77c0116427aabb623056",
+      "size": 158420,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/add204d9bc18ac5de58a77c0116427aabb623056"
+    },
+    {
+      "path": "docs/screenshots/hero-custom-02.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2548048f103c676ba2778c75cde84076d5cf6f37",
+      "size": 117544,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2548048f103c676ba2778c75cde84076d5cf6f37"
+    },
+    {
+      "path": "docs/screenshots/hero-custom-03.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ef49babcd4c1ca03bd2d528fa1b69b90217bdaa3",
+      "size": 138093,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ef49babcd4c1ca03bd2d528fa1b69b90217bdaa3"
+    },
+    {
+      "path": "docs/screenshots/hero-custom-04.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e4a0b0de2c0baba5823562768193ac2fde75277",
+      "size": 401434,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8e4a0b0de2c0baba5823562768193ac2fde75277"
+    },
+    {
+      "path": "docs/screenshots/hero-garden-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f93d3512566e3d042c67d3a0e8e55f18fdb37d34",
+      "size": 140782,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f93d3512566e3d042c67d3a0e8e55f18fdb37d34"
+    },
+    {
+      "path": "docs/screenshots/hero-hum-07.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd992fb751790290108874d3de22f491e9df6e7d",
+      "size": 152942,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dd992fb751790290108874d3de22f491e9df6e7d"
+    },
+    {
+      "path": "docs/screenshots/hero-hyperlane.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "15656de5236498b95765a092635d426f1b08a848",
+      "size": 137401,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/15656de5236498b95765a092635d426f1b08a848"
+    },
+    {
+      "path": "docs/screenshots/hero-lumen-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "03d56d2f961c7165ea7d88e14b4e67315f972f33",
+      "size": 168282,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/03d56d2f961c7165ea7d88e14b4e67315f972f33"
+    },
+    {
+      "path": "docs/screenshots/hero-najm.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "66a4d379473c4afe2a7d3cd82074ac2de9f8272c",
+      "size": 191756,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/66a4d379473c4afe2a7d3cd82074ac2de9f8272c"
+    },
+    {
+      "path": "docs/screenshots/hero-press-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36ed0a188b310a3cd02f16c1f0c1ecef9a98f873",
+      "size": 134075,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/36ed0a188b310a3cd02f16c1f0c1ecef9a98f873"
+    },
+    {
+      "path": "docs/screenshots/hero-riso-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "70405276164ec9de26e1e783d9f263ad6b3fd3de",
+      "size": 202157,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/70405276164ec9de26e1e783d9f263ad6b3fd3de"
+    },
+    {
+      "path": "docs/screenshots/hero-slow-pour.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "01ff2cc3f6c1724b2f14f2b01c9be6f087ad162c",
+      "size": 141237,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/01ff2cc3f6c1724b2f14f2b01c9be6f087ad162c"
+    },
+    {
+      "path": "docs/screenshots/hero-soroe.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7550bce8bc189d2bc671aaad774c14b11fa7cd04",
+      "size": 145245,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7550bce8bc189d2bc671aaad774c14b11fa7cd04"
+    },
+    {
+      "path": "docs/screenshots/hero-tally.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "301444574f928103807dab53ecb2dd9b92b1a163",
+      "size": 180347,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/301444574f928103807dab53ecb2dd9b92b1a163"
+    },
+    {
+      "path": "docs/screenshots/hero-wayfare.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "69a7d93dd76518c7d6ee5a3178c588915e249fde",
+      "size": 163332,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/69a7d93dd76518c7d6ee5a3178c588915e249fde"
+    },
+    {
+      "path": "docs/study-examples.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "491477482ce3c3be695f7602484bd1603a1ddc21",
+      "size": 12380,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/491477482ce3c3be695f7602484bd1603a1ddc21"
+    },
+    {
+      "path": "docs/talk-slides.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e8177d028032aa242b3bf3f1035c355c342b4b34",
+      "size": 14340,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e8177d028032aa242b3bf3f1035c355c342b4b34"
+    },
+    {
+      "path": "package.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ded1f0da8a6501ab90205e50fb61fb0c535d8760",
+      "size": 707,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ded1f0da8a6501ab90205e50fb61fb0c535d8760"
+    },
+    {
+      "path": "site",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fd9645537e561771efd6a6d7ce520f6b7924f01d",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/fd9645537e561771efd6a6d7ce520f6b7924f01d"
+    },
+    {
+      "path": "site/.gitignore",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e985853ed84acf10f62f639a4733083229c5a55d",
+      "size": 8,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e985853ed84acf10f62f639a4733083229c5a55d"
+    },
+    {
+      "path": "site/OG-hallmark.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e1cdb75cc8d20eb2cdcc35f0fa0e36c183d07d8",
+      "size": 804638,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0e1cdb75cc8d20eb2cdcc35f0fa0e36c183d07d8"
+    },
+    {
+      "path": "site/_tests",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "48581d2274534dab8314afba4dce6d6958c287de",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/48581d2274534dab8314afba4dce6d6958c287de"
+    },
+    {
+      "path": "site/_tests/01-tide-podcast",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "826778928a584d34c0292d952289889d681b746b",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/826778928a584d34c0292d952289889d681b746b"
+    },
+    {
+      "path": "site/_tests/01-tide-podcast/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bd63924b37689c573fecaf949ca4d881fa2dea72",
+      "size": 3728,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/bd63924b37689c573fecaf949ca4d881fa2dea72"
+    },
+    {
+      "path": "site/_tests/01-tide-podcast/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "81f14c600a048d8ee2fa55c5f9b0497710d081a2",
+      "size": 3208,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/81f14c600a048d8ee2fa55c5f9b0497710d081a2"
+    },
+    {
+      "path": "site/_tests/01-tide-podcast/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8614cf194eb2426f640bdc375b8dd47a748d6258",
+      "size": 5686,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8614cf194eb2426f640bdc375b8dd47a748d6258"
+    },
+    {
+      "path": "site/_tests/02-streampipe-cli",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7d96bca90a18dcdcc2fd3f6061887260f2bf16fe",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/7d96bca90a18dcdcc2fd3f6061887260f2bf16fe"
+    },
+    {
+      "path": "site/_tests/02-streampipe-cli/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "076b528b0193bd7079752816abca05554f061f4a",
+      "size": 3507,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/076b528b0193bd7079752816abca05554f061f4a"
+    },
+    {
+      "path": "site/_tests/02-streampipe-cli/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0eefed10dac714dacc972030213e25343f0c4b31",
+      "size": 6843,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0eefed10dac714dacc972030213e25343f0c4b31"
+    },
+    {
+      "path": "site/_tests/02-streampipe-cli/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "97e894099f796509afe3a37408141db7f8ae9f5f",
+      "size": 6047,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/97e894099f796509afe3a37408141db7f8ae9f5f"
+    },
+    {
+      "path": "site/_tests/03-maple-bakery",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c8aab915bcd1d6c2079fe269391d97b791e7dcb9",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/c8aab915bcd1d6c2079fe269391d97b791e7dcb9"
+    },
+    {
+      "path": "site/_tests/03-maple-bakery/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3cf9b86c216253d70d3fdc25b54bfc788d9c9a26",
+      "size": 3400,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3cf9b86c216253d70d3fdc25b54bfc788d9c9a26"
+    },
+    {
+      "path": "site/_tests/03-maple-bakery/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c66af06551ecb6aeeeb4aad8193e8b950418c4bb",
+      "size": 6182,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c66af06551ecb6aeeeb4aad8193e8b950418c4bb"
+    },
+    {
+      "path": "site/_tests/03-maple-bakery/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ce166890614d6ef3f19f8012e0b321cfe3caa07e",
+      "size": 5546,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ce166890614d6ef3f19f8012e0b321cfe3caa07e"
+    },
+    {
+      "path": "site/_tests/04-meridian-manifesto",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8288b7c0572e4d9938763a6174ed7b01b56db77f",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/8288b7c0572e4d9938763a6174ed7b01b56db77f"
+    },
+    {
+      "path": "site/_tests/04-meridian-manifesto/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3627c9796a539d88b8df752854863fa2c9dda364",
+      "size": 3546,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3627c9796a539d88b8df752854863fa2c9dda364"
+    },
+    {
+      "path": "site/_tests/04-meridian-manifesto/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f855c9c9d93f6cd2717b1b5e9700cc972d7ef19e",
+      "size": 4412,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f855c9c9d93f6cd2717b1b5e9700cc972d7ef19e"
+    },
+    {
+      "path": "site/_tests/04-meridian-manifesto/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "715489827cc58042b562c731924e6335b2ef8f87",
+      "size": 5999,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/715489827cc58042b562c731924e6335b2ef8f87"
+    },
+    {
+      "path": "site/_tests/05-tracejam-saas",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cdc3048486c2fe6f3cb6e69ab31037a13eb3131d",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/cdc3048486c2fe6f3cb6e69ab31037a13eb3131d"
+    },
+    {
+      "path": "site/_tests/05-tracejam-saas/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "26481684f6245d14366c04086aef49db165b20af",
+      "size": 3738,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/26481684f6245d14366c04086aef49db165b20af"
+    },
+    {
+      "path": "site/_tests/05-tracejam-saas/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "59e35b0874e72be27a4e038e50d7255d0d75df1f",
+      "size": 9137,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/59e35b0874e72be27a4e038e50d7255d0d75df1f"
+    },
+    {
+      "path": "site/_tests/05-tracejam-saas/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7c9cfe42d208cd677e3390ac6ab68b92e8b20584",
+      "size": 11577,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7c9cfe42d208cd677e3390ac6ab68b92e8b20584"
+    },
+    {
+      "path": "site/_tests/06-anya-portfolio",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6bdc328546c99c051279700c25eb9204a4cbd1b9",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6bdc328546c99c051279700c25eb9204a4cbd1b9"
+    },
+    {
+      "path": "site/_tests/06-anya-portfolio/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1c5eff79918803a5db4769b29c27c4368aa3dd35",
+      "size": 3861,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1c5eff79918803a5db4769b29c27c4368aa3dd35"
+    },
+    {
+      "path": "site/_tests/06-anya-portfolio/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "16f90912d0f7a977a898ee6c4386fd9e3885d02b",
+      "size": 7559,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/16f90912d0f7a977a898ee6c4386fd9e3885d02b"
+    },
+    {
+      "path": "site/_tests/06-anya-portfolio/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5eccc2179511bbc1426f1484d7be17c04bf9244b",
+      "size": 7327,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5eccc2179511bbc1426f1484d7be17c04bf9244b"
+    },
+    {
+      "path": "site/_tests/07-foundry-compliance",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1e5314ab8940215d128eea6beb9710f2cef8d350",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/1e5314ab8940215d128eea6beb9710f2cef8d350"
+    },
+    {
+      "path": "site/_tests/07-foundry-compliance/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f6c89fcd87eb4444315ae07eaff74aac5c837597",
+      "size": 3820,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f6c89fcd87eb4444315ae07eaff74aac5c837597"
+    },
+    {
+      "path": "site/_tests/07-foundry-compliance/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "80f6f890272e9baa1fc3ca6b9fd42eb804868d06",
+      "size": 7020,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/80f6f890272e9baa1fc3ca6b9fd42eb804868d06"
+    },
+    {
+      "path": "site/_tests/07-foundry-compliance/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fa7c395c8310cc6617984dfd77c55e2863c6c4b9",
+      "size": 12057,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fa7c395c8310cc6617984dfd77c55e2863c6c4b9"
+    },
+    {
+      "path": "site/_tests/08-cohort-courses",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "151c3f8ee14f8d8964b5c1363071b75be389738f",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/151c3f8ee14f8d8964b5c1363071b75be389738f"
+    },
+    {
+      "path": "site/_tests/08-cohort-courses/brief.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3e7cf4497dccf63490bb80efea73954d4ca182e",
+      "size": 3650,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a3e7cf4497dccf63490bb80efea73954d4ca182e"
+    },
+    {
+      "path": "site/_tests/08-cohort-courses/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c8bd3d4bf464189bb600713506f91479849665b3",
+      "size": 5066,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c8bd3d4bf464189bb600713506f91479849665b3"
+    },
+    {
+      "path": "site/_tests/08-cohort-courses/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "baeb9d704d1db5233a3e48f3bc42520aabbe1880",
+      "size": 9390,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/baeb9d704d1db5233a3e48f3bc42520aabbe1880"
+    },
+    {
+      "path": "site/_tests/09-slow-pour",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "456594091cb8512b684eda88dfd0fe38a35970e0",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/456594091cb8512b684eda88dfd0fe38a35970e0"
+    },
+    {
+      "path": "site/_tests/09-slow-pour/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe1b21e06e3e7a31cda7529b57652f650e4e2c74",
+      "size": 18974,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fe1b21e06e3e7a31cda7529b57652f650e4e2c74"
+    },
+    {
+      "path": "site/_tests/10-owl-hours",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4989e088457cfdca4b2bd6514f1166a4b988d36e",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/4989e088457cfdca4b2bd6514f1166a4b988d36e"
+    },
+    {
+      "path": "site/_tests/10-owl-hours/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "101ee3b071b36b75d0c4fd3f825bdf323fcd711f",
+      "size": 15602,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/101ee3b071b36b75d0c4fd3f825bdf323fcd711f"
+    },
+    {
+      "path": "site/_tests/11-soroe-ceramics",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6586f21ed7bcf1a9f2ffbba84a4f8f36f340db5a",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6586f21ed7bcf1a9f2ffbba84a4f8f36f340db5a"
+    },
+    {
+      "path": "site/_tests/11-soroe-ceramics/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ff65543b3485d9a70b7f41113014fe7ef4f70433",
+      "size": 17094,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ff65543b3485d9a70b7f41113014fe7ef4f70433"
+    },
+    {
+      "path": "site/_tests/12-loafer",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6bb7daac6648dce69daec37baf845c35ec94b2f1",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6bb7daac6648dce69daec37baf845c35ec94b2f1"
+    },
+    {
+      "path": "site/_tests/12-loafer/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c554cc21b0ed360e85d2fcae6746aa594c264e42",
+      "size": 18768,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c554cc21b0ed360e85d2fcae6746aa594c264e42"
+    },
+    {
+      "path": "site/_tests/13-alma",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8ee39d18c68d0cab8d4c0fa19899110a3bd1f13c",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/8ee39d18c68d0cab8d4c0fa19899110a3bd1f13c"
+    },
+    {
+      "path": "site/_tests/13-alma/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2163049feefe203439c7793fdb5248b8987413c1",
+      "size": 17228,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2163049feefe203439c7793fdb5248b8987413c1"
+    },
+    {
+      "path": "site/_tests/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47fdea03cc422fcd07b9f96359b18394e7fa1eab",
+      "size": 18864,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/47fdea03cc422fcd07b9f96359b18394e7fa1eab"
+    },
+    {
+      "path": "site/_tests/_thumbs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "153d8ebe8015271c45e89b25b1f0ed2a0d4b2662",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/153d8ebe8015271c45e89b25b1f0ed2a0d4b2662"
+    },
+    {
+      "path": "site/_tests/_thumbs/Podcast-loop.mp4",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4daba789d464d3fb995543ce2ffe04b188fec81",
+      "size": 482329,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e4daba789d464d3fb995543ce2ffe04b188fec81"
+    },
+    {
+      "path": "site/_tests/_thumbs/after-quiet-hour.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f9aa4c73cc8a3dc039dcf7461fce4ca91a52c971",
+      "size": 228939,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f9aa4c73cc8a3dc039dcf7461fce4ca91a52c971"
+    },
+    {
+      "path": "site/_tests/_thumbs/anya.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cdb6882d42afe4ccaccdbec3b48137a6645e6c13",
+      "size": 275359,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cdb6882d42afe4ccaccdbec3b48137a6645e6c13"
+    },
+    {
+      "path": "site/_tests/_thumbs/audit-example.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "817136b88804593bf69ed0dbd725f9df30bac36d",
+      "size": 581413,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/817136b88804593bf69ed0dbd725f9df30bac36d"
+    },
+    {
+      "path": "site/_tests/_thumbs/bananastudio.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5c3cb5165a9fbeef11c0fa411d4a1ea5b0936f60",
+      "size": 521827,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5c3cb5165a9fbeef11c0fa411d4a1ea5b0936f60"
+    },
+    {
+      "path": "site/_tests/_thumbs/before-quiet-hour.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d6044ca6f7c81dcab0d76b21d36f74019ab2049",
+      "size": 251151,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6d6044ca6f7c81dcab0d76b21d36f74019ab2049"
+    },
+    {
+      "path": "site/_tests/_thumbs/carnival-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1364ff6bab01ac9d7548ce11226ce16980e7b898",
+      "size": 549545,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1364ff6bab01ac9d7548ce11226ce16980e7b898"
+    },
+    {
+      "path": "site/_tests/_thumbs/cobalt-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "539a682151a588904aab66e3cf90f5d0efd88e67",
+      "size": 361006,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/539a682151a588904aab66e3cf90f5d0efd88e67"
+    },
+    {
+      "path": "site/_tests/_thumbs/custom-04.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "65ed3075b87dbc0ceab66bfd9077616c5b48e742",
+      "size": 1152350,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/65ed3075b87dbc0ceab66bfd9077616c5b48e742"
+    },
+    {
+      "path": "site/_tests/_thumbs/example-redesign-uractivation.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a3b97e7a2e8371e5eeb33ff00993f73acbb1ceba",
+      "size": 273417,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a3b97e7a2e8371e5eeb33ff00993f73acbb1ceba"
+    },
+    {
+      "path": "site/_tests/_thumbs/garden-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "201a883f1a932566307ce7b34a93078857584f68",
+      "size": 791709,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/201a883f1a932566307ce7b34a93078857584f68"
+    },
+    {
+      "path": "site/_tests/_thumbs/grid-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f98bd005231b5280dda530e16987ec8ec79208ff",
+      "size": 281428,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f98bd005231b5280dda530e16987ec8ec79208ff"
+    },
+    {
+      "path": "site/_tests/_thumbs/hum-07.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac10e5a2af9d4be70ce95ad42014c4a9d06d5026",
+      "size": 494628,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ac10e5a2af9d4be70ce95ad42014c4a9d06d5026"
+    },
+    {
+      "path": "site/_tests/_thumbs/hyperlane.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "608d90ce5424216260410b1109cbe798e1b68dc9",
+      "size": 523078,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/608d90ce5424216260410b1109cbe798e1b68dc9"
+    },
+    {
+      "path": "site/_tests/_thumbs/lumen-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91a032b5cf52410beea980ce3900f00913554b8f",
+      "size": 447840,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/91a032b5cf52410beea980ce3900f00913554b8f"
+    },
+    {
+      "path": "site/_tests/_thumbs/najm.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f5b47a077275be5f4c9b1c21f5393ae14c35ea1",
+      "size": 317024,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9f5b47a077275be5f4c9b1c21f5393ae14c35ea1"
+    },
+    {
+      "path": "site/_tests/_thumbs/press-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f93820d44d44f76a224544664e0f362b10063ab1",
+      "size": 833216,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f93820d44d44f76a224544664e0f362b10063ab1"
+    },
+    {
+      "path": "site/_tests/_thumbs/riso-01.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2e1f0e3fe2977ae1994b30b124c2cc4dc4b0e375",
+      "size": 977804,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2e1f0e3fe2977ae1994b30b124c2cc4dc4b0e375"
+    },
+    {
+      "path": "site/_tests/_thumbs/study-example.png",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fdf0bd521849e429da752e6c1a911130efb7af1b",
+      "size": 260004,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fdf0bd521849e429da752e6c1a911130efb7af1b"
+    },
+    {
+      "path": "site/_tests/_thumbs/tally.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d237daa445024bc903d1b1b575f20fff44cce9b0",
+      "size": 572178,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d237daa445024bc903d1b1b575f20fff44cce9b0"
+    },
+    {
+      "path": "site/_tests/_thumbs/uractivation-after-loop.mp4",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "09afa6d72e3b88bfe5950f5e534bc15775736173",
+      "size": 913061,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/09afa6d72e3b88bfe5950f5e534bc15775736173"
+    },
+    {
+      "path": "site/_tests/_thumbs/wayfare.jpg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c2f85476e4969c2caa695e8d2304f2e2066c9ec9",
+      "size": 447918,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c2f85476e4969c2caa695e8d2304f2e2066c9ec9"
+    },
+    {
+      "path": "site/_tests/all-themes.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8e055195c4d134276d4cca3e031a6a0a8cde3536",
+      "size": 6569,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8e055195c4d134276d4cca3e031a6a0a8cde3536"
+    },
+    {
+      "path": "site/_tests/custom",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3e54ad65e21736124f0be3e391b03f5efd2c6fab",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/3e54ad65e21736124f0be3e391b03f5efd2c6fab"
+    },
+    {
+      "path": "site/_tests/custom/01-coffeebox",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e8ebb572d7710fcad5c7b50bab81ff55c527477b",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/e8ebb572d7710fcad5c7b50bab81ff55c527477b"
+    },
+    {
+      "path": "site/_tests/custom/01-coffeebox/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "aa69676a146b8d2e5a6cd0b83f9fd0696d183cb4",
+      "size": 3238,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/aa69676a146b8d2e5a6cd0b83f9fd0696d183cb4"
+    },
+    {
+      "path": "site/_tests/custom/01-coffeebox/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "933a9c71436fc327eccfd3b1d0e67623346952e6",
+      "size": 6117,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/933a9c71436fc327eccfd3b1d0e67623346952e6"
+    },
+    {
+      "path": "site/_tests/custom/02-loop",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "49ad4b544abef0a5d9bef407e98fa6d562c1bd81",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/49ad4b544abef0a5d9bef407e98fa6d562c1bd81"
+    },
+    {
+      "path": "site/_tests/custom/02-loop/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "730571224e6b53d5385b5449fbd9204608e693a2",
+      "size": 6169,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/730571224e6b53d5385b5449fbd9204608e693a2"
+    },
+    {
+      "path": "site/_tests/custom/02-loop/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b3b04ed52977b0ad09838b857184ec9d6ff42455",
+      "size": 9001,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b3b04ed52977b0ad09838b857184ec9d6ff42455"
+    },
+    {
+      "path": "site/_tests/custom/03-mossroot",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c3cb3e5c65b580c3245996bc80f6037226403960",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/c3cb3e5c65b580c3245996bc80f6037226403960"
+    },
+    {
+      "path": "site/_tests/custom/03-mossroot/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dfe6b58c634d814c3acf970b54d6734f517b2e23",
+      "size": 6490,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dfe6b58c634d814c3acf970b54d6734f517b2e23"
+    },
+    {
+      "path": "site/_tests/custom/03-mossroot/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6835738892cf69e2a07d52a8c13af16e8e1355ee",
+      "size": 6375,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6835738892cf69e2a07d52a8c13af16e8e1355ee"
+    },
+    {
+      "path": "site/_tests/custom/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0cd5e4a7d37c513dace819bd24c4f614385270bb",
+      "size": 3112,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0cd5e4a7d37c513dace819bd24c4f614385270bb"
+    },
+    {
+      "path": "site/_tests/verbs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "79f47473f40f253d2cdca7da865bd9f2e496a291",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/79f47473f40f253d2cdca7da865bd9f2e496a291"
+    },
+    {
+      "path": "site/_tests/verbs/README.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7b70cb17486b92694ea0ddd6ecaa00bdc3715723",
+      "size": 1392,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7b70cb17486b92694ea0ddd6ecaa00bdc3715723"
+    },
+    {
+      "path": "site/_tests/verbs/audit",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "684bd02c6b706852042b52d1e9e0dfff95e30d67",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/684bd02c6b706852042b52d1e9e0dfff95e30d67"
+    },
+    {
+      "path": "site/_tests/verbs/audit/audit-report.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b021dcee5864a8dae2a6e535a8d51ca89c1dcca4",
+      "size": 6164,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b021dcee5864a8dae2a6e535a8d51ca89c1dcca4"
+    },
+    {
+      "path": "site/_tests/verbs/audit/input.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "056a322d192dda45eb98133d4364c29472985fcd",
+      "size": 4501,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/056a322d192dda45eb98133d4364c29472985fcd"
+    },
+    {
+      "path": "site/_tests/verbs/audit/notes.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "42c9cdca71f765c01866870997c2bfbccd968e2c",
+      "size": 1554,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/42c9cdca71f765c01866870997c2bfbccd968e2c"
+    },
+    {
+      "path": "site/_tests/verbs/redesign",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "00dbb9822835fbc57d7cc595c26e8423c161d202",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/00dbb9822835fbc57d7cc595c26e8423c161d202"
+    },
+    {
+      "path": "site/_tests/verbs/redesign/input.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "393305e1adcd9cb8b01d6a76251754c4ee2d874b",
+      "size": 3717,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/393305e1adcd9cb8b01d6a76251754c4ee2d874b"
+    },
+    {
+      "path": "site/_tests/verbs/redesign/notes.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5abf1612d79255294932e7dd911a5cbb976d212b",
+      "size": 6313,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5abf1612d79255294932e7dd911a5cbb976d212b"
+    },
+    {
+      "path": "site/_tests/verbs/redesign/output.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7ad49332394c5e2e585a7a70ca24bff5953bfbfd",
+      "size": 12097,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7ad49332394c5e2e585a7a70ca24bff5953bfbfd"
+    },
+    {
+      "path": "site/_tests/verbs/study",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d6dfd04d54ecd84dd57db4c5c7fea4af6ad931fc",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/d6dfd04d54ecd84dd57db4c5c7fea4af6ad931fc"
+    },
+    {
+      "path": "site/_tests/verbs/study/diagnosis.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "57687365cb081f59f63afec8055295fb2af1a4c4",
+      "size": 3782,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/57687365cb081f59f63afec8055295fb2af1a4c4"
+    },
+    {
+      "path": "site/_tests/verbs/study/input-description.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3762f2615dc1f28bf466ed344d5164b26bce0359",
+      "size": 2300,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3762f2615dc1f28bf466ed344d5164b26bce0359"
+    },
+    {
+      "path": "site/_tests/verbs/study/notes.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cc95350bb7a75238532ebea0e4740e4233a8cd70",
+      "size": 4913,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cc95350bb7a75238532ebea0e4740e4233a8cd70"
+    },
+    {
+      "path": "site/_tests/verbs/study/output.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "775adef08db7dd381a67d430619c86f78ec19b89",
+      "size": 4981,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/775adef08db7dd381a67d430619c86f78ec19b89"
+    },
+    {
+      "path": "site/_tests/verbs/study/output.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d23bba3a89781612838507962583908ff44e2cc7",
+      "size": 2804,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d23bba3a89781612838507962583908ff44e2cc7"
+    },
+    {
+      "path": "site/css",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "58cd76ce8abff32fda13308a06e67fa7dfcb646b",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/58cd76ce8abff32fda13308a06e67fa7dfcb646b"
+    },
+    {
+      "path": "site/css/base.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "efc4a1dc8ef442fa0dbcb233fb2c124579bd7879",
+      "size": 6335,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/efc4a1dc8ef442fa0dbcb233fb2c124579bd7879"
+    },
+    {
+      "path": "site/css/components.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3d2d1bdfc7c45141aea6cc28631f5e6cd4145e13",
+      "size": 133993,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3d2d1bdfc7c45141aea6cc28631f5e6cd4145e13"
+    },
+    {
+      "path": "site/css/sections.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2b389ab391069da471b033b028fc233402ab307a",
+      "size": 60760,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2b389ab391069da471b033b028fc233402ab307a"
+    },
+    {
+      "path": "site/css/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "31c00b0b2dbd2763b4ed2ab7c26354a01ea0a5a1",
+      "size": 55659,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/31c00b0b2dbd2763b4ed2ab7c26354a01ea0a5a1"
+    },
+    {
+      "path": "site/examples",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5759490cc9c4ae7949fc9854ec1bfce067a79ac3",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/5759490cc9c4ae7949fc9854ec1bfce067a79ac3"
+    },
+    {
+      "path": "site/examples/bananastudio",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "68d3078d2a909e180ee437e7fa95150cb84f2185",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/68d3078d2a909e180ee437e7fa95150cb84f2185"
+    },
+    {
+      "path": "site/examples/bananastudio/.hallmark",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "0c83e5ccd48b09ba63b4d9d95869672a14d610df",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/0c83e5ccd48b09ba63b4d9d95869672a14d610df"
+    },
+    {
+      "path": "site/examples/bananastudio/.hallmark/log.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "71cd62be719173da7e2f8d955e77352a9d8c687a",
+      "size": 1092,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/71cd62be719173da7e2f8d955e77352a9d8c687a"
+    },
+    {
+      "path": "site/examples/bananastudio/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fae7032a37c1c0f1e289eb738f48d39eb8ea9821",
+      "size": 23467,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fae7032a37c1c0f1e289eb738f48d39eb8ea9821"
+    },
+    {
+      "path": "site/examples/bananastudio/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8a857bff5fc085c21c63011544d146cfcbfd575",
+      "size": 44597,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d8a857bff5fc085c21c63011544d146cfcbfd575"
+    },
+    {
+      "path": "site/examples/bananastudio/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9c2819c41aa6a3b994d33ffd3929cb8e5a1aa450",
+      "size": 3305,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9c2819c41aa6a3b994d33ffd3929cb8e5a1aa450"
+    },
+    {
+      "path": "site/examples/carnival-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "240a91fdd200798a022f7b6f4f7eec6f2d41d89c",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/240a91fdd200798a022f7b6f4f7eec6f2d41d89c"
+    },
+    {
+      "path": "site/examples/carnival-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f017835b63ff33de90406a0b8d6dc80acbdd37fc",
+      "size": 12126,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f017835b63ff33de90406a0b8d6dc80acbdd37fc"
+    },
+    {
+      "path": "site/examples/carnival-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a6a7616de569fe24ca0c5d000aab327299d97a71",
+      "size": 21280,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a6a7616de569fe24ca0c5d000aab327299d97a71"
+    },
+    {
+      "path": "site/examples/carnival-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7ddd3000065527289a239e603725ea89d294dca9",
+      "size": 3448,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7ddd3000065527289a239e603725ea89d294dca9"
+    },
+    {
+      "path": "site/examples/cobalt-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "44868992e282e76bd60b2cf3cf08f51d411976a1",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/44868992e282e76bd60b2cf3cf08f51d411976a1"
+    },
+    {
+      "path": "site/examples/cobalt-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "21f4fa6b636b0b86f9654199919d06fe868bba3b",
+      "size": 19244,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/21f4fa6b636b0b86f9654199919d06fe868bba3b"
+    },
+    {
+      "path": "site/examples/cobalt-01/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "066a027a55b201d2e6a1f0c76f59878aee2d70c8",
+      "size": 7998,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/066a027a55b201d2e6a1f0c76f59878aee2d70c8"
+    },
+    {
+      "path": "site/examples/cobalt-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4d03d6dfccdedd593608d8a920014d663b3ed8c5",
+      "size": 29767,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4d03d6dfccdedd593608d8a920014d663b3ed8c5"
+    },
+    {
+      "path": "site/examples/cobalt-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d7e3dd28523277622ae8ae07924e746cf8786fb7",
+      "size": 4064,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d7e3dd28523277622ae8ae07924e746cf8786fb7"
+    },
+    {
+      "path": "site/examples/custom-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8d95af923d90f4910688dafc819dd28af579ffcc",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/8d95af923d90f4910688dafc819dd28af579ffcc"
+    },
+    {
+      "path": "site/examples/custom-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ff9ef42182f9b040ebca46f68bf969a74f3b2d2",
+      "size": 4451,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8ff9ef42182f9b040ebca46f68bf969a74f3b2d2"
+    },
+    {
+      "path": "site/examples/custom-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a22d02c3f448da3cf04d37aba230778b88c56bed",
+      "size": 12960,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a22d02c3f448da3cf04d37aba230778b88c56bed"
+    },
+    {
+      "path": "site/examples/custom-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fbf02d5178a49b2265877acbdb6119d8d9737d1a",
+      "size": 2845,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fbf02d5178a49b2265877acbdb6119d8d9737d1a"
+    },
+    {
+      "path": "site/examples/custom-02",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "ffa665ba8e2201b420bc5decc700cab06838c22c",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/ffa665ba8e2201b420bc5decc700cab06838c22c"
+    },
+    {
+      "path": "site/examples/custom-02/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8bd77df83b4aa3f18f0c15a1fc2a94aee7e2d4e4",
+      "size": 7662,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8bd77df83b4aa3f18f0c15a1fc2a94aee7e2d4e4"
+    },
+    {
+      "path": "site/examples/custom-02/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b2e62c17a43ad306a539243fe77f9e6071b6ccff",
+      "size": 1566,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b2e62c17a43ad306a539243fe77f9e6071b6ccff"
+    },
+    {
+      "path": "site/examples/custom-02/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "708bac8ad8f54e2e80fa4d2b63b40157f4e0375c",
+      "size": 18965,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/708bac8ad8f54e2e80fa4d2b63b40157f4e0375c"
+    },
+    {
+      "path": "site/examples/custom-02/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "317995fff9ca7d1262e48a16d04fb590ba8afb64",
+      "size": 4274,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/317995fff9ca7d1262e48a16d04fb590ba8afb64"
+    },
+    {
+      "path": "site/examples/custom-03",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "c6f04e0da15d683cb5501bdb0e5157e6535602bb",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/c6f04e0da15d683cb5501bdb0e5157e6535602bb"
+    },
+    {
+      "path": "site/examples/custom-03/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb2c25ca4b5bb5c7a2796316b346148fb61838f7",
+      "size": 27021,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cb2c25ca4b5bb5c7a2796316b346148fb61838f7"
+    },
+    {
+      "path": "site/examples/custom-03/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9ca09be62b9c128a956559b2f3875cd186400f50",
+      "size": 4253,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9ca09be62b9c128a956559b2f3875cd186400f50"
+    },
+    {
+      "path": "site/examples/custom-03/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1d93bbe77abde645350e12d141a7d69fbdccb291",
+      "size": 18518,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1d93bbe77abde645350e12d141a7d69fbdccb291"
+    },
+    {
+      "path": "site/examples/custom-03/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "799b8f2aba84a71e7361604d79ec384d627c1a48",
+      "size": 4268,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/799b8f2aba84a71e7361604d79ec384d627c1a48"
+    },
+    {
+      "path": "site/examples/custom-04",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "fcfc44b32ee0f47886bbcb035f896bb5f43fab1d",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/fcfc44b32ee0f47886bbcb035f896bb5f43fab1d"
+    },
+    {
+      "path": "site/examples/custom-04/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3880aa51b7b98ba6d8a5f75e1f871a8bc3843f54",
+      "size": 11692,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3880aa51b7b98ba6d8a5f75e1f871a8bc3843f54"
+    },
+    {
+      "path": "site/examples/custom-04/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a40422820b619659a0f7a5c86f6a685bad040baa",
+      "size": 740,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a40422820b619659a0f7a5c86f6a685bad040baa"
+    },
+    {
+      "path": "site/examples/custom-04/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "45dc5ed1a6a539a0d492e1358425df935a2a9b59",
+      "size": 21407,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/45dc5ed1a6a539a0d492e1358425df935a2a9b59"
+    },
+    {
+      "path": "site/examples/custom-04/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c633d0c870e0bcde4586726e51bedf2b97a16be5",
+      "size": 3987,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c633d0c870e0bcde4586726e51bedf2b97a16be5"
+    },
+    {
+      "path": "site/examples/custom-05",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "d94cb1ab8d5c99fb749d10a691f78b8005759a20",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/d94cb1ab8d5c99fb749d10a691f78b8005759a20"
+    },
+    {
+      "path": "site/examples/custom-05/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2aa12304a9b1d1ef57aa3229c57d59718fa6564b",
+      "size": 11319,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2aa12304a9b1d1ef57aa3229c57d59718fa6564b"
+    },
+    {
+      "path": "site/examples/custom-05/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6140b3af0c4d7e4c258c6f159c7580f21d86383c",
+      "size": 7187,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6140b3af0c4d7e4c258c6f159c7580f21d86383c"
+    },
+    {
+      "path": "site/examples/custom-05/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "963e7526e5c77e275c7547b30a064915a7e0f273",
+      "size": 17899,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/963e7526e5c77e275c7547b30a064915a7e0f273"
+    },
+    {
+      "path": "site/examples/custom-05/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "04142b0a4fd0dc353296d4c49db58ea4e1817109",
+      "size": 3514,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/04142b0a4fd0dc353296d4c49db58ea4e1817109"
+    },
+    {
+      "path": "site/examples/garden-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "1b57b77d9abb14f5112316ddb9820d2dddc43c8a",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/1b57b77d9abb14f5112316ddb9820d2dddc43c8a"
+    },
+    {
+      "path": "site/examples/garden-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dd9899cd9026da29c4de964165a2c90ad6692213",
+      "size": 19602,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dd9899cd9026da29c4de964165a2c90ad6692213"
+    },
+    {
+      "path": "site/examples/garden-01/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dac5015151a9eaffe40edf72e5507803f1c8bded",
+      "size": 2919,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dac5015151a9eaffe40edf72e5507803f1c8bded"
+    },
+    {
+      "path": "site/examples/garden-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9bb88aa5d91f23c93424a4052b26256953825b60",
+      "size": 30395,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9bb88aa5d91f23c93424a4052b26256953825b60"
+    },
+    {
+      "path": "site/examples/garden-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f30bde81fdbfdd3a607e48fb6ea489a6ff4087f",
+      "size": 6941,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8f30bde81fdbfdd3a607e48fb6ea489a6ff4087f"
+    },
+    {
+      "path": "site/examples/grid-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5cb328a152c099f1d511e48f7b7c58b75a59e111",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/5cb328a152c099f1d511e48f7b7c58b75a59e111"
+    },
+    {
+      "path": "site/examples/grid-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "91ed2fc96874021bd0ba154a0eb66075b2acd358",
+      "size": 9822,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/91ed2fc96874021bd0ba154a0eb66075b2acd358"
+    },
+    {
+      "path": "site/examples/grid-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4cf82f5d4a99a8e875f287abb89f0f6c3c66dbdd",
+      "size": 18483,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4cf82f5d4a99a8e875f287abb89f0f6c3c66dbdd"
+    },
+    {
+      "path": "site/examples/hum-07",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "093efc14b90ddb6ed589edb099445897b9b7ff04",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/093efc14b90ddb6ed589edb099445897b9b7ff04"
+    },
+    {
+      "path": "site/examples/hum-07/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c21e81ee86330f80c7e1e976009f3865be067843",
+      "size": 16762,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c21e81ee86330f80c7e1e976009f3865be067843"
+    },
+    {
+      "path": "site/examples/hum-07/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5567d6423e8bd05ae80b784f3e84e975f1252adc",
+      "size": 3410,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5567d6423e8bd05ae80b784f3e84e975f1252adc"
+    },
+    {
+      "path": "site/examples/hum-07/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5bdc30092bcae55e13b1c1ac4859969629f8c86d",
+      "size": 32184,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5bdc30092bcae55e13b1c1ac4859969629f8c86d"
+    },
+    {
+      "path": "site/examples/hum-07/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5620403adbb24f3b838df84b5e36edb352f03c41",
+      "size": 3951,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5620403adbb24f3b838df84b5e36edb352f03c41"
+    },
+    {
+      "path": "site/examples/hyperlane",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "5f9a75e0d56ff77d0c9096ad1b7ad085b8a26ed6",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/5f9a75e0d56ff77d0c9096ad1b7ad085b8a26ed6"
+    },
+    {
+      "path": "site/examples/hyperlane/.hallmark",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f44ad2c19110077b2f473ec302aedf8cff5f622a",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/f44ad2c19110077b2f473ec302aedf8cff5f622a"
+    },
+    {
+      "path": "site/examples/hyperlane/.hallmark/log.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5652d2aae3d0839d8786326ba6f8099f6d4fb476",
+      "size": 354,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5652d2aae3d0839d8786326ba6f8099f6d4fb476"
+    },
+    {
+      "path": "site/examples/hyperlane/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4097ef4996d2dff1f7598a6efa05bff5d4c63aaf",
+      "size": 16203,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4097ef4996d2dff1f7598a6efa05bff5d4c63aaf"
+    },
+    {
+      "path": "site/examples/hyperlane/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc1c10af75238ad493edcca3220c68204f33897",
+      "size": 3516,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3bc1c10af75238ad493edcca3220c68204f33897"
+    },
+    {
+      "path": "site/examples/hyperlane/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f484bfca9ad3d832ff2121f84b1b43c8d0bb66b",
+      "size": 28305,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8f484bfca9ad3d832ff2121f84b1b43c8d0bb66b"
+    },
+    {
+      "path": "site/examples/hyperlane/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2e58b4f7eab3ea94b4639a83e98870d303dc7f0e",
+      "size": 2856,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2e58b4f7eab3ea94b4639a83e98870d303dc7f0e"
+    },
+    {
+      "path": "site/examples/lumen-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f0478e49719a691b54368f1786a4f18aefc39c9e",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/f0478e49719a691b54368f1786a4f18aefc39c9e"
+    },
+    {
+      "path": "site/examples/lumen-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "447074b1207add73b0397844502c0ae4db8fb094",
+      "size": 18210,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/447074b1207add73b0397844502c0ae4db8fb094"
+    },
+    {
+      "path": "site/examples/lumen-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fc9e418a25d28f2524909d94a35d9ff48bbe7b77",
+      "size": 30252,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fc9e418a25d28f2524909d94a35d9ff48bbe7b77"
+    },
+    {
+      "path": "site/examples/lumen-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6104ebe6ecbeb8bd425966f27b3576f2ccea87f5",
+      "size": 3188,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6104ebe6ecbeb8bd425966f27b3576f2ccea87f5"
+    },
+    {
+      "path": "site/examples/najm",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "4af7deccd80db6043012234c9426e84adaac83a4",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/4af7deccd80db6043012234c9426e84adaac83a4"
+    },
+    {
+      "path": "site/examples/najm/.hallmark",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "f710846e0a40619ee0e3a8d6c8e6776983417fdb",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/f710846e0a40619ee0e3a8d6c8e6776983417fdb"
+    },
+    {
+      "path": "site/examples/najm/.hallmark/log.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab0cb4a18020eccdd342eae668fa729bb077f14c",
+      "size": 362,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ab0cb4a18020eccdd342eae668fa729bb077f14c"
+    },
+    {
+      "path": "site/examples/najm/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ff2ff71f9ad78ca16e3bca31529a0b92e11f0d61",
+      "size": 14896,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ff2ff71f9ad78ca16e3bca31529a0b92e11f0d61"
+    },
+    {
+      "path": "site/examples/najm/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "da9b66922305816879b40cbae8b53735ec726ea7",
+      "size": 4460,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/da9b66922305816879b40cbae8b53735ec726ea7"
+    },
+    {
+      "path": "site/examples/najm/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2c111d2998fd00eb788997a17db0421ba0fde195",
+      "size": 28023,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2c111d2998fd00eb788997a17db0421ba0fde195"
+    },
+    {
+      "path": "site/examples/najm/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0471f8ece7b5034a1af4cd830810b84d14e25cd9",
+      "size": 2887,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0471f8ece7b5034a1af4cd830810b84d14e25cd9"
+    },
+    {
+      "path": "site/examples/press-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "3cef6b1b37d778420e3ad682db4e6c20e2fb13e0",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/3cef6b1b37d778420e3ad682db4e6c20e2fb13e0"
+    },
+    {
+      "path": "site/examples/press-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0e7b5d4668601624c5c62dee531e811dd31a9285",
+      "size": 17244,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0e7b5d4668601624c5c62dee531e811dd31a9285"
+    },
+    {
+      "path": "site/examples/press-01/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d674009b1e5f22472c0e48bd96d1a341a011ac09",
+      "size": 5359,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d674009b1e5f22472c0e48bd96d1a341a011ac09"
+    },
+    {
+      "path": "site/examples/press-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6aed4c62f7bcb8393b0bdc90d2fca75e8e55de52",
+      "size": 32256,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6aed4c62f7bcb8393b0bdc90d2fca75e8e55de52"
+    },
+    {
+      "path": "site/examples/press-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f3e2bcef65629b71847e6a49328018e83254565f",
+      "size": 5408,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f3e2bcef65629b71847e6a49328018e83254565f"
+    },
+    {
+      "path": "site/examples/riso-01",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "cc430cbff20b85aca54f4241f702b45e307b170b",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/cc430cbff20b85aca54f4241f702b45e307b170b"
+    },
+    {
+      "path": "site/examples/riso-01/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "47f4d15d89cfe6c8309711dcb17b49c74ec90dcc",
+      "size": 18253,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/47f4d15d89cfe6c8309711dcb17b49c74ec90dcc"
+    },
+    {
+      "path": "site/examples/riso-01/script.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2fb1eff229b505302b365d86e9a93f0486ce9330",
+      "size": 5155,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2fb1eff229b505302b365d86e9a93f0486ce9330"
+    },
+    {
+      "path": "site/examples/riso-01/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7adbda78cc77a74bddbff74ea5c8db7eddb2af7c",
+      "size": 30980,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7adbda78cc77a74bddbff74ea5c8db7eddb2af7c"
+    },
+    {
+      "path": "site/examples/riso-01/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5b748fe145169a70d3cb3717a40bcf42d6da1374",
+      "size": 4772,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5b748fe145169a70d3cb3717a40bcf42d6da1374"
+    },
+    {
+      "path": "site/examples/scroll-demos.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2244cc1789518898c758253409a72ed634baeec5",
+      "size": 2838,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2244cc1789518898c758253409a72ed634baeec5"
+    },
+    {
+      "path": "site/examples/tally",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6a967d0a5a31a363207e948d97805d5057a72a04",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6a967d0a5a31a363207e948d97805d5057a72a04"
+    },
+    {
+      "path": "site/examples/tally/app.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "256ba1f70e1037898b15c66617d63dfc89465535",
+      "size": 2881,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/256ba1f70e1037898b15c66617d63dfc89465535"
+    },
+    {
+      "path": "site/examples/tally/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8297fa89516965fdf1a9d71ccfa9a24c7a54c708",
+      "size": 19059,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8297fa89516965fdf1a9d71ccfa9a24c7a54c708"
+    },
+    {
+      "path": "site/examples/tally/styles.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "daf63ca6e98912909f3abe5a810e405809bc0a80",
+      "size": 30277,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/daf63ca6e98912909f3abe5a810e405809bc0a80"
+    },
+    {
+      "path": "site/examples/tally/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9b41f20da784eb0391a46987cc5856aed52106e9",
+      "size": 2900,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9b41f20da784eb0391a46987cc5856aed52106e9"
+    },
+    {
+      "path": "site/examples/wayfare",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6628f6e740919376d9f5c66fb2ed6ddd429260be",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6628f6e740919376d9f5c66fb2ed6ddd429260be"
+    },
+    {
+      "path": "site/examples/wayfare/.hallmark",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "b6dd26aff7b2c38eed6d346067d9dda97715d5ed",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/b6dd26aff7b2c38eed6d346067d9dda97715d5ed"
+    },
+    {
+      "path": "site/examples/wayfare/.hallmark/log.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "637a2b3d7b148e3b1b4f7ffbf36554b6576579f5",
+      "size": 713,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/637a2b3d7b148e3b1b4f7ffbf36554b6576579f5"
+    },
+    {
+      "path": "site/examples/wayfare/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d8bbfc26ec359ef2e5f3b82dd189775c4cabcded",
+      "size": 18510,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d8bbfc26ec359ef2e5f3b82dd189775c4cabcded"
+    },
+    {
+      "path": "site/examples/wayfare/style.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "daf589a646da78c67007b411ed9e168fa3d1e45c",
+      "size": 26198,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/daf589a646da78c67007b411ed9e168fa3d1e45c"
+    },
+    {
+      "path": "site/examples/wayfare/tokens.css",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2cdb85ed6c0fee3f9c091977efd66eee8ec7e16b",
+      "size": 2658,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2cdb85ed6c0fee3f9c091977efd66eee8ec7e16b"
+    },
+    {
+      "path": "site/favicon-dark.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "60a88139245d1975aa540385cd1544e2d3a44241",
+      "size": 3777,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/60a88139245d1975aa540385cd1544e2d3a44241"
+    },
+    {
+      "path": "site/favicon-light.svg",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "2e3c923b247dd2fcb3e3e02ef6d956875ec6a87d",
+      "size": 3777,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/2e3c923b247dd2fcb3e3e02ef6d956875ec6a87d"
+    },
+    {
+      "path": "site/index.html",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "109431276072202c7834d345e6e20b4af8e1f75b",
+      "size": 63661,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/109431276072202c7834d345e6e20b4af8e1f75b"
+    },
+    {
+      "path": "site/js",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "6758c8b6674bdc1169f2a35ede1034f61f1b0fca",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/6758c8b6674bdc1169f2a35ede1034f61f1b0fca"
+    },
+    {
+      "path": "site/js/main.js",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f52a3e98aa67ee416cc32591639de7a609b7b204",
+      "size": 48136,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f52a3e98aa67ee416cc32591639de7a609b7b204"
+    },
+    {
+      "path": "skills",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7e037d20ec1b1017fffa131c0aed0792fd314805",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/7e037d20ec1b1017fffa131c0aed0792fd314805"
+    },
+    {
+      "path": "skills/hallmark",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "747c924c4767b4d5fa6f1c59985c87a21c918334",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/747c924c4767b4d5fa6f1c59985c87a21c918334"
+    },
+    {
+      "path": "skills/hallmark/SKILL.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "645221da63743de870501760a48694acdf7aef10",
+      "size": 67460,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/645221da63743de870501760a48694acdf7aef10"
+    },
+    {
+      "path": "skills/hallmark/references",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "524e89c27f8df557c699b9503d07b387a3e6d4ea",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/524e89c27f8df557c699b9503d07b387a3e6d4ea"
+    },
+    {
+      "path": "skills/hallmark/references/anti-patterns.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e643cfbe81908ba76a443c128ad5987cd50ffd7b",
+      "size": 25676,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e643cfbe81908ba76a443c128ad5987cd50ffd7b"
+    },
+    {
+      "path": "skills/hallmark/references/assets.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e1d7d93c8befe4ffca9564f66b12176cf2db2c12",
+      "size": 25332,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e1d7d93c8befe4ffca9564f66b12176cf2db2c12"
+    },
+    {
+      "path": "skills/hallmark/references/color.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6bf19cab4e535456ee8c8f6f6f16fef58f653810",
+      "size": 4339,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6bf19cab4e535456ee8c8f6f6f16fef58f653810"
+    },
+    {
+      "path": "skills/hallmark/references/component-cookbook.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "56fd0efafb15de8754ed71c6fb5230fe24e5fc30",
+      "size": 30980,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/56fd0efafb15de8754ed71c6fb5230fe24e5fc30"
+    },
+    {
+      "path": "skills/hallmark/references/components",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "314db0144ba7e8b0bbc2ab2933aa93857b67a7f7",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/314db0144ba7e8b0bbc2ab2933aa93857b67a7f7"
+    },
+    {
+      "path": "skills/hallmark/references/components/c1-outlined-chip.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9319f53617c3d002a4e1f74914d13b5fcd5eea17",
+      "size": 464,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9319f53617c3d002a4e1f74914d13b5fcd5eea17"
+    },
+    {
+      "path": "skills/hallmark/references/components/c2-inline-form-as-cta.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9600223fb45a8a76b13eeacd5bc9f6375668b12d",
+      "size": 672,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9600223fb45a8a76b13eeacd5bc9f6375668b12d"
+    },
+    {
+      "path": "skills/hallmark/references/components/c3-typographic-link.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "68ce77fc2ba2d03cab940c2971d99e6c13aa3975",
+      "size": 280,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/68ce77fc2ba2d03cab940c2971d99e6c13aa3975"
+    },
+    {
+      "path": "skills/hallmark/references/components/c4-sticky-bottom-bar.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8f8c05b305a15bec8ae95dbfcad8fafd321c9b61",
+      "size": 671,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8f8c05b305a15bec8ae95dbfcad8fafd321c9b61"
+    },
+    {
+      "path": "skills/hallmark/references/components/f1-bento-grid.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fab987ee8aaf6680790a256415865543a4b7bba9",
+      "size": 782,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fab987ee8aaf6680790a256415865543a4b7bba9"
+    },
+    {
+      "path": "skills/hallmark/references/components/f2-sticky-scroll-stack.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7675d5296b7b6accf21cb761270f8e384abab306",
+      "size": 899,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7675d5296b7b6accf21cb761270f8e384abab306"
+    },
+    {
+      "path": "skills/hallmark/references/components/f3-tabular-spec-sheet.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4007334f81b6551332d7f4a945f95d86083b6c4b",
+      "size": 419,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4007334f81b6551332d7f4a945f95d86083b6c4b"
+    },
+    {
+      "path": "skills/hallmark/references/components/f4-step-sequence.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ac82a1829b6f51de25f2c731f1853f7c0185288f",
+      "size": 448,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ac82a1829b6f51de25f2c731f1853f7c0185288f"
+    },
+    {
+      "path": "skills/hallmark/references/components/f5-annotated-screenshot.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "014aefdff6619107526d9c3d4ed78ff63780034c",
+      "size": 410,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/014aefdff6619107526d9c3d4ed78ff63780034c"
+    },
+    {
+      "path": "skills/hallmark/references/components/f6-product-card-grid.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1521921a2dce8acf30d974abd5aba3669672c3dd",
+      "size": 2729,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1521921a2dce8acf30d974abd5aba3669672c3dd"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft1-mast-headed.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "92972ccc302a63af2bfdc3e01ff9d6331fa80454",
+      "size": 501,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/92972ccc302a63af2bfdc3e01ff9d6331fa80454"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft2-inline-rule-single-line.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f994f8b79311afef44950d457b47d09ed5c9788f",
+      "size": 362,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f994f8b79311afef44950d457b47d09ed5c9788f"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft3-index-style-category-list.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a02f8d29f9e68ad99bb91eeaf1e79561b5ddf941",
+      "size": 483,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a02f8d29f9e68ad99bb91eeaf1e79561b5ddf941"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft4-dense-typographic.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7d2b2502be364793554aebe35fc098ff9609d235",
+      "size": 501,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7d2b2502be364793554aebe35fc098ff9609d235"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft5-statement.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e0d88a74e7e8a321def67bb7654a4e4a9593fb78",
+      "size": 1303,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e0d88a74e7e8a321def67bb7654a4e4a9593fb78"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft6-letter-close.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ba84f7691228de2a3b44b72cee630d84e71bd913",
+      "size": 1119,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ba84f7691228de2a3b44b72cee630d84e71bd913"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft7-newsletter-first.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "df67edc72c859dd32c8fbe4b7bd4552e5cdbc133",
+      "size": 1755,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/df67edc72c859dd32c8fbe4b7bd4552e5cdbc133"
+    },
+    {
+      "path": "skills/hallmark/references/components/ft8-marquee-scroll.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e5a0f295475751264ee343fa9f84f9d23d35af1c",
+      "size": 1500,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e5a0f295475751264ee343fa9f84f9d23d35af1c"
+    },
+    {
+      "path": "skills/hallmark/references/components/h1-marquee.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b15087c5b746bc7f7fc3e6c3cc86879f5403e3a0",
+      "size": 507,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b15087c5b746bc7f7fc3e6c3cc86879f5403e3a0"
+    },
+    {
+      "path": "skills/hallmark/references/components/h2-split-diptych.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f5c8cae8999dff7657597522814d828156bc9f3f",
+      "size": 600,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f5c8cae8999dff7657597522814d828156bc9f3f"
+    },
+    {
+      "path": "skills/hallmark/references/components/h3-quote-led.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e2bb4558140d636e60e4e28fe3e0ac4b87b72023",
+      "size": 420,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e2bb4558140d636e60e4e28fe3e0ac4b87b72023"
+    },
+    {
+      "path": "skills/hallmark/references/components/h4-stat-led.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "414815a015da7e06f092a4584efec8693754c303",
+      "size": 509,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/414815a015da7e06f092a4584efec8693754c303"
+    },
+    {
+      "path": "skills/hallmark/references/components/h5-letter-hero.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "19a7e743805e2ddfac9c2d2d4cf472d8501d4701",
+      "size": 361,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/19a7e743805e2ddfac9c2d2d4cf472d8501d4701"
+    },
+    {
+      "path": "skills/hallmark/references/components/h6-photographic-fold.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4aaf01d8bcd02f2bd79bf7e636aadbcfd26b91e7",
+      "size": 586,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4aaf01d8bcd02f2bd79bf7e636aadbcfd26b91e7"
+    },
+    {
+      "path": "skills/hallmark/references/components/h7-demo-video-clipped-by-viewport-edge.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "82fecbf84496166cebf26dc45ddfb566fc5f9ca2",
+      "size": 1613,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/82fecbf84496166cebf26dc45ddfb566fc5f9ca2"
+    },
+    {
+      "path": "skills/hallmark/references/components/h8-mockup-split-browser-framed.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7159f778ad2bc54a3026a6ffdd6bb193fff82a78",
+      "size": 1309,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7159f778ad2bc54a3026a6ffdd6bb193fff82a78"
+    },
+    {
+      "path": "skills/hallmark/references/components/h9-custom-illustration-centerpiece.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7b65eac49580799f10fd23254bdcbd433f217aa7",
+      "size": 1479,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7b65eac49580799f10fd23254bdcbd433f217aa7"
+    },
+    {
+      "path": "skills/hallmark/references/components/n1-wordmark-2-links.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f74a5b0b128e73211ab92864ca5c75ea403d17f2",
+      "size": 388,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f74a5b0b128e73211ab92864ca5c75ea403d17f2"
+    },
+    {
+      "path": "skills/hallmark/references/components/n10-floating-on-scroll-morph.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6297780024a0a987a3d89632f2ff128dc3ee50bf",
+      "size": 1387,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6297780024a0a987a3d89632f2ff128dc3ee50bf"
+    },
+    {
+      "path": "skills/hallmark/references/components/n11-mega-menu.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94568719cdc733d1b2577428458611ac9b73943d",
+      "size": 3155,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/94568719cdc733d1b2577428458611ac9b73943d"
+    },
+    {
+      "path": "skills/hallmark/references/components/n12-banner-retract.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f9edee523b4ec15206a720f492107b52288c89ea",
+      "size": 2858,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f9edee523b4ec15206a720f492107b52288c89ea"
+    },
+    {
+      "path": "skills/hallmark/references/components/n13-inline-cmdk-pill.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "fe0d186520e49b03f196ca768fbacb755c5ebc5d",
+      "size": 3314,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/fe0d186520e49b03f196ca768fbacb755c5ebc5d"
+    },
+    {
+      "path": "skills/hallmark/references/components/n1b-saas-three-section.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b39d53922fb983589254e91faf59b5e2c019c502",
+      "size": 3047,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b39d53922fb983589254e91faf59b5e2c019c502"
+    },
+    {
+      "path": "skills/hallmark/references/components/n2-floating-chip.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b4dcc97ab8587fce14d332ef4da83fc6fce69ca0",
+      "size": 617,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b4dcc97ab8587fce14d332ef4da83fc6fce69ca0"
+    },
+    {
+      "path": "skills/hallmark/references/components/n3-side-rail.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a31ddfbb8ff150eb1da19ad437b249c362574880",
+      "size": 536,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a31ddfbb8ff150eb1da19ad437b249c362574880"
+    },
+    {
+      "path": "skills/hallmark/references/components/n4-hidden-behind-k.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24a4f3f216dc66d638ce358c3ac8d5fed09b5426",
+      "size": 373,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/24a4f3f216dc66d638ce358c3ac8d5fed09b5426"
+    },
+    {
+      "path": "skills/hallmark/references/components/n5-floating-pill.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b6170f354f2b816ebec51c5ac65877547183b15d",
+      "size": 1418,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b6170f354f2b816ebec51c5ac65877547183b15d"
+    },
+    {
+      "path": "skills/hallmark/references/components/n6-newspaper-masthead.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24f055a05abfa0dbac0250ccd81d92af816598b6",
+      "size": 1619,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/24f055a05abfa0dbac0250ccd81d92af816598b6"
+    },
+    {
+      "path": "skills/hallmark/references/components/n7-brutal-slab.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "24d0f0f0938a6a2ff54d4771d30f9b99311ee14e",
+      "size": 1380,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/24d0f0f0938a6a2ff54d4771d30f9b99311ee14e"
+    },
+    {
+      "path": "skills/hallmark/references/components/n8-terminal-command.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17c23a72a6678ac46f76e3d4f44c485b28deb299",
+      "size": 1651,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/17c23a72a6678ac46f76e3d4f44c485b28deb299"
+    },
+    {
+      "path": "skills/hallmark/references/components/n9-edge-aligned-minimal.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8361dfa10fddad652dfbb937a785c13b6a21ced2",
+      "size": 868,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8361dfa10fddad652dfbb937a785c13b6a21ced2"
+    },
+    {
+      "path": "skills/hallmark/references/components/s1-left-margin-numbered.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "14a59389c6661f38cafedac63ece9f865e65307e",
+      "size": 495,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/14a59389c6661f38cafedac63ece9f865e65307e"
+    },
+    {
+      "path": "skills/hallmark/references/components/s2-hanging.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "57531f39905fa23c3c57bc08e3561b32c4857bcc",
+      "size": 357,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/57531f39905fa23c3c57bc08e3561b32c4857bcc"
+    },
+    {
+      "path": "skills/hallmark/references/components/s3-sticky-pinned.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dbdd0f3d973434061662a7c189c9947de55b466a",
+      "size": 1179,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dbdd0f3d973434061662a7c189c9947de55b466a"
+    },
+    {
+      "path": "skills/hallmark/references/components/s4-inline-no-break.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d6d03f8f0fbcf37d327d5622cb4a7cecc0cf3ae",
+      "size": 438,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6d6d03f8f0fbcf37d327d5622cb4a7cecc0cf3ae"
+    },
+    {
+      "path": "skills/hallmark/references/components/s5-bottom-anchored.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1f84a975e8e342b36f52edf105c262b3e345625d",
+      "size": 358,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1f84a975e8e342b36f52edf105c262b3e345625d"
+    },
+    {
+      "path": "skills/hallmark/references/components/t1-pull-quote-with-marginalia.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "95c92072f76a6ca7394384d309350004f67d047f",
+      "size": 465,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/95c92072f76a6ca7394384d309350004f67d047f"
+    },
+    {
+      "path": "skills/hallmark/references/components/t2-logo-wall-hairline.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1ac2a14e3df67b969c8dee8f19efc04e66de140d",
+      "size": 733,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1ac2a14e3df67b969c8dee8f19efc04e66de140d"
+    },
+    {
+      "path": "skills/hallmark/references/components/t3-single-huge-quote.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "71011d49deb0237602959398dab386f2f6ddec2a",
+      "size": 490,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/71011d49deb0237602959398dab386f2f6ddec2a"
+    },
+    {
+      "path": "skills/hallmark/references/components/t4-numbered-stat-strip.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e534b423f0fdcf5042cd74dcede495e2c4432b5e",
+      "size": 470,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e534b423f0fdcf5042cd74dcede495e2c4432b5e"
+    },
+    {
+      "path": "skills/hallmark/references/contract.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "410d19f046270ad090e830409d4a8f8310240b1e",
+      "size": 2027,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/410d19f046270ad090e830409d4a8f8310240b1e"
+    },
+    {
+      "path": "skills/hallmark/references/copy.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "eaca077ee8e66c69c1c8495c9fac93a091d30d26",
+      "size": 12261,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/eaca077ee8e66c69c1c8495c9fac93a091d30d26"
+    },
+    {
+      "path": "skills/hallmark/references/custom-craft.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c965449641d0a8e7110079e1dfc870d65b5b8b55",
+      "size": 34133,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c965449641d0a8e7110079e1dfc870d65b5b8b55"
+    },
+    {
+      "path": "skills/hallmark/references/custom-theme.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "4118a75e269d83026ea396f06b9d9df23d95b4cf",
+      "size": 24059,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/4118a75e269d83026ea396f06b9d9df23d95b4cf"
+    },
+    {
+      "path": "skills/hallmark/references/design-md.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b8f39a703d7c2bea2a2095d0867ced5901fc9a42",
+      "size": 6846,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b8f39a703d7c2bea2a2095d0867ced5901fc9a42"
+    },
+    {
+      "path": "skills/hallmark/references/export-formats.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "6d9ffada9ddb5fa973d0a64383a025f774f57c2e",
+      "size": 14620,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/6d9ffada9ddb5fa973d0a64383a025f774f57c2e"
+    },
+    {
+      "path": "skills/hallmark/references/floating-nav.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a4c00338fc3251b7ca302ae5b71cda386832a6d5",
+      "size": 5266,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a4c00338fc3251b7ca302ae5b71cda386832a6d5"
+    },
+    {
+      "path": "skills/hallmark/references/genres",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "7b239b4ac965c55a87d6de3db9ecb4e9bde0c435",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/7b239b4ac965c55a87d6de3db9ecb4e9bde0c435"
+    },
+    {
+      "path": "skills/hallmark/references/genres/atmospheric.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "941bcd04542768126db8e87c2da7413c50d9c87b",
+      "size": 5075,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/941bcd04542768126db8e87c2da7413c50d9c87b"
+    },
+    {
+      "path": "skills/hallmark/references/genres/editorial.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "853604be39983c2af5ce98c279c2960b3352eb67",
+      "size": 4121,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/853604be39983c2af5ce98c279c2960b3352eb67"
+    },
+    {
+      "path": "skills/hallmark/references/genres/modern-minimal.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "648c67e6ce5cf4a44e2402163d30d253eb866dd4",
+      "size": 4836,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/648c67e6ce5cf4a44e2402163d30d253eb866dd4"
+    },
+    {
+      "path": "skills/hallmark/references/genres/playful.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e16142ed5569b8bc4159251d430ab1513382471b",
+      "size": 5218,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e16142ed5569b8bc4159251d430ab1513382471b"
+    },
+    {
+      "path": "skills/hallmark/references/hero-enrichment.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "be0e521e488cbf80413af697379b172e42c433a7",
+      "size": 32151,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/be0e521e488cbf80413af697379b172e42c433a7"
+    },
+    {
+      "path": "skills/hallmark/references/imagery-kit.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "48efb96f502af1636c2c41155aba314cadbb4d65",
+      "size": 8544,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/48efb96f502af1636c2c41155aba314cadbb4d65"
+    },
+    {
+      "path": "skills/hallmark/references/interaction-and-states.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "07453213da7264a25079287102d8642ebd32d9d7",
+      "size": 13537,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/07453213da7264a25079287102d8642ebd32d9d7"
+    },
+    {
+      "path": "skills/hallmark/references/layout-and-space.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8844d518ae8a82ea5b57f68581a284e89085c6a9",
+      "size": 6766,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8844d518ae8a82ea5b57f68581a284e89085c6a9"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0d28032c3250847a5f54dcddb367a9c383f47df1",
+      "size": 11597,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0d28032c3250847a5f54dcddb367a9c383f47df1"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "e79122910d2fd9803c61998174a0782433f3069a",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/e79122910d2fd9803c61998174a0782433f3069a"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/01-bento-grid.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab6f035cc8a7b9039bd3ab340b413ae9ad7d93a4",
+      "size": 1836,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ab6f035cc8a7b9039bd3ab340b413ae9ad7d93a4"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/02-long-document.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "225ac77ca7b8bd2a3bb05c1e3484f5f70704cc54",
+      "size": 1722,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/225ac77ca7b8bd2a3bb05c1e3484f5f70704cc54"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/03-marquee-hero.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "b88f72913f6802113173147e94f91f4b11a57ef4",
+      "size": 1645,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/b88f72913f6802113173147e94f91f4b11a57ef4"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/04-stat-led.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7d99d1094106876c673f079b8898389e5d389e0d",
+      "size": 2120,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7d99d1094106876c673f079b8898389e5d389e0d"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/05-workbench.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e14ed64f737bd937e0fef9a0f015f4760070084",
+      "size": 1690,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1e14ed64f737bd937e0fef9a0f015f4760070084"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/06-conversational-faq.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "8ee3437277fed4e7b8c87c9952ec33b3a7ddb4cf",
+      "size": 1621,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/8ee3437277fed4e7b8c87c9952ec33b3a7ddb4cf"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/07-manifesto.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "0b89da31d717f99b0b74a3fd88b753342e8dea50",
+      "size": 1711,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/0b89da31d717f99b0b74a3fd88b753342e8dea50"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/08-photographic.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "17ba98a1b75ecbd45bd4f791bf2f664bbfe51910",
+      "size": 1491,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/17ba98a1b75ecbd45bd4f791bf2f664bbfe51910"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/09-quote-led.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "36c1965e1442090d4155322b6ca59a2de9c1262b",
+      "size": 1817,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/36c1965e1442090d4155322b6ca59a2de9c1262b"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/10-specimen.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "ab343b42e7a35b25443143237a27faf0902c77c7",
+      "size": 1614,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/ab343b42e7a35b25443143237a27faf0902c77c7"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/11-catalogue.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c4fd2a33253d99be260301c88f6535bd80a965bc",
+      "size": 1186,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c4fd2a33253d99be260301c88f6535bd80a965bc"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/12-letter.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9320d85ef3cf3c962fe1b6a859313bc0da21bc17",
+      "size": 1253,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9320d85ef3cf3c962fe1b6a859313bc0da21bc17"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/13-index-first.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7527d8b7a70adb5306f5e033c4c6df570302d304",
+      "size": 1208,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7527d8b7a70adb5306f5e033c4c6df570302d304"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/14-narrative-workflow.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cfe0a784be257812d2fc92f0136acfa51b4e760a",
+      "size": 1428,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cfe0a784be257812d2fc92f0136acfa51b4e760a"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/15-split-studio.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "bf05bda7ce422e30d8fb0b178f9a0155706ca7a3",
+      "size": 1336,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/bf05bda7ce422e30d8fb0b178f9a0155706ca7a3"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/16-feature-stack.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e693e6ca9aa0759252718fd50cbce0fa1cbbbbb5",
+      "size": 1386,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e693e6ca9aa0759252718fd50cbce0fa1cbbbbb5"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/17-type-specimen.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "dea1ae8c0cd2e55bd6e6c16b4d5c32eb0170c538",
+      "size": 1271,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/dea1ae8c0cd2e55bd6e6c16b4d5c32eb0170c538"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/18-portfolio-grid.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "968ae6ddd9674f51fe12625fa6cf09284db4c939",
+      "size": 1057,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/968ae6ddd9674f51fe12625fa6cf09284db4c939"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/19-map-diagram.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "f2a035b5e745767920b8922e83b930634efb6df1",
+      "size": 1269,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/f2a035b5e745767920b8922e83b930634efb6df1"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/20-ecosystem-index.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5dfee944d4217cff1c1a44f9582195029da92bd2",
+      "size": 1209,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5dfee944d4217cff1c1a44f9582195029da92bd2"
+    },
+    {
+      "path": "skills/hallmark/references/macrostructures/21-component-playground.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "c6f65c6c0bf3dd23d58635957e4d782e740e48c0",
+      "size": 1171,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/c6f65c6c0bf3dd23d58635957e4d782e740e48c0"
+    },
+    {
+      "path": "skills/hallmark/references/microinteractions.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "1e0fb62ed6702849e6ee6a07525c84e0776fcb35",
+      "size": 20017,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/1e0fb62ed6702849e6ee6a07525c84e0776fcb35"
+    },
+    {
+      "path": "skills/hallmark/references/motion.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e3207a1db5f8b234d618406250f8e39f3819871e",
+      "size": 4340,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e3207a1db5f8b234d618406250f8e39f3819871e"
+    },
+    {
+      "path": "skills/hallmark/references/preview-examples.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "9f5126233577c3a85f4f44c357534e19d4b3be20",
+      "size": 2834,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/9f5126233577c3a85f4f44c357534e19d4b3be20"
+    },
+    {
+      "path": "skills/hallmark/references/responsive.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "58d0e1faec1d86dfee860b94ec5f8b3eb1c25e92",
+      "size": 5918,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/58d0e1faec1d86dfee860b94ec5f8b3eb1c25e92"
+    },
+    {
+      "path": "skills/hallmark/references/slop-test.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "3bc7ec12f91706c33dac1397ecaad81551143475",
+      "size": 31065,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/3bc7ec12f91706c33dac1397ecaad81551143475"
+    },
+    {
+      "path": "skills/hallmark/references/structure.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "e4e5e327ef445a88c43b9137250f33cfd0bc5351",
+      "size": 15714,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/e4e5e327ef445a88c43b9137250f33cfd0bc5351"
+    },
+    {
+      "path": "skills/hallmark/references/study.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "5d72092b14570442846493f196b26107af80340a",
+      "size": 42639,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/5d72092b14570442846493f196b26107af80340a"
+    },
+    {
+      "path": "skills/hallmark/references/themes",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "9a5a7e12569abb73657990a9dbf565a220f22508",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/9a5a7e12569abb73657990a9dbf565a220f22508"
+    },
+    {
+      "path": "skills/hallmark/references/themes/carnival.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "d3b876780b438b104cd692fa2fd7ab6be240b0da",
+      "size": 19616,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/d3b876780b438b104cd692fa2fd7ab6be240b0da"
+    },
+    {
+      "path": "skills/hallmark/references/themes/cobalt.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "7f7c324a743d885adb4d96ea0a4669a061a34881",
+      "size": 11273,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/7f7c324a743d885adb4d96ea0a4669a061a34881"
+    },
+    {
+      "path": "skills/hallmark/references/themes/grid.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "94a2702221011ca0a8e306e7a2a8fe1b41f2c943",
+      "size": 14564,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/94a2702221011ca0a8e306e7a2a8fe1b41f2c943"
+    },
+    {
+      "path": "skills/hallmark/references/themes/hum.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "51fe8e86a55554d1dd6e8d3a7ecf13152d943dca",
+      "size": 32317,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/51fe8e86a55554d1dd6e8d3a7ecf13152d943dca"
+    },
+    {
+      "path": "skills/hallmark/references/themes/lumen.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "cb0623c3c60a3ede8c26e56069c286bd8fa2066a",
+      "size": 28180,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/cb0623c3c60a3ede8c26e56069c286bd8fa2066a"
+    },
+    {
+      "path": "skills/hallmark/references/typography.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "a67a8ca14813f1834c0e9ae810505e35ab2ef7e9",
+      "size": 18381,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/a67a8ca14813f1834c0e9ae810505e35ab2ef7e9"
+    },
+    {
+      "path": "skills/hallmark/references/verbs",
+      "mode": "040000",
+      "type": "tree",
+      "sha": "8337e19ba903b4c1e7fe39bb3dfd68b3a78bd30b",
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/trees/8337e19ba903b4c1e7fe39bb3dfd68b3a78bd30b"
+    },
+    {
+      "path": "skills/hallmark/references/verbs/audit.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "855ed5cf11985a34e94e1b6162f0f1dc64ec0da4",
+      "size": 2803,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/855ed5cf11985a34e94e1b6162f0f1dc64ec0da4"
+    },
+    {
+      "path": "skills/hallmark/references/verbs/redesign.md",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "494b022b38cf8796d5eb6b0e8dd50c9a71dea9ba",
+      "size": 13849,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/494b022b38cf8796d5eb6b0e8dd50c9a71dea9ba"
+    },
+    {
+      "path": "vercel.json",
+      "mode": "100644",
+      "type": "blob",
+      "sha": "43dc9369c0b6ca5682d6c050c26684586e60b686",
+      "size": 103,
+      "url": "https://api.github.com/repos/Nutlope/hallmark/git/blobs/43dc9369c0b6ca5682d6c050c26684586e60b686"
+    }
+  ],
+  "truncated": false
+}

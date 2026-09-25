@@ -3,8 +3,15 @@
 
 from typing import List, Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, Depends, HTTPException, Query
+from sqlalchemy import func, select
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import selectinload
 
+from backend.app.core.security import require_procurement
+from backend.app.db.session import get_db
+from backend.app.models.models import MaterialMapping, RawMaterial, UnifiedMasterCode
+from backend.app.schemas.auth import UserSession
 from backend.app.schemas.surplus import (
     MTIRFApproveRequest,
     MTIRFApproveResponse,
@@ -41,13 +48,6 @@ async def list_cpse_plants():
     return plants
 
 
-from sqlalchemy.ext.asyncio import AsyncSession
-from fastapi import Depends
-from backend.app.db.session import get_db
-from sqlalchemy import select
-from sqlalchemy.orm import selectinload
-from backend.app.models.models import RawMaterial, MaterialMapping, UnifiedMasterCode
-
 @router.get("/nearby", response_model=NearbySurplusResponse, summary="Discover surplus stock within geographic radius")
 async def get_nearby_surplus(
     destination_plant: str = Query("IOCL_MATHURA", description="Requesting plant key or location (e.g. IOCL_MATHURA)"),
@@ -55,7 +55,7 @@ async def get_nearby_surplus(
     onmc_code: Optional[str] = Query(None, description="Filter by ONMC standard code"),
     max_radius_km: float = Query(1200.0, ge=10.0, le=4000.0, description="Max geographic search radius in km"),
     limit: int = Query(20, ge=1, le=100),
-    session: AsyncSession = Depends(get_db)
+    session: AsyncSession = Depends(get_db),
 ):
     """
     Scans national CPSE inventory for available surplus stock and sorts by road transit distance.
@@ -70,16 +70,22 @@ async def get_nearby_surplus(
     dest_code = dest_plant_rec["plant_code"]
 
     # Query RawMaterials that are mapped to UnifiedMasterCode
-    stmt = select(RawMaterial).join(MaterialMapping).join(UnifiedMasterCode).options(
-        selectinload(RawMaterial.mapping).selectinload(MaterialMapping.unified_master),
-        selectinload(RawMaterial.organization)
-    ).where(RawMaterial.stock_quantity > 0)
-    
+    stmt = (
+        select(RawMaterial)
+        .join(MaterialMapping)
+        .join(UnifiedMasterCode)
+        .options(
+            selectinload(RawMaterial.mapping).selectinload(MaterialMapping.unified_master),
+            selectinload(RawMaterial.organization),
+        )
+        .where(RawMaterial.stock_quantity > 0)
+    )
+
     if onmc_code:
         stmt = stmt.where(UnifiedMasterCode.onmc_code == onmc_code)
     if item_class:
         stmt = stmt.where(func.upper(UnifiedMasterCode.item_class) == item_class.upper())
-        
+
     result = await session.execute(stmt)
     raw_materials = result.scalars().all()
 
@@ -143,16 +149,16 @@ async def get_nearby_surplus(
 
 
 @router.post("/mtirf/generate", response_model=MTIRFDocument, summary="Generate MoPNG MTIRF Requisition Form")
-async def generate_mtirf_form(req: MTIRFGenerateRequest):
+async def generate_mtirf_form(
+    req: MTIRFGenerateRequest,
+    _user: UserSession = Depends(require_procurement),
+):
     """
     Generates a formal Material Transfer Inter-Company Requisition Form (MTIRF)
     between requesting and source CPSE installations with a SHA-256 tamper seal.
     """
-    # Lookup canonical item details if available
-    matched_master = next((m for m in CANONICAL_MASTER_ITEMS if m["onmc_code"] == req.onmc_code), None)
-
     try:
-        doc = default_mtirf_generator.generate_form(req, item_lookup=matched_master)
+        doc = default_mtirf_generator.generate_form(req, item_lookup=None)
         return doc
     except ValueError as exc:
         raise HTTPException(status_code=400, detail=str(exc))
@@ -172,7 +178,12 @@ async def get_mtirf_document(requisition_number: str):
 @router.post(
     "/mtirf/{requisition_number}/approve", response_model=MTIRFApproveResponse, summary="Authorize MTIRF transfer"
 )
-async def approve_mtirf(requisition_number: str, payload: MTIRFApproveRequest):
+async def approve_mtirf(
+    requisition_number: str,
+    payload: MTIRFApproveRequest,
+    session: AsyncSession = Depends(get_db),
+    user: UserSession = Depends(require_procurement),
+):
     """
     Authorizes the inter-CPSE transfer from the source materials division.
     Emits simulated SAP outbound delivery note and cryptographic audit seal.
@@ -182,10 +193,10 @@ async def approve_mtirf(requisition_number: str, payload: MTIRFApproveRequest):
 
     try:
         resp = default_mtirf_generator.approve_requisition(payload)
-        # Record into CVC cryptographic ledger
-        default_cvc_audit_service.record_action(
-            actor_email=payload.approving_officer_email,
-            actor_role="PROCUREMENT_OFFICER",
+        await default_cvc_audit_service.record_action(
+            session=session,
+            actor_email=payload.approving_officer_email or user.email,
+            actor_role=user.role,
             action="MTIRF_APPROVED",
             entity_type="REQUISITION",
             entity_id=payload.requisition_number,
@@ -197,6 +208,7 @@ async def approve_mtirf(requisition_number: str, payload: MTIRFApproveRequest):
                 "sap_inbound_po": resp.sap_inbound_purchase_order,
             },
         )
+        await session.commit()
         return resp
     except KeyError as exc:
         raise HTTPException(status_code=404, detail=str(exc))

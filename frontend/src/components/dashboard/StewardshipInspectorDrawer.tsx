@@ -71,9 +71,7 @@ export const StewardshipInspectorDrawer: React.FC<
   const isConflict = item.status === "CONFLICT";
   const isNovel = item.status === "NOVEL";
 
-  const fallbackImage =
-    item.imageUrl ||
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&auto=format&fit=crop&q=80";
+  const fallbackImage = item.imageUrl || "/images/pipeline-valves.jpg";
 
   return (
     <div
@@ -282,7 +280,7 @@ export const StewardshipInspectorDrawer: React.FC<
           </div>
         )}
 
-        {/* Equipment Verification Visual from Unsplash */}
+        {/* Equipment Verification Visual from Pixabay */}
         <div
           style={{
             position: "relative",

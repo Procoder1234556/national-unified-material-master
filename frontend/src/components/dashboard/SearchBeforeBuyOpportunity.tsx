@@ -68,7 +68,7 @@ export const SearchBeforeBuyOpportunity: React.FC<
       <div
         style={{ display: "flex", alignItems: "center", gap: "16px", flex: 1 }}
       >
-        {/* Unsplash Industrial Equipment Thumbnail */}
+        {/* Industrial Equipment Thumbnail */}
         <div
           style={{
             width: "68px",
@@ -81,7 +81,7 @@ export const SearchBeforeBuyOpportunity: React.FC<
           }}
         >
           <img
-            src="https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300&auto=format&fit=crop&q=80"
+            src="/images/pipeline-valves.jpg"
             alt="2 inch 150# Ball Valve"
             style={{ width: "100%", height: "100%", objectFit: "cover" }}
           />
@@ -120,7 +120,7 @@ export const SearchBeforeBuyOpportunity: React.FC<
               }}
             >
               <Sparkles size={13} />
-              Potential duplicate purchase detected
+              Potential duplicate purchase (APP_FLOW Flow 3)
             </span>
           </div>
 
@@ -132,7 +132,7 @@ export const SearchBeforeBuyOpportunity: React.FC<
               marginTop: "4px",
             }}
           >
-            2" Ball Valve • Class 150 • ASTM A105
+            2&quot; Ball Valve · Class 150 · ASTM A105 · API 6D
           </div>
 
           <div

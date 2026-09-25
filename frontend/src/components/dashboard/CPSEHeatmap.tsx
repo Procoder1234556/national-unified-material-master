@@ -14,14 +14,16 @@ export const CPSEHeatmap: React.FC = () => {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   const cpseRows = [
-    { name: "IOCL", values: [420, 510, 480, 620, 590, 210, 180] },
-    { name: "ONGC", values: [380, 440, 490, 530, 510, 190, 140] },
-    { name: "BPCL", values: [290, 310, 340, 410, 390, 120, 95] },
-    { name: "HPCL", values: [260, 290, 310, 360, 340, 110, 80] },
-    { name: "GAIL", values: [180, 220, 250, 280, 270, 75, 60] },
-    { name: "OIL", values: [140, 160, 180, 210, 195, 60, 45] },
-    { name: "EIL", values: [95, 110, 125, 140, 130, 40, 30] },
-    { name: "NRL", values: [85, 95, 105, 120, 115, 35, 25] },
+    { name: "IOCL", values: [1, 1, 1, 1, 1, 0, 1] },
+    { name: "ONGC", values: [1, 1, 1, 1, 1, 1, 0] },
+    { name: "BPCL", values: [1, 1, 1, 1, 1, 0, 0] },
+    { name: "HPCL", values: [1, 0, 1, 1, 0, 0, 0] },
+    { name: "GAIL", values: [1, 0, 1, 0, 1, 0, 0] },
+    { name: "OIL", values: [1, 0, 0, 0, 0, 0, 0] },
+    { name: "EIL", values: [0, 0, 0, 0, 0, 0, 0] },
+    { name: "NRL", values: [0, 0, 0, 0, 1, 0, 0] },
+    { name: "MRPL", values: [0, 0, 0, 0, 0, 0, 0] },
+    { name: "CPCL", values: [0, 0, 0, 0, 0, 0, 0] },
   ];
 
   // Calculate day totals
@@ -29,8 +31,8 @@ export const CPSEHeatmap: React.FC = () => {
     cpseRows.reduce((sum, r) => sum + r.values[dayIdx], 0)
   );
 
-  // Maximum value for intensity color scale
-  const maxVal = 620;
+  // Maximum value for intensity color scale (POC: 0–1 lines/day)
+  const maxVal = 1;
 
   // Intensity color generator
   const getCellBg = (val: number) => {
@@ -79,10 +81,9 @@ export const CPSEHeatmap: React.FC = () => {
         <div>
           <div
             style={{
-              fontSize: "16px",
+              fontSize: "15px",
               fontWeight: 700,
-              fontFamily: rawTokens.fontCalligraphy,
-              letterSpacing: "0em",
+              fontFamily: rawTokens.fontSans,
               color: rawTokens.textPrimary,
             }}
           >
@@ -95,7 +96,8 @@ export const CPSEHeatmap: React.FC = () => {
               marginTop: "2px",
             }}
           >
-            Harmonization volume by participating CPSE
+            POC ingest lines by CPSE (24-record seed · EIL/MRPL/CPCL pending
+            pilot)
           </div>
         </div>
 

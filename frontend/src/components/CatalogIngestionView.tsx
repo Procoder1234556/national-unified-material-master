@@ -9,7 +9,7 @@ import {
   CheckCircle2,
   Database,
 } from "lucide-react";
-import { API_BASE } from "../api";
+import { apiFetch } from "../api";
 
 interface IngestionSummary {
   job_id: string;
@@ -95,9 +95,8 @@ export const CatalogIngestionView: React.FC = () => {
     const stageTimer4 = setTimeout(() => setActiveStage(5), 1200);
 
     try {
-      const res = await fetch(`${API_BASE}/api/v1/ingest/batch`, {
+      const res = await apiFetch("/api/v1/ingest/batch", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           organization_code: selectedOrg,
           items: items,
@@ -129,7 +128,7 @@ export const CatalogIngestionView: React.FC = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    fetch(`${API_BASE}/api/v1/ingest/upload?organization_code=${selectedOrg}`, {
+    apiFetch(`/api/v1/ingest/upload?organization_code=${selectedOrg}`, {
       method: "POST",
       body: formData,
     })
@@ -613,4 +612,3 @@ export const CatalogIngestionView: React.FC = () => {
     </div>
   );
 };
-

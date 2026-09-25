@@ -88,9 +88,9 @@ export const TransferModal: React.FC<TransferModalProps> = ({
   const steps = [
     { num: 1, label: "Requisition Draft" },
     { num: 2, label: "Source CPSE Approval" },
-    { num: 3, label: "MeghRaj e-Sign" },
-    { num: 4, label: "SAP Outbound (VL01N)" },
-    { num: 5, label: "Receiving ERP (ME21N)" },
+    { num: 3, label: "Simulated MeghRaj e-Sign" },
+    { num: 4, label: "Simulated SAP VL01N" },
+    { num: 5, label: "Simulated SAP ME21N" },
   ];
 
   return (
@@ -616,7 +616,7 @@ export const TransferModal: React.FC<TransferModalProps> = ({
                 }}
               >
                 <Lock size={13} />
-                <span>e-Sign digitally bound via NIC MeghRaj SSO</span>
+                <span>e-Sign bound via simulated MeghRaj SSO (SIH demo)</span>
               </div>
               <div style={{ display: "flex", gap: "8px" }}>
                 <button

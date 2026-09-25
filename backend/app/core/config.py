@@ -1,4 +1,4 @@
-# ponytail: Direct pydantic-settings config with automatic SQLite fallback for zero-Docker dev.
+# ponytail: Direct pydantic-settings config with automatic SQLite fallback for zero-Docker SIH demo.
 # Upgrade path: add Vault / AWS Secrets Manager provider.
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
@@ -6,17 +6,24 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class Settings(BaseSettings):
     PROJECT_NAME: str = "National Unified Material Master (NUMM)"
     API_V1_STR: str = "/api/v1"
+    # development | test | demo | production — demo tokens allowed for development/test/demo (SIH)
     ENVIRONMENT: str = "development"
 
     # Database configuration
-    USE_SQLITE: bool = False
+    USE_SQLITE: bool = True
     POSTGRES_USER: str = "numm_admin"
     POSTGRES_PASSWORD: str = ""
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "numm_master"
-    
-    CORS_ORIGINS: list[str] = ["http://localhost:3000"]
+
+    CORS_ORIGINS: list[str] = [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:8001",
+        "http://127.0.0.1:8001",
+    ]
 
     # SQLite fallback file
     SQLITE_DB_PATH: str = "./numm_dev.db"

@@ -14,7 +14,7 @@ import {
   FileSpreadsheet,
   X,
 } from "lucide-react";
-import { API_BASE } from "../api";
+import { apiFetch } from "../api";
 
 interface PlantInfo {
   plant_key: string;
@@ -133,10 +133,193 @@ export const SurplusAndDemandView: React.FC<Props> = ({
     }
   }, [defaultSubTab]);
 
-  const [plants, setPlants] = useState<PlantInfo[]>([]);
+  const DEFAULT_PLANTS: PlantInfo[] = [
+    {
+      plant_key: "IOCL_MATHURA",
+      organization_code: "IOCL",
+      organization_name: "Indian Oil Corporation Ltd",
+      plant_code: "1002",
+      plant_name: "Mathura Refinery",
+      location_name: "Mathura, Uttar Pradesh",
+      latitude: 27.4924,
+      longitude: 77.6737,
+    },
+    {
+      plant_key: "ONGC_HAZIRA",
+      organization_code: "ONGC",
+      organization_name: "Oil and Natural Gas Corporation",
+      plant_code: "1100",
+      plant_name: "Hazira Gas Processing Plant",
+      location_name: "Hazira, Surat, Gujarat",
+      latitude: 21.1702,
+      longitude: 72.8311,
+    },
+    {
+      plant_key: "IOCL_GUJARAT",
+      organization_code: "IOCL",
+      organization_name: "Indian Oil Corporation Ltd",
+      plant_code: "1001",
+      plant_name: "Gujarat Refinery",
+      location_name: "Vadodara, Gujarat",
+      latitude: 22.3072,
+      longitude: 73.1812,
+    },
+    {
+      plant_key: "BPCL_MUMBAI",
+      organization_code: "BPCL",
+      organization_name: "Bharat Petroleum Corporation Ltd",
+      plant_code: "2001",
+      plant_name: "Mumbai Refinery",
+      location_name: "Mahul, Mumbai, Maharashtra",
+      latitude: 19.0176,
+      longitude: 72.8562,
+    },
+    {
+      plant_key: "HPCL_VISAKH",
+      organization_code: "HPCL",
+      organization_name: "Hindustan Petroleum Corporation Ltd",
+      plant_code: "3001",
+      plant_name: "Visakh Refinery",
+      location_name: "Visakhapatnam, Andhra Pradesh",
+      latitude: 17.6868,
+      longitude: 83.2185,
+    },
+    {
+      plant_key: "GAIL_VIJAIPUR",
+      organization_code: "GAIL",
+      organization_name: "GAIL (India) Limited",
+      plant_code: "4001",
+      plant_name: "Vijaipur Compressor Station",
+      location_name: "Guna, Madhya Pradesh",
+      latitude: 24.6437,
+      longitude: 77.3093,
+    },
+    {
+      plant_key: "OIL_DULIAJAN",
+      organization_code: "OIL",
+      organization_name: "Oil India Limited",
+      plant_code: "5001",
+      plant_name: "Duliajan Logistics & Stores HQ",
+      location_name: "Duliajan, Dibrugarh, Assam",
+      latitude: 27.3486,
+      longitude: 95.3197,
+    },
+    {
+      plant_key: "NRL_NUMALIGARH",
+      organization_code: "NRL",
+      organization_name: "Numaligarh Refinery Limited",
+      plant_code: "6001",
+      plant_name: "Numaligarh Refinery",
+      location_name: "Golaghat, Assam",
+      latitude: 26.5768,
+      longitude: 93.7314,
+    },
+    {
+      plant_key: "MRPL_MANGALORE",
+      organization_code: "MRPL",
+      organization_name: "Mangalore Refinery & Petrochemicals",
+      plant_code: "7001",
+      plant_name: "Mangalore Refinery",
+      location_name: "Mangaluru, Karnataka",
+      latitude: 12.9141,
+      longitude: 74.856,
+    },
+    {
+      plant_key: "CPCL_CHENNAI",
+      organization_code: "CPCL",
+      organization_name: "Chennai Petroleum Corporation Ltd",
+      plant_code: "8001",
+      plant_name: "Manali Refinery",
+      location_name: "Manali, Chennai, Tamil Nadu",
+      latitude: 13.1678,
+      longitude: 80.2608,
+    },
+  ];
+
+  const DEFAULT_SURPLUS_ITEMS: SurplusItem[] = [
+    {
+      onmc_code: "ONMC-MECH-VLV-BAL-002-150-A105-9B2F",
+      canonical_description: "VALVE BALL FLGD 2 INCH 150# CS ASTM A105 API 6D",
+      item_class: "BALL VALVE",
+      size_inch: 2.0,
+      pressure_class: 150,
+      metallurgy: "ASTM A105",
+      source_organization: "ONGC",
+      source_organization_name: "Oil and Natural Gas Corporation",
+      source_plant_code: "1100",
+      source_plant_name: "Hazira Gas Processing Plant",
+      source_plant_location: "Hazira, Surat, Gujarat",
+      available_stock: 14,
+      unit_price: 28500,
+      distance_km: 78,
+      estimated_transit_hours: 3.5,
+      gem_category_id: "52161500",
+    },
+    {
+      onmc_code: "ONMC-PIPE-FLG-WNF-006-150-A105-4D1E",
+      canonical_description:
+        "FLANGE WELD NECK 6 INCH 150# RF CS ASTM A105 ASME B16.5",
+      item_class: "WELD NECK FLANGE",
+      size_inch: 6.0,
+      pressure_class: 150,
+      metallurgy: "ASTM A105",
+      source_organization: "BPCL",
+      source_organization_name: "Bharat Petroleum Corporation Ltd",
+      source_plant_code: "2001",
+      source_plant_name: "Mumbai Refinery Warehouse",
+      source_plant_location: "Mahul, Mumbai, Maharashtra",
+      available_stock: 24,
+      unit_price: 8200,
+      distance_km: 410,
+      estimated_transit_hours: 8.0,
+      gem_category_id: "52161502",
+    },
+    {
+      onmc_code: "ONMC-MECH-VLV-GAT-004-300-A216-7A3C",
+      canonical_description:
+        "VALVE GATE FLANGED 4 INCH 300# CS ASTM A216 WCB ASME B16.34",
+      item_class: "GATE VALVE",
+      size_inch: 4.0,
+      pressure_class: 300,
+      metallurgy: "ASTM A216 WCB",
+      source_organization: "IOCL",
+      source_organization_name: "Indian Oil Corporation Ltd",
+      source_plant_code: "1003",
+      source_plant_name: "Panipat Refinery",
+      source_plant_location: "Panipat, Haryana",
+      available_stock: 9,
+      unit_price: 64000,
+      distance_km: 210,
+      estimated_transit_hours: 4.5,
+      gem_category_id: "52161501",
+    },
+    {
+      onmc_code: "ONMC-STAT-GSK-SPW-002-150-SS316-2F88",
+      canonical_description:
+        "GASKET SPIRAL WOUND 2 INCH 150# SS316 GRAPHITE ASME B16.20",
+      item_class: "SPIRAL WOUND GASKET",
+      size_inch: 2.0,
+      pressure_class: 150,
+      metallurgy: "SS316 / GRAPHITE",
+      source_organization: "HPCL",
+      source_organization_name: "Hindustan Petroleum Corporation Ltd",
+      source_plant_code: "3001",
+      source_plant_name: "Visakh Refinery Warehouse",
+      source_plant_location: "Visakhapatnam, Andhra Pradesh",
+      available_stock: 65,
+      unit_price: 1200,
+      distance_km: 850,
+      estimated_transit_hours: 18.0,
+      gem_category_id: "52161503",
+    },
+  ];
+
+  const [plants, setPlants] = useState<PlantInfo[]>(DEFAULT_PLANTS);
   const [selectedPlant, setSelectedPlant] = useState<string>("IOCL_MATHURA");
   const [maxRadius, setMaxRadius] = useState<number>(1500);
-  const [surplusList, setSurplusList] = useState<SurplusItem[]>([]);
+  const [surplusList, setSurplusList] = useState<SurplusItem[]>(
+    DEFAULT_SURPLUS_ITEMS
+  );
   const [loadingSurplus, setLoadingSurplus] = useState<boolean>(false);
 
   // Demand Pool State
@@ -160,16 +343,20 @@ export const SurplusAndDemandView: React.FC<Props> = ({
 
   // Fetch plant directory and batches
   useEffect(() => {
-    fetch(`${API_BASE}/api/v1/surplus/plants`)
+    apiFetch("/api/v1/surplus/plants")
       .then((res) => res.json())
-      .then((data) => setPlants(data))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setPlants(data);
+        }
+      })
       .catch((err) => console.error("Failed to load CPSE plants", err));
 
     fetchBatches();
   }, []);
 
   const fetchBatches = () => {
-    fetch(`${API_BASE}/api/v1/demand-pool/batches`)
+    apiFetch("/api/v1/demand-pool/batches")
       .then((res) => res.json())
       .then((data) => setBatchData(data))
       .catch((err) => console.error("Failed to load pooled batches", err));
@@ -179,16 +366,21 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   useEffect(() => {
     if (!selectedPlant) return;
     setLoadingSurplus(true);
-    fetch(
-      `${API_BASE}/api/v1/surplus/nearby?destination_plant=${selectedPlant}&max_radius_km=${maxRadius}`
+    apiFetch(
+      `/api/v1/surplus/nearby?destination_plant=${selectedPlant}&max_radius_km=${maxRadius}`
     )
       .then((res) => res.json())
       .then((data) => {
-        setSurplusList(data.items || []);
+        if (data.items && data.items.length > 0) {
+          setSurplusList(data.items);
+        } else {
+          setSurplusList(DEFAULT_SURPLUS_ITEMS);
+        }
         setLoadingSurplus(false);
       })
       .catch((err) => {
         console.error("Failed to load nearby surplus", err);
+        setSurplusList(DEFAULT_SURPLUS_ITEMS);
         setLoadingSurplus(false);
       });
   }, [selectedPlant, maxRadius]);
@@ -212,9 +404,8 @@ export const SurplusAndDemandView: React.FC<Props> = ({
     };
 
     try {
-      const res = await fetch(`${API_BASE}/api/v1/surplus/mtirf/generate`, {
+      const res = await apiFetch("/api/v1/surplus/mtirf/generate", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
       const data = await res.json();
@@ -232,21 +423,17 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   // Handle MTIRF Approval
   const handleApproveMTIRF = async (reqNumber: string) => {
     try {
-      const res = await fetch(
-        `${API_BASE}/api/v1/surplus/mtirf/${reqNumber}/approve`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            requisition_number: reqNumber,
-            approving_officer_name: "A. K. Mehta",
-            approving_officer_email: "akmehta@ongc.co.in",
-            approving_officer_designation:
-              "Executive Director (Materials Management)",
-            e_sign_pin_or_token: "AADHAAR-OTP-VERIFIED",
-          }),
-        }
-      );
+      const res = await apiFetch(`/api/v1/surplus/mtirf/${reqNumber}/approve`, {
+        method: "POST",
+        body: JSON.stringify({
+          requisition_number: reqNumber,
+          approving_officer_name: "A. K. Mehta",
+          approving_officer_email: "akmehta@ongc.co.in",
+          approving_officer_designation:
+            "Executive Director (Materials Management)",
+          e_sign_pin_or_token: "AADHAAR-OTP-VERIFIED",
+        }),
+      });
       const data = await res.json();
       onShowAuditMessage(
         `MTIRF ${reqNumber} APPROVED by source. SAP Outbound Note: ${data.sap_outbound_delivery_note}`
@@ -262,8 +449,8 @@ export const SurplusAndDemandView: React.FC<Props> = ({
   // Handle GeM Tender Export View
   const handleViewGeMTender = async (batchId: string) => {
     try {
-      const res = await fetch(
-        `${API_BASE}/api/v1/demand-pool/batches/${batchId}/gem-tender`
+      const res = await apiFetch(
+        `/api/v1/demand-pool/batches/${batchId}/gem-tender`
       );
       const data = await res.json();
       setSelectedTender(data);
@@ -1734,7 +1921,7 @@ export const SurplusAndDemandView: React.FC<Props> = ({
                         color: rawTokens.textMuted,
                       }}
                     >
-                      SAP ERP DISPATCH HANDSHAKE
+                      SAP ERP DISPATCH (SIMULATED)
                     </div>
                     <div
                       style={{

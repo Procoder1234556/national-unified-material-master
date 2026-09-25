@@ -2,16 +2,18 @@
 
 ## National Unified Material Master (NUMM) Framework
 
-**Design Engine**: Astryx Design System (`@astryxdesign/core`) + StyleX (`@stylexjs/stylex`)  
+**Design Engine**: Humanto token object (`tokens.stylex.ts`) + inline styles (StyleX package present; Vite plugin not enabled)  
 **Aesthetic Anchor**: Humanto Sovereign Industrial Palette  
-**Version**: 2.2.0
+**Version**: 2.2.0 (as-built)
+
+> **Stack honesty note (2026-09)**: Production UI uses React 19 + Vite 6 + Lucide + Framer Motion with Humanto CSS tokens applied via inline `style={{}}`. `@astryxdesign/*`, TanStack Table/Query, Zustand, and ECharts are **not** wired. `@stylexjs/stylex` is a dependency for future compile-time CSS; current build does not run the StyleX Vite plugin. Landing page uses Tailwind CDN separately.
 
 ---
 
 ## 1. Design System Principles
 
 1. **Enterprise Industrial Clarity**: Prioritize engineering attribute scannability and unambiguous dimensional representation over decorative fluff.
-2. **Deterministic Zero-Runtime Style Resolution**: Strictly implemented with Meta's **StyleX** (`@stylexjs/stylex`) and **Astryx Design System** (`@astryxdesign/core`, `@astryxdesign/theme-neutral`). Zero runtime CSS-in-JS injection ensures rock-solid 60 FPS performance.
+2. **Token-driven industrial styling**: Humanto palette tokens in `frontend/src/tokens.stylex.ts` applied as a plain object (inline styles). StyleX compile pipeline is an upgrade path, not current runtime.
 3. **Keyboard-First Ergonomics**: Data stewards processing thousands of candidate items daily can navigate, inspect, approve, reject, or edit entirely via single-key shortcuts without touching the mouse.
 4. **Transparent Explainability**: Visual attribute diffing highlights matches in mint green, acceptable tolerances in warm peach, and fatal safety mismatches in crimson wine.
 5. **Accessibility & Contrast**: Strict compliance with WCAG 2.1 Level AA (minimum 4.5:1 text contrast, prominent focus rings, ARIA roles for screen readers).

@@ -34,13 +34,13 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
           view: "search",
         },
         {
-          code: "ONMC-MECH-VLV-GAT-004-300-WCB-41A7",
-          desc: '4" Gate Valve • Class 300 • ASTM A216 WCB',
+          code: "ONMC-MECH-VLV-GAT-004-300-A216-7A3C",
+          desc: '4" Gate Valve · Class 300 · ASTM A216 WCB',
           view: "search",
         },
         {
-          code: "ONMC-MECH-GSK-SPW-050-150-SS3-11C8",
-          desc: "Spiral Wound Gasket 50mm 150# SS316",
+          code: "ONMC-STAT-GSK-SPW-002-150-SS316-2F88",
+          desc: '2" Spiral Wound Gasket · Class 150 · SS316/Graphite',
           view: "search",
         },
       ],
@@ -61,7 +61,7 @@ export const QuickSearchModal: React.FC<QuickSearchModalProps> = ({
         {
           code: "Security & CVC Audit",
           desc: "Tamper-evident logs and cryptographic hash verification",
-          view: "audit",
+          view: "security",
         },
       ],
     },

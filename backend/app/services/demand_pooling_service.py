@@ -3,8 +3,12 @@
 
 import uuid
 from datetime import datetime, timezone
-from typing import Dict, List, Optional, Tuple
+from typing import List, Optional, Tuple
 
+from sqlalchemy import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from backend.app.models.models import PooledDemand, UnifiedMasterCode
 from backend.app.schemas.demand_pool import (
     CPSEDemandItem,
     DemandAggregationRequest,
@@ -12,12 +16,7 @@ from backend.app.schemas.demand_pool import (
     PooledBatchSummary,
     VolumeTierInfo,
 )
-from backend.app.services.taxonomy_mapper import default_taxonomy_mapper
 
-
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import select, func
-from backend.app.models.models import PooledDemand, UnifiedMasterCode
 
 class DemandPoolingService:
     """
@@ -91,7 +90,7 @@ class DemandPoolingService:
         stmt = select(UnifiedMasterCode).where(UnifiedMasterCode.onmc_code == req.onmc_code)
         result = await session.execute(stmt)
         master = result.scalars().first()
-        
+
         if not master:
             raise ValueError(f"Unified master code '{req.onmc_code}' not found.")
 
@@ -105,7 +104,7 @@ class DemandPoolingService:
 
         participating_orgs = sorted(list(set(d.organization_code for d in req.demands)))
         gfr_status, proc_mode = self.determine_gfr_status(total_baseline)
-        
+
         pooled_demand = PooledDemand(
             unified_master_id=master.id,
             total_aggregate_quantity=total_qty,
@@ -113,7 +112,7 @@ class DemandPoolingService:
             target_tender_month=req.target_tender_month,
             status="DRAFT",
             estimated_cost_inr=pooled_total,
-            projected_savings_inr=projected_savings
+            projected_savings_inr=projected_savings,
         )
         session.add(pooled_demand)
         await session.flush()
@@ -158,12 +157,16 @@ class DemandPoolingService:
         batch = result.scalars().first()
         if not batch:
             return None
-            
-        master_res = await session.execute(select(UnifiedMasterCode).where(UnifiedMasterCode.id == batch.unified_master_id))
+
+        master_res = await session.execute(
+            select(UnifiedMasterCode).where(UnifiedMasterCode.id == batch.unified_master_id)
+        )
         master = master_res.scalars().first()
-        
+
         discount_pct, tier_label = self.get_discount_tier(batch.total_aggregate_quantity)
-        gfr_status, proc_mode = self.determine_gfr_status(float(batch.estimated_cost_inr) + float(batch.projected_savings_inr))
+        gfr_status, proc_mode = self.determine_gfr_status(
+            float(batch.estimated_cost_inr) + float(batch.projected_savings_inr)
+        )
 
         return PooledBatchSummary(
             batch_id=str(batch.id),
@@ -192,7 +195,7 @@ class DemandPoolingService:
         stmt = select(PooledDemand)
         result = await session.execute(stmt)
         batches = result.scalars().all()
-        
+
         batch_summaries = []
         for batch in batches:
             s = await self.get_batch(session, str(batch.id))

@@ -13,11 +13,11 @@
 
 The NUMM Framework employs a decoupled, asynchronous microservices architecture engineered specifically for high-throughput public sector industrial catalog processing:
 
-- **Frontend Presentation Layer**: High-density enterprise single page application (SPA) built with React 19, Astryx Design System, and StyleX.
-- **Backend API & Orchestration**: Asynchronous Python 3.11 + FastAPI microservices serving REST, WebSockets, and Server-Sent Events (SSE).
-- **Hybrid Storage & Vector Search**: PostgreSQL 16 with `pgvector` 0.8+ executing HNSW cosine similarity search combined with ACID relational tables.
-- **Asynchronous Task Processing**: Redis 7.4 with ARQ / Celery workers for streaming catalog ingestion, NLP extraction, and batch vector generation.
-- **AI/ML & NLP Engine**: Dual-tier pipeline pairing dense semantic embeddings (`BAAI/bge-large-en-v1.5`) with C++ accelerated lexical string algorithms (`RapidFuzz`, `Jellyfish`) and deterministic engineering rule gating.
+- **Frontend Presentation Layer**: High-density enterprise SPA built with React 19, Humanto design tokens, and inline styles (StyleX/Astryx reserved as upgrade path).
+- **Backend API & Orchestration**: Asynchronous Python 3.11 + FastAPI serving REST. Default local store is SQLite; PostgreSQL 16 + pgvector is the production target via docker-compose.
+- **Hybrid Storage & Vector Search**: Relational catalog + optional dense embeddings (`BAAI/bge-large-en-v1.5` when sentence-transformers available; deterministic fallback otherwise). HNSW SQL path is upgrade-gated on Postgres.
+- **Asynchronous Task Processing**: Redis present in docker-compose; ingest currently runs in-process. ARQ/Celery workers are upgrade path for 100k+ catalogs.
+- **AI/ML & NLP Engine**: Dual-tier pipeline pairing dense semantic embeddings with RapidFuzz lexical scoring and deterministic engineering rule gating.
 
 ```
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -72,25 +72,19 @@ The NUMM Framework employs a decoupled, asynchronous microservices architecture 
   - _Rationale_: Sub-second Hot Module Replacement (HMR) and optimized Rollup tree-shaking for minimal production bundle footprint (<180kB initial gzip).
 - **Language**: TypeScript 5.6.3 (Strict Mode enabled, `noImplicitAny: true`, `strictNullChecks: true`).
 
-### 2.2. Design System & Styling Engine
+### 2.2. Design System & Styling Engine (as-built)
 
-- **Design System**: **Astryx Design System**
-  - Package: `@astryxdesign/core` @ 1.2.0
-  - Theme: `@astryxdesign/theme-neutral` @ 1.2.0
-- **Styling Architecture**: **StyleX** (`@stylexjs/stylex` @ 0.9.3)
-  - _Rationale_: Zero-runtime CSS-in-JS developed by Meta. Guarantees deterministic style resolution, eliminates runtime CSS style-injection overhead, and enforces strict token constraints suitable for mission-critical sovereign software.
-- **Aesthetic Direction**: Humanto-inspired warm sovereign industrial theme (`#E94344` terracotta red, `#9B121E` crimson wine, `#F1CC9D` sandstone, `#5F978E` petroleum sage, `#593C32` deep umber, `#A5D7C9` soft mint).
-
-### 2.3. State Management & Data Grids
-
-- **Server State**: TanStack Query (React Query) v5.62.7
-  - Automatic background refetching, cache invalidation, and optimistic UI mutations for instant review approvals.
-- **Client State**: Zustand 5.0.2
-  - Ultra-lightweight store (1.2kB) managing data steward review queues, active filters, and keyboard triage state.
-- **Data Table Engine**: TanStack Table v8.20.5
-  - Headless virtualized data grid rendering 10,000+ material rows at a locked 60 FPS.
-- **Charts & Data Analytics**: Apache ECharts 5.5.1 via `echarts-for-react` 3.0.2.
+- **Tokens**: Humanto Sovereign Industrial palette in `tokens.stylex.ts` (`#E94344`, `#9B121E`, `#F1CC9D`, `#5F978E`, `#593C32`, `#A5D7C9`).
+- **Styling**: Inline React styles + global `index.css`. Package `@stylexjs/stylex` present; Vite StyleX plugin **not** enabled.
+- **Design system packages**: `@astryxdesign/core` / `theme-neutral` **not installed** — upgrade path only.
 - **Icons**: Lucide React 0.468.0.
+- **Motion**: Framer Motion (landing / micro-interactions).
+
+### 2.3. State Management & Data Grids (as-built)
+
+- **Server calls**: Central `apiFetch` + MeghRaj demo JWT (`frontend/src/api.ts`). No TanStack Query / Zustand yet.
+- **Tables / charts**: Custom list UIs + `MicroCharts.tsx` (donut/sparkline). TanStack Table and ECharts are upgrade path for 10k+ virtualized grids.
+- **Navigation**: Tab state machine in `App.tsx` (no React Router). Role switcher loads demo JWTs from `GET /api/v1/auth/demo-tokens`.
 
 ---
 

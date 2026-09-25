@@ -40,16 +40,22 @@ async def root_health():
 # Mount API v1 router
 app.include_router(api_router, prefix=settings.API_V1_STR)
 
+
 @app.on_event("startup")
 async def startup_event():
     if settings.USE_SQLITE:
         from backend.app.db.seed import seed_data
+
         await seed_data()
     else:
         if not settings.POSTGRES_PASSWORD:
-            raise RuntimeError("POSTGRES_PASSWORD is not set. Cannot run in production mode with missing database credentials.")
-        from backend.app.db.session import engine
+            raise RuntimeError(
+                "POSTGRES_PASSWORD is not set. Cannot run in production mode with missing database credentials."
+            )
         from sqlalchemy import text
+
+        from backend.app.db.session import engine
+
         try:
             async with engine.begin() as conn:
                 await conn.execute(text("SELECT 1"))

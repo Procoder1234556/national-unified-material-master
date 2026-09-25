@@ -147,7 +147,7 @@ export const PriorityReviewQueue: React.FC<PriorityReviewQueueProps> = ({
             style={{
               fontSize: "16px",
               fontWeight: 700,
-              fontFamily: rawTokens.fontCalligraphy,
+              fontFamily: rawTokens.fontSans,
               letterSpacing: "0em",
               textTransform: "none",
               color: rawTokens.textPrimary,

@@ -19,7 +19,7 @@ import {
   AlertTriangle,
 } from "lucide-react";
 import { DonutMicro, Sparkline } from "./MicroCharts";
-import { API_BASE } from "../api";
+import { apiFetch } from "../api";
 
 export interface StockDistributionItem {
   organization_code: string;
@@ -218,6 +218,42 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [copiedCode, setCopiedCode] = useState<string | null>(null);
 
+  // Robust token-based matching with engineering synonym support
+  const matchResult = (
+    r: NationalSearchResult,
+    searchQuery: string
+  ): boolean => {
+    if (!searchQuery.trim()) return true;
+    const qClean = searchQuery.toLowerCase().replace(/[^a-z0-9\s]/g, " ");
+    const tokens = qClean
+      .split(/\s+/)
+      .filter((t) => t.length > 1 && !["inch", "class", "body"].includes(t));
+    if (tokens.length === 0) return true;
+
+    const target =
+      `${r.canonical_description} ${r.item_class} ${r.onmc_code} ${r.metallurgy || ""} ${r.pressure_class || ""} ${r.size_inch || ""}`.toLowerCase();
+
+    // Map common engineering synonyms
+    const aliases: Record<string, string[]> = {
+      valve: ["vlv", "valve"],
+      ball: ["bal", "ball"],
+      flanged: ["flgd", "flg", "flanged"],
+      flange: ["flg", "flange", "wnrf"],
+      wcb: ["a216", "wcb", "cs"],
+      a105: ["a105", "cs", "forged"],
+    };
+
+    return tokens.some((token) => {
+      if (target.includes(token)) return true;
+      for (const [key, alts] of Object.entries(aliases)) {
+        if (token === key || alts.includes(token)) {
+          if (alts.some((a) => target.includes(a))) return true;
+        }
+      }
+      return false;
+    });
+  };
+
   const executeSearch = (searchQuery: string = query) => {
     if (!searchQuery.trim()) return;
     setLoading(true);
@@ -230,43 +266,35 @@ export const SearchBeforeBuy: React.FC<SearchBeforeBuyProps> = ({
     if (pressureFilter) payload.pressure_class = parseInt(pressureFilter, 10);
     if (sizeFilter) payload.size_inch = parseFloat(sizeFilter);
 
-    fetch(`${API_BASE}/api/v1/search`, {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 2000);
+
+    apiFetch("/api/v1/search", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
+      signal: controller.signal,
     })
       .then((res) => res.json())
       .then((data) => {
+        clearTimeout(timeoutId);
         if (data.results && data.results.length > 0) {
           setResults(data.results);
         } else {
-          // Filter default mock if backend has no matches
-          setResults(
-            DEFAULT_SEARCH_RESULTS.filter(
-              (r) =>
-                r.canonical_description
-                  .toLowerCase()
-                  .includes(searchQuery.toLowerCase()) ||
-                r.item_class
-                  .toLowerCase()
-                  .includes(searchQuery.toLowerCase()) ||
-                r.onmc_code.toLowerCase().includes(searchQuery.toLowerCase())
-            )
+          // Token-based fallback matching
+          const filtered = DEFAULT_SEARCH_RESULTS.filter((r) =>
+            matchResult(r, searchQuery)
           );
+          setResults(filtered.length > 0 ? filtered : DEFAULT_SEARCH_RESULTS);
         }
         setLoading(false);
       })
       .catch(() => {
-        // Fallback filter on client
-        setResults(
-          DEFAULT_SEARCH_RESULTS.filter(
-            (r) =>
-              r.canonical_description
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase()) ||
-              r.item_class.toLowerCase().includes(searchQuery.toLowerCase())
-          )
+        clearTimeout(timeoutId);
+        // Robust fallback matching on client
+        const filtered = DEFAULT_SEARCH_RESULTS.filter((r) =>
+          matchResult(r, searchQuery)
         );
+        setResults(filtered.length > 0 ? filtered : DEFAULT_SEARCH_RESULTS);
         setLoading(false);
       });
   };

@@ -1,0 +1,1384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NUMM Admin Dashboard — One Nation, One Material Code</title>
+
+  <!-- Bootstrap 3 (Gentelella base) -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── NUMM × Gentelella Theme Override ─────────────────────────────────── */
+    :root {
+      --numm-sidebar:    #1A1614;
+      --numm-sidebar2:   #221E1B;
+      --numm-action:     #E94344;
+      --numm-conflict:   #9B121E;
+      --numm-highlight:  #F1CC9D;
+      --numm-verified:   #5F978E;
+      --numm-anchor:     #593C32;
+      --numm-approved:   #A5D7C9;
+      --numm-canvas:     #F5F3F0;
+      --numm-card:       #FFFFFF;
+      --numm-subtle:     #F8F7F5;
+      --numm-border:     #E5E2DE;
+      --numm-text1:      #0F172A;
+      --numm-text2:      #475569;
+      --numm-muted:      #94A3B8;
+      --topbar-h:        60px;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--numm-canvas);
+      color: var(--numm-text1);
+      margin: 0; padding: 0;
+      overflow-x: hidden;
+    }
+    code, kbd, .mono { font-family: 'JetBrains Mono', monospace; }
+
+    /* ─── SIDEBAR ──────────────────────────────────────────────────────────── */
+    #sidebar-menu {
+      position: fixed;
+      top: 0; left: 0;
+      width: 230px;
+      height: 100vh;
+      background: var(--numm-sidebar);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    .sidebar-logo {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .sidebar-logo a {
+      display: flex; align-items: center; gap: 10px;
+      text-decoration: none;
+    }
+    .logo-badge {
+      width: 36px; height: 36px; border-radius: 10px;
+      background: var(--numm-action);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: #fff;
+      flex-shrink: 0;
+    }
+    .logo-text { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.02em; }
+    .logo-sub  { font-size: 9px; color: rgba(255,255,255,0.4); font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; display: block; margin-top: 1px; }
+
+    .sidebar-section-label {
+      padding: 16px 20px 6px;
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: rgba(255,255,255,0.3);
+    }
+
+    .sidebar-nav { list-style: none; margin: 0; padding: 0 10px; }
+    .sidebar-nav li a {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px; border-radius: 10px;
+      color: rgba(255,255,255,0.6);
+      font-size: 13px; font-weight: 500;
+      text-decoration: none;
+      transition: background 0.15s, color 0.15s;
+      position: relative;
+    }
+    .sidebar-nav li a:hover { background: rgba(255,255,255,0.05); color: #fff; }
+    .sidebar-nav li.active a {
+      background: rgba(233,67,68,0.18);
+      color: #fff;
+    }
+    .sidebar-nav li.active a::before {
+      content: '';
+      position: absolute; left: -10px; top: 50%; transform: translateY(-50%);
+      width: 3px; height: 60%; border-radius: 0 3px 3px 0;
+      background: var(--numm-action);
+    }
+    .sidebar-nav li a .fa { width: 18px; text-align: center; font-size: 14px; }
+    .nav-badge {
+      margin-left: auto; padding: 2px 7px; border-radius: 999px;
+      font-size: 10px; font-weight: 700;
+      background: var(--numm-action); color: #fff;
+    }
+    .nav-badge.sage { background: var(--numm-verified); }
+    .nav-badge.peach { background: var(--numm-highlight); color: var(--numm-text1); }
+
+    /* ─── TOP NAV ──────────────────────────────────────────────────────────── */
+    #top-nav {
+      position: fixed;
+      top: 0; left: 230px; right: 0;
+      height: var(--topbar-h);
+      background: #fff;
+      border-bottom: 1px solid var(--numm-border);
+      display: flex; align-items: center;
+      padding: 0 24px;
+      z-index: 99;
+      gap: 16px;
+    }
+    .topnav-search {
+      flex: 1; max-width: 440px;
+      background: var(--numm-subtle);
+      border: 1px solid var(--numm-border);
+      border-radius: 10px;
+      padding: 7px 14px;
+      font-size: 13px; color: var(--numm-text1);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .topnav-search input {
+      border: none; background: transparent; outline: none;
+      flex: 1; font-size: 13px; color: var(--numm-text1); font-family: 'Inter', sans-serif;
+    }
+    .topnav-right { margin-left: auto; display: flex; align-items: center; gap: 12px; }
+    .topnav-badge-pill {
+      padding: 4px 12px; border-radius: 999px;
+      font-size: 11px; font-weight: 700;
+      background: rgba(165,215,201,0.3);
+      color: var(--numm-verified);
+      border: 1px solid var(--numm-approved);
+    }
+    .topnav-role-sel {
+      padding: 5px 12px; border-radius: 8px;
+      border: 1px solid var(--numm-border);
+      font-size: 12px; font-weight: 600; color: var(--numm-text2);
+      background: var(--numm-subtle);
+      cursor: pointer;
+    }
+    .topnav-icon-btn {
+      width: 36px; height: 36px; border-radius: 10px;
+      border: 1px solid var(--numm-border);
+      background: var(--numm-subtle);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; color: var(--numm-text2);
+      position: relative;
+    }
+    .notif-dot {
+      position: absolute; top: 6px; right: 6px;
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--numm-action);
+      border: 1.5px solid #fff;
+    }
+    .btn-back-landing {
+      padding: 6px 14px; border-radius: 8px;
+      background: var(--numm-action); color: #fff;
+      font-size: 12px; font-weight: 700;
+      border: none; cursor: pointer;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 6px;
+    }
+
+    /* ─── MAIN CONTENT WRAPPER ─────────────────────────────────────────────── */
+    #main-content {
+      margin-left: 230px;
+      margin-top: var(--topbar-h);
+      padding: 24px;
+      min-height: calc(100vh - 60px);
+    }
+
+    /* ─── PAGE HEADER ──────────────────────────────────────────────────────── */
+    .page-header-numm {
+      margin-bottom: 24px;
+    }
+    .page-header-numm h1 {
+      font-size: 22px; font-weight: 800; color: var(--numm-text1);
+      margin: 0 0 4px;
+    }
+    .page-header-numm p {
+      font-size: 13px; color: var(--numm-text2); margin: 0;
+    }
+    .breadcrumb-numm {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 11px; color: var(--numm-muted); margin-bottom: 8px;
+    }
+    .breadcrumb-numm span { color: var(--numm-text2); }
+
+    /* ─── KPI TILES ────────────────────────────────────────────────────────── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .kpi-tile {
+      background: var(--numm-card);
+      border: 1px solid var(--numm-border);
+      border-radius: 14px;
+      padding: 18px 20px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .kpi-tile::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    }
+    .kpi-tile.action::before  { background: var(--numm-action); }
+    .kpi-tile.verified::before { background: var(--numm-verified); }
+    .kpi-tile.highlight::before { background: var(--numm-highlight); }
+    .kpi-tile.approved::before { background: var(--numm-approved); }
+    .kpi-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--numm-muted); margin-bottom: 6px;
+    }
+    .kpi-value {
+      font-size: 28px; font-weight: 800; color: var(--numm-text1);
+      letter-spacing: -0.03em; line-height: 1;
+    }
+    .kpi-sub {
+      font-size: 11px; color: var(--numm-text2); margin-top: 6px;
+      display: flex; align-items: center; gap: 4px;
+    }
+    .kpi-icon {
+      position: absolute; right: 16px; top: 16px;
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 16px;
+    }
+    .kpi-tile.action  .kpi-icon { background: rgba(233,67,68,0.1);  color: var(--numm-action); }
+    .kpi-tile.verified .kpi-icon { background: rgba(95,151,142,0.1); color: var(--numm-verified); }
+    .kpi-tile.highlight .kpi-icon { background: rgba(241,204,157,0.2); color: var(--numm-anchor); }
+    .kpi-tile.approved .kpi-icon { background: rgba(165,215,201,0.2); color: var(--numm-verified); }
+    .kpi-delta { font-size: 11px; font-weight: 700; }
+    .kpi-delta.up   { color: #22c55e; }
+    .kpi-delta.down { color: var(--numm-action); }
+
+    /* ─── CHARTS ROW ───────────────────────────────────────────────────────── */
+    .charts-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ─── CARDS ────────────────────────────────────────────────────────────── */
+    .card-numm {
+      background: var(--numm-card);
+      border: 1px solid var(--numm-border);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .card-numm-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--numm-border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .card-numm-header h3 {
+      font-size: 14px; font-weight: 700; color: var(--numm-text1); margin: 0;
+    }
+    .card-numm-header .card-label {
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; color: var(--numm-muted);
+      display: block; margin-bottom: 2px;
+    }
+    .card-numm-body { padding: 20px; }
+    .card-action-link {
+      font-size: 12px; font-weight: 600; color: var(--numm-action);
+      text-decoration: none; cursor: pointer;
+    }
+
+    /* ─── MINI BAR CHART ───────────────────────────────────────────────────── */
+    .bar-chart {
+      display: flex; align-items: flex-end; gap: 5px;
+      height: 80px; padding-top: 8px;
+    }
+    .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .bar { width: 100%; border-radius: 4px 4px 0 0; transition: opacity 0.2s; cursor: pointer; }
+    .bar:hover { opacity: 0.8; }
+    .bar-label { font-size: 9px; color: var(--numm-muted); font-weight: 600; }
+
+    /* ─── DONUT CHART ──────────────────────────────────────────────────────── */
+    .donut-wrap { position: relative; width: 120px; height: 120px; margin: 0 auto 16px; }
+    .donut-wrap svg { transform: rotate(-90deg); }
+    .donut-center {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+    }
+    .donut-center .val { font-size: 22px; font-weight: 800; color: var(--numm-text1); }
+    .donut-center .lbl { font-size: 9px; font-weight: 700; color: var(--numm-muted); text-transform: uppercase; }
+    .legend-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 0; border-bottom: 1px solid var(--numm-border);
+      font-size: 12px;
+    }
+    .legend-row:last-child { border-bottom: none; }
+    .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .legend-val { font-weight: 700; color: var(--numm-text1); }
+
+    /* ─── SPARKLINE ────────────────────────────────────────────────────────── */
+    .sparkline-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--numm-border);
+    }
+    .sparkline-row:last-child { border-bottom: none; }
+    .spark-label { flex: 1; font-size: 12px; color: var(--numm-text2); font-weight: 600; }
+    .spark-val { font-size: 13px; font-weight: 800; color: var(--numm-text1); min-width: 40px; text-align: right; }
+    .spark-svg { flex-shrink: 0; }
+
+    /* ─── GRID 3-COL ───────────────────────────────────────────────────────── */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    /* ─── QUEUE TABLE ──────────────────────────────────────────────────────── */
+    .numm-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+    .numm-table th {
+      padding: 9px 12px; text-align: left;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.07em; color: var(--numm-muted);
+      background: var(--numm-subtle);
+      border-bottom: 1px solid var(--numm-border);
+    }
+    .numm-table td {
+      padding: 11px 12px;
+      border-bottom: 1px solid var(--numm-border);
+      vertical-align: middle;
+    }
+    .numm-table tr:last-child td { border-bottom: none; }
+    .numm-table tr:hover td { background: var(--numm-subtle); }
+    .onmc-chip {
+      display: inline-block; padding: 2px 8px; border-radius: 6px;
+      background: var(--numm-subtle); border: 1px solid var(--numm-border);
+      font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600;
+      color: var(--numm-text1); white-space: nowrap;
+    }
+    .status-badge {
+      display: inline-block; padding: 2px 9px; border-radius: 999px;
+      font-size: 10px; font-weight: 700; text-transform: uppercase;
+    }
+    .status-badge.review   { background: rgba(241,204,157,0.3); color: #92400e; border: 1px solid rgba(241,204,157,0.8); }
+    .status-badge.approved { background: rgba(165,215,201,0.3); color: var(--numm-verified); border: 1px solid rgba(165,215,201,0.8); }
+    .status-badge.conflict { background: rgba(155,18,30,0.12); color: var(--numm-conflict); border: 1px solid rgba(155,18,30,0.3); }
+    .status-badge.novel    { background: rgba(95,151,142,0.12); color: var(--numm-verified); border: 1px solid rgba(95,151,142,0.3); }
+    .conf-bar {
+      display: flex; align-items: center; gap: 8px;
+    }
+    .conf-track {
+      flex: 1; height: 5px; background: var(--numm-border); border-radius: 999px; overflow: hidden;
+    }
+    .conf-fill { height: 100%; border-radius: 999px; }
+    .btn-action {
+      padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; border: none; cursor: pointer;
+    }
+    .btn-approve { background: rgba(165,215,201,0.3); color: var(--numm-verified); }
+    .btn-reject  { background: rgba(233,67,68,0.1);  color: var(--numm-action); }
+
+    /* ─── PROGRESS BARS ────────────────────────────────────────────────────── */
+    .progress-numm {
+      height: 6px; border-radius: 999px; background: var(--numm-border);
+      overflow: hidden; margin-top: 4px; margin-bottom: 12px;
+    }
+    .progress-fill { height: 100%; border-radius: 999px; }
+
+    /* ─── CPSE GRID ────────────────────────────────────────────────────────── */
+    .cpse-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+    }
+    .cpse-cell {
+      text-align: center; padding: 12px 8px; border-radius: 10px;
+      border: 1px solid var(--numm-border); background: var(--numm-subtle);
+      cursor: pointer; transition: all 0.15s;
+    }
+    .cpse-cell:hover { background: #fff; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .cpse-abbr { font-size: 13px; font-weight: 800; color: var(--numm-text1); }
+    .cpse-items { font-size: 10px; color: var(--numm-muted); margin-top: 3px; }
+    .cpse-bar { width: 100%; height: 4px; border-radius: 999px; margin-top: 8px; }
+
+    /* ─── SURPLUS ITEM ─────────────────────────────────────────────────────── */
+    .surplus-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--numm-border);
+    }
+    .surplus-item:last-child { border-bottom: none; }
+    .surplus-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: rgba(95,151,142,0.12);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--numm-verified); font-size: 14px; flex-shrink: 0;
+    }
+    .surplus-desc { flex: 1; }
+    .surplus-title { font-size: 12px; font-weight: 700; color: var(--numm-text1); }
+    .surplus-meta { font-size: 10px; color: var(--numm-muted); margin-top: 1px; }
+    .surplus-stock { font-size: 13px; font-weight: 800; color: var(--numm-verified); text-align: right; }
+    .surplus-km { font-size: 10px; color: var(--numm-muted); text-align: right; }
+
+    /* ─── INGESTION JOB ────────────────────────────────────────────────────── */
+    .job-row {
+      display: flex; align-items: center; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid var(--numm-border);
+    }
+    .job-row:last-child { border-bottom: none; }
+    .job-icon {
+      width: 32px; height: 32px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; flex-shrink: 0;
+    }
+    .job-icon.done   { background: rgba(165,215,201,0.2); color: var(--numm-verified); }
+    .job-icon.proc   { background: rgba(241,204,157,0.2); color: #92400e; }
+    .job-icon.fail   { background: rgba(233,67,68,0.1);   color: var(--numm-action); }
+    .job-desc { flex: 1; }
+    .job-title { font-size: 12px; font-weight: 700; color: var(--numm-text1); }
+    .job-meta  { font-size: 10px; color: var(--numm-muted); margin-top: 1px; }
+    .job-stats { text-align: right; }
+    .job-count { font-size: 13px; font-weight: 800; color: var(--numm-text1); }
+    .job-time  { font-size: 10px; color: var(--numm-muted); }
+
+    /* ─── AUDIT LOG ────────────────────────────────────────────────────────── */
+    .audit-item {
+      padding: 10px 0; border-bottom: 1px solid var(--numm-border);
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .audit-item:last-child { border-bottom: none; }
+    .audit-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      margin-top: 4px; flex-shrink: 0;
+    }
+    .audit-hash { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--numm-muted); margin-top: 2px; }
+    .audit-text { font-size: 12px; color: var(--numm-text2); flex: 1; }
+    .audit-time { font-size: 10px; color: var(--numm-muted); }
+
+    /* ─── SAFETY GATE STATUS ───────────────────────────────────────────────── */
+    .gate-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 0; border-bottom: 1px solid var(--numm-border);
+      font-size: 12px;
+    }
+    .gate-row:last-child { border-bottom: none; }
+    .gate-label { color: var(--numm-text2); font-weight: 600; }
+    .gate-pass { color: #22c55e; font-weight: 700; }
+    .gate-fail { color: var(--numm-conflict); font-weight: 700; }
+    .gate-icon { font-size: 14px; }
+
+    /* ─── ALERT BANNER ─────────────────────────────────────────────────────── */
+    .alert-numm {
+      padding: 10px 16px; border-radius: 10px;
+      font-size: 12px; font-weight: 600; margin-bottom: 16px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .alert-numm.warn { background: rgba(241,204,157,0.25); color: #92400e; border: 1px solid rgba(241,204,157,0.8); }
+    .alert-numm.info { background: rgba(95,151,142,0.15); color: var(--numm-verified); border: 1px solid rgba(95,151,142,0.4); }
+    .alert-numm.crit { background: rgba(155,18,30,0.1);  color: var(--numm-conflict); border: 1px solid rgba(155,18,30,0.3); }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────────────── */
+    .footer-numm {
+      margin-left: 230px;
+      background: #fff; border-top: 1px solid var(--numm-border);
+      padding: 14px 24px;
+      display: flex; justify-content: space-between; align-items: center;
+      font-size: 11px; color: var(--numm-muted);
+    }
+    .footer-tag { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────────────── */
+    @media (max-width: 992px) {
+      #sidebar-menu { transform: translateX(-230px); }
+      #main-content, #top-nav, .footer-numm { margin-left: 0; left: 0; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+      .charts-row, .grid-2 { grid-template-columns: 1fr; }
+      .grid-3 { grid-template-columns: 1fr; }
+      .cpse-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════════════════════════════════════════ -->
+<nav id="sidebar-menu">
+  <div class="sidebar-logo">
+    <a href="/">
+      <div class="logo-badge">N</div>
+      <div>
+        <div class="logo-text">NUMM Admin</div>
+        <span class="logo-sub">SIH 26099 · MoPNG</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="sidebar-section-label">Main</div>
+  <ul class="sidebar-nav">
+    <li class="active">
+      <a href="#"><i class="fa fa-tachometer"></i> Overview <span class="nav-badge">84</span></a>
+    </li>
+    <li>
+      <a href="#steward-section"><i class="fa fa-tasks"></i> Steward Queue <span class="nav-badge">84</span></a>
+    </li>
+    <li>
+      <a href="#search-section"><i class="fa fa-search"></i> Search Before Buy</a>
+    </li>
+  </ul>
+
+  <div class="sidebar-section-label">Procurement</div>
+  <ul class="sidebar-nav">
+    <li>
+      <a href="#surplus-section"><i class="fa fa-exchange"></i> Surplus Stock <span class="nav-badge sage">12</span></a>
+    </li>
+    <li>
+      <a href="#demand-section"><i class="fa fa-line-chart"></i> Pooled Demand <span class="nav-badge peach">3</span></a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-upload"></i> Ingestion Jobs</a>
+    </li>
+  </ul>
+
+  <div class="sidebar-section-label">Governance</div>
+  <ul class="sidebar-nav">
+    <li>
+      <a href="#audit-section"><i class="fa fa-shield"></i> CVC Audit Ledger</a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-lock"></i> Security Vault</a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-sitemap"></i> Architecture</a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-cog"></i> Settings</a>
+    </li>
+  </ul>
+
+  <div class="sidebar-section-label">Standards</div>
+  <ul class="sidebar-nav">
+    <li>
+      <a href="#"><i class="fa fa-book"></i> MESC Taxonomy</a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-barcode"></i> UNSPSC Codes</a>
+    </li>
+    <li>
+      <a href="#"><i class="fa fa-government"></i> GeM Portal</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     TOP NAV
+════════════════════════════════════════════════════════════════════════ -->
+<nav id="top-nav">
+  <div class="topnav-search">
+    <i class="fa fa-search" style="color: var(--numm-muted); font-size:13px;"></i>
+    <input type="text" placeholder="Search material by ONMC, MESC, description… (Ctrl+K)" />
+    <span style="font-size:10px; color:var(--numm-muted); font-family:'JetBrains Mono',monospace; font-weight:600;">⌘K</span>
+  </div>
+
+  <div class="topnav-right">
+    <span class="topnav-badge-pill"><i class="fa fa-circle" style="font-size:7px;"></i> Live · p95 38ms</span>
+    <select class="topnav-role-sel">
+      <option>Data Steward</option>
+      <option>Procurement Officer</option>
+      <option>Plant Engineer</option>
+      <option>CVC Auditor</option>
+    </select>
+    <div class="topnav-icon-btn">
+      <i class="fa fa-bell" style="font-size:14px;"></i>
+      <div class="notif-dot"></div>
+    </div>
+    <div class="topnav-icon-btn">
+      <i class="fa fa-keyboard-o" style="font-size:14px;"></i>
+    </div>
+    <a href="/" class="btn-back-landing">
+      <i class="fa fa-arrow-left"></i> Landing Page
+    </a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════════════════════════ -->
+<div id="main-content">
+
+  <!-- ── Page Header ── -->
+  <div class="page-header-numm">
+    <div class="breadcrumb-numm">
+      <i class="fa fa-home"></i> <span>NUMM</span> / <span>Overview Dashboard</span>
+    </div>
+    <h1>National Unified Material Master — Operations</h1>
+    <p>Ministry of Petroleum &amp; Natural Gas · SIH 26099 · One Nation, One Material Code (ONMC)</p>
+  </div>
+
+  <!-- ── Alert Banner ── -->
+  <div class="alert-numm warn">
+    <i class="fa fa-exclamation-triangle"></i>
+    <div><strong>84 items</strong> in Steward Review Queue require engineering attribute validation. <a href="#steward-section" style="color: inherit; text-decoration: underline; font-weight:700;">Review now →</a></div>
+  </div>
+
+  <!-- ── KPI Tiles ── -->
+  <div class="kpi-grid">
+    <div class="kpi-tile action">
+      <div class="kpi-icon"><i class="fa fa-database"></i></div>
+      <div class="kpi-label">Total Catalog Items</div>
+      <div class="kpi-value">4.21M</div>
+      <div class="kpi-sub">
+        <span class="kpi-delta up"><i class="fa fa-arrow-up"></i> +12,440</span>
+        <span>since last sync</span>
+      </div>
+    </div>
+    <div class="kpi-tile verified">
+      <div class="kpi-icon"><i class="fa fa-check-circle"></i></div>
+      <div class="kpi-label">Auto-Approved Matches</div>
+      <div class="kpi-value">83.2%</div>
+      <div class="kpi-sub">
+        <span class="kpi-delta up"><i class="fa fa-arrow-up"></i> +1.4%</span>
+        <span>vs prior 7 days</span>
+      </div>
+    </div>
+    <div class="kpi-tile highlight">
+      <div class="kpi-icon"><i class="fa fa-hourglass-half"></i></div>
+      <div class="kpi-label">Pending HITL Review</div>
+      <div class="kpi-value">84</div>
+      <div class="kpi-sub">
+        <span class="kpi-delta down"><i class="fa fa-arrow-down"></i> 32 critical</span>
+        <span>flagged today</span>
+      </div>
+    </div>
+    <div class="kpi-tile approved">
+      <div class="kpi-icon"><i class="fa fa-inr"></i></div>
+      <div class="kpi-label">Value Pool Identified</div>
+      <div class="kpi-value">₹4,812Cr</div>
+      <div class="kpi-sub">
+        <span class="kpi-delta up"><i class="fa fa-arrow-up"></i> +₹248Cr</span>
+        <span>this quarter</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Charts Row ── -->
+  <div class="charts-row">
+    <!-- Harmonization Activity -->
+    <div class="card-numm">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">7-Day Trend</span>
+          <h3>Harmonization Activity</h3>
+        </div>
+        <div style="display:flex; gap:8px; align-items:center;">
+          <span style="font-size:11px; color:var(--numm-muted);">Auto-Approved</span>
+          <span style="width:10px; height:3px; border-radius:99px; background:var(--numm-verified); display:inline-block;"></span>
+          <span style="font-size:11px; color:var(--numm-muted);">HITL</span>
+          <span style="width:10px; height:3px; border-radius:99px; background:var(--numm-highlight); display:inline-block;"></span>
+        </div>
+      </div>
+      <div class="card-numm-body">
+        <div class="bar-chart">
+          <div class="bar-col">
+            <div class="bar" style="height:62%; background:var(--numm-verified); opacity:0.85;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:18%; background:var(--numm-highlight); margin-top:2px;"></div>
+            </div>
+            <div class="bar-label">Mon</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:70%; background:var(--numm-verified); opacity:0.85;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:22%; background:var(--numm-highlight); margin-top:2px;"></div>
+            </div>
+            <div class="bar-label">Tue</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:55%; background:var(--numm-verified); opacity:0.85;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:28%; background:var(--numm-highlight); margin-top:2px;"></div>
+            </div>
+            <div class="bar-label">Wed</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:80%; background:var(--numm-verified); opacity:0.85;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:15%; background:var(--numm-highlight); margin-top:2px;"></div>
+            </div>
+            <div class="bar-label">Thu</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:72%; background:var(--numm-verified); opacity:0.85;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:20%; background:var(--numm-highlight); margin-top:2px;"></div>
+            </div>
+            <div class="bar-label">Fri</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:40%; background:var(--numm-verified); opacity:0.5;"></div>
+            <div class="bar-col" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+              <div class="bar" style="height:10%; background:var(--numm-highlight); margin-top:2px; opacity:0.5;"></div>
+            </div>
+            <div class="bar-label">Sat</div>
+          </div>
+          <div class="bar-col">
+            <div class="bar" style="height:90%; background:var(--numm-action);"></div>
+            <div class="bar-label" style="color:var(--numm-action); font-weight:800;">Today</div>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px;">
+          <div>
+            <div style="font-size:10px; color:var(--numm-muted); text-transform:uppercase; font-weight:700;">Processed Today</div>
+            <div style="font-size:18px; font-weight:800; color:var(--numm-text1);">2,841</div>
+          </div>
+          <div>
+            <div style="font-size:10px; color:var(--numm-muted); text-transform:uppercase; font-weight:700;">Auto-Approved</div>
+            <div style="font-size:18px; font-weight:800; color:var(--numm-verified);">2,367</div>
+          </div>
+          <div>
+            <div style="font-size:10px; color:var(--numm-muted); text-transform:uppercase; font-weight:700;">Novel Items</div>
+            <div style="font-size:18px; font-weight:800; color:var(--numm-anchor);">290</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Match Quality Donut -->
+    <div class="card-numm">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">Confidence Distribution</span>
+          <h3>Match Quality Breakdown</h3>
+        </div>
+      </div>
+      <div class="card-numm-body">
+        <div class="donut-wrap">
+          <svg width="120" height="120" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="45" fill="none" stroke="var(--numm-border)" stroke-width="14"/>
+            <!-- High Confidence 83.2% -->
+            <circle cx="60" cy="60" r="45" fill="none" stroke="var(--numm-verified)" stroke-width="14"
+              stroke-dasharray="234.6 47.1" stroke-linecap="round"/>
+            <!-- Borderline 11.5% -->
+            <circle cx="60" cy="60" r="45" fill="none" stroke="var(--numm-highlight)" stroke-width="14"
+              stroke-dasharray="32.4 249.3" stroke-linecap="round" stroke-dashoffset="-234.6"/>
+            <!-- Novel 5.3% -->
+            <circle cx="60" cy="60" r="45" fill="none" stroke="var(--numm-anchor)" stroke-width="14"
+              stroke-dasharray="14.9 266.8" stroke-linecap="round" stroke-dashoffset="-267"/>
+          </svg>
+          <div class="donut-center">
+            <span class="val">83%</span>
+            <span class="lbl">Auto</span>
+          </div>
+        </div>
+        <div class="legend-row">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="legend-dot" style="background:var(--numm-verified);"></div>
+            <span style="font-size:12px; color:var(--numm-text2);">High Confidence (≥92%)</span>
+          </div>
+          <span class="legend-val">83.2%</span>
+        </div>
+        <div class="legend-row">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="legend-dot" style="background:var(--numm-highlight);"></div>
+            <span style="font-size:12px; color:var(--numm-text2);">Borderline (70-91%)</span>
+          </div>
+          <span class="legend-val">11.5%</span>
+        </div>
+        <div class="legend-row">
+          <div style="display:flex; align-items:center; gap:8px;">
+            <div class="legend-dot" style="background:var(--numm-anchor);"></div>
+            <span style="font-size:12px; color:var(--numm-text2);">Novel Item (&lt;70%)</span>
+          </div>
+          <span class="legend-val">5.3%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── CPSE Catalog Heatmap ── -->
+  <div class="card-numm" style="margin-bottom:24px;">
+    <div class="card-numm-header">
+      <div>
+        <span class="card-label">National Coverage</span>
+        <h3>CPSE Catalog Ingestion Status</h3>
+      </div>
+      <a class="card-action-link" href="#">View all CPSEs →</a>
+    </div>
+    <div class="card-numm-body">
+      <div class="cpse-grid">
+        <div class="cpse-cell">
+          <div class="cpse-abbr">IOCL</div>
+          <div class="cpse-items">1,24,812 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-verified) 92%, var(--numm-border) 92%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">ONGC</div>
+          <div class="cpse-items">98,204 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-verified) 88%, var(--numm-border) 88%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">BPCL</div>
+          <div class="cpse-items">62,140 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-action) 74%, var(--numm-border) 74%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">HPCL</div>
+          <div class="cpse-items">55,890 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-highlight) 81%, var(--numm-border) 81%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">GAIL</div>
+          <div class="cpse-items">41,220 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-verified) 95%, var(--numm-border) 95%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">OIL</div>
+          <div class="cpse-items">28,450 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-approved) 69%, var(--numm-border) 69%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">EIL</div>
+          <div class="cpse-items">14,200 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-action) 55%, var(--numm-border) 55%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">NRL</div>
+          <div class="cpse-items">8,910 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-highlight) 78%, var(--numm-border) 78%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">MRPL</div>
+          <div class="cpse-items">10,340 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-verified) 82%, var(--numm-border) 82%);"></div>
+        </div>
+        <div class="cpse-cell">
+          <div class="cpse-abbr">CPCL</div>
+          <div class="cpse-items">9,620 items</div>
+          <div class="cpse-bar" style="background: linear-gradient(to right, var(--numm-anchor) 62%, var(--numm-border) 62%);"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Steward Queue + Surplus ── -->
+  <div class="grid-2" id="steward-section">
+    <!-- Priority Review Queue -->
+    <div class="card-numm">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">HITL Stewardship</span>
+          <h3>Priority Review Queue <span style="font-size:11px; background:rgba(233,67,68,0.12); color:var(--numm-action); padding:2px 8px; border-radius:999px; font-weight:700; margin-left:6px;">84 pending</span></h3>
+        </div>
+        <a class="card-action-link" href="/">Full Cockpit →</a>
+      </div>
+      <div class="card-numm-body" style="padding:0;">
+        <table class="numm-table">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>ONMC Code</th>
+              <th>Conf.</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div style="font-size:12px; font-weight:600; color:var(--numm-text1);">VLV BL FLGD 50MM 150# WCB</div>
+                <div style="font-size:10px; color:var(--numm-muted);">ONGC · Hazira</div>
+              </td>
+              <td><span class="onmc-chip">ONMC-MECH-VLV-BAL-050-150-WCB-48A1</span></td>
+              <td>
+                <div class="conf-bar" style="min-width:80px;">
+                  <div class="conf-track"><div class="conf-fill" style="width:89.4%; background:var(--numm-highlight);"></div></div>
+                  <span style="font-size:11px; font-weight:700; color:var(--numm-text2);">89.4%</span>
+                </div>
+              </td>
+              <td><span class="status-badge review">REVIEW</span></td>
+              <td>
+                <button class="btn-action btn-approve">A</button>
+                <button class="btn-action btn-reject" style="margin-left:4px;">R</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-size:12px; font-weight:600; color:var(--numm-text1);">4IN GATE VLV CL300 WCB RF OS&amp;Y</div>
+                <div style="font-size:10px; color:var(--numm-muted);">IOCL · Mathura</div>
+              </td>
+              <td><span class="onmc-chip">ONMC-MECH-VLV-GAT-100-300-WCB-91F2</span></td>
+              <td>
+                <div class="conf-bar" style="min-width:80px;">
+                  <div class="conf-track"><div class="conf-fill" style="width:94.1%; background:var(--numm-verified);"></div></div>
+                  <span style="font-size:11px; font-weight:700; color:var(--numm-text2);">94.1%</span>
+                </div>
+              </td>
+              <td><span class="status-badge conflict">CONFLICT</span></td>
+              <td>
+                <button class="btn-action btn-approve">A</button>
+                <button class="btn-action btn-reject" style="margin-left:4px;">R</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-size:12px; font-weight:600; color:var(--numm-text1);">FLANGE WN 6" SCH40 300# A105 RF</div>
+                <div style="font-size:10px; color:var(--numm-muted);">BPCL · Mumbai Refinery</div>
+              </td>
+              <td><span class="onmc-chip">ONMC-MECH-FLG-WNF-150-300-A105-7E3C</span></td>
+              <td>
+                <div class="conf-bar" style="min-width:80px;">
+                  <div class="conf-track"><div class="conf-fill" style="width:76.5%; background:var(--numm-highlight);"></div></div>
+                  <span style="font-size:11px; font-weight:700; color:var(--numm-text2);">76.5%</span>
+                </div>
+              </td>
+              <td><span class="status-badge review">REVIEW</span></td>
+              <td>
+                <button class="btn-action btn-approve">A</button>
+                <button class="btn-action btn-reject" style="margin-left:4px;">R</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-size:12px; font-weight:600; color:var(--numm-text1);">GASKET SPW 3" 150# SS316L GRAPHITE</div>
+                <div style="font-size:10px; color:var(--numm-muted);">HPCL · Vizag Refinery</div>
+              </td>
+              <td><span class="onmc-chip">ONMC-MECH-GSK-SPW-080-150-SS316-2F9A</span></td>
+              <td>
+                <div class="conf-bar" style="min-width:80px;">
+                  <div class="conf-track"><div class="conf-fill" style="width:98%; background:var(--numm-verified);"></div></div>
+                  <span style="font-size:11px; font-weight:700; color:var(--numm-text2);">98.0%</span>
+                </div>
+              </td>
+              <td><span class="status-badge approved">APPROVED</span></td>
+              <td>
+                <button class="btn-action btn-approve">A</button>
+                <button class="btn-action btn-reject" style="margin-left:4px;">R</button>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div style="font-size:12px; font-weight:600; color:var(--numm-text1);">PIPE SMLS 4" SCH40 A106 GR B</div>
+                <div style="font-size:10px; color:var(--numm-muted);">GAIL · Vijaipur</div>
+              </td>
+              <td><span class="onmc-chip">ONMC-MECH-PIP-SML-100-STD-A106-1C7B</span></td>
+              <td>
+                <div class="conf-bar" style="min-width:80px;">
+                  <div class="conf-track"><div class="conf-fill" style="width:65%; background:var(--numm-anchor);"></div></div>
+                  <span style="font-size:11px; font-weight:700; color:var(--numm-text2);">65.0%</span>
+                </div>
+              </td>
+              <td><span class="status-badge novel">NOVEL</span></td>
+              <td>
+                <button class="btn-action btn-approve">A</button>
+                <button class="btn-action btn-reject" style="margin-left:4px;">R</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="padding:12px 16px; font-size:11px; color:var(--numm-muted); border-top:1px solid var(--numm-border); display:flex; align-items:center; gap:12px;">
+          <i class="fa fa-keyboard-o"></i>
+          <span><kbd style="background:var(--numm-subtle); border:1px solid var(--numm-border); border-radius:4px; padding:1px 6px; font-size:10px;">A</kbd> Approve &nbsp;
+          <kbd style="background:var(--numm-subtle); border:1px solid var(--numm-border); border-radius:4px; padding:1px 6px; font-size:10px;">R</kbd> Reject &nbsp;
+          <kbd style="background:var(--numm-subtle); border:1px solid var(--numm-border); border-radius:4px; padding:1px 6px; font-size:10px;">E</kbd> Edit &nbsp;
+          <kbd style="background:var(--numm-subtle); border:1px solid var(--numm-border); border-radius:4px; padding:1px 6px; font-size:10px;">J/K</kbd> Navigate</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Surplus Stock Panel -->
+    <div id="surplus-section">
+      <div class="card-numm" style="margin-bottom:16px;">
+        <div class="card-numm-header">
+          <div>
+            <span class="card-label">Inter-CPSE Surplus</span>
+            <h3>Available Surplus Stock</h3>
+          </div>
+          <a class="card-action-link" href="#">Transfer →</a>
+        </div>
+        <div class="card-numm-body">
+          <div class="surplus-item">
+            <div class="surplus-icon"><i class="fa fa-wrench"></i></div>
+            <div class="surplus-desc">
+              <div class="surplus-title">Ball Valve 2" 150# CS A105</div>
+              <div class="surplus-meta">ONGC Hazira → IOCL Gujarat</div>
+            </div>
+            <div>
+              <div class="surplus-stock">14 units</div>
+              <div class="surplus-km">78 km</div>
+            </div>
+          </div>
+          <div class="surplus-item">
+            <div class="surplus-icon"><i class="fa fa-circle-o"></i></div>
+            <div class="surplus-desc">
+              <div class="surplus-title">Spiral Wound Gasket 4" 300#</div>
+              <div class="surplus-meta">BPCL Mumbai → HPCL Vizag</div>
+            </div>
+            <div>
+              <div class="surplus-stock">240 units</div>
+              <div class="surplus-km">1,148 km</div>
+            </div>
+          </div>
+          <div class="surplus-item">
+            <div class="surplus-icon"><i class="fa fa-minus"></i></div>
+            <div class="surplus-desc">
+              <div class="surplus-title">Gate Valve 6" 600# A216 WCB</div>
+              <div class="surplus-meta">IOCL Paradip → MRPL Mangalore</div>
+            </div>
+            <div>
+              <div class="surplus-stock">6 units</div>
+              <div class="surplus-km">1,842 km</div>
+            </div>
+          </div>
+          <div class="surplus-item">
+            <div class="surplus-icon"><i class="fa fa-arrows-h"></i></div>
+            <div class="surplus-desc">
+              <div class="surplus-title">Weld Neck Flange 8" 150# A105</div>
+              <div class="surplus-meta">GAIL Vijaipur → IOCL Mathura</div>
+            </div>
+            <div>
+              <div class="surplus-stock">48 units</div>
+              <div class="surplus-km">312 km</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pooled Demand -->
+      <div class="card-numm" id="demand-section">
+        <div class="card-numm-header">
+          <div>
+            <span class="card-label">Joint Procurement</span>
+            <h3>Pooled Demand Opportunities</h3>
+          </div>
+        </div>
+        <div class="card-numm-body">
+          <div class="sparkline-row">
+            <div style="width:28px; height:28px; border-radius:8px; background:rgba(165,215,201,0.2); display:flex; align-items:center; justify-content:center; color:var(--numm-verified); font-size:13px; flex-shrink:0;"><i class="fa fa-droplet"></i></div>
+            <div class="spark-label">2" Ball Valves CS A105 (3 CPSEs)</div>
+            <div class="spark-val" style="color:var(--numm-verified);">₹1.14Cr</div>
+          </div>
+          <div class="sparkline-row">
+            <div style="width:28px; height:28px; border-radius:8px; background:rgba(241,204,157,0.2); display:flex; align-items:center; justify-content:center; color:#92400e; font-size:13px; flex-shrink:0;"><i class="fa fa-bars"></i></div>
+            <div class="spark-label">4" SMLS Pipe A106 GrB (5 CPSEs)</div>
+            <div class="spark-val" style="color:var(--numm-verified);">₹2.87Cr</div>
+          </div>
+          <div class="sparkline-row">
+            <div style="width:28px; height:28px; border-radius:8px; background:rgba(233,67,68,0.1); display:flex; align-items:center; justify-content:center; color:var(--numm-action); font-size:13px; flex-shrink:0;"><i class="fa fa-bolt"></i></div>
+            <div class="spark-label">SS316 Spiral Wound Gaskets (4 CPSEs)</div>
+            <div class="spark-val" style="color:var(--numm-verified);">₹0.62Cr</div>
+          </div>
+          <div style="margin-top:12px; padding:10px; background:rgba(165,215,201,0.12); border-radius:10px; border:1px solid rgba(165,215,201,0.4);">
+            <div style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--numm-verified); margin-bottom:4px;">Total Savings Identified</div>
+            <div style="font-size:22px; font-weight:800; color:var(--numm-text1);">₹4.63 Crore</div>
+            <div style="font-size:11px; color:var(--numm-text2);">14.2% avg. volume discount on pooled tenders</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Safety Gate + Ingestion + Audit ── -->
+  <div class="grid-3">
+    <!-- ASME Safety Gate -->
+    <div class="card-numm">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">Engineering Rules</span>
+          <h3>ASME Safety Gate Status</h3>
+        </div>
+      </div>
+      <div class="card-numm-body">
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-ruler-horizontal gate-icon"></i> Pressure Class Gate</span>
+          <span class="gate-pass"><i class="fa fa-check-circle"></i> 0 failures</span>
+        </div>
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-expand gate-icon"></i> Nominal Bore Gate</span>
+          <span class="gate-pass"><i class="fa fa-check-circle"></i> 0 failures</span>
+        </div>
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-flask gate-icon"></i> Metallurgy Segregation</span>
+          <span class="gate-pass"><i class="fa fa-check-circle"></i> 0 failures</span>
+        </div>
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-tint gate-icon"></i> Sour Gas NACE MR0175</span>
+          <span class="gate-fail"><i class="fa fa-times-circle"></i> 2 flagged</span>
+        </div>
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-check-square gate-icon"></i> ASME B16.5 Validation</span>
+          <span class="gate-pass"><i class="fa fa-check-circle"></i> 0 failures</span>
+        </div>
+        <div class="gate-row">
+          <span class="gate-label"><i class="fa fa-balance-scale gate-icon"></i> UOM Normalization</span>
+          <span class="gate-pass"><i class="fa fa-check-circle"></i> 0 failures</span>
+        </div>
+        <div style="margin-top:14px; padding:10px; background:rgba(165,215,201,0.1); border-radius:8px; border:1px solid rgba(165,215,201,0.4); font-size:12px;">
+          <strong>INV-01:</strong> Zero tolerance for cross-class merges.<br/>
+          <strong>INV-03:</strong> Sour gas items isolated. 2 under review.
+        </div>
+      </div>
+    </div>
+
+    <!-- Ingestion Jobs -->
+    <div class="card-numm">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">ERP Batch Sync</span>
+          <h3>Recent Ingestion Jobs</h3>
+        </div>
+        <a class="card-action-link" href="#">All jobs →</a>
+      </div>
+      <div class="card-numm-body">
+        <div class="job-row">
+          <div class="job-icon done"><i class="fa fa-check"></i></div>
+          <div class="job-desc">
+            <div class="job-title">iocl_mathura_valves_q4.xlsx</div>
+            <div class="job-meta">Stage 5 complete · 12,440 rows</div>
+          </div>
+          <div class="job-stats">
+            <div class="job-count" style="color:var(--numm-verified);">✓ Done</div>
+            <div class="job-time">08:14 AM</div>
+          </div>
+        </div>
+        <div class="job-row">
+          <div class="job-icon proc"><i class="fa fa-spinner fa-spin"></i></div>
+          <div class="job-desc">
+            <div class="job-title">ongc_hazira_piping_2026.csv</div>
+            <div class="job-meta">Stage 3: BGE Embedding · 8,200 rows</div>
+          </div>
+          <div class="job-stats">
+            <div class="job-count" style="color:#92400e;">62%</div>
+            <div class="job-time">09:31 AM</div>
+          </div>
+        </div>
+        <div class="job-row">
+          <div class="job-icon done"><i class="fa fa-check"></i></div>
+          <div class="job-desc">
+            <div class="job-title">bpcl_mumbai_flanges_jan26.xlsx</div>
+            <div class="job-meta">Stage 5 complete · 4,819 rows</div>
+          </div>
+          <div class="job-stats">
+            <div class="job-count" style="color:var(--numm-verified);">✓ Done</div>
+            <div class="job-time">Yesterday</div>
+          </div>
+        </div>
+        <div class="job-row">
+          <div class="job-icon fail"><i class="fa fa-times"></i></div>
+          <div class="job-desc">
+            <div class="job-title">hpcl_vizag_instruments.xlsx</div>
+            <div class="job-meta">E-03: Corrupt header · UTF-16 detected</div>
+          </div>
+          <div class="job-stats">
+            <div class="job-count" style="color:var(--numm-action);">Failed</div>
+            <div class="job-time">Yesterday</div>
+          </div>
+        </div>
+        <div style="margin-top:14px;">
+          <div style="font-size:10px; font-weight:700; color:var(--numm-muted); text-transform:uppercase; margin-bottom:6px;">Processing Rate (rows/min)</div>
+          <div class="progress-numm">
+            <div class="progress-fill" style="width:78%; background: linear-gradient(to right, var(--numm-verified), var(--numm-approved));"></div>
+          </div>
+          <div style="font-size:12px; font-weight:700; color:var(--numm-text1);">10,280 / 13,000 <span style="color:var(--numm-muted); font-weight:500;">target rows/min</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CVC Audit Ledger -->
+    <div class="card-numm" id="audit-section">
+      <div class="card-numm-header">
+        <div>
+          <span class="card-label">CVC Compliance</span>
+          <h3>Immutable Audit Chain</h3>
+        </div>
+      </div>
+      <div class="card-numm-body">
+        <div class="audit-item">
+          <div class="audit-dot" style="background:var(--numm-verified);"></div>
+          <div>
+            <div class="audit-text">Steward R.Sharma approved match ONMC-MECH-VLV-BAL-002-150-A105-9B2F</div>
+            <div class="audit-hash">SHA: a7f2c1… · Ed25519 signed</div>
+          </div>
+          <div class="audit-time">09:14</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-dot" style="background:var(--numm-conflict);"></div>
+          <div>
+            <div class="audit-text">Safety gate INV-03 blocked sour gas merge — metallurgy NACE MR0175 conflict</div>
+            <div class="audit-hash">SHA: 3b19e8… · auto-blocker</div>
+          </div>
+          <div class="audit-time">08:52</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-dot" style="background:var(--numm-anchor);"></div>
+          <div>
+            <div class="audit-text">Novel ONMC minted for 4" 600# Globe Valve Incoloy (new material class)</div>
+            <div class="audit-hash">SHA: f04d7a… · auto-minted</div>
+          </div>
+          <div class="audit-time">08:14</div>
+        </div>
+        <div class="audit-item">
+          <div class="audit-dot" style="background:var(--numm-verified);"></div>
+          <div>
+            <div class="audit-text">MTIRF-2026-00842 dispatched — ONGC→IOCL transfer 14 units initiated</div>
+            <div class="audit-hash">SHA: c8a32f… · e-Sign Aadhaar OTP</div>
+          </div>
+          <div class="audit-time">07:59</div>
+        </div>
+        <div style="margin-top:12px; padding:8px 12px; background:var(--numm-subtle); border-radius:8px; border:1px solid var(--numm-border);">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--numm-muted); margin-bottom:4px;">Audit Chain Integrity</div>
+          <div style="display:flex; align-items:center; gap:8px;">
+            <i class="fa fa-lock" style="color:var(--numm-verified); font-size:14px;"></i>
+            <span style="font-size:12px; font-weight:700; color:var(--numm-verified);">Append-only · SHA-256 · CVC verified</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Search Before Buy Section ── -->
+  <div class="card-numm" style="margin-bottom:24px;" id="search-section">
+    <div class="card-numm-header">
+      <div>
+        <span class="card-label">Pre-Procurement Discovery</span>
+        <h3>Search Before Buy — Semantic Search Results</h3>
+      </div>
+      <span style="font-size:11px; color:var(--numm-muted);">Query: "2 inch 150# flanged ball valve CS A105"</span>
+    </div>
+    <div class="card-numm-body">
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px;">
+        <div style="padding:16px; background:var(--numm-subtle); border-radius:12px; border:2px solid var(--numm-approved);">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--numm-verified); margin-bottom:8px;">National Master Record</div>
+          <div class="onmc-chip" style="margin-bottom:8px; display:block;">ONMC-MECH-VLV-BAL-002-150-A105-9B2F</div>
+          <div style="font-size:11px; color:var(--numm-text2); margin-bottom:4px;"><strong>MESC:</strong> 74.16.01.015.1 (SPE 77/300)</div>
+          <div style="font-size:11px; color:var(--numm-text2); margin-bottom:4px;"><strong>UNSPSC:</strong> 40141607</div>
+          <div style="font-size:11px; color:var(--numm-text2);"><strong>GeM:</strong> GeM-CAT-VLV-BALL-01</div>
+          <div style="margin-top:8px; padding:6px; background:rgba(165,215,201,0.2); border-radius:6px; font-size:11px; font-weight:700; color:var(--numm-verified);">
+            <i class="fa fa-check-circle"></i> 28 units in national surplus
+          </div>
+        </div>
+        <div style="padding:16px; background:var(--numm-subtle); border-radius:12px; border:1px solid var(--numm-border);">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--numm-muted); margin-bottom:8px;">Engineering Specification</div>
+          <table style="width:100%; font-size:11px;">
+            <tr><td style="color:var(--numm-muted); padding-bottom:4px; font-weight:600;">Item Class</td><td style="font-weight:700; color:var(--numm-text1);">Ball Valve</td></tr>
+            <tr><td style="color:var(--numm-muted); padding-bottom:4px; font-weight:600;">Size (NPS)</td><td style="font-weight:700; color:var(--numm-text1);">2.00" (50mm NB)</td></tr>
+            <tr><td style="color:var(--numm-muted); padding-bottom:4px; font-weight:600;">Pressure</td><td style="font-weight:700; color:var(--numm-text1);">Class 150</td></tr>
+            <tr><td style="color:var(--numm-muted); padding-bottom:4px; font-weight:600;">Metallurgy</td><td style="font-weight:700; color:var(--numm-text1);">ASTM A105</td></tr>
+            <tr><td style="color:var(--numm-muted); padding-bottom:4px; font-weight:600;">End Conn.</td><td style="font-weight:700; color:var(--numm-text1);">Flanged RF</td></tr>
+            <tr><td style="color:var(--numm-muted); font-weight:600;">Standard</td><td style="font-weight:700; color:var(--numm-text1);">API 6D / ASME B16.34</td></tr>
+          </table>
+        </div>
+        <div style="padding:16px; background:var(--numm-subtle); border-radius:12px; border:1px solid var(--numm-border);">
+          <div style="font-size:10px; font-weight:700; text-transform:uppercase; color:var(--numm-muted); margin-bottom:8px;">CPSE Stock Holdings</div>
+          <div class="sparkline-row" style="border-bottom:1px solid var(--numm-border);">
+            <span style="font-size:11px; font-weight:700; width:50px; color:var(--numm-text1);">ONGC</span>
+            <div class="conf-track" style="flex:1; margin:0 8px;"><div class="conf-fill" style="width:57%; background:var(--numm-verified);"></div></div>
+            <span style="font-size:11px; font-weight:800; color:var(--numm-text1);">14 ea</span>
+          </div>
+          <div class="sparkline-row" style="border-bottom:1px solid var(--numm-border);">
+            <span style="font-size:11px; font-weight:700; width:50px; color:var(--numm-text1);">IOCL</span>
+            <div class="conf-track" style="flex:1; margin:0 8px;"><div class="conf-fill" style="width:34%; background:var(--numm-verified);"></div></div>
+            <span style="font-size:11px; font-weight:800; color:var(--numm-text1);">8 ea</span>
+          </div>
+          <div class="sparkline-row">
+            <span style="font-size:11px; font-weight:700; width:50px; color:var(--numm-text1);">BPCL</span>
+            <div class="conf-track" style="flex:1; margin:0 8px;"><div class="conf-fill" style="width:25%; background:var(--numm-highlight);"></div></div>
+            <span style="font-size:11px; font-weight:800; color:var(--numm-text1);">6 ea</span>
+          </div>
+          <button style="margin-top:12px; width:100%; padding:8px; border-radius:8px; border:none; background:var(--numm-action); color:#fff; font-size:12px; font-weight:700; cursor:pointer;">
+            <i class="fa fa-exchange"></i> Initiate Inter-CPSE Transfer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── System Health ── -->
+  <div class="card-numm" style="margin-bottom:24px;">
+    <div class="card-numm-header">
+      <div>
+        <span class="card-label">Platform SLA Monitoring</span>
+        <h3>System Health &amp; Performance</h3>
+      </div>
+      <span class="topnav-badge-pill"><i class="fa fa-circle" style="font-size:7px;"></i> All Systems Operational</span>
+    </div>
+    <div class="card-numm-body">
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:16px;">
+        <div>
+          <div style="font-size:10px; color:var(--numm-muted); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Vector Search p95</div>
+          <div style="font-size:20px; font-weight:800; color:var(--numm-verified);">38ms</div>
+          <div style="font-size:10px; color:var(--numm-muted);">SLA: &lt;50ms ✓</div>
+          <div class="progress-numm"><div class="progress-fill" style="width:76%; background:var(--numm-verified);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:10px; color:var(--numm-muted); font-weight:700; text-transform:uppercase; margin-bottom:4px;">Ingestion Rate</div>
+          <div style="font-size:20px; font-weight:800; color:var(--numm-text1);">10,280<span style="font-size:12px;"> /min</span></div>
+          <div style="font-size:10px; color:var(--numm-muted);">SLA: ≥10,000 ✓</div>
+          <div class="progress-numm"><div class="progress-fill" style="width:83%; background:var(--numm-verified);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:10px; color:var(--numm-muted); font-weight:700; text-transform:uppercase; margin-bottom:4px;">UI Render FPS</div>
+          <div style="font-size:20px; font-weight:800; color:var(--numm-text1);">60 FPS</div>
+          <div style="font-size:10px; color:var(--numm-muted);">10k rows virtualized ✓</div>
+          <div class="progress-numm"><div class="progress-fill" style="width:100%; background:var(--numm-approved);"></div></div>
+        </div>
+        <div>
+          <div style="font-size:10px; color:var(--numm-muted); font-weight:700; text-transform:uppercase; margin-bottom:4px;">BGE Embedding Model</div>
+          <div style="font-size:20px; font-weight:800; color:var(--numm-text1);">1024-dim</div>
+          <div style="font-size:10px; color:var(--numm-muted);">BAAI/bge-large-en-v1.5 ✓</div>
+          <div class="progress-numm"><div class="progress-fill" style="width:100%; background:var(--numm-approved);"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end #main-content -->
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════════════ -->
+<footer class="footer-numm">
+  <div class="footer-tag">
+    <span style="width:8px; height:8px; border-radius:50%; background:var(--numm-verified); display:inline-block;"></span>
+    NUMM v2.2.0 · SIH 26099 · Ministry of Petroleum &amp; Natural Gas, Government of India
+  </div>
+  <div>
+    Deployed on <strong>NIC MeghRaj</strong> · OISD-STD-118 · OISD-STD-141 · CVC Audit Compliant ·
+    <a href="/" style="color:var(--numm-action); font-weight:700; text-decoration:none;">← Back to Landing Page</a>
+  </div>
+</footer>
+
+<!-- Bootstrap 3 JS -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script>
+  // Keyboard shortcuts overlay hint
+  document.addEventListener('keydown', function(e) {
+    if (e.key === '?' && document.activeElement.tagName !== 'INPUT') {
+      alert('NUMM Keyboard Shortcuts:\nA — Approve Match\nR — Reject / Split\nE — Edit Attributes\nJ — Next Item\nK — Previous Item\nCtrl+K — Command Palette\n? — This help');
+    }
+  });
+
+  // Animate KPI values on load
+  document.querySelectorAll('.btn-approve').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const row = this.closest('tr');
+      row.style.opacity = '0.4';
+      row.style.transition = 'opacity 0.3s';
+      setTimeout(() => row.style.display = 'none', 300);
+    });
+  });
+  document.querySelectorAll('.btn-reject').forEach(btn => {
+    btn.addEventListener('click', function() {
+      const row = this.closest('tr');
+      row.style.background = 'rgba(155,18,30,0.06)';
+      row.style.transition = 'background 0.3s';
+      setTimeout(() => { row.style.opacity = '0.4'; row.style.display = 'none'; }, 500);
+    });
+  });
+
+  // Active sidebar link highlighting
+  document.querySelectorAll('.sidebar-nav a').forEach(link => {
+    link.addEventListener('click', function(e) {
+      document.querySelectorAll('.sidebar-nav li').forEach(li => li.classList.remove('active'));
+      this.closest('li').classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

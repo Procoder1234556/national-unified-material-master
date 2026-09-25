@@ -46,12 +46,12 @@ export const NationalMasterSummary: React.FC = () => {
             style={{
               fontSize: "15px",
               fontWeight: 700,
-              fontFamily: rawTokens.fontCalligraphy,
+              fontFamily: rawTokens.fontSans,
               color: rawTokens.textPrimary,
               marginTop: "2px",
             }}
           >
-            Sovereign CPSE Harmonization Core
+            MoPNG NUMM · One Nation, One Material Code
           </div>
         </div>
 
@@ -63,7 +63,7 @@ export const NationalMasterSummary: React.FC = () => {
           }}
         />
 
-        {/* 4.2M+ Catalog Records */}
+        {/* 4.2M+ Catalog Records — PRD.md national addressable */}
         <div>
           <div
             style={{
@@ -83,7 +83,7 @@ export const NationalMasterSummary: React.FC = () => {
               marginTop: "3px",
             }}
           >
-            Catalog Records
+            National catalog (PRD)
           </div>
         </div>
 

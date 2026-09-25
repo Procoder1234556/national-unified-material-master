@@ -1,21 +1,20 @@
 from bs4 import BeautifulSoup
-import re
 
-with open('landing_page.html', 'r', encoding='utf-8') as f:
-    soup = BeautifulSoup(f.read(), 'html.parser')
+with open("landing_page.html", "r", encoding="utf-8") as f:
+    soup = BeautifulSoup(f.read(), "html.parser")
 
-sections = soup.find_all('section')
+sections = soup.find_all("section")
 
 hero_section = sections[0]
-hero_section['id'] = 'hero-section'
-hero_section['class'] = hero_section.get('class', []) + ['motion-hero']
+hero_section["id"] = "hero-section"
+hero_section["class"] = hero_section.get("class", []) + ["motion-hero"]
 
 for section in [sections[1], sections[3]]:
-    cards = section.select('div.bg-white, div.bg-\[\#fff8f5\]')
+    cards = section.select(r"div.bg-white, div.bg-\[\#fff8f5\]")
     for card in cards:
-        card['class'] = card.get('class', []) + ['motion-card']
+        card["class"] = card.get("class", []) + ["motion-card"]
 
-pricing_html = '''
+pricing_html = """
 <section id="pricing-calculator" class="py-24 px-6 md:px-12 lg:px-24 bg-[#fff8f5]">
     <div class="max-w-[1280px] mx-auto">
         <div class="text-center mb-16">
@@ -23,7 +22,7 @@ pricing_html = '''
             <p class="text-base text-[#4e4541] max-w-2xl mx-auto">Estimate your monthly investment based on your team size and strategic HR needs.</p>
         </div>
         <div class="bg-white rounded-[2rem] p-8 shadow-[0_12px_32px_rgba(30,23,20,0.04)] border border-white/80 max-w-4xl mx-auto flex flex-col md:flex-row gap-12">
-            
+
             <div class="flex-1 space-y-8">
                 <div>
                     <label class="block text-sm font-semibold text-[#1e1714] mb-2">Team Size</label>
@@ -64,30 +63,30 @@ pricing_html = '''
         </div>
     </div>
 </section>
-'''
-pricing_soup = BeautifulSoup(pricing_html, 'html.parser')
+"""
+pricing_soup = BeautifulSoup(pricing_html, "html.parser")
 
 faq_section = sections[10]
 faq_section.insert_before(pricing_soup)
 
-script_html = '''
+script_html = """
 <script type="module">
     import { animate, inView, stagger } from "https://cdn.jsdelivr.net/npm/motion@11.11.11/+esm";
 
-    animate(".motion-hero", 
-        { opacity: [0, 1], y: [50, 0] }, 
+    animate(".motion-hero",
+        { opacity: [0, 1], y: [50, 0] },
         { duration: 0.8, easing: "ease-out" }
     );
-    
+
     const heroTexts = document.querySelectorAll(".motion-hero h1, .motion-hero p, .motion-hero button, .motion-hero img");
-    animate(heroTexts, 
-        { opacity: [0, 1], y: [20, 0] }, 
+    animate(heroTexts,
+        { opacity: [0, 1], y: [20, 0] },
         { duration: 0.6, delay: stagger(0.1, { startDelay: 0.3 }), easing: "ease-out" }
     );
 
     inView(".motion-card", (info) => {
-        animate(info.target, 
-            { opacity: [0, 1], y: [40, 0] }, 
+        animate(info.target,
+            { opacity: [0, 1], y: [40, 0] },
             { duration: 0.6, easing: "ease-out" }
         );
     });
@@ -96,30 +95,30 @@ script_html = '''
     const teamSizeDisplay = document.getElementById('teamSizeDisplay');
     const priceDisplay = document.getElementById('priceDisplay');
     const levelInputs = document.querySelectorAll('input[name="level"]');
-    
+
     function calculatePrice() {
         const size = parseInt(teamSizeInput.value);
         let level = 2;
         levelInputs.forEach(i => { if(i.checked) level = parseInt(i.value); });
-        
+
         teamSizeDisplay.innerText = size + (size >= 150 ? '+' : '') + ' employees';
-        
+
         let base = level === 1 ? 2500 : 4500;
         let addition = Math.floor(size / 10) * (level === 1 ? 150 : 300);
-        
+
         const total = base + addition;
-        
+
         animate(priceDisplay, { scale: [1.1, 1], opacity: [0.5, 1] }, { duration: 0.3 });
         priceDisplay.innerText = '$' + total.toLocaleString();
     }
-    
+
     teamSizeInput.addEventListener('input', calculatePrice);
     levelInputs.forEach(i => i.addEventListener('change', calculatePrice));
     calculatePrice();
 </script>
-'''
-script_soup = BeautifulSoup(script_html, 'html.parser')
+"""
+script_soup = BeautifulSoup(script_html, "html.parser")
 soup.body.append(script_soup)
 
-with open('landing_page_edited.html', 'w', encoding='utf-8') as f:
+with open("landing_page_edited.html", "w", encoding="utf-8") as f:
     f.write(str(soup))

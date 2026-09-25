@@ -57,5 +57,13 @@ async def get_demo_tokens():
     - STEWARD (Materials Engineering Data Steward)
     - PROCUREMENT_OFFICER (CPSE Materials GM)
     - AUDITOR (Central Vigilance Commission Inspector)
+    - PLANT_ENGINEER (Maintenance Superintendent)
     """
+    from backend.app.core.config import settings
+
+    if settings.ENVIRONMENT not in ("development", "test", "demo"):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Demo tokens disabled outside development/demo environments.",
+        )
     return default_meghraj_auth.get_demo_tokens()
