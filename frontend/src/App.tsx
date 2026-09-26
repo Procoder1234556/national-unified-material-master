@@ -28,8 +28,41 @@ import {
 import { authenticateAsRole, AuthRole, getAuthSession } from "./api";
 
 export const App: React.FC = () => {
-  const [viewMode, setViewMode] = useState<"landing" | "dashboard">("landing");
-  const [activeTab, setActiveTab] = useState<NavTabId>("overview");
+  const getInitialView = (): "landing" | "dashboard" => {
+    if (typeof window === "undefined") return "landing";
+    const params = new URLSearchParams(window.location.search);
+    if (params.get("view") === "dashboard" || params.has("tab"))
+      return "dashboard";
+    if (
+      typeof document !== "undefined" &&
+      document.referrer.includes("gentelella")
+    )
+      return "dashboard";
+    return "landing";
+  };
+
+  const getInitialTab = (): NavTabId => {
+    if (typeof window === "undefined") return "overview";
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get("tab") as NavTabId;
+    const validTabs: NavTabId[] = [
+      "overview",
+      "steward",
+      "search",
+      "surplus",
+      "demand",
+      "ingest",
+      "security",
+      "system",
+    ];
+    if (tab && validTabs.includes(tab)) return tab;
+    return "overview";
+  };
+
+  const [viewMode, setViewMode] = useState<"landing" | "dashboard">(
+    getInitialView
+  );
+  const [activeTab, setActiveTab] = useState<NavTabId>(getInitialTab);
   const [activeRole, setActiveRole] = useState<UserRole>("STEWARD");
   const [authEmail, setAuthEmail] = useState<string>(
     "steward.iocl@numm.gov.in"
@@ -39,6 +72,39 @@ export const App: React.FC = () => {
     "2 inch 150# flanged ball valve CS A105"
   );
   const [auditMessage, setAuditMessage] = useState<string | null>(null);
+
+  const handleSelectTab = (tab: NavTabId) => {
+    setActiveTab(tab);
+    if (typeof window !== "undefined" && window.history.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", "dashboard");
+      url.searchParams.set("tab", tab);
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
+
+  const handleEnterDashboard = (targetTab?: string, targetRole?: string) => {
+    if (targetTab) setActiveTab(targetTab as NavTabId);
+    if (targetRole) setActiveRole(targetRole as UserRole);
+    setViewMode("dashboard");
+    if (typeof window !== "undefined" && window.history.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("view", "dashboard");
+      if (targetTab) url.searchParams.set("tab", targetTab);
+      window.history.replaceState({}, "", url.toString());
+    }
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const handleBackToLanding = () => {
+    setViewMode("landing");
+    if (typeof window !== "undefined" && window.history.replaceState) {
+      const url = new URL(window.location.href);
+      url.searchParams.delete("view");
+      url.searchParams.delete("tab");
+      window.history.replaceState({}, "", url.toString());
+    }
+  };
 
   // Global Modals State
   const [isCommandOpen, setIsCommandOpen] = useState<boolean>(false);
@@ -165,12 +231,9 @@ export const App: React.FC = () => {
   if (viewMode === "landing") {
     return (
       <LandingPage
-        onEnterDashboard={(targetTab, targetRole) => {
-          if (targetTab) setActiveTab(targetTab as NavTabId);
-          if (targetRole) setActiveRole(targetRole as UserRole);
-          setViewMode("dashboard");
-          window.scrollTo({ top: 0, behavior: "smooth" });
-        }}
+        onEnterDashboard={(targetTab, targetRole) =>
+          handleEnterDashboard(targetTab, targetRole)
+        }
       />
     );
   }
@@ -178,14 +241,14 @@ export const App: React.FC = () => {
   return (
     <AppShell
       activeTab={activeTab}
-      onSelectTab={(tab) => setActiveTab(tab)}
+      onSelectTab={handleSelectTab}
       activeRole={activeRole}
       onSelectRole={(role) => {
         setActiveRole(role);
       }}
       onOpenCommandPalette={() => setIsCommandOpen(true)}
       onOpenKeyboardHelp={() => setIsHelpOpen(true)}
-      onBackToLanding={() => setViewMode("landing")}
+      onBackToLanding={handleBackToLanding}
       stewardPendingCount={stewardPendingCount}
     >
       {/* CVC Tamper-Evident Audit Record Notification Toast */}

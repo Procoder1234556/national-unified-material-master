@@ -18,18 +18,18 @@ services:
         value: "true"
       - key: SQLITE_DB_PATH
         value: ./numm_master.db
-    healthCheckPath: /api/v1/health
+      - key: ALLOW_DEMO_TOKENS
+        value: "true"
+    healthCheckPath: /health
     autoDeploy: true
 
   # 2. Frontend React 19 / StyleX Sovereign UI
   - type: web
     name: numm-frontend
     runtime: static
-    buildCommand: cd frontend && npx pnpm install && npx pnpm build
+    buildCommand: npm install -g pnpm && cd frontend && pnpm install && VITE_API_BASE_URL=https://numm-backend.onrender.com pnpm build
     staticPublishPath: frontend/dist
     envVars:
-      - key: SKIP_INSTALL_DEPS
-        value: "true"
       - key: VITE_API_BASE_URL
         value: https://numm-backend.onrender.com
     routes:

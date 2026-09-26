@@ -61,7 +61,7 @@ async def get_demo_tokens():
     """
     from backend.app.core.config import settings
 
-    if settings.ENVIRONMENT not in ("development", "test", "demo"):
+    if not settings.ALLOW_DEMO_TOKENS and settings.ENVIRONMENT not in ("development", "test", "demo"):
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Demo tokens disabled outside development/demo environments.",

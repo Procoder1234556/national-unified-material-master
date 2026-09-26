@@ -13,6 +13,7 @@ import {
   CheckCircle2,
   FileSpreadsheet,
   X,
+  ExternalLink,
 } from "lucide-react";
 import { apiFetch } from "../api";
 
@@ -884,28 +885,59 @@ export const SurplusAndDemandView: React.FC<Props> = ({
                         </div>
                       </div>
 
-                      <button
-                        onClick={() => {
-                          setActiveSurplusForMTIRF(item);
-                          setActiveMTIRF(null);
-                        }}
+                      <div
                         style={{
-                          display: "inline-flex",
+                          display: "flex",
+                          gap: "8px",
                           alignItems: "center",
-                          gap: "6px",
-                          backgroundColor: rawTokens.colorAction,
-                          color: "#FFFFFF",
-                          border: "none",
-                          borderRadius: rawTokens.radiusMd,
-                          padding: "8px 14px",
-                          fontSize: rawTokens.textXs,
-                          fontWeight: 700,
-                          cursor: "pointer",
                         }}
                       >
-                        <FileCheck size={14} />
-                        Initiate MTIRF Form
-                      </button>
+                        <a
+                          href="/gentelella/dist/production/product_detail.html"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "5px",
+                            backgroundColor: "#F0FDF4",
+                            color: "#166534",
+                            border: "1px solid #BBF7D0",
+                            borderRadius: rawTokens.radiusMd,
+                            padding: "8px 12px",
+                            fontSize: rawTokens.textXs,
+                            fontWeight: 600,
+                            textDecoration: "none",
+                          }}
+                          title="View Full Specification & GeM Dossier in CPSE Portal"
+                        >
+                          <ExternalLink size={13} />
+                          CPSE Dossier
+                        </a>
+
+                        <button
+                          onClick={() => {
+                            setActiveSurplusForMTIRF(item);
+                            setActiveMTIRF(null);
+                          }}
+                          style={{
+                            display: "inline-flex",
+                            alignItems: "center",
+                            gap: "6px",
+                            backgroundColor: rawTokens.colorAction,
+                            color: "#FFFFFF",
+                            border: "none",
+                            borderRadius: rawTokens.radiusMd,
+                            padding: "8px 14px",
+                            fontSize: rawTokens.textXs,
+                            fontWeight: 700,
+                            cursor: "pointer",
+                          }}
+                        >
+                          <FileCheck size={14} />
+                          Initiate MTIRF Form
+                        </button>
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -1982,7 +2014,35 @@ export const SurplusAndDemandView: React.FC<Props> = ({
                     </span>
                   </div>
 
-                  <div style={{ display: "flex", gap: "10px" }}>
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      alignItems: "center",
+                    }}
+                  >
+                    <a
+                      href="/gentelella/dist/production/order_detail.html"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "6px",
+                        backgroundColor: "#F0FDF4",
+                        color: "#166534",
+                        border: "1px solid #BBF7D0",
+                        borderRadius: rawTokens.radiusMd,
+                        padding: "10px 16px",
+                        fontSize: rawTokens.textSm,
+                        fontWeight: 600,
+                        textDecoration: "none",
+                      }}
+                      title="View Official Government Transfer Manifest & Print Slip"
+                    >
+                      <ExternalLink size={14} />
+                      View Official Manifest
+                    </a>
                     {activeMTIRF.status !== "APPROVED_BY_SOURCE" && (
                       <button
                         onClick={() =>

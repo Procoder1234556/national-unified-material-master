@@ -1,0 +1,13 @@
+import './main-v4-4eeF3Vvb.js';
+document.getElementById('validate-form').addEventListener('submit', e => {
+  (e.preventDefault(),
+    e.target.querySelectorAll('.form-control').forEach(e => {
+      e.classList.remove('is-invalid');
+      const t = e.nextElementSibling;
+      if ((t && t.classList.contains('form-error') && t.remove(), !e.checkValidity())) {
+        e.classList.add('is-invalid');
+        const t = document.createElement('div');
+        ((t.className = 'form-error'), (t.textContent = e.validationMessage), e.after(t));
+      }
+    }));
+});

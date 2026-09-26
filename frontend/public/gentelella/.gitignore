@@ -4,7 +4,7 @@ node_modules
 .sass-cache
 
 # Build outputs
-dist/
+# (dist is preserved for static serving in frontend/public)
 
 # Vendor dependencies (generated from node_modules)
 vendors/

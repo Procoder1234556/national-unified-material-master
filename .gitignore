@@ -11,8 +11,10 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
-dist/
+/dist/
+/frontend/dist/
 build/
+!frontend/public/**
 *.egg-info/
 .venv/
 env/

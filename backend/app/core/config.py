@@ -9,6 +9,8 @@ class Settings(BaseSettings):
     # development | test | demo | production — demo tokens allowed for development/test/demo (SIH)
     ENVIRONMENT: str = "development"
 
+    ALLOW_DEMO_TOKENS: bool = True
+
     # Database configuration
     USE_SQLITE: bool = True
     POSTGRES_USER: str = "numm_admin"
@@ -21,8 +23,16 @@ class Settings(BaseSettings):
         "http://localhost:3000",
         "http://localhost:5173",
         "http://127.0.0.1:5173",
+        "http://localhost:8000",
+        "http://127.0.0.1:8000",
         "http://localhost:8001",
         "http://127.0.0.1:8001",
+        "http://localhost:80",
+        "http://127.0.0.1:80",
+        # Production
+        "https://numm-frontend.onrender.com",
+        "https://numm-backend.onrender.com",
+        "https://national-unified-material-master.vercel.app",
     ]
 
     # SQLite fallback file

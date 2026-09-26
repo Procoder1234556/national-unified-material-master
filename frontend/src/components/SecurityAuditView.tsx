@@ -11,6 +11,7 @@ import {
   Terminal,
   UserCheck,
   Zap,
+  ExternalLink,
 } from "lucide-react";
 import { apiFetch } from "../api";
 
@@ -404,6 +405,28 @@ export const SecurityAuditView: React.FC<Props> = ({
               <Download size={16} />
               Export CVC Dossier
             </button>
+            <a
+              href="/gentelella/dist/production/project_detail.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "8px",
+                backgroundColor: "#F0FDF4",
+                color: "#166534",
+                border: "1px solid #BBF7D0",
+                borderRadius: rawTokens.radiusMd,
+                padding: "10px 18px",
+                fontSize: rawTokens.textSm,
+                fontWeight: 600,
+                textDecoration: "none",
+              }}
+              title="Open CVC Audit Chain & Milestones Dossier in CPSE Portal"
+            >
+              <ExternalLink size={16} />
+              CVC Audit Dossier
+            </a>
           </div>
         </div>
 
