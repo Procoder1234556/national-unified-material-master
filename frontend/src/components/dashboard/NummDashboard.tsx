@@ -19,7 +19,7 @@ import { NationalMasterSummary } from "./NationalMasterSummary";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { QuickSearchModal } from "./QuickSearchModal";
 import { rawTokens } from "../../tokens.stylex";
-import { UserCheck } from "lucide-react";
+import { UserCheck, ArrowUpRight } from "lucide-react";
 import { apiFetch } from "../../api";
 
 export interface NummDashboardProps {
