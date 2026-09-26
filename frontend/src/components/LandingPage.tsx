@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export interface LandingPageProps {
   onEnterDashboard?: (targetTab?: string, targetRole?: string) => void;
@@ -7,6 +7,22 @@ export interface LandingPageProps {
 export const LandingPage: React.FC<LandingPageProps> = ({
   onEnterDashboard,
 }) => {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    const elements = document.querySelectorAll(".reveal-on-scroll");
+    elements.forEach((el) => observer.observe(el));
+    return () => elements.forEach((el) => observer.unobserve(el));
+  }, []);
+
   return (
     <>
       <style>{`
@@ -80,9 +96,27 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           width: 200%;
           animation: scroll 25s linear infinite;
         }
+
         .marquee-container:hover {
           animation-play-state: paused;
         }
+        
+        /* Smooth Scroll Reveal */
+        .reveal-on-scroll {
+          opacity: 0;
+          transform: translateY(40px);
+          transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+          will-change: opacity, transform;
+        }
+        .reveal-on-scroll.is-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
       `}</style>
 
       <div className="min-h-screen overflow-x-hidden selection:bg-[var(--opti-lime)] selection:text-black">
@@ -117,12 +151,6 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             >
               Open Dashboard
             </a>
-            <button
-              className="bg-white/20 text-white px-5 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform border border-white/30"
-              onClick={() => onEnterDashboard?.()}
-            >
-              App View
-            </button>
           </div>
         </nav>
 
@@ -138,7 +166,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
 
           {/* Top Centered Headline */}
-          <div className="relative z-10 w-full text-center mt-32 px-6">
+          <div className="relative z-10 w-full text-center mt-32 px-6 reveal-on-scroll">
             <h1 className="text-6xl md:text-[100px] leading-[0.9]">
               <span className="text-3d">
                 One master code.
@@ -153,7 +181,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Bottom Centered Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 flex flex-col items-center text-center">
+          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 flex flex-col items-center text-center reveal-on-scroll delay-200">
             <div className="max-w-md">
               <p className="text-white font-bold text-sm md:text-base mb-6 leading-relaxed drop-shadow-lg">
                 NUMM harmonizes 4.2 million material lines across India's
@@ -167,19 +195,13 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 >
                   Open NUMM Dashboard →
                 </a>
-                <button
-                  className="btn-black bg-white/20 backdrop-blur-md text-white border border-white/40 shadow-xl"
-                  onClick={() => onEnterDashboard?.()}
-                >
-                  Enter Triage Cockpit
-                </button>
               </div>
             </div>
           </div>
         </header>
 
         {/* 2. PINK BANNER */}
-        <section className="px-6 py-4">
+        <section className="px-6 py-4 reveal-on-scroll">
           <div className="max-w-7xl mx-auto bg-[var(--opti-pink)] rounded-[24px] p-8 flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
             <div>
               <h2 className="font-black text-2xl text-[var(--opti-dark)] mb-2 tracking-tight">
@@ -287,7 +309,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow">
+              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
                     src="/images/refinery-plant.jpg"
@@ -314,7 +336,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </button>
               </div>
 
-              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow">
+              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll delay-100">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
                     src="/images/pipeline-valves.jpg"
@@ -341,7 +363,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </button>
               </div>
 
-              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow">
+              <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll delay-200">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
                     src="/images/industrial-piping.jpg"
@@ -369,7 +391,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* 5. DARK SECTION: Sphere and Tags */}
         <section className="bg-[var(--opti-dark)] py-24 px-6 overflow-hidden relative">
-          <div className="max-w-5xl mx-auto text-center relative z-20">
+          <div className="max-w-5xl mx-auto text-center relative z-20 reveal-on-scroll">
             <h2 className="text-5xl md:text-7xl leading-[0.9] mb-6">
               <span className="text-3d text-white">
                 AI to make you
@@ -388,7 +410,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <button className="btn-lime">Explore NUMM AI</button>
           </div>
 
-          <div className="mt-16 relative w-full max-w-3xl mx-auto h-[400px]">
+          <div className="mt-16 relative w-full max-w-3xl mx-auto h-[400px] reveal-on-scroll delay-200">
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-gradient-to-tr from-purple-500 via-blue-400 to-green-300 blur-sm opacity-80 animate-pulse"></div>
             </div>
@@ -414,7 +436,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* 6. LIGHT GREEN SECTION: Test here */}
         <section className="bg-[var(--opti-light-green)] py-24 px-6 text-center">
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-3xl mx-auto reveal-on-scroll">
             <h2 className="font-black text-4xl md:text-5xl tracking-tighter text-[var(--opti-dark)] mb-6 leading-tight">
               Yes, you can audit here.
               <br />
@@ -460,8 +482,8 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </section>
 
         {/* 7. Z-PATTERN SECTION (Mining Images) */}
-        <section className="py-24 px-6 bg-white">
-          <div className="max-w-5xl mx-auto text-center mb-20">
+        <section className="py-24 px-6 bg-white reveal-on-scroll">
+          <div className="max-w-5xl mx-auto text-center mb-20 reveal-on-scroll">
             <h2 className="text-5xl md:text-6xl leading-[0.9]">
               <span className="text-3d">
                 One platform.
@@ -476,7 +498,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="max-w-5xl mx-auto space-y-24">
-            <div className="flex flex-col md:flex-row items-center gap-12 group">
+            <div className="flex flex-col md:flex-row items-center gap-12 group reveal-on-scroll">
               <div className="flex-1 bg-[var(--opti-light-green)] rounded-[24px] p-8 border border-gray-100">
                 <h3 className="font-black text-2xl text-[var(--opti-dark)] tracking-tight mb-4">
                   Surplus Stock Discovery
@@ -497,7 +519,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row-reverse items-center gap-12 group">
+            <div className="flex flex-col md:flex-row-reverse items-center gap-12 group reveal-on-scroll">
               <div className="flex-1 bg-[var(--opti-light-green)] rounded-[24px] p-8 border border-gray-100">
                 <h3 className="font-black text-2xl text-[var(--opti-dark)] tracking-tight mb-4">
                   Sovereign Cloud Hosting
@@ -517,7 +539,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
             </div>
 
-            <div className="flex flex-col md:flex-row items-center gap-12 group">
+            <div className="flex flex-col md:flex-row items-center gap-12 group reveal-on-scroll">
               <div className="flex-1 bg-[var(--opti-light-green)] rounded-[24px] p-8 border border-gray-100">
                 <h3 className="font-black text-2xl text-[var(--opti-dark)] tracking-tight mb-4">
                   GeM API &amp; GFR 149 Compliance
@@ -547,7 +569,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row">
+              <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row reveal-on-scroll">
                 <div className="w-full md:w-2/5 h-48 md:h-auto">
                   <img
                     src="/images/iocl-refinery.jpg"
@@ -570,7 +592,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 </div>
               </div>
 
-              <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row">
+              <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row reveal-on-scroll delay-200">
                 <div className="w-full md:w-2/5 h-48 md:h-auto bg-[var(--opti-dark)]">
                   <img
                     src="/images/ongc-platform.jpg"
@@ -605,7 +627,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
 
-          <div className="relative z-10 text-center w-full max-w-4xl px-6">
+          <div className="relative z-10 text-center w-full max-w-4xl px-6 reveal-on-scroll">
             <h2 className="text-5xl md:text-7xl leading-[0.9] mb-12">
               <span className="text-3d text-white">
                 Slots straight into your
@@ -705,7 +727,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* 11. FOOTER */}
         <footer className="bg-[var(--opti-teal)] pt-16 pb-8 px-6 overflow-hidden">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-20">
+          <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between gap-12 mb-20 reveal-on-scroll">
             <div>
               <div className="font-black text-2xl tracking-tighter text-[var(--opti-dark)] mb-6">
                 Platform
@@ -772,7 +794,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </div>
           </div>
 
-          <div className="w-full flex justify-center pb-8 border-t border-[var(--opti-dark)]/10 pt-8">
+          <div className="w-full flex justify-center pb-8 border-t border-[var(--opti-dark)]/10 pt-8 reveal-on-scroll delay-200">
             <h1 className="text-[120px] md:text-[200px] lg:text-[280px] leading-none text-center select-none">
               <span
                 className="text-3d text-[var(--opti-lime)] drop-shadow-xl"

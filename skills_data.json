@@ -1,0 +1,2592 @@
+[
+  {
+    "id": "academy-guide",
+    "name": "academy-guide",
+    "desc": "Stop and check this skill before finishing any reply to a question about how",
+    "path": "D:\\oil\\.agents\\skills\\academy-guide\\SKILL.md",
+    "size": 7902,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "AC"
+  },
+  {
+    "id": "algorithmic-art",
+    "name": "algorithmic-art",
+    "desc": "Creating algorithmic art using p5.js with seeded randomness and interactive parameter exploration. Use this when users request creating art using code, generative art, algorithmic art, flow fields, or particle systems. Create original algorithmic art rather than copying existing artists' work to avoid copyright violations.",
+    "path": "D:\\oil\\.agents\\skills\\algorithmic-art\\SKILL.md",
+    "size": 20173,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "AL"
+  },
+  {
+    "id": "ask-matt",
+    "name": "ask-matt",
+    "desc": "Ask which skill or flow fits your situation. A router over the skills in this repo.",
+    "path": "D:\\oil\\.agents\\skills\\ask-matt\\SKILL.md",
+    "size": 11507,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "AS"
+  },
+  {
+    "id": "babysit",
+    "name": "babysit",
+    "desc": "Watch a pull request or review cycle until it is ready to merge. Use when asked to babysit, monitor, or keep checking PR comments, reviews, and CI until all actionable issues are resolved.",
+    "path": "D:\\oil\\.agents\\skills\\babysit\\SKILL.md",
+    "size": 4354,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "BA"
+  },
+  {
+    "id": "brainstorming",
+    "name": "brainstorming",
+    "desc": "\"You MUST use this before any creative work - creating features, building components, adding functionality, or modifying behavior. Explores user intent, requirements and design before implementation.\"",
+    "path": "D:\\oil\\.agents\\skills\\brainstorming\\SKILL.md",
+    "size": 17548,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "BR"
+  },
+  {
+    "id": "brand-guidelines",
+    "name": "brand-guidelines",
+    "desc": "Applies Anthropic's official brand colors and typography to any sort of artifact that may benefit from having Anthropic's look-and-feel. Use it when brand colors or style guidelines, visual formatting, or company design standards apply.",
+    "path": "D:\\oil\\.agents\\skills\\brand-guidelines\\SKILL.md",
+    "size": 2308,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "BR"
+  },
+  {
+    "id": "canvas-design",
+    "name": "canvas-design",
+    "desc": "Create beautiful visual art in .png and .pdf documents using design philosophy. You should use this skill when the user asks to create a poster, piece of art, design, or other static piece. Create original visual designs, never copying existing artists' work to avoid copyright violations.",
+    "path": "D:\\oil\\.agents\\skills\\canvas-design\\SKILL.md",
+    "size": 12068,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "cavecrew",
+    "name": "cavecrew",
+    "desc": "When to delegate to `cavecrew-investigator` (locate code), `cavecrew-builder`",
+    "path": "D:\\oil\\.agents\\skills\\cavecrew\\SKILL.md",
+    "size": 3606,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman",
+    "name": "caveman",
+    "desc": "Ultra-compressed communication mode that cuts output tokens while keeping",
+    "path": "D:\\oil\\.agents\\skills\\caveman\\SKILL.md",
+    "size": 7061,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-commit",
+    "name": "caveman-commit",
+    "desc": "Write a Conventional Commits message compressed to intent only. Use for",
+    "path": "D:\\oil\\.agents\\skills\\caveman-commit\\SKILL.md",
+    "size": 2371,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-compress",
+    "name": "caveman-compress",
+    "desc": "Compress a memory file such as CLAUDE.md or a todo list into caveman format",
+    "path": "D:\\oil\\.agents\\skills\\caveman-compress\\SKILL.md",
+    "size": 4697,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-discover",
+    "name": "caveman-discover",
+    "desc": "Find and label every LLM workflow in the repository so Caveman Cloud groups",
+    "path": "D:\\oil\\.agents\\skills\\caveman-discover\\SKILL.md",
+    "size": 5276,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-evidence-review",
+    "name": "caveman-evidence-review",
+    "desc": "Read-only review of Caveman Cloud evidence: cost, Cave Score, workflows,",
+    "path": "D:\\oil\\.agents\\skills\\caveman-evidence-review\\SKILL.md",
+    "size": 3734,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-explore",
+    "name": "caveman-explore",
+    "desc": "Read-only repository explorer for cold-start orientation, broad cross-file localization, or when a direct search failed. Skip it when the exact file or symbol is already named. Returns path:line citations only; its reads stay out of main context.",
+    "path": "D:\\oil\\.agents\\skills\\caveman-explore\\SKILL.md",
+    "size": 1970,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-help",
+    "name": "caveman-help",
+    "desc": "Quick-reference card for caveman modes, skills and commands.",
+    "path": "D:\\oil\\.agents\\skills\\caveman-help\\SKILL.md",
+    "size": 2266,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-learn",
+    "name": "caveman-learn",
+    "desc": "Act on a Caveman learn report - review the ranked token sinks, apply cost-lowering fixes with per-edit consent, and report what those fixes returned. Use when asked to lower an agent's token cost, what caveman has saved, to trim a heavy CLAUDE.md, or to offload re-pasted context into cavemem.",
+    "path": "D:\\oil\\.agents\\skills\\caveman-learn\\SKILL.md",
+    "size": 9205,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-manage",
+    "name": "caveman-manage",
+    "desc": "Inspect Caveman Cloud's experiment lifecycle and block unsafe execution. Use",
+    "path": "D:\\oil\\.agents\\skills\\caveman-manage\\SKILL.md",
+    "size": 3916,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-optimize",
+    "name": "caveman-optimize",
+    "desc": "Turn a Caveman optimization observation into an operator-chosen candidate",
+    "path": "D:\\oil\\.agents\\skills\\caveman-optimize\\SKILL.md",
+    "size": 4723,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-review",
+    "name": "caveman-review",
+    "desc": "Compressed code review - one line per finding with location, problem and fix.",
+    "path": "D:\\oil\\.agents\\skills\\caveman-review\\SKILL.md",
+    "size": 2567,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-setup",
+    "name": "caveman-setup",
+    "desc": "Wire a repository through the Caveman Cloud gateway so every LLM request is",
+    "path": "D:\\oil\\.agents\\skills\\caveman-setup\\SKILL.md",
+    "size": 10524,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "CA"
+  },
+  {
+    "id": "caveman-stats",
+    "name": "caveman-stats",
+    "desc": "Show recorded output and cache-read token usage and mode attribution for",
+    "path": "D:\\oil\\.agents\\skills\\caveman-stats\\SKILL.md",
+    "size": 1964,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "CA"
+  },
+  {
+    "id": "ccs-align",
+    "name": "ccs-align",
+    "desc": "Run the CCS Align seat's hourly breathing cycle — prove the local claude-mem worker is healthy, pull needle observations through search → timeline → get_observations, land them in a seat-owned middle cache via atomic grab → append → filter exclude-marks → replace, manage exclude marks, and walk house → project → seat rules to detect conflicts (SHADOW_HOUSE, DENY_ALLOW, DRIFT, CLOCK_HEADER) with an append-only rules-report.md. Use when asked to run CCS Align, breathe the alignment seat, refresh the middle cache, exclude or restore an observation, walk rules, check rules conflicts, or check the Worker Watch board.",
+    "path": "D:\\oil\\.agents\\skills\\ccs-align\\SKILL.md",
+    "size": 24641,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "CC"
+  },
+  {
+    "id": "claude-api",
+    "name": "claude-api",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\claude-api\\SKILL.md",
+    "size": 86770,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "CL"
+  },
+  {
+    "id": "claude-handoff",
+    "name": "claude-handoff",
+    "desc": "Hand the current conversation off to a fresh background agent that picks up the work immediately.",
+    "path": "D:\\oil\\.agents\\skills\\claude-handoff\\SKILL.md",
+    "size": 1319,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "CL"
+  },
+  {
+    "id": "cloud-sync",
+    "name": "cloud-sync",
+    "desc": "Set up or check claude-mem cloud sync with cmem.ai Pro. Use when the user says \"set up cloud sync\", \"sync my memories\", \"cmem pro\", \"cloud backup\", \"sync status\", or wants their memory database backed up or synced to their cmem.ai account.",
+    "path": "D:\\oil\\.agents\\skills\\cloud-sync\\SKILL.md",
+    "size": 4705,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "CL"
+  },
+  {
+    "id": "code-review",
+    "name": "code-review",
+    "desc": "\"Review the changes since a fixed point (commit, branch, tag, or merge-base) along two axes: Standards (does the code follow this repo's documented coding standards?) and Spec (does the code match what the originating issue/spec asked for?). Runs both reviews in parallel sub-agents and reports them side by side. Use when the user wants to review a branch, a PR, work-in-progress changes, or asks to \\\"review since X\\\".\"",
+    "path": "D:\\oil\\.agents\\skills\\code-review\\SKILL.md",
+    "size": 6676,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "CO"
+  },
+  {
+    "id": "codebase-design",
+    "name": "codebase-design",
+    "desc": "Shared vocabulary for designing deep modules. Use when the user wants to design or improve a module's interface, find deepening opportunities, decide where a seam goes, make code more testable or AI-navigable, or when another skill needs the deep-module vocabulary.",
+    "path": "D:\\oil\\.agents\\skills\\codebase-design\\SKILL.md",
+    "size": 6560,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "CO"
+  },
+  {
+    "id": "context-engineering-collection",
+    "name": "context-engineering-collection",
+    "desc": "\"A comprehensive collection of Agent Skills for context engineering, harness engineering, multi-agent architectures, and production agent systems. Use when building, optimizing, evaluating, or debugging agent systems that require effective context management and reliable operating loops.\"",
+    "path": "D:\\oil\\.agents\\skills\\context-engineering-collection\\SKILL.md",
+    "size": 10564,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "CO"
+  },
+  {
+    "id": "context7-cli",
+    "name": "context7-cli",
+    "desc": "Use the ctx7 CLI to fetch library documentation, manage AI coding skills, and configure Context7 MCP. Activate when the user mentions \"ctx7\" or \"context7\", needs current docs for any library, wants to install/search/generate skills, or needs to set up Context7 for their AI coding agent.",
+    "path": "D:\\oil\\.agents\\skills\\context7-cli\\SKILL.md",
+    "size": 3011,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "CO"
+  },
+  {
+    "id": "context7-mcp",
+    "name": "context7-mcp",
+    "desc": "This skill should be used when the user asks about libraries, frameworks, API references, or needs code examples. Activates for setup questions, code generation involving libraries, or mentions of specific frameworks like React, Vue, Next.js, Prisma, Supabase, etc.",
+    "path": "D:\\oil\\.agents\\skills\\context7-mcp\\SKILL.md",
+    "size": 2783,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "CO"
+  },
+  {
+    "id": "deep-agents-core",
+    "name": "deep-agents-core",
+    "desc": "\"INVOKE THIS SKILL when building ANY Deep Agents application. Covers create_deep_agent(), harness architecture, SKILL.md format, and configuration options.\"",
+    "path": "D:\\oil\\.agents\\skills\\deep-agents-core\\SKILL.md",
+    "size": 12729,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "DE"
+  },
+  {
+    "id": "deep-agents-memory",
+    "name": "deep-agents-memory",
+    "desc": "\"INVOKE THIS SKILL when your Deep Agent needs memory, persistence, or filesystem access. Covers StateBackend (ephemeral), StoreBackend (persistent), FilesystemMiddleware, and CompositeBackend for routing.\"",
+    "path": "D:\\oil\\.agents\\skills\\deep-agents-memory\\SKILL.md",
+    "size": 10278,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "DE"
+  },
+  {
+    "id": "deep-agents-orchestration",
+    "name": "deep-agents-orchestration",
+    "desc": "\"INVOKE THIS SKILL when using subagents, task planning, or human approval in Deep Agents. Covers SubAgentMiddleware, TodoList for planning, and HITL interrupts.\"",
+    "path": "D:\\oil\\.agents\\skills\\deep-agents-orchestration\\SKILL.md",
+    "size": 14230,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "DE"
+  },
+  {
+    "id": "deepagents-python-quickstart",
+    "name": "deepagents-python-quickstart",
+    "desc": "\"Scaffold a minimal local Deep Agent in Python by following the official quickstart, using provider-native web search instead of Tavily. Use when the user wants to quickly build or try a Deep Agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\deepagents-python-quickstart\\SKILL.md",
+    "size": 2245,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "DE"
+  },
+  {
+    "id": "deepagents-typescript-quickstart",
+    "name": "deepagents-typescript-quickstart",
+    "desc": "\"Scaffold a minimal local Deep Agent in TypeScript by following the official quickstart, using provider-native web search instead of Tavily. Use when the user wants to quickly build or try a Deep Agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\deepagents-typescript-quickstart\\SKILL.md",
+    "size": 2240,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "DE"
+  },
+  {
+    "id": "design-is",
+    "name": "design-is",
+    "desc": "Audit a design against Dieter Rams' ten \"Good design is...\" principles, then hand off a /make-plan prompt for one of three outcomes — new design, refine design, or redesign. Use when the user says \"audit this design\", \"design review\", \"check this UI against Rams\", \"is this UI good\", \"critique this design\", \"design audit\", or asks for a critique that should lead to a plan.",
+    "path": "D:\\oil\\.agents\\skills\\design-is\\SKILL.md",
+    "size": 18817,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "DE"
+  },
+  {
+    "id": "diagnosing-bugs",
+    "name": "diagnosing-bugs",
+    "desc": "Diagnosis loop for hard bugs and performance regressions. Use when the user says \"diagnose\"/\"debug this\", or reports something broken/throwing/failing/slow.",
+    "path": "D:\\oil\\.agents\\skills\\diagnosing-bugs\\SKILL.md",
+    "size": 8667,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "DI"
+  },
+  {
+    "id": "diagnosing-superpowers",
+    "name": "diagnosing-superpowers",
+    "desc": "Use when a superpowers session went wrong and your human partner wants to know why — repeated work, ignored plans, stumbles, poor results, a skill that didn't fire, \"it took too long\", \"why is it so expensive\", \"what is it doing\" — or wants to build a bug report for the superpowers maintainers, for the current session or a past one identified by id or path, on any harness.",
+    "path": "D:\\oil\\.agents\\skills\\diagnosing-superpowers\\SKILL.md",
+    "size": 6904,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "DI"
+  },
+  {
+    "id": "discernment-nudge",
+    "name": "discernment-nudge",
+    "desc": "After you give a substantive answer or draft that the user may act on",
+    "path": "D:\\oil\\.agents\\skills\\discernment-nudge\\SKILL.md",
+    "size": 10801,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "DI"
+  },
+  {
+    "id": "dispatching-parallel-agents",
+    "name": "dispatching-parallel-agents",
+    "desc": "Use when facing 2+ independent tasks that can be worked on without shared state or sequential dependencies",
+    "path": "D:\\oil\\.agents\\skills\\dispatching-parallel-agents\\SKILL.md",
+    "size": 6078,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "DI"
+  },
+  {
+    "id": "do",
+    "name": "do",
+    "desc": "Execute a phased implementation plan using subagents. Use when asked to execute, run, or carry out a plan — especially one created by make-plan.",
+    "path": "D:\\oil\\.agents\\skills\\do\\SKILL.md",
+    "size": 2049,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "DO"
+  },
+  {
+    "id": "doc-coauthoring",
+    "name": "doc-coauthoring",
+    "desc": "Guide users through a structured workflow for co-authoring documentation. Use when user wants to write documentation, proposals, technical specs, decision docs, or similar structured content. This workflow helps users efficiently transfer context, refine content through iteration, and verify the doc works for readers. Trigger when user mentions writing docs, creating proposals, drafting specs, or similar documentation tasks.",
+    "path": "D:\\oil\\.agents\\skills\\doc-coauthoring\\SKILL.md",
+    "size": 16190,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "DO"
+  },
+  {
+    "id": "docx",
+    "name": "docx",
+    "desc": "\"Use this skill whenever the user wants to create, read, edit, or manipulate Word documents (.docx files) or Word templates (.dotx files). Triggers include: any mention of 'Word doc', 'word document', '.docx', '.dotx', or requests to produce professional documents with formatting like tables of contents, headings, page numbers, or letterheads. Also use when extracting or reorganizing content from .docx or .dotx files, inserting or replacing images in documents, performing find-and-replace in Word files, working with tracked changes or comments, or converting content into a polished Word document. If the user asks for a 'report', 'memo', 'letter', 'template', or similar deliverable as a Word or .docx file, use this skill. Do NOT use for PDFs, spreadsheets, Google Docs, or general coding tasks unrelated to document generation.\"",
+    "path": "D:\\oil\\.agents\\skills\\docx\\SKILL.md",
+    "size": 7002,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "DO"
+  },
+  {
+    "id": "domain-modeling",
+    "name": "domain-modeling",
+    "desc": "Build and sharpen a project's domain model. Use when discussing codebase terminology, writing or editing a CONTEXT.md, or recording or editing an ADR.",
+    "path": "D:\\oil\\.agents\\skills\\domain-modeling\\SKILL.md",
+    "size": 3405,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "DO"
+  },
+  {
+    "id": "ecosystem-primer",
+    "name": "ecosystem-primer",
+    "desc": "\"INVOKE FIRST for any LangChain / LangGraph / Deep Agents agent building project before consulting other skills or writing any agent code. Required starting point for up to date info on framework selection (LangChain vs LangGraph vs Deep Agents vs hybrid composition), agent patterns, install, environment setup, and which skill to load next.\"",
+    "path": "D:\\oil\\.agents\\skills\\ecosystem-primer\\SKILL.md",
+    "size": 8321,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "EC"
+  },
+  {
+    "id": "eval-engineering",
+    "name": "eval-engineering",
+    "desc": "Inspect an agent repository and optional traces, interview the user, write reviewed Task Specs, build and audit Harbor tasks, and bootstrap reusable project World Knowledge Skills. Use for agent evals, benchmark design, Task generation, controlled Environments, synthetic data, Verifiers, Harbor runs, calibration, or continuous benchmark maintenance.",
+    "path": "D:\\oil\\.agents\\skills\\eval-engineering\\SKILL.md",
+    "size": 16259,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "EV"
+  },
+  {
+    "id": "executing-plans",
+    "name": "executing-plans",
+    "desc": "Use when executing an implementation plan in the current session as the implementer yourself — your human partner chose inline execution, or no subagent tool is available",
+    "path": "D:\\oil\\.agents\\skills\\executing-plans\\SKILL.md",
+    "size": 20405,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "EX"
+  },
+  {
+    "id": "find-docs",
+    "name": "find-docs",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\find-docs\\SKILL.md",
+    "size": 7588,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "FI"
+  },
+  {
+    "id": "finishing-a-development-branch",
+    "name": "finishing-a-development-branch",
+    "desc": "Use when implementation is complete, all tests pass, and you need to decide how to integrate the work",
+    "path": "D:\\oil\\.agents\\skills\\finishing-a-development-branch\\SKILL.md",
+    "size": 7781,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "FI"
+  },
+  {
+    "id": "frontend-design",
+    "name": "frontend-design",
+    "desc": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making choices that don't read as templated defaults.",
+    "path": "D:\\oil\\.agents\\skills\\frontend-design\\SKILL.md",
+    "size": 9461,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "FR"
+  },
+  {
+    "id": "git-guardrails-claude-code",
+    "name": "git-guardrails-claude-code",
+    "desc": "Set up Claude Code hooks to block dangerous git commands (push, reset --hard, clean, branch -D, etc.) before they execute. Use when user wants to prevent destructive git operations, add git safety hooks, or block git push/reset in Claude Code.",
+    "path": "D:\\oil\\.agents\\skills\\git-guardrails-claude-code\\SKILL.md",
+    "size": 2408,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "GI"
+  },
+  {
+    "id": "grill-me",
+    "name": "grill-me",
+    "desc": "A relentless interview to sharpen a plan or design.",
+    "path": "D:\\oil\\.agents\\skills\\grill-me\\SKILL.md",
+    "size": 164,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "GR"
+  },
+  {
+    "id": "grill-with-docs",
+    "name": "grill-with-docs",
+    "desc": "A relentless interview to sharpen a plan or design, which also creates docs (ADR's and glossary) as we go.",
+    "path": "D:\\oil\\.agents\\skills\\grill-with-docs\\SKILL.md",
+    "size": 254,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "GR"
+  },
+  {
+    "id": "grilling",
+    "name": "grilling",
+    "desc": "Grill the user relentlessly about a plan, decision, or idea. Use when the user wants to stress-test their thinking, or uses any 'grill' trigger phrases.",
+    "path": "D:\\oil\\.agents\\skills\\grilling\\SKILL.md",
+    "size": 2015,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "GR"
+  },
+  {
+    "id": "gstack",
+    "name": "gstack",
+    "desc": "Router for the gstack skill suite. (gstack)",
+    "path": "D:\\oil\\.agents\\skills\\gstack\\SKILL.md",
+    "size": 15215,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "GS"
+  },
+  {
+    "id": "handoff",
+    "name": "handoff",
+    "desc": "Compact the current conversation into a handoff document for another agent to pick up.",
+    "path": "D:\\oil\\.agents\\skills\\handoff\\SKILL.md",
+    "size": 910,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "HA"
+  },
+  {
+    "id": "how-it-works",
+    "name": "how-it-works",
+    "desc": "Explain how claude-mem captures observations, when memory injection kicks in, and where data lives. Use when the user asks \"how does claude-mem work?\" or \"what is this thing doing?\".",
+    "path": "D:\\oil\\.agents\\skills\\how-it-works\\SKILL.md",
+    "size": 1233,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "HO"
+  },
+  {
+    "id": "implement",
+    "name": "implement",
+    "desc": "\"Implement a piece of work based on a spec or set of tickets.\"",
+    "path": "D:\\oil\\.agents\\skills\\implement\\SKILL.md",
+    "size": 448,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "IM"
+  },
+  {
+    "id": "implement-spec",
+    "name": "implement-spec",
+    "desc": "\"Implement a specification in code.\"",
+    "path": "D:\\oil\\.agents\\skills\\implement-spec\\SKILL.md",
+    "size": 2078,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "IM"
+  },
+  {
+    "id": "improve-codebase-architecture",
+    "name": "improve-codebase-architecture",
+    "desc": "Scan a codebase for deepening opportunities, present them as a visual HTML report, then grill through whichever one you pick.",
+    "path": "D:\\oil\\.agents\\skills\\improve-codebase-architecture\\SKILL.md",
+    "size": 6064,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "IM"
+  },
+  {
+    "id": "internal-comms",
+    "name": "internal-comms",
+    "desc": "A set of resources to help me write all kinds of internal communications, using the formats that my company likes to use. Claude should use this skill whenever asked to write some sort of internal communications (status reports, leadership updates, 3P updates, company newsletters, FAQs, incident reports, project updates, etc.).",
+    "path": "D:\\oil\\.agents\\skills\\internal-comms\\SKILL.md",
+    "size": 1543,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "IN"
+  },
+  {
+    "id": "investigate-first",
+    "name": "investigate-first",
+    "desc": "Diagnose ambiguous failures before editing. Use for unknown causes, intermittent behavior, performance regressions, or investigations needing evidence-ranked hypotheses.",
+    "path": "D:\\oil\\.agents\\skills\\investigate-first\\SKILL.md",
+    "size": 688,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "IN"
+  },
+  {
+    "id": "karpathy-agentic-engineering",
+    "name": "karpathy-agentic-engineering",
+    "desc": "'Apply Karpathy-style agentic engineering to any coding or building task. Use this skill when the user wants to set up an agent-driven workflow, needs to write a CLAUDE.md or AGENTS.md, wants to orchestrate agents with clear success criteria, or says things like \"agent loop\", \"let the agent handle it\", \"agentic coding\", \"set up agent workflow\". Includes the 7-step inner loop from Karpathy claude coding notes.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-agentic-engineering\\SKILL.md",
+    "size": 5421,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-autoresearch",
+    "name": "karpathy-autoresearch",
+    "desc": "'Set up an autonomous research loop where an agent iterates on experiments, hypotheses, and code on git branches. Use this skill when the user wants to automate ML experiments, set up a research agent that self-improves, needs to run many variations of an experiment without manual intervention, or says \"automate experiments\", \"agent research loop\", \"self-improving agent\", \"run hyperparameter search\", \"autoresearch\". Based on Karpathy 28k-like AutoResearch post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-autoresearch\\SKILL.md",
+    "size": 6080,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-education-first",
+    "name": "karpathy-education-first",
+    "desc": "'Apply the education-first mindset — make everything you build teachable, create nano-project explanations, write for beginners. Use this skill when the user wants to explain a project to beginners, create a tutorial from code, write documentation that teaches (not just documents), make a concept accessible, or says \"make this teachable\", \"explain like im a beginner\", \"nano project version\", \"teaching version\", \"explain from scratch\", \"blog post about this\". Based on Karpathy 243-line GPT and Eureka Labs posts.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-education-first\\SKILL.md",
+    "size": 7565,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-idea-files",
+    "name": "karpathy-idea-files",
+    "desc": "'Create and share ideas as abstract Gist-style specs instead of code — letting agents or others implement. Use this skill when the user wants to capture a new idea quickly, needs to write a project spec for an agent to implement, wants to share a concept without building it first, or says \"write up this idea\", \"create a spec\", \"gist this\", \"idea file\", \"agent can implement this\", \"brief for this project\". Based on Karpathy 27k-like LLM Wiki Gist post and GitHub repo.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-idea-files\\SKILL.md",
+    "size": 6518,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-llm-simulator",
+    "name": "karpathy-llm-simulator",
+    "desc": "'Use LLM as a simulator of expert debates and opposing viewpoints instead of getting a single sycophantic answer. Use this skill when the user needs to make an important decision, wants to stress-test an idea, needs devil''s advocate analysis, wants to avoid confirmation bias, or says \"argue against this\", \"what are the counterarguments\", \"simulate experts\", \"debate this\", \"challenge my thinking\". Based on Karpathy 31k-like post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-llm-simulator\\SKILL.md",
+    "size": 5722,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-llm-wiki",
+    "name": "karpathy-llm-wiki",
+    "desc": "'Build and maintain an LLM-powered personal knowledge base or wiki. Use this skill when the user wants to organize research notes, build a second brain, set up an Obsidian vault with LLM compilation, ingest papers or articles automatically, or mentions \"personal knowledge base\", \"LLM wiki\", \"second brain\", \"knowledge management\", \"ingest papers\", \"obsidian + LLM\". Based on Karpathy Gist and 59k-like post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-llm-wiki\\SKILL.md",
+    "size": 6395,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-meta-reflection",
+    "name": "karpathy-meta-reflection",
+    "desc": "'Run a structured reflection on how AI is reshaping your skills, career, and leverage. Use this skill for monthly career audits, skill atrophy reviews, understanding what''s worth learning vs delegating to AI, or when the user says \"career audit\", \"skills review\", \"what should I learn\", \"am I becoming obsolete\", \"AI impact on my work\", \"leverage review\", \"meta reflection\". Based on Karpathy 56k-like programmer identity post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-meta-reflection\\SKILL.md",
+    "size": 6758,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-methodology",
+    "name": "karpathy-methodology",
+    "desc": "'Apply Andrej Karpathy AI methodology and principles from his 2023-2026 insights. Use this skill when the user wants to apply Karpathy-style thinking, needs guidance on agentic engineering, LLM knowledge bases, minimalist coding, understanding-first principles, or any of the 14 core methodologies distilled from his work. Also triggers on: \"karpathy method\", \"karpathy approach\", \"karpathy way\", \"AK style\", \"like karpathy does\", \"karpathy principles\", or when user asks how Karpathy would approach any programming or AI problem.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-methodology\\SKILL.md",
+    "size": 6008,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-minimalism",
+    "name": "karpathy-minimalism",
+    "desc": "'Apply Karpathy-style minimalism and anti-dependency principles to code and system design. Use this skill when the user wants to reduce dependencies, avoid supply chain risks, rewrite something in pure Python or minimal code, audit a project for bloat, design agent-native CLI tools, or says \"too many dependencies\", \"minimize deps\", \"pure python\", \"yoink this\", \"vibe code this\", \"no frameworks\", \"agent-native design\". Based on 28k-like litellm attack post and 25k-like 243-line GPT post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-minimalism\\SKILL.md",
+    "size": 6987,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-output-evolution",
+    "name": "karpathy-output-evolution",
+    "desc": "'Upgrade LLM outputs from plain text to structured, rendered formats like HTML, Marp slides, or interactive dashboards. Use this skill when the user wants better-formatted output, needs to convert notes into a presentation, wants HTML output from an LLM, needs slides from a document, or says \"make this prettier\", \"render this\", \"output as HTML\", \"make slides from this\", \"structured output\", \"Marp\", \"better format\". Based on Karpathy 19k-like HTML output post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-output-evolution\\SKILL.md",
+    "size": 6501,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-practice-environments",
+    "name": "karpathy-practice-environments",
+    "desc": "'Build practice environments and evaluation gyms where agents can try, fail, and learn from feedback. Use this skill when the user wants to set up automated evaluation for an agent, needs a sandbox for testing LLM capabilities, wants to build a practice gym for skills, needs an RL-style environment for agent improvement, or says \"eval environment\", \"practice gym\", \"agent sandbox\", \"automated testing for agents\", \"RL environment\", \"agent eval loop\". Based on Karpathy LLM Textbook and environments posts.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-practice-environments\\SKILL.md",
+    "size": 9191,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-supply-chain-hygiene",
+    "name": "karpathy-supply-chain-hygiene",
+    "desc": "'Apply rigorous supply chain security hygiene to software projects — audit dependencies, detect risks, minimize attack surface. Use this skill when the user wants to audit project dependencies, is concerned about supply chain attacks, wants to set up secure dependency management, needs to review a requirements.txt or package.json, or says \"dependency audit\", \"supply chain risk\", \"check packages\", \"secure dependencies\", \"pin versions\", \"check pypi\". Based on Karpathy 28k-like litellm supply chain post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-supply-chain-hygiene\\SKILL.md",
+    "size": 7450,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-system-prompt-learning",
+    "name": "karpathy-system-prompt-learning",
+    "desc": "'Write explicit strategy into system prompts as a learning mechanism — making LLM behavior more predictable and teachable through prompt-as-textbook approach. Use this skill when the user wants to improve an agent or LLM''s performance on a specific task through system prompts, needs to encode a strategy or workflow into a prompt, wants consistent LLM behavior, or says \"improve system prompt\", \"encode this strategy\", \"prompt engineering\", \"make agent follow this workflow\", \"prompt as textbook\". Based on Karpathy system prompt learning post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-system-prompt-learning\\SKILL.md",
+    "size": 8023,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-understanding-first",
+    "name": "karpathy-understanding-first",
+    "desc": "'Apply the Karpathy understanding-first principle — verify what AI built, own your understanding, map the jagged capability landscape of LLMs. Use this skill when the user has used AI to build something and needs to verify it, wants to audit their own understanding, needs to know where LLMs are reliable vs unreliable, or says \"verify this\", \"do I actually understand this\", \"what can I trust the AI on\", \"jagged capabilities\", \"understanding not outsourcing\". Based on 46k-like quote post.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-understanding-first\\SKILL.md",
+    "size": 6915,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "KA"
+  },
+  {
+    "id": "karpathy-vibe-to-agentic",
+    "name": "karpathy-vibe-to-agentic",
+    "desc": "'Transition from vibe coding (fast prototyping) to agentic engineering (rigorous iteration). Use this skill when the user has a rough prototype and wants to level it up, needs to go from \"it kind of works\" to production-quality, wants to understand the difference between vibe coding and agentic coding, or says \"polish this\", \"make this production-ready\", \"level up from prototype\", \"vibe coded this now what\". Based on Karpathy posts 3 and 6.'",
+    "path": "D:\\oil\\.agents\\skills\\karpathy-vibe-to-agentic\\SKILL.md",
+    "size": 6034,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "KA"
+  },
+  {
+    "id": "knowledge-agent",
+    "name": "knowledge-agent",
+    "desc": "Build and query AI-powered knowledge bases from claude-mem observations. Use when users want to create focused \"brains\" from their observation history, ask questions about past work patterns, or compile expertise on specific topics.",
+    "path": "D:\\oil\\.agents\\skills\\knowledge-agent\\SKILL.md",
+    "size": 2488,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "KN"
+  },
+  {
+    "id": "langchain-dependencies",
+    "name": "langchain-dependencies",
+    "desc": "\"INVOKE THIS SKILL when setting up a new project or when asked about package versions, installation, or dependency management for LangChain, LangGraph, LangSmith, or Deep Agents. Covers required packages, minimum versions, environment requirements, versioning best practices, and common community tool packages for both Python and TypeScript.\"",
+    "path": "D:\\oil\\.agents\\skills\\langchain-dependencies\\SKILL.md",
+    "size": 15025,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "LA"
+  },
+  {
+    "id": "langchain-fundamentals",
+    "name": "langchain-fundamentals",
+    "desc": "Create LangChain agents with create_agent, define tools, and use middleware for human-in-the-loop and error handling.",
+    "path": "D:\\oil\\.agents\\skills\\langchain-fundamentals\\SKILL.md",
+    "size": 12936,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "LA"
+  },
+  {
+    "id": "langchain-middleware",
+    "name": "langchain-middleware",
+    "desc": "\"INVOKE THIS SKILL when you need human-in-the-loop approval, custom middleware, or structured output. Covers HumanInTheLoopMiddleware for human approval of dangerous tool calls, creating custom middleware with hooks, Command resume patterns, and structured output with Pydantic/Zod.\"",
+    "path": "D:\\oil\\.agents\\skills\\langchain-middleware\\SKILL.md",
+    "size": 11169,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "LA"
+  },
+  {
+    "id": "langchain-python-quickstart",
+    "name": "langchain-python-quickstart",
+    "desc": "\"Scaffold a minimal local LangChain agent in Python by following the official quickstart. Use when the user wants to quickly build or try a LangChain agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\langchain-python-quickstart\\SKILL.md",
+    "size": 1509,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "LA"
+  },
+  {
+    "id": "langchain-rag",
+    "name": "langchain-rag",
+    "desc": "\"INVOKE THIS SKILL when building ANY retrieval-augmented generation (RAG) system. Covers document loaders, RecursiveCharacterTextSplitter, embeddings (OpenAI), and vector stores (Chroma, FAISS, Pinecone).\"",
+    "path": "D:\\oil\\.agents\\skills\\langchain-rag\\SKILL.md",
+    "size": 15999,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "LA"
+  },
+  {
+    "id": "langchain-typescript-quickstart",
+    "name": "langchain-typescript-quickstart",
+    "desc": "\"Scaffold a minimal local LangChain agent in TypeScript by following the official quickstart. Use when the user wants to quickly build or try a LangChain agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\langchain-typescript-quickstart\\SKILL.md",
+    "size": 1543,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-cli",
+    "name": "langgraph-cli",
+    "desc": "\"INVOKE THIS SKILL when using the langgraph CLI to scaffold, develop, build, or deploy LangGraph applications. Covers langgraph new, dev, build, up, deploy, and langgraph.json configuration.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-cli\\SKILL.md",
+    "size": 11436,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-fundamentals",
+    "name": "langgraph-fundamentals",
+    "desc": "\"INVOKE THIS SKILL when writing ANY LangGraph code. Covers StateGraph, state schemas, nodes, edges, Command, Send, invoke, streaming, and error handling.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-fundamentals\\SKILL.md",
+    "size": 6067,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-human-in-the-loop",
+    "name": "langgraph-human-in-the-loop",
+    "desc": "\"INVOKE THIS SKILL when implementing human-in-the-loop patterns, pausing for approval, or handling errors in LangGraph. Covers interrupt(), Command(resume=...), approval/validation workflows, and the 4-tier error handling strategy.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-human-in-the-loop\\SKILL.md",
+    "size": 16960,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-persistence",
+    "name": "langgraph-persistence",
+    "desc": "\"INVOKE THIS SKILL when your LangGraph needs to persist state, remember conversations, travel through history, or configure subgraph checkpointer scoping. Covers checkpointers, thread_id, time travel, Store, and subgraph persistence modes.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-persistence\\SKILL.md",
+    "size": 19114,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-python-quickstart",
+    "name": "langgraph-python-quickstart",
+    "desc": "\"Scaffold a minimal local LangGraph agent in Python by following the official quickstart. Use when the user wants to quickly build or try a LangGraph agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-python-quickstart\\SKILL.md",
+    "size": 1857,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "LA"
+  },
+  {
+    "id": "langgraph-typescript-quickstart",
+    "name": "langgraph-typescript-quickstart",
+    "desc": "\"Scaffold a minimal local LangGraph agent in TypeScript by following the official quickstart. Use when the user wants to quickly build or try a LangGraph agent locally.\"",
+    "path": "D:\\oil\\.agents\\skills\\langgraph-typescript-quickstart\\SKILL.md",
+    "size": 1862,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "LA"
+  },
+  {
+    "id": "langsmith-online-eval-engineering",
+    "name": "langsmith-online-eval-engineering",
+    "desc": "Iteratively inspect traces, interview the user, and create LangSmith online evaluators one at a time. Use specifically for creating online evaluators for use within LangSmith -- use \"eval-engineering\" for Harbor-style online evaluations.",
+    "path": "D:\\oil\\.agents\\skills\\langsmith-online-eval-engineering\\SKILL.md",
+    "size": 6544,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "LA"
+  },
+  {
+    "id": "lean-build",
+    "name": "lean-build",
+    "desc": "Build feature work with high overbuilding risk. Use for new behavior, product slices, or integrations where repository reuse, strict scope, and an explicit stop condition matter.",
+    "path": "D:\\oil\\.agents\\skills\\lean-build\\SKILL.md",
+    "size": 1090,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "LE"
+  },
+  {
+    "id": "learn-codebase",
+    "name": "learn-codebase",
+    "desc": "Prime a codebase by reading every source file in full. Use when starting work on a new or unfamiliar project, or when the user asks to \"learn the codebase\", \"read the codebase\", \"prime\", or \"get up to speed\".",
+    "path": "D:\\oil\\.agents\\skills\\learn-codebase\\SKILL.md",
+    "size": 901,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "LE"
+  },
+  {
+    "id": "loop-me",
+    "name": "loop-me",
+    "desc": "Grill me about specs for the workflows I want to build, within this workspace.",
+    "path": "D:\\oil\\.agents\\skills\\loop-me\\SKILL.md",
+    "size": 2554,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "LO"
+  },
+  {
+    "id": "make-plan",
+    "name": "make-plan",
+    "desc": "Create a detailed, phased implementation plan with documentation discovery. Use when asked to plan a feature, task, or multi-step implementation — especially before executing with do.",
+    "path": "D:\\oil\\.agents\\skills\\make-plan\\SKILL.md",
+    "size": 3165,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "MA"
+  },
+  {
+    "id": "managed-deep-agents",
+    "name": "managed-deep-agents",
+    "desc": "\"INVOKE THIS SKILL when building, testing, or deploying Managed Deep Agents in LangSmith with the mda CLI. Walks a user through their first agent end to end — interviewing them about what they want to build, mapping it onto what MDA can actually do, then scaffolding and deploying it. Covers the file-based project layout; define_deep_agent / defineDeepAgent; instructions, skills, memory, identity, tools, middleware, sandboxes, schedules, channels, and evals; mda init/build/dev/deploy/logs/delete; and Context Hub.\"",
+    "path": "D:\\oil\\.agents\\skills\\managed-deep-agents\\SKILL.md",
+    "size": 30457,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "MA"
+  },
+  {
+    "id": "mcp-builder",
+    "name": "mcp-builder",
+    "desc": "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).",
+    "path": "D:\\oil\\.agents\\skills\\mcp-builder\\SKILL.md",
+    "size": 9328,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "MC"
+  },
+  {
+    "id": "mem-search",
+    "name": "mem-search",
+    "desc": "Search claude-mem's persistent cross-session memory database. Use when user asks \"did we already solve this?\", \"how did we do X last time?\", or needs work from previous sessions.",
+    "path": "D:\\oil\\.agents\\skills\\mem-search\\SKILL.md",
+    "size": 5609,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "ME"
+  },
+  {
+    "id": "mem-setup",
+    "name": "mem-setup",
+    "desc": "This skill should be used when the user asks to \"set up claude-mem\", \"pair",
+    "path": "D:\\oil\\.agents\\skills\\mem-setup\\SKILL.md",
+    "size": 2652,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "ME"
+  },
+  {
+    "id": "migrate-to-shoehorn",
+    "name": "migrate-to-shoehorn",
+    "desc": "Migrate test files from `as` type assertions to @total-typescript/shoehorn. Use when user mentions shoehorn, wants to replace `as` in tests, or needs partial test data.",
+    "path": "D:\\oil\\.agents\\skills\\migrate-to-shoehorn\\SKILL.md",
+    "size": 2913,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "MI"
+  },
+  {
+    "id": "migration",
+    "name": "migration",
+    "desc": "Implement reversible compatibility-safe transitions. Use for schema, data, API, protocol, configuration, or dependency migrations requiring rollback and preservation proof.",
+    "path": "D:\\oil\\.agents\\skills\\migration\\SKILL.md",
+    "size": 784,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "MI"
+  },
+  {
+    "id": "mode-creator",
+    "name": "mode-creator",
+    "desc": "Interactively create, install, activate, and verify custom claude-mem modes, including domain-specific observation types, concept tags, optional Telegram alerts, bot setup, worker restart, and startup-context verification. Use this whenever someone asks to customize what claude-mem remembers, create or change a mode, track domain-specific notes, add observation types or tags, or send Telegram notifications for particular memories—even if they do not use the word \"mode.\"",
+    "path": "D:\\oil\\.agents\\skills\\mode-creator\\SKILL.md",
+    "size": 9783,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "MO"
+  },
+  {
+    "id": "oh-my-issues",
+    "name": "oh-my-issues",
+    "desc": "Cluster a GitHub issue backlog by root cause into a small set of plan-master issues, redirect children with a standardized comment, and bundle architectural-fix PRs that close clusters atomically. Use when an issue tracker has accumulated dozens of reports that share underlying defects, when asked to triage / consolidate / cluster / dedupe issues, when asked to build a plan series or roadmap from open issues, or when routing a new incoming bug into an existing plan.",
+    "path": "D:\\oil\\.agents\\skills\\oh-my-issues\\SKILL.md",
+    "size": 11662,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "OH"
+  },
+  {
+    "id": "pathfinder",
+    "name": "pathfinder",
+    "desc": "Map a codebase into feature-grouped flowcharts, identify duplicated concerns across features, and propose a unified architecture. Use when asked to \"find the ideal path,\" unify duplicated systems, or audit architecture before a refactor. Emits a proposed unified flowchart plus per-system /make-plan prompts.",
+    "path": "D:\\oil\\.agents\\skills\\pathfinder\\SKILL.md",
+    "size": 6195,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "PA"
+  },
+  {
+    "id": "pdf",
+    "name": "pdf",
+    "desc": "Use this skill whenever the user wants to do anything with PDF files. This includes reading or extracting text/tables from PDFs, combining or merging multiple PDFs into one, splitting PDFs apart, rotating pages, adding watermarks, creating new PDFs, filling PDF forms, encrypting/decrypting PDFs, extracting images, and OCR on scanned PDFs to make them searchable. If the user mentions a .pdf file or asks to produce one, use this skill.",
+    "path": "D:\\oil\\.agents\\skills\\pdf\\SKILL.md",
+    "size": 8386,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "PD"
+  },
+  {
+    "id": "ponytail",
+    "name": "ponytail",
+    "desc": "Forces the laziest solution that actually works, simplest, shortest, most",
+    "path": "D:\\oil\\.agents\\skills\\ponytail\\SKILL.md",
+    "size": 6757,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "PO"
+  },
+  {
+    "id": "ponytail-audit",
+    "name": "ponytail-audit",
+    "desc": "Whole-repo audit for over-engineering. Like ponytail-review, but scans the",
+    "path": "D:\\oil\\.agents\\skills\\ponytail-audit\\SKILL.md",
+    "size": 1693,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "PO"
+  },
+  {
+    "id": "ponytail-debt",
+    "name": "ponytail-debt",
+    "desc": "Harvest every `ponytail:` comment in the codebase into a debt ledger, so the",
+    "path": "D:\\oil\\.agents\\skills\\ponytail-debt\\SKILL.md",
+    "size": 1747,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "PO"
+  },
+  {
+    "id": "ponytail-gain",
+    "name": "ponytail-gain",
+    "desc": "Show ponytail's measured impact as a compact scoreboard: less code, less",
+    "path": "D:\\oil\\.agents\\skills\\ponytail-gain\\SKILL.md",
+    "size": 2023,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "PO"
+  },
+  {
+    "id": "ponytail-help",
+    "name": "ponytail-help",
+    "desc": "Quick-reference card for all ponytail modes, skills, and commands.",
+    "path": "D:\\oil\\.agents\\skills\\ponytail-help\\SKILL.md",
+    "size": 2867,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "PO"
+  },
+  {
+    "id": "ponytail-review",
+    "name": "ponytail-review",
+    "desc": "Code review focused exclusively on over-engineering. Finds what to delete:",
+    "path": "D:\\oil\\.agents\\skills\\ponytail-review\\SKILL.md",
+    "size": 2440,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "PO"
+  },
+  {
+    "id": "pptx",
+    "name": "pptx",
+    "desc": "\"Use this skill any time a .pptx or .potx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx or .potx file (even if the extracted content will be used elsewhere, like in an email or summary); editing, modifying, or updating existing presentations; combining or splitting slide files; working with templates (.potx), layouts, speaker notes, or comments. Trigger whenever the user mentions \\\"deck,\\\" \\\"slides,\\\" \\\"presentation,\\\" or references a .pptx or .potx filename, regardless of what they plan to do with the content afterward. If a .pptx or .potx file needs to be opened, created, or touched, use this skill.\"",
+    "path": "D:\\oil\\.agents\\skills\\pptx\\SKILL.md",
+    "size": 21034,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "PP"
+  },
+  {
+    "id": "pr",
+    "name": "pr",
+    "desc": "\"Use when writing a PR body.\"",
+    "path": "D:\\oil\\.agents\\skills\\pr\\SKILL.md",
+    "size": 4339,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "PR"
+  },
+  {
+    "id": "prototype",
+    "name": "prototype",
+    "desc": "Build a throwaway prototype to answer a design question. Use when the user wants to sanity-check whether a state model or logic feels right, or explore what a UI should look like.",
+    "path": "D:\\oil\\.agents\\skills\\prototype\\SKILL.md",
+    "size": 2957,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "PR"
+  },
+  {
+    "id": "receiving-code-review",
+    "name": "receiving-code-review",
+    "desc": "Use when receiving code review feedback, before implementing suggestions, especially if feedback seems unclear or technically questionable - requires technical rigor and verification, not performative agreement or blind implementation",
+    "path": "D:\\oil\\.agents\\skills\\receiving-code-review\\SKILL.md",
+    "size": 6203,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-background-workers",
+    "name": "render-background-workers",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-background-workers\\SKILL.md",
+    "size": 5503,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "RE"
+  },
+  {
+    "id": "render-blueprints",
+    "name": "render-blueprints",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-blueprints\\SKILL.md",
+    "size": 10743,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-cli",
+    "name": "render-cli",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-cli\\SKILL.md",
+    "size": 5736,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-cron-jobs",
+    "name": "render-cron-jobs",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-cron-jobs\\SKILL.md",
+    "size": 6030,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "RE"
+  },
+  {
+    "id": "render-debug",
+    "name": "render-debug",
+    "desc": "Debug failed Render deployments by analyzing logs, metrics, and database state. Identifies errors (missing env vars, port binding, OOM, etc.) and suggests fixes. Use when deployments fail, services won't start, or users mention errors, logs, or debugging.",
+    "path": "D:\\oil\\.agents\\skills\\render-debug\\SKILL.md",
+    "size": 7807,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-deploy",
+    "name": "render-deploy",
+    "desc": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+    "path": "D:\\oil\\.agents\\skills\\render-deploy\\SKILL.md",
+    "size": 16573,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-disks",
+    "name": "render-disks",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-disks\\SKILL.md",
+    "size": 6186,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-docker",
+    "name": "render-docker",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-docker\\SKILL.md",
+    "size": 6640,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "RE"
+  },
+  {
+    "id": "render-domains",
+    "name": "render-domains",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-domains\\SKILL.md",
+    "size": 5779,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-env-vars",
+    "name": "render-env-vars",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-env-vars\\SKILL.md",
+    "size": 8207,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-keyvalue",
+    "name": "render-keyvalue",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-keyvalue\\SKILL.md",
+    "size": 6589,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-mcp",
+    "name": "render-mcp",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-mcp\\SKILL.md",
+    "size": 7270,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "RE"
+  },
+  {
+    "id": "render-migrate-from-heroku",
+    "name": "render-migrate-from-heroku",
+    "desc": "\"Migrate from Heroku to Render by reading local project files and generating equivalent Render services. Triggers: any mention of migrating from Heroku, moving off Heroku, Heroku to Render migration, or switching from Heroku. Reads Procfile, dependency files, and app config from the local repo. Optionally uses Heroku MCP to enrich with live config vars, add-on details, and dyno sizes. Uses Render MCP or Blueprint YAML to create services.\"",
+    "path": "D:\\oil\\.agents\\skills\\render-migrate-from-heroku\\SKILL.md",
+    "size": 17816,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-monitor",
+    "name": "render-monitor",
+    "desc": "Monitor Render services in real-time. Check health, performance metrics, logs, and resource usage. Use when users want to check service status, view metrics, monitor performance, or verify deployments are healthy.",
+    "path": "D:\\oil\\.agents\\skills\\render-monitor\\SKILL.md",
+    "size": 7230,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-networking",
+    "name": "render-networking",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-networking\\SKILL.md",
+    "size": 6449,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "RE"
+  },
+  {
+    "id": "render-postgres",
+    "name": "render-postgres",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-postgres\\SKILL.md",
+    "size": 7600,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-private-services",
+    "name": "render-private-services",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-private-services\\SKILL.md",
+    "size": 5683,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "render-scaling",
+    "name": "render-scaling",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-scaling\\SKILL.md",
+    "size": 5029,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-static-sites",
+    "name": "render-static-sites",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-static-sites\\SKILL.md",
+    "size": 5909,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-web-services",
+    "name": "render-web-services",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\render-web-services\\SKILL.md",
+    "size": 6765,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "render-workflows",
+    "name": "render-workflows",
+    "desc": "Sets up, develops, tests, and deploys Render Workflows. Covers first-time scaffolding (via CLI or manual), SDK installation (Python or TypeScript), task patterns (retries, subtasks, fan-out), local development, Dashboard deployment, and troubleshooting. Use when a user wants to set up Render Workflows for the first time, scaffold a workflow service, add or modify workflow tasks, test workflows locally, or deploy workflows to Render.",
+    "path": "D:\\oil\\.agents\\skills\\render-workflows\\SKILL.md",
+    "size": 9588,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "requesting-code-review",
+    "name": "requesting-code-review",
+    "desc": "Use when completing tasks, implementing major features, or before merging to verify work meets requirements",
+    "path": "D:\\oil\\.agents\\skills\\requesting-code-review\\SKILL.md",
+    "size": 2977,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "research",
+    "name": "research",
+    "desc": "Investigate a question against high-trust primary sources and capture the findings as a Markdown file in the repo. Use when the user wants a topic researched, docs or API facts gathered, or reading legwork delegated to a background agent.",
+    "path": "D:\\oil\\.agents\\skills\\research\\SKILL.md",
+    "size": 806,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "resolving-merge-conflicts",
+    "name": "resolving-merge-conflicts",
+    "desc": "\"Use when you need to resolve an in-progress git merge/rebase conflict.\"",
+    "path": "D:\\oil\\.agents\\skills\\resolving-merge-conflicts\\SKILL.md",
+    "size": 932,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "retro",
+    "name": "retro",
+    "desc": "\"Conduct a retrospective on a coding session.\"",
+    "path": "D:\\oil\\.agents\\skills\\retro\\SKILL.md",
+    "size": 4413,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "safe-refactor",
+    "name": "safe-refactor",
+    "desc": "Restructure code while preserving behavior. Use for extraction, consolidation, ownership moves, or cleanup where verification must bracket structural edits.",
+    "path": "D:\\oil\\.agents\\skills\\safe-refactor\\SKILL.md",
+    "size": 705,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "SA"
+  },
+  {
+    "id": "scaffold-exercises",
+    "name": "scaffold-exercises",
+    "desc": "Create exercise directory structures with sections, problems, solutions, and explainers that pass linting. Use when user wants to scaffold exercises, create exercise stubs, or set up a new course section.",
+    "path": "D:\\oil\\.agents\\skills\\scaffold-exercises\\SKILL.md",
+    "size": 3695,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "SC"
+  },
+  {
+    "id": "setup-matt-pocock-skills",
+    "name": "setup-matt-pocock-skills",
+    "desc": "\"Configure this repo for the engineering skills: set up its issue tracker, triage label vocabulary, and domain doc layout. Run once before first use of the other engineering skills.\"",
+    "path": "D:\\oil\\.agents\\skills\\setup-matt-pocock-skills\\SKILL.md",
+    "size": 6957,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "SE"
+  },
+  {
+    "id": "setup-pre-commit",
+    "name": "setup-pre-commit",
+    "desc": "Set up Husky pre-commit hooks with lint-staged (Prettier), type checking, and tests in the current repo. Use when user wants to add pre-commit hooks, set up Husky, configure lint-staged, or add commit-time formatting/typechecking/testing.",
+    "path": "D:\\oil\\.agents\\skills\\setup-pre-commit\\SKILL.md",
+    "size": 2349,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "SE"
+  },
+  {
+    "id": "setup-ts-deep-modules",
+    "name": "setup-ts-deep-modules",
+    "desc": "Wire dependency-cruiser into a TypeScript repo so each package is a deep module, with implementation hidden in subfolders and reachable only through its entry-point files. User-invoked.",
+    "path": "D:\\oil\\.agents\\skills\\setup-ts-deep-modules\\SKILL.md",
+    "size": 7648,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "SE"
+  },
+  {
+    "id": "skill-creator",
+    "name": "skill-creator",
+    "desc": "Create new skills, modify and improve existing skills, and measure skill performance. Use when users want to create a skill from scratch, edit, or optimize an existing skill, run evals to test a skill, benchmark skill performance with variance analysis, or optimize a skill's description for better triggering accuracy.",
+    "path": "D:\\oil\\.agents\\skills\\skill-creator\\SKILL.md",
+    "size": 33653,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "SK"
+  },
+  {
+    "id": "slack-gif-creator",
+    "name": "slack-gif-creator",
+    "desc": "Knowledge and utilities for creating animated GIFs optimized for Slack. Provides constraints, validation tools, and animation concepts. Use when users request animated GIFs for Slack like \"make me a GIF of X doing Y for Slack.\"",
+    "path": "D:\\oil\\.agents\\skills\\slack-gif-creator\\SKILL.md",
+    "size": 8095,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "SL"
+  },
+  {
+    "id": "smart-explore",
+    "name": "smart-explore",
+    "desc": "Token-optimized structural code search using tree-sitter AST parsing. Use instead of reading full files when you need to understand code structure, find functions, or explore a codebase efficiently.",
+    "path": "D:\\oil\\.agents\\skills\\smart-explore\\SKILL.md",
+    "size": 9240,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "SM"
+  },
+  {
+    "id": "standup",
+    "name": "standup",
+    "desc": "Facilitate a read-only standup across git worktrees, branches, or PRs to compare changes and produce one consolidation plan.",
+    "path": "D:\\oil\\.agents\\skills\\standup\\SKILL.md",
+    "size": 6694,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "ST"
+  },
+  {
+    "id": "subagent-driven-development",
+    "name": "subagent-driven-development",
+    "desc": "Use when executing implementation plans with independent tasks in the current session",
+    "path": "D:\\oil\\.agents\\skills\\subagent-driven-development\\SKILL.md",
+    "size": 32577,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "SU"
+  },
+  {
+    "id": "surgical-patch",
+    "name": "surgical-patch",
+    "desc": "Fix bugs and small behavior changes at the narrowest responsible layer. Use when regression proof, preserved surrounding behavior, and task-relevant tests matter.",
+    "path": "D:\\oil\\.agents\\skills\\surgical-patch\\SKILL.md",
+    "size": 664,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "SU"
+  },
+  {
+    "id": "swarm",
+    "name": "swarm",
+    "desc": "-",
+    "path": "D:\\oil\\.agents\\skills\\swarm\\SKILL.md",
+    "size": 12385,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "SW"
+  },
+  {
+    "id": "systematic-debugging",
+    "name": "systematic-debugging",
+    "desc": "Use when encountering any bug, test failure, or unexpected behavior, before proposing fixes",
+    "path": "D:\\oil\\.agents\\skills\\systematic-debugging\\SKILL.md",
+    "size": 9465,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "SY"
+  },
+  {
+    "id": "tdd",
+    "name": "tdd",
+    "desc": "Test-driven development. Use when the user wants to build features or fix bugs test-first, mentions \"red-green-refactor\", or wants integration tests.",
+    "path": "D:\\oil\\.agents\\skills\\tdd\\SKILL.md",
+    "size": 3587,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "TD"
+  },
+  {
+    "id": "teach",
+    "name": "teach",
+    "desc": "Teach the user a new skill or concept, within this workspace.",
+    "path": "D:\\oil\\.agents\\skills\\teach\\SKILL.md",
+    "size": 9646,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "TE"
+  },
+  {
+    "id": "template-skill",
+    "name": "template-skill",
+    "desc": "Replace with description of the skill and when Claude should use it.",
+    "path": "D:\\oil\\.agents\\skills\\template-skill\\SKILL.md",
+    "size": 146,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "TE"
+  },
+  {
+    "id": "test-driven-development",
+    "name": "test-driven-development",
+    "desc": "Use when implementing any feature or bugfix, before writing implementation code",
+    "path": "D:\\oil\\.agents\\skills\\test-driven-development\\SKILL.md",
+    "size": 9578,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "TE"
+  },
+  {
+    "id": "theme-factory",
+    "name": "theme-factory",
+    "desc": "Toolkit for styling artifacts with a theme. These artifacts can be slides, docs, reportings, HTML landing pages, etc. There are 10 pre-set themes with colors/fonts that you can apply to any artifact that has been creating, or can generate a new theme on-the-fly.",
+    "path": "D:\\oil\\.agents\\skills\\theme-factory\\SKILL.md",
+    "size": 3183,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "TH"
+  },
+  {
+    "id": "timeline-report",
+    "name": "timeline-report",
+    "desc": "Generate a \"Journey Into [Project]\" narrative report analyzing a project's entire development history from claude-mem's timeline. Use when asked for a timeline report, project history analysis, development journey, or full project report.",
+    "path": "D:\\oil\\.agents\\skills\\timeline-report\\SKILL.md",
+    "size": 12571,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "TI"
+  },
+  {
+    "id": "to-questionnaire",
+    "name": "to-questionnaire",
+    "desc": "Turn a decision you can't fully answer into a questionnaire for someone else to fill in.",
+    "path": "D:\\oil\\.agents\\skills\\to-questionnaire\\SKILL.md",
+    "size": 2958,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "TO"
+  },
+  {
+    "id": "to-spec",
+    "name": "to-spec",
+    "desc": "\"Turn the current conversation into a spec and publish it to the project issue tracker: no interview, just synthesis of what you've already discussed.\"",
+    "path": "D:\\oil\\.agents\\skills\\to-spec\\SKILL.md",
+    "size": 3118,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "TO"
+  },
+  {
+    "id": "to-tickets",
+    "name": "to-tickets",
+    "desc": "Break a plan, spec, or the current conversation into a set of tracer-bullet tickets, each declaring its blocking edges, published to the configured tracker (edges as text in one file per ticket locally, or native blocking links on a real tracker).",
+    "path": "D:\\oil\\.agents\\skills\\to-tickets\\SKILL.md",
+    "size": 5776,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "TO"
+  },
+  {
+    "id": "triage",
+    "name": "triage",
+    "desc": "Move issues and external PRs through a state machine of triage roles, categorise, verify, grill if needed, and write agent-ready briefs.",
+    "path": "D:\\oil\\.agents\\skills\\triage\\SKILL.md",
+    "size": 6669,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "TR"
+  },
+  {
+    "id": "using-git-worktrees",
+    "name": "using-git-worktrees",
+    "desc": "Use when starting feature work that needs isolation from current workspace or before executing implementation plans - ensures an isolated workspace exists via native tools or git worktree fallback",
+    "path": "D:\\oil\\.agents\\skills\\using-git-worktrees\\SKILL.md",
+    "size": 6813,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "US"
+  },
+  {
+    "id": "using-superpowers",
+    "name": "using-superpowers",
+    "desc": "Use when starting any conversation - establishes how to find and use skills, requiring skill invocation before ANY response including clarifying questions",
+    "path": "D:\\oil\\.agents\\skills\\using-superpowers\\SKILL.md",
+    "size": 3192,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "US"
+  },
+  {
+    "id": "verification-before-completion",
+    "name": "verification-before-completion",
+    "desc": "Use when about to claim work is complete, fixed, or passing, before committing or creating PRs - requires running verification commands and confirming output before making any success claims; evidence before assertions always",
+    "path": "D:\\oil\\.agents\\skills\\verification-before-completion\\SKILL.md",
+    "size": 3646,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "VE"
+  },
+  {
+    "id": "verify-and-stop",
+    "name": "verify-and-stop",
+    "desc": "Prove existing work meets acceptance conditions without expanding scope. Use for validation-only tasks, completion checks, focused gate runs, and last-mile proof.",
+    "path": "D:\\oil\\.agents\\skills\\verify-and-stop\\SKILL.md",
+    "size": 704,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "VE"
+  },
+  {
+    "id": "version-bump",
+    "name": "version-bump",
+    "desc": "Automated semantic versioning and release workflow for Claude Code plugins. Handles version increments across package.json, marketplace.json, plugin.json manifests, build verification, git tagging, GitHub releases, and changelog generation. NPM publishing is the final human-required handoff because the maintainer raised npm security.",
+    "path": "D:\\oil\\.agents\\skills\\version-bump\\SKILL.md",
+    "size": 5389,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "VE"
+  },
+  {
+    "id": "wait-what",
+    "name": "wait-what",
+    "desc": "\"Stop. That last message did not land: re-pitch it.\"",
+    "path": "D:\\oil\\.agents\\skills\\wait-what\\SKILL.md",
+    "size": 401,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "WA"
+  },
+  {
+    "id": "wayfinder",
+    "name": "wayfinder",
+    "desc": "Plan a huge chunk of work (more than one agent session can hold) as a shared map of decision tickets on your issue tracker, and resolve them one at a time until the way to the destination is clear.",
+    "path": "D:\\oil\\.agents\\skills\\wayfinder\\SKILL.md",
+    "size": 12036,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "WA"
+  },
+  {
+    "id": "web-artifacts-builder",
+    "name": "web-artifacts-builder",
+    "desc": "Suite of tools for creating elaborate, multi-component claude.ai HTML artifacts using modern frontend web technologies (React, Tailwind CSS, shadcn/ui). Use for complex artifacts requiring state management, routing, or shadcn/ui components - not for simple single-file HTML/JSX artifacts.",
+    "path": "D:\\oil\\.agents\\skills\\web-artifacts-builder\\SKILL.md",
+    "size": 3160,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "WE"
+  },
+  {
+    "id": "webapp-testing",
+    "name": "webapp-testing",
+    "desc": "Toolkit for interacting with and testing local web applications using Playwright. Supports verifying frontend functionality, debugging UI behavior, capturing browser screenshots, and viewing browser logs.",
+    "path": "D:\\oil\\.agents\\skills\\webapp-testing\\SKILL.md",
+    "size": 4008,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "WE"
+  },
+  {
+    "id": "weekly-digests",
+    "name": "weekly-digests",
+    "desc": "Generate a serial week-by-week narrative digest of a project's full claude-mem timeline. Splits the timeline into per-ISO-week files, then runs one consecutive subagent per week — each receiving the prior week's carry-forward block — to produce one chapter per ISO week of data. Use when asked for \"weekly digests\", \"week-by-week story\", \"serial timeline\", or \"narrative chapters\" of a project's history.",
+    "path": "D:\\oil\\.agents\\skills\\weekly-digests\\SKILL.md",
+    "size": 14236,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "WE"
+  },
+  {
+    "id": "what-the",
+    "name": "what-the",
+    "desc": "\"What the? Use when the user wants a plain-English breakdown of something technical — the who, what, where, why, and when.\"",
+    "path": "D:\\oil\\.agents\\skills\\what-the\\SKILL.md",
+    "size": 248,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "WH"
+  },
+  {
+    "id": "wizard",
+    "name": "wizard",
+    "desc": "Generate an interactive bash wizard that walks a human through steps only they can perform. Use when provisioning infrastructure, setting up credentials or CI secrets, walking an unfamiliar third-party dashboard, or running a one-off migration or cutover. Don't invoke this for steps the agent can perform itself.",
+    "path": "D:\\oil\\.agents\\skills\\wizard\\SKILL.md",
+    "size": 4167,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "WI"
+  },
+  {
+    "id": "wowerpoint",
+    "name": "wowerpoint",
+    "desc": "Turn one document into a kawaii NotebookLM slide-deck PDF. Use for \"wowerpoint this\", \"make a deck about <file>\", \"turn this report into slides\", or any request to render a single document as shareable narrative slides.",
+    "path": "D:\\oil\\.agents\\skills\\wowerpoint\\SKILL.md",
+    "size": 8876,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "WO"
+  },
+  {
+    "id": "writing-beats",
+    "name": "writing-beats",
+    "desc": "Writing, exploit; assemble raw material into a journey of beats, grounding each term before a beat leans on it.",
+    "path": "D:\\oil\\.agents\\skills\\writing-beats\\SKILL.md",
+    "size": 4922,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "WR"
+  },
+  {
+    "id": "writing-for-agents",
+    "name": "writing-for-agents",
+    "desc": "Writing documents for agents. Use when creating or editing skills, or modifying AGENTS.md or CLAUDE.md.",
+    "path": "D:\\oil\\.agents\\skills\\writing-for-agents\\SKILL.md",
+    "size": 10967,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "WR"
+  },
+  {
+    "id": "writing-fragments",
+    "name": "writing-fragments",
+    "desc": "\"Writing, explore: mine raw fragments, no structure yet.\"",
+    "path": "D:\\oil\\.agents\\skills\\writing-fragments\\SKILL.md",
+    "size": 3637,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "WR"
+  },
+  {
+    "id": "writing-plans",
+    "name": "writing-plans",
+    "desc": "Use when you have a spec or requirements for a multi-step task, before touching code",
+    "path": "D:\\oil\\.agents\\skills\\writing-plans\\SKILL.md",
+    "size": 9092,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "WR"
+  },
+  {
+    "id": "writing-shape",
+    "name": "writing-shape",
+    "desc": "\"Writing, exploit: shape raw material into an article, paragraph by paragraph.\"",
+    "path": "D:\\oil\\.agents\\skills\\writing-shape\\SKILL.md",
+    "size": 6001,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "WR"
+  },
+  {
+    "id": "writing-skills",
+    "name": "writing-skills",
+    "desc": "Use when creating new skills, editing existing skills, or verifying skills work before deployment",
+    "path": "D:\\oil\\.agents\\skills\\writing-skills\\SKILL.md",
+    "size": 26623,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "WR"
+  },
+  {
+    "id": "xlsx",
+    "name": "xlsx",
+    "desc": "\"Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xlsx, .xlsm, .xltx, .csv, or .tsv file (e.g., adding columns, computing formulas, formatting, charting, cleaning messy data); create a new spreadsheet from scratch or from other data sources; or convert between tabular file formats. Trigger especially when the user references a spreadsheet file by name or path — even casually (like \\\"the xlsx in my downloads\\\") — and wants something done to it or produced from it. Also trigger for cleaning or restructuring messy tabular data files (malformed rows, misplaced headers, junk data) into proper spreadsheets. The deliverable must be a spreadsheet file. Do NOT trigger when the primary deliverable is a Word document, HTML report, standalone Python script, database pipeline, or Google Sheets API integration, even if tabular data is involved.\"",
+    "path": "D:\\oil\\.agents\\skills\\xlsx\\SKILL.md",
+    "size": 8697,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "XL"
+  },
+  {
+    "id": "render-background-workers",
+    "name": "render-background-workers",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-background-workers\\SKILL.md",
+    "size": 5503,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-blueprints",
+    "name": "render-blueprints",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-blueprints\\SKILL.md",
+    "size": 10743,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "render-cli",
+    "name": "render-cli",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-cli\\SKILL.md",
+    "size": 5736,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-cron-jobs",
+    "name": "render-cron-jobs",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-cron-jobs\\SKILL.md",
+    "size": 6030,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-debug",
+    "name": "render-debug",
+    "desc": "Debug failed Render deployments by analyzing logs, metrics, and database state. Identifies errors (missing env vars, port binding, OOM, etc.) and suggests fixes. Use when deployments fail, services won't start, or users mention errors, logs, or debugging.",
+    "path": "D:\\oil\\.gemini\\skills\\render-debug\\SKILL.md",
+    "size": 7807,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "red",
+    "initials": "RE"
+  },
+  {
+    "id": "render-deploy",
+    "name": "render-deploy",
+    "desc": "Deploy applications to Render by analyzing codebases, generating render.yaml Blueprints, and providing Dashboard deeplinks. Use when the user wants to deploy, host, publish, or set up their application on Render's cloud platform.",
+    "path": "D:\\oil\\.gemini\\skills\\render-deploy\\SKILL.md",
+    "size": 16573,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-disks",
+    "name": "render-disks",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-disks\\SKILL.md",
+    "size": 6186,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-docker",
+    "name": "render-docker",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-docker\\SKILL.md",
+    "size": 6640,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "render-domains",
+    "name": "render-domains",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-domains\\SKILL.md",
+    "size": 5779,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-env-vars",
+    "name": "render-env-vars",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-env-vars\\SKILL.md",
+    "size": 8207,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-keyvalue",
+    "name": "render-keyvalue",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-keyvalue\\SKILL.md",
+    "size": 6589,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "render-mcp",
+    "name": "render-mcp",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-mcp\\SKILL.md",
+    "size": 7270,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-migrate-from-heroku",
+    "name": "render-migrate-from-heroku",
+    "desc": "\"Migrate from Heroku to Render by reading local project files and generating equivalent Render services. Triggers: any mention of migrating from Heroku, moving off Heroku, Heroku to Render migration, or switching from Heroku. Reads Procfile, dependency files, and app config from the local repo. Optionally uses Heroku MCP to enrich with live config vars, add-on details, and dyno sizes. Uses Render MCP or Blueprint YAML to create services.\"",
+    "path": "D:\\oil\\.gemini\\skills\\render-migrate-from-heroku\\SKILL.md",
+    "size": 17816,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-monitor",
+    "name": "render-monitor",
+    "desc": "Monitor Render services in real-time. Check health, performance metrics, logs, and resource usage. Use when users want to check service status, view metrics, monitor performance, or verify deployments are healthy.",
+    "path": "D:\\oil\\.gemini\\skills\\render-monitor\\SKILL.md",
+    "size": 7230,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-networking",
+    "name": "render-networking",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-networking\\SKILL.md",
+    "size": 6449,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "RE"
+  },
+  {
+    "id": "render-postgres",
+    "name": "render-postgres",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-postgres\\SKILL.md",
+    "size": 7600,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "green",
+    "initials": "RE"
+  },
+  {
+    "id": "render-private-services",
+    "name": "render-private-services",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-private-services\\SKILL.md",
+    "size": 5683,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "render-scaling",
+    "name": "render-scaling",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-scaling\\SKILL.md",
+    "size": 5029,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "azure",
+    "initials": "RE"
+  },
+  {
+    "id": "render-static-sites",
+    "name": "render-static-sites",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-static-sites\\SKILL.md",
+    "size": 5909,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "purple",
+    "initials": "RE"
+  },
+  {
+    "id": "render-web-services",
+    "name": "render-web-services",
+    "desc": "-",
+    "path": "D:\\oil\\.gemini\\skills\\render-web-services\\SKILL.md",
+    "size": 6765,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "RE"
+  },
+  {
+    "id": "render-workflows",
+    "name": "render-workflows",
+    "desc": "Sets up, develops, tests, and deploys Render Workflows. Covers first-time scaffolding (via CLI or manual), SDK installation (Python or TypeScript), task patterns (retries, subtasks, fan-out), local development, Dashboard deployment, and troubleshooting. Use when a user wants to set up Render Workflows for the first time, scaffold a workflow service, add or modify workflow tasks, test workflows locally, or deploy workflows to Render.",
+    "path": "D:\\oil\\.gemini\\skills\\render-workflows\\SKILL.md",
+    "size": 9588,
+    "createdAt": "Mon Sep 21 2026",
+    "avatarColor": "primary",
+    "initials": "RE"
+  },
+  {
+    "id": "ab-testing",
+    "name": "ab-testing",
+    "desc": "When the user wants to plan, design, or implement an A/B test or experiment, or build a growth experimentation program. Also use when the user mentions \"A/B test,\" \"split test,\" \"experiment,\" \"test this change,\" \"variant copy,\" \"multivariate test,\" \"hypothesis,\" \"should I test this,\" \"which version is better,\" \"test two versions,\" \"statistical significance,\" \"how long should I run this test,\" \"growth experiments,\" \"experiment velocity,\" \"experiment backlog,\" \"ICE score,\" \"experimentation program,\" or \"experiment playbook.\" Use this whenever someone is comparing two approaches and wants to measure which performs better, or when they want to build a systematic experimentation practice. For tracking implementation, see analytics. For page-level conversion optimization, see cro.",
+    "path": "D:\\oil\\marketingskills\\skills\\ab-testing\\SKILL.md",
+    "size": 11515,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "AB"
+  },
+  {
+    "id": "ad-creative",
+    "name": "ad-creative",
+    "desc": "\"When the user wants to generate, iterate, or scale ad creative — headlines, descriptions, primary text, or full ad variations — for any paid advertising platform. Also use when the user mentions 'ad copy variations,' 'ad creative,' 'generate headlines,' 'RSA headlines,' 'bulk ad copy,' 'ad iterations,' 'creative testing,' 'write me some ads,' 'Facebook ad copy,' 'Google ad headlines,' 'LinkedIn ad text,' 'static ads,' 'ad templates,' 'iMessage ad,' 'chat reveal ad,' 'ChatGPT ad,' 'Apple Notes ad,' 'AirDrop ad,' 'creative strategy,' 'creative roadmap,' 'creative retro,' 'hook writing,' 'creative review page,' 'present ad creative for approval,' 'motion video ad,' 'faceless video ad,' 'UGC ad,' 'greenscreen ad,' 'TikTok/Reels ad format,' 'which ad format to make,' 'Meta ad format tier list,' or 'creative format taxonomy.' Use this whenever someone needs to produce ad copy at scale or iterate on existing ads. For campaign strategy and targeting, see ads. For landing page copy, see copywriting.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\ad-creative\\SKILL.md",
+    "size": 23447,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "AD"
+  },
+  {
+    "id": "ads",
+    "name": "ads",
+    "desc": "\"When the user wants help with paid advertising campaigns on Google Ads, Meta (Facebook/Instagram), LinkedIn, Twitter/X, or other ad platforms. Also use when the user mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'audience targeting,' 'Google Ads,' 'Facebook ads,' 'LinkedIn ads,' 'ad budget,' 'cost per click,' 'ad spend,' 'should I run ads,' 'ABM,' 'account-based marketing,' 'B2B ads,' 'lead quality,' 'negative keywords,' 'Performance Max,' 'thought leader ads,' or 'when should I kill an ad.' Use this for campaign strategy, audience targeting, bidding, and optimization. For bulk ad creative generation and iteration, see ad-creative. For landing page optimization, see cro.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\ads\\SKILL.md",
+    "size": 29043,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "AD"
+  },
+  {
+    "id": "ai-seo",
+    "name": "ai-seo",
+    "desc": "\"When the user wants to optimize content for AI search engines, get cited by LLMs, or appear in AI-generated answers. Also use when the user mentions 'AI SEO,' 'AEO,' 'GEO,' 'LLMO,' 'answer engine optimization,' 'generative engine optimization,' 'LLM optimization,' 'AI Overviews,' 'optimize for ChatGPT,' 'optimize for Perplexity,' 'AI citations,' 'AI visibility,' 'zero-click search,' 'how do I show up in AI answers,' 'LLM mentions,' 'optimize for Claude/Gemini,' 'llms.txt,' 'llms-full.txt,' 'OKF,' 'Open Knowledge Format,' 'knowledge bundle,' 'agent-readable site,' 'agent readiness,' 'is my site agent-ready,' 'WebMCP,' 'do listicles still work for AI,' 'ChatGPT stopped citing comparison pages,' or 'AI citation format shift.' Use this whenever someone wants their content to be cited or surfaced by AI assistants and AI search engines. For traditional technical and on-page SEO audits, see seo-audit. For structured data implementation, see schema.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\ai-seo\\SKILL.md",
+    "size": 29943,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "AI"
+  },
+  {
+    "id": "analytics",
+    "name": "analytics",
+    "desc": "When the user wants to set up, improve, or audit analytics tracking and measurement. Also use when the user mentions \"set up tracking,\" \"GA4,\" \"Google Analytics,\" \"conversion tracking,\" \"event tracking,\" \"UTM parameters,\" \"tag manager,\" \"GTM,\" \"analytics implementation,\" \"tracking plan,\" \"how do I measure this,\" \"track conversions,\" \"Mixpanel,\" \"Segment,\" \"are my events firing,\" or \"analytics isn't working.\" Use this whenever someone asks how to know if something is working or wants to measure marketing results. For choosing attribution models, comparing multi-touch/MMM/incrementality, or reconciling conflicting numbers across tools, see attribution. For A/B test measurement, see ab-testing.",
+    "path": "D:\\oil\\marketingskills\\skills\\analytics\\SKILL.md",
+    "size": 8945,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "AN"
+  },
+  {
+    "id": "aso",
+    "name": "aso",
+    "desc": "\"When the user wants to audit or optimize an App Store or Google Play listing. Also use when the user mentions 'ASO audit,' 'app store optimization,' 'optimize my app listing,' 'improve app visibility,' 'app store ranking,' 'audit my listing,' 'why aren't people downloading my app,' 'improve my app conversion,' 'keyword optimization for app,' or 'compare my app to competitors.' Use when the user shares an App Store or Google Play URL and wants to improve it.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\aso\\SKILL.md",
+    "size": 16091,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "red",
+    "initials": "AS"
+  },
+  {
+    "id": "attribution",
+    "name": "attribution",
+    "desc": "When the user wants to figure out which marketing actually drives conversions and revenue, choose or interpret an attribution model, or reconcile conflicting numbers across tools. Also use when the user mentions \"attribution,\" \"attribution model,\" \"first-touch vs last-touch,\" \"multi-touch,\" \"which channel drives revenue,\" \"what's my real CAC,\" \"my dashboards disagree,\" \"Google/Meta says X but GA says Y,\" \"media mix model,\" \"MMM,\" \"incrementality,\" \"geo lift,\" \"holdout test,\" \"how did you hear about us,\" \"self-reported attribution,\" \"dark social,\" or wants to instrument attribution themselves — \"stitch my bookings to their source,\" \"SavvyCal/Calendly attribution,\" \"close the identify gap,\" \"track conversions on a third-party domain,\" \"first-party / self-hosted attribution.\" For event tracking setup and UTMs, see analytics. For ad-platform pixels/CAPI, see ads. For pipeline and CRM revenue reporting, see revops. For the AI-search attribution blind spot, see ai-seo.",
+    "path": "D:\\oil\\marketingskills\\skills\\attribution\\SKILL.md",
+    "size": 21136,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "red",
+    "initials": "AT"
+  },
+  {
+    "id": "churn-prevention",
+    "name": "churn-prevention",
+    "desc": "\"When the user wants to reduce churn, build cancellation flows, set up save offers, recover failed payments, or implement retention strategies. Also use when the user mentions 'churn,' 'cancel flow,' 'offboarding,' 'save offer,' 'dunning,' 'failed payment recovery,' 'win-back,' 'retention,' 'exit survey,' 'pause subscription,' 'involuntary churn,' 'people keep canceling,' 'churn rate is too high,' 'how do I keep users,' or 'customers are leaving.' Use this whenever someone is losing subscribers or wants to build systems to prevent it. For post-cancel win-back email sequences, see emails. For in-app upgrade paywalls, see paywalls.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\churn-prevention\\SKILL.md",
+    "size": 18844,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "CH"
+  },
+  {
+    "id": "co-marketing",
+    "name": "co-marketing",
+    "desc": "\"When the user wants to find co-marketing partners, plan joint campaigns, or brainstorm partnership opportunities. Use when the user says 'co-marketing,' 'partner marketing,' 'joint campaign,' 'who should we partner with,' 'integration marketing,' 'cross-promotion,' 'collaborate with another company,' 'partnership ideas,' or 'co-brand.' For customer referral programs, see referrals. For launch-specific partnerships, see launch.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\co-marketing\\SKILL.md",
+    "size": 12132,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "CO"
+  },
+  {
+    "id": "cold-email",
+    "name": "cold-email",
+    "desc": "Write B2B cold emails and follow-up sequences that get replies. Use when the user wants to write cold outreach emails, prospecting emails, cold email campaigns, sales development emails, or SDR emails. Also use when the user mentions \"cold outreach,\" \"prospecting email,\" \"outbound email,\" \"email to leads,\" \"reach out to prospects,\" \"sales email,\" \"follow-up email sequence,\" \"nobody's replying to my emails,\" or \"how do I write a cold email.\" Covers subject lines, opening lines, body copy, CTAs, personalization, and multi-touch follow-up sequences. For warm/lifecycle email sequences, see emails. For sales collateral beyond emails, see sales-enablement.",
+    "path": "D:\\oil\\marketingskills\\skills\\cold-email\\SKILL.md",
+    "size": 7509,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "CO"
+  },
+  {
+    "id": "community-marketing",
+    "name": "community-marketing",
+    "desc": "\"Build and leverage online communities to drive product growth and brand loyalty. Use when the user wants to create a community strategy, grow a Discord or Slack community, manage a forum or subreddit, build brand advocates, increase word-of-mouth, drive community-led growth, engage users post-signup, or turn customers into evangelists. Trigger phrases: \\\"build a community,\\\" \\\"community strategy,\\\" \\\"Discord community,\\\" \\\"Slack community,\\\" \\\"community-led growth,\\\" \\\"brand advocates,\\\" \\\"user community,\\\" \\\"forum strategy,\\\" \\\"community engagement,\\\" \\\"grow our community,\\\" \\\"ambassador program,\\\" \\\"community flywheel.\\\"\"",
+    "path": "D:\\oil\\marketingskills\\skills\\community-marketing\\SKILL.md",
+    "size": 10001,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "CO"
+  },
+  {
+    "id": "competitor-profiling",
+    "name": "competitor-profiling",
+    "desc": "\"When the user wants to research, profile, or analyze competitors from their URLs. Also use when the user mentions 'competitor profile,' 'competitor research,' 'competitor analysis,' 'profile this competitor,' 'analyze competitor,' 'competitive intelligence,' 'competitor deep dive,' 'who are my competitors,' 'competitor landscape,' 'competitor dossier,' 'competitive audit,' or 'research these competitors.' Input is a list of competitor URLs. Output is structured competitor profile markdown files. For creating comparison/alternative pages from profiles, see competitors. For sales-specific battle cards, see sales-enablement.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\competitor-profiling\\SKILL.md",
+    "size": 14973,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "CO"
+  },
+  {
+    "id": "competitors",
+    "name": "competitors",
+    "desc": "\"When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],' '[Product] alternative,' 'competitive landing pages,' 'how do we compare to X,' 'battle card,' or 'competitor teardown.' Use this for any content that positions your product against competitors. Covers four formats: singular alternative, plural alternatives, you vs competitor, and competitor vs competitor. For sales-specific competitor docs, see sales-enablement.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\competitors\\SKILL.md",
+    "size": 9061,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "CO"
+  },
+  {
+    "id": "content-strategy",
+    "name": "content-strategy",
+    "desc": "When the user wants to plan a content strategy, decide what content to create, or figure out what topics to cover. Also use when the user mentions \"content strategy,\" \"what should I write about,\" \"content ideas,\" \"blog strategy,\" \"topic clusters,\" \"content planning,\" \"editorial calendar,\" \"content marketing,\" \"content roadmap,\" \"what content should I create,\" \"blog topics,\" \"content pillars,\" or \"I don't know what to write.\" Use this whenever someone needs help deciding what content to produce, not just writing it. For writing individual pieces, see copywriting. For SEO-specific audits, see seo-audit. For social media content specifically, see social.",
+    "path": "D:\\oil\\marketingskills\\skills\\content-strategy\\SKILL.md",
+    "size": 19150,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "CO"
+  },
+  {
+    "id": "copy-editing",
+    "name": "copy-editing",
+    "desc": "\"When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review my copy,' 'copy feedback,' 'proofread,' 'polish this,' 'make this better,' 'copy sweep,' 'tighten this up,' 'this reads awkwardly,' 'clean up this text,' 'too wordy,' 'sharpen the messaging,' 'refresh this content,' 'update this page,' 'this content is outdated,' or 'content audit.' Use this when the user already has copy and wants it improved or refreshed rather than rewritten from scratch. For writing new copy, see copywriting.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\copy-editing\\SKILL.md",
+    "size": 15457,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "CO"
+  },
+  {
+    "id": "copywriting",
+    "name": "copywriting",
+    "desc": "When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or product pages. Also use when the user says \"write copy for,\" \"improve this copy,\" \"rewrite this page,\" \"marketing copy,\" \"headline help,\" \"CTA copy,\" \"value proposition,\" \"tagline,\" \"subheadline,\" \"hero section copy,\" \"above the fold,\" \"this copy is weak,\" \"make this more compelling,\" or \"help me describe my product.\" Use this whenever someone is working on website text that needs to persuade or convert. For email copy, see emails. For popup copy, see popups. For editing existing copy, see copy-editing. For the offer underneath the copy (bonuses, guarantees, value framing), see offers.",
+    "path": "D:\\oil\\marketingskills\\skills\\copywriting\\SKILL.md",
+    "size": 8657,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "CO"
+  },
+  {
+    "id": "cro",
+    "name": "cro",
+    "desc": "\"When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature pages, lead capture forms, or contact forms. Also use when the user says 'CRO,' 'conversion rate optimization,' 'this page isn't converting,' 'improve conversions,' 'why isn't this page working,' 'my landing page sucks,' 'form abandonment,' 'nobody's converting,' 'low conversion rate,' or 'this page needs work.' Use this even if the user just shares a URL and asks for feedback. For signup/registration flows, see signup. For post-signup activation, see onboarding. For popups/modals, see popups.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\cro\\SKILL.md",
+    "size": 6288,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "CR"
+  },
+  {
+    "id": "customer-research",
+    "name": "customer-research",
+    "desc": "When the user wants to conduct, analyze, or synthesize customer research. Use when the user mentions \"customer research,\" \"ICP research,\" \"talk to customers,\" \"analyze transcripts,\" \"customer interviews,\" \"survey analysis,\" \"support ticket analysis,\" \"voice of customer,\" \"VOC,\" \"build personas,\" \"customer personas,\" \"jobs to be done,\" \"JTBD,\" \"what do customers say,\" \"what are customers struggling with,\" \"Reddit mining,\" \"G2 reviews,\" \"review mining,\" \"digital watering holes,\" \"community research,\" \"forum research,\" \"competitor reviews,\" \"customer sentiment,\" \"PMF survey,\" \"product/market fit survey,\" \"customer interview questions,\" \"interview outreach,\" \"Sales Safari,\" or \"find out why customers churn/convert/buy.\" Use for analyzing existing research assets, mining online sources, AND running primary research (interviews and surveys). For writing copy informed by research, see copywriting. For acting on research to improve pages, see cro.",
+    "path": "D:\\oil\\marketingskills\\skills\\customer-research\\SKILL.md",
+    "size": 15183,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "CU"
+  },
+  {
+    "id": "directory-submissions",
+    "name": "directory-submissions",
+    "desc": "When the user wants to submit their product to startup, SaaS, AI, agent, MCP, no-code, or review directories for backlinks, domain rating, and discovery. Also use when the user mentions \"directory submissions,\" \"submit to directories,\" \"backlinks from directories,\" \"list my product,\" \"submit to Product Hunt,\" \"BetaList,\" \"TAAFT,\" \"Futurepedia,\" \"G2 listing,\" \"Capterra listing,\" \"AlternativeTo,\" \"SaaSHub,\" \"AI directories,\" \"MCP registry,\" \"agent directory,\" \"dofollow backlinks,\" \"launch directories,\" or \"directory tracker.\" Use this whenever someone is planning the directory layer of a product launch or an ongoing backlink campaign. For the broader launch moment, see launch. For programmatic SEO pages that should live behind these backlinks, see programmatic-seo. For AI citation optimization, see ai-seo.",
+    "path": "D:\\oil\\marketingskills\\skills\\directory-submissions\\SKILL.md",
+    "size": 23742,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "DI"
+  },
+  {
+    "id": "emails",
+    "name": "emails",
+    "desc": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"email sequence,\" \"drip campaign,\" \"nurture sequence,\" \"onboarding emails,\" \"welcome sequence,\" \"re-engagement emails,\" \"email automation,\" \"lifecycle emails,\" \"trigger-based emails,\" \"email funnel,\" \"email workflow,\" \"what emails should I send,\" \"welcome series,\" or \"email cadence.\" Use this for any multi-email automated flow. For cold outreach emails, see cold-email. For in-app onboarding, see onboarding.",
+    "path": "D:\\oil\\marketingskills\\skills\\emails\\SKILL.md",
+    "size": 8873,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "EM"
+  },
+  {
+    "id": "events",
+    "name": "events",
+    "desc": "\"When the user wants to plan, run, sponsor, speak at, or get pipeline from events — webinars, conferences, trade shows, meetups, dinners, workshops, virtual summits, or user conferences. Also use when the user mentions 'event marketing,' 'field marketing,' 'run a webinar,' 'webinar funnel,' 'show-up rate,' 'should we sponsor,' 'sponsor a conference,' 'trade show booth,' 'booth strategy,' 'event ROI,' 'badge scans,' 'event follow-up,' 'speaking slot,' 'CFP,' 'conference talk,' 'host a dinner,' 'user conference,' or 'virtual summit.' Covers all four roles: hosting, sponsoring/exhibiting, speaking, and attending. For product launch moments, see launch. For the partnership side of joint webinars, see co-marketing. For ongoing community programs, see community-marketing. For podcast appearances, see public-relations. For the email sequences themselves, see emails.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\events\\SKILL.md",
+    "size": 12271,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "EV"
+  },
+  {
+    "id": "free-tools",
+    "name": "free-tools",
+    "desc": "When the user wants to plan, evaluate, or build a free tool for marketing purposes — lead generation, SEO value, or brand awareness. Also use when the user mentions \"engineering as marketing,\" \"free tool,\" \"marketing tool,\" \"calculator,\" \"generator,\" \"interactive tool,\" \"lead gen tool,\" \"build a tool for leads,\" \"free resource,\" \"ROI calculator,\" \"grader tool,\" \"audit tool,\" \"should I build a free tool,\" or \"tools for lead gen.\" Use this whenever someone wants to build something useful and give it away to attract leads or earn links. For downloadable content lead magnets (ebooks, checklists, templates), see lead-magnets.",
+    "path": "D:\\oil\\marketingskills\\skills\\free-tools\\SKILL.md",
+    "size": 7430,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "FR"
+  },
+  {
+    "id": "image",
+    "name": "image",
+    "desc": "\"When the user wants to create, generate, edit, or optimize images for marketing — blog heroes, social graphics, product mockups, profile banners, listing visuals, or brand assets. Also use when the user mentions 'AI image generation,' 'generate an image,' 'create a graphic,' 'product mockup,' 'hero image,' 'social media graphic,' 'banner image,' 'cover photo,' 'profile banner,' 'listing screenshot,' 'Flux,' 'Flux Kontext,' 'Midjourney,' 'DALL-E,' 'GPT Image,' 'ChatGPT Images,' 'Ideogram,' 'Gemini image,' 'Nano Banana,' 'Recraft,' 'Stable Diffusion,' 'Canva,' 'Figma,' 'image optimization,' 'compress images,' 'WebP,' or 'OG image.' Use this for general-purpose marketing image creation and optimization. For paid ad image creative and platform-specific ad specs, see ad-creative. For video production, see video.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\image\\SKILL.md",
+    "size": 16138,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "IM"
+  },
+  {
+    "id": "influencer-marketing",
+    "name": "influencer-marketing",
+    "desc": "\"When the user wants to run influencer, creator, or ambassador partnerships to promote their product — finding and vetting partners, structuring deals, briefing creators, disclosure compliance, and measuring ROI. Also use when the user mentions 'influencer marketing,' 'creator partnerships,' 'sponsorships,' 'YouTube sponsorships,' 'podcast sponsorships,' 'brand ambassador,' 'ambassador program,' 'creator program,' 'UGC creators,' 'tech UGC,' 'UGC creator program,' 'creator network,' 'B2B influencers,' 'thought leader ads,' 'gifting,' 'product seeding,' 'whitelisting creator content,' 'how much to pay an influencer,' or 'FTC disclosure.' For affiliate/referral payout mechanics, see referrals. For community-led advocacy, see community-marketing. For turning creator content into paid ads, see ad-creative.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\influencer-marketing\\SKILL.md",
+    "size": 18018,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "red",
+    "initials": "IN"
+  },
+  {
+    "id": "launch",
+    "name": "launch",
+    "desc": "\"When the user wants to plan a product launch, feature announcement, or release strategy. Also use when the user mentions 'launch,' 'Product Hunt,' 'feature release,' 'announcement,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' 'product update,' 'how do I launch this,' 'launch checklist,' 'GTM plan,' or 'we're about to ship.' Use this whenever someone is preparing to release something publicly. For ongoing marketing after launch, see marketing-ideas. For the offer being launched (bonuses, guarantees, scarcity, naming), see offers.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\launch\\SKILL.md",
+    "size": 15560,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "LA"
+  },
+  {
+    "id": "lead-magnets",
+    "name": "lead-magnets",
+    "desc": "When the user wants to create, plan, or optimize a lead magnet for email capture or lead generation. Also use when the user mentions \"lead magnet,\" \"gated content,\" \"content upgrade,\" \"downloadable,\" \"ebook,\" \"cheat sheet,\" \"checklist,\" \"template download,\" \"opt-in,\" \"freebie,\" \"PDF download,\" \"resource library,\" \"content offer,\" \"email capture content,\" \"Notion template,\" \"spreadsheet template,\" or \"what should I give away for emails.\" Use this for planning what to create and how to distribute it. For interactive tools as lead magnets, see free-tools. For writing the actual content, see copywriting. For the email sequence after capture, see emails.",
+    "path": "D:\\oil\\marketingskills\\skills\\lead-magnets\\SKILL.md",
+    "size": 11235,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "LE"
+  },
+  {
+    "id": "marketing-council",
+    "name": "marketing-council",
+    "desc": "\"When the user wants multiple expert perspectives on a marketing question — a simulated board of advisors staffed by legendary marketers (Seth Godin, David Ogilvy, Eugene Schwartz, April Dunford, Rory Sutherland, Alex Hormozi, Byron Sharp, and more). Also use when the user mentions 'marketing council,' 'board of advisors,' 'advisory board,' 'what would Seth Godin say,' 'what would Ogilvy think,' 'channel Hormozi,' 'get multiple perspectives,' 'debate this,' 'have the council review,' 'marketing mentors,' or asks how a famous marketer would approach their problem. The council gives each advisor's take through their documented frameworks, surfaces where they disagree, and synthesizes a recommendation. For executing the winning direction, hand off to positioning, offers, copywriting, ads, or the relevant skill.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\marketing-council\\SKILL.md",
+    "size": 12641,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "MA"
+  },
+  {
+    "id": "marketing-ideas",
+    "name": "marketing-ideas",
+    "desc": "\"When the user needs marketing ideas, inspiration, or strategies for their SaaS or software product. Also use when the user asks for 'marketing ideas,' 'growth ideas,' 'how to market,' 'marketing strategies,' 'marketing tactics,' 'ways to promote,' 'ideas to grow,' 'what else can I try,' 'I don't know how to market this,' 'brainstorm marketing,' or 'what marketing should I do.' Use this as a starting point whenever someone is stuck or looking for inspiration on how to grow. For specific channel execution, see the relevant skill (ads, social, emails, etc.).\"",
+    "path": "D:\\oil\\marketingskills\\skills\\marketing-ideas\\SKILL.md",
+    "size": 5960,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "MA"
+  },
+  {
+    "id": "marketing-loops",
+    "name": "marketing-loops",
+    "desc": "\"When the user wants to set up a recurring, self-running marketing workflow — a repeatable loop an AI agent runs on a cadence (weekly, daily, on a trigger) rather than a one-off task. Also use when the user mentions 'marketing loop,' 'recurring marketing workflow,' 'automate my marketing,' 'marketing on autopilot,' 'weekly marketing review,' 'ad fatigue check,' 'content refresh loop,' 'churn watch,' 'ranking drop alert,' 'always-on marketing,' 'marketing automation workflow,' or 'run this every week.' Use this to pick, adapt, and schedule an ongoing marketing loop that orchestrates the other marketing skills. For one-off marketing ideas, see marketing-ideas. For the experimentation loop specifically, see ab-testing.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\marketing-loops\\SKILL.md",
+    "size": 9151,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "MA"
+  },
+  {
+    "id": "marketing-plan",
+    "name": "marketing-plan",
+    "desc": "When the user needs a comprehensive marketing plan for a client, a company they advise, or their own product. Also use when the user mentions \"marketing plan,\" \"growth plan,\" \"GTM plan,\" \"go-to-market plan,\" \"AARRR plan,\" \"90-day marketing plan,\" \"12-month marketing roadmap,\" \"fractional CMO plan,\" or \"fCMO plan.\" Generates an exhaustive 13-section plan structured by AARRR (Acquisition, Activation, Retention, Referral, Revenue), customized to the client's current budget, team, and stage, mapped to future funding milestones, cross-referenced with the 139-idea marketing-ideas library and an embedded 17-section current-state audit rubric, with a full marketing operations stack showing which skills and MCP/API integrations execute each part. Outputs a Notion-paste-ready markdown document. For positioning and ICP context before planning, see product-marketing. For stage-specific deep work, see onboarding, signup, emails, referrals, pricing.",
+    "path": "D:\\oil\\marketingskills\\skills\\marketing-plan\\SKILL.md",
+    "size": 24821,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "red",
+    "initials": "MA"
+  },
+  {
+    "id": "marketing-psychology",
+    "name": "marketing-psychology",
+    "desc": "\"When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'why people buy,' 'decision-making,' 'consumer behavior,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' Use this whenever someone wants to understand or leverage how people think and make decisions in a marketing context. For applying psychology to specific pages, see cro; for pricing tactics, see pricing; for copy framing, see copywriting.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\marketing-psychology\\SKILL.md",
+    "size": 22339,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "MA"
+  },
+  {
+    "id": "offers",
+    "name": "offers",
+    "desc": "\"When the user wants to design, construct, or improve an offer — the thing they actually sell — including value framing, bonus stacking, guarantee design, scarcity/urgency, naming, and payment structure. Also use when the user mentions 'offer,' 'offer design,' 'build an offer,' 'grand slam offer,' 'irresistible offer,' 'value stack,' 'bonus stack,' 'guarantee,' 'risk reversal,' 'money-back guarantee,' 'scarcity,' 'urgency,' 'high-ticket offer,' 'productize a service,' 'naming an offer,' 'payment plan,' 'down-sell,' 'upsell offer,' or 'why isn't my offer converting.' Best for services, agencies, courses, coaching, info products, high-ticket B2B, and direct-response. If you run pure self-serve SaaS, read pricing first — tiers and packaging do more work there. For price level itself (tiers, freemium, value metric), see pricing. For the page that presents the offer, see copywriting. For the launch moment, see launch. For sales collateral, see sales-enablement.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\offers\\SKILL.md",
+    "size": 10161,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "OF"
+  },
+  {
+    "id": "onboarding",
+    "name": "onboarding",
+    "desc": "When the user wants to optimize post-signup onboarding, user activation, first-run experience, or time-to-value. Also use when the user mentions \"onboarding flow,\" \"activation rate,\" \"user activation,\" \"first-run experience,\" \"empty states,\" \"onboarding checklist,\" \"aha moment,\" \"new user experience,\" \"users aren't activating,\" \"nobody completes setup,\" \"low activation rate,\" \"users sign up but don't use the product,\" \"time to value,\" or \"first session experience.\" Use this whenever users are signing up but not sticking around. For signup/registration optimization, see signup. For ongoing email sequences, see emails.",
+    "path": "D:\\oil\\marketingskills\\skills\\onboarding\\SKILL.md",
+    "size": 10495,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "ON"
+  },
+  {
+    "id": "paywalls",
+    "name": "paywalls",
+    "desc": "When the user wants to create or optimize in-app paywalls, upgrade screens, upsell modals, or feature gates. Also use when the user mentions \"paywall,\" \"upgrade screen,\" \"upgrade modal,\" \"upsell,\" \"feature gate,\" \"convert free to paid,\" \"freemium conversion,\" \"trial expiration screen,\" \"limit reached screen,\" \"plan upgrade prompt,\" \"in-app pricing,\" \"free users won't upgrade,\" \"trial to paid conversion,\" or \"how do I get users to pay.\" Use this for any in-product moment where you're asking users to upgrade. Distinct from public pricing pages (see cro) — this focuses on in-product upgrade moments where the user has already experienced value. For pricing decisions, see pricing.",
+    "path": "D:\\oil\\marketingskills\\skills\\paywalls\\SKILL.md",
+    "size": 6026,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "PA"
+  },
+  {
+    "id": "popups",
+    "name": "popups",
+    "desc": "When the user wants to create or optimize popups, modals, overlays, slide-ins, or banners for conversion purposes. Also use when the user mentions \"exit intent,\" \"popup conversions,\" \"modal optimization,\" \"lead capture popup,\" \"email popup,\" \"announcement banner,\" \"overlay,\" \"collect emails with a popup,\" \"exit popup,\" \"scroll trigger,\" \"sticky bar,\" or \"notification bar.\" Use this for any overlay or interrupt-style conversion element. For forms outside of popups, see cro. For general page conversion optimization, see cro.",
+    "path": "D:\\oil\\marketingskills\\skills\\popups\\SKILL.md",
+    "size": 12259,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "PO"
+  },
+  {
+    "id": "pricing",
+    "name": "pricing",
+    "desc": "\"When the user wants help with pricing decisions, packaging, or monetization strategy. Also use when the user mentions 'pricing,' 'pricing tiers,' 'freemium,' 'free trial,' 'packaging,' 'price increase,' 'value metric,' 'Van Westendorp,' 'willingness to pay,' 'monetization,' 'how much should I charge,' 'my pricing is wrong,' 'pricing page,' 'annual vs monthly,' 'per seat pricing,' 'should I offer a free plan,' 'pricing page teardown,' 'pricing page audit,' 'is my pricing page AI-readable,' or 'can AI read my pricing.' Use this whenever someone is figuring out what to charge, how to structure their plans, or wants to audit a pricing page (for humans and for the AI agents that shortlist tools). For in-app upgrade screens, see paywalls. For offer construction (bonuses, guarantees, value framing, naming) on services/courses/coaching/high-ticket B2B, see offers.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\pricing\\SKILL.md",
+    "size": 13548,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "PR"
+  },
+  {
+    "id": "product-marketing",
+    "name": "product-marketing",
+    "desc": "\"When the user wants to create or update their product marketing context document. Also use when the user mentions 'product context,' 'marketing context,' 'set up context,' 'positioning,' 'who is my target audience,' 'describe my product,' 'ICP,' 'ideal customer profile,' or wants to avoid repeating foundational information across marketing tasks. Use this at the start of any new project before using other marketing skills — it creates `.agents/product-marketing.md` that all other skills reference for product, audience, and positioning context.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\product-marketing\\SKILL.md",
+    "size": 9688,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "PR"
+  },
+  {
+    "id": "programmatic-seo",
+    "name": "programmatic-seo",
+    "desc": "When the user wants to create SEO-driven pages at scale using templates and data. Also use when the user mentions \"programmatic SEO,\" \"template pages,\" \"pages at scale,\" \"directory pages,\" \"location pages,\" \"[keyword] + [city] pages,\" \"comparison pages,\" \"integration pages,\" \"building many pages for SEO,\" \"pSEO,\" \"generate 100 pages,\" \"data-driven pages,\" or \"templated landing pages.\" Use this whenever someone wants to create many similar pages targeting different keywords or locations. For auditing existing SEO issues, see seo-audit. For content strategy planning, see content-strategy.",
+    "path": "D:\\oil\\marketingskills\\skills\\programmatic-seo\\SKILL.md",
+    "size": 7336,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "PR"
+  },
+  {
+    "id": "prospecting",
+    "name": "prospecting",
+    "desc": "When the user wants to find, qualify, and build a list of prospects to reach out to — across B2B SaaS, general B2B, or local small businesses. Also use when the user mentions \"prospecting,\" \"build a prospect list,\" \"find prospects,\" \"find leads,\" \"lead gen list,\" \"find SaaS companies that,\" \"find B2B companies,\" \"find local businesses,\" \"ICP-fit accounts,\" \"who should we go after,\" \"outbound list,\" \"target account list,\" \"find clients near me,\" \"businesses without websites,\" \"prospect research,\" \"qualified leads,\" \"find my first customers,\" \"early adopters,\" \"design partners,\" \"beta users,\" or \"who has this problem.\" Use this for the list-building and qualification phase. For writing the outbound copy after the list is built, see cold-email. For deep competitive research on specific accounts, see competitor-profiling.",
+    "path": "D:\\oil\\marketingskills\\skills\\prospecting\\SKILL.md",
+    "size": 17284,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "PR"
+  },
+  {
+    "id": "public-relations",
+    "name": "public-relations",
+    "desc": "\"When the user wants help with public relations, earned media, press coverage, journalist outreach, or media strategy (not pull requests). Also use when the user mentions 'PR,' 'public relations,' 'press,' 'press release,' 'press coverage,' 'media outreach,' 'pitch a journalist,' 'get featured,' 'media list,' 'media kit,' 'press kit,' 'newsjacking,' 'news hijack,' 'HARO,' 'Qwoted,' 'Featured,' 'Help A Reporter,' 'reporter request,' 'tech press,' 'TechCrunch,' 'earned media,' 'thought leadership placement,' 'op-ed,' 'guest article,' 'press contacts,' 'podcast prep,' 'going on a podcast,' 'podcast guest,' 'prep me for this podcast,' or 'how do I get press.' Use this for earned media work — finding journalists, pitching stories, newsjacking, prepping podcast appearances, and responding to press requests. For startup/SaaS/AI directory submissions, see directory-submissions. For product launches, see launch. For social-media engagement, see social. For cold-email outreach to prospects, see cold-email.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\public-relations\\SKILL.md",
+    "size": 8973,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "PU"
+  },
+  {
+    "id": "referrals",
+    "name": "referrals",
+    "desc": "\"When the user wants to create, optimize, or analyze a referral program, affiliate program, or word-of-mouth strategy. Also use when the user mentions 'referral,' 'affiliate,' 'ambassador,' 'word of mouth,' 'viral loop,' 'refer a friend,' 'partner program,' 'referral incentive,' 'how to get referrals,' 'customers referring customers,' or 'affiliate payout.' Use this whenever someone wants existing users or partners to bring in new customers. For launch-specific virality, see launch.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\referrals\\SKILL.md",
+    "size": 9444,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "RE"
+  },
+  {
+    "id": "revops",
+    "name": "revops",
+    "desc": "\"When the user wants help with revenue operations, lead lifecycle management, or marketing-to-sales handoff processes. Also use when the user mentions 'RevOps,' 'revenue operations,' 'lead scoring,' 'lead routing,' 'MQL,' 'SQL,' 'pipeline stages,' 'deal desk,' 'CRM automation,' 'marketing-to-sales handoff,' 'data hygiene,' 'leads aren't getting to sales,' 'pipeline management,' 'lead qualification,' or 'when should marketing hand off to sales.' Use this for anything involving the systems and processes that connect marketing to revenue. For cold outreach emails, see cold-email. For email drip campaigns, see emails. For pricing decisions, see pricing.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\revops\\SKILL.md",
+    "size": 15686,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "RE"
+  },
+  {
+    "id": "sales-enablement",
+    "name": "sales-enablement",
+    "desc": "\"When the user wants to create sales collateral, pitch decks, one-pagers, objection handling docs, or demo scripts. Also use when the user mentions 'sales deck,' 'pitch deck,' 'one-pager,' 'leave-behind,' 'objection handling,' 'deal-specific ROI analysis,' 'demo script,' 'talk track,' 'sales playbook,' 'proposal template,' 'buyer persona card,' 'help my sales team,' 'sales materials,' or 'what should I give my sales reps.' Use this for any document or asset that helps a sales team close deals. For competitor comparison pages and battle cards, see competitors. For marketing website copy, see copywriting. For cold outreach emails, see cold-email. For the offer being sold (bonuses, guarantees, pricing structure), see offers.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\sales-enablement\\SKILL.md",
+    "size": 15080,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "SA"
+  },
+  {
+    "id": "schema",
+    "name": "schema",
+    "desc": "When the user wants to add, fix, or optimize schema markup and structured data on their site. Also use when the user mentions \"schema markup,\" \"structured data,\" \"JSON-LD,\" \"rich snippets,\" \"schema.org,\" \"FAQ schema,\" \"product schema,\" \"review schema,\" \"breadcrumb schema,\" \"Google rich results,\" \"knowledge panel,\" \"star ratings in search,\" or \"add structured data.\" Use this whenever someone wants their pages to show enhanced results in Google. For broader SEO issues, see seo-audit. For AI search optimization, see ai-seo.",
+    "path": "D:\\oil\\marketingskills\\skills\\schema\\SKILL.md",
+    "size": 5427,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "SC"
+  },
+  {
+    "id": "seo-audit",
+    "name": "seo-audit",
+    "desc": "When the user wants to audit, review, or diagnose SEO issues on their site. Also use when the user mentions \"SEO audit,\" \"technical SEO,\" \"why am I not ranking,\" \"SEO issues,\" \"on-page SEO,\" \"meta tags review,\" \"SEO health check,\" \"my traffic dropped,\" \"lost rankings,\" \"not showing up in Google,\" \"site isn't ranking,\" \"Google update hit me,\" \"page speed,\" \"core web vitals,\" \"crawl errors,\" or \"indexing issues.\" Use this even if the user just says something vague like \"my SEO is bad\" or \"help with SEO\" — start with an audit. For building pages at scale to target keywords, see programmatic-seo. For adding structured data, see schema. For AI search optimization, see ai-seo.",
+    "path": "D:\\oil\\marketingskills\\skills\\seo-audit\\SKILL.md",
+    "size": 17109,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "primary",
+    "initials": "SE"
+  },
+  {
+    "id": "signup",
+    "name": "signup",
+    "desc": "When the user wants to optimize signup, registration, account creation, or trial activation flows. Also use when the user mentions \"signup conversions,\" \"registration friction,\" \"signup form optimization,\" \"free trial signup,\" \"reduce signup dropoff,\" \"account creation flow,\" \"people aren't signing up,\" \"signup abandonment,\" \"trial conversion rate,\" \"nobody completes registration,\" \"too many steps to sign up,\" or \"simplify our signup.\" Use this whenever the user has a signup or registration flow that isn't performing. For post-signup onboarding, see onboarding. For lead capture forms (not account creation), see cro.",
+    "path": "D:\\oil\\marketingskills\\skills\\signup\\SKILL.md",
+    "size": 10741,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "SI"
+  },
+  {
+    "id": "site-architecture",
+    "name": "site-architecture",
+    "desc": "When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal linking. Also use when the user mentions \"sitemap,\" \"site map,\" \"visual sitemap,\" \"site structure,\" \"page hierarchy,\" \"information architecture,\" \"IA,\" \"navigation design,\" \"URL structure,\" \"breadcrumbs,\" \"internal linking strategy,\" \"website planning,\" \"what pages do I need,\" \"how should I organize my site,\" or \"site navigation.\" Use this whenever someone is planning what pages a website should have and how they connect. NOT for XML sitemaps (that's technical SEO — see seo-audit). For SEO audits, see seo-audit. For structured data, see schema.",
+    "path": "D:\\oil\\marketingskills\\skills\\site-architecture\\SKILL.md",
+    "size": 14025,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "yellow",
+    "initials": "SI"
+  },
+  {
+    "id": "sms",
+    "name": "sms",
+    "desc": "When the user wants to plan, build, or optimize SMS or MMS marketing — including welcome flows, abandoned cart texts, post-purchase, win-back, promotional sends, or transactional/auth SMS. Also use when the user mentions \"SMS marketing,\" \"text message campaigns,\" \"SMS sequence,\" \"SMS automation,\" \"abandoned cart text,\" \"post-purchase SMS,\" \"Klaviyo SMS,\" \"Postscript,\" \"Attentive,\" \"Twilio,\" \"A2P 10DLC,\" \"TCPA,\" \"SMS compliance,\" \"short code,\" \"toll-free SMS,\" \"MMS campaign,\" \"should I do SMS,\" or \"SMS vs email.\" For email sequences, see emails. For SMS copy framing, see copywriting. For opt-in popups that capture phone numbers, see popups.",
+    "path": "D:\\oil\\marketingskills\\skills\\sms\\SKILL.md",
+    "size": 17147,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "SM"
+  },
+  {
+    "id": "social",
+    "name": "social",
+    "desc": "\"When the user wants help creating, scheduling, or optimizing social media content for LinkedIn, Twitter/X, Instagram, TikTok, Facebook, or other platforms, or wants to do social listening and engagement triage. Also use when the user mentions 'LinkedIn post,' 'Twitter thread,' 'social media,' 'content calendar,' 'social scheduling,' 'engagement,' 'viral content,' 'what should I post,' 'repurpose this content,' 'tweet ideas,' 'LinkedIn carousel,' 'social media strategy,' 'grow my following,' 'TikTok video,' 'Reels,' 'Shorts,' 'video script,' 'video hook,' 'short-form video,' 'create a reel,' 'social listening,' 'brand mentions,' 'competitor monitoring,' 'top posts to comment on,' 'find people asking for,' 'carousel,' 'slide-by-slide,' or 'document post.' Use this for social media content creation, repurposing, scheduling, short-form video scripting, and social listening. For broader content strategy, see content-strategy. For paid ads, see ad-creative. For earned media, see public-relations.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\social\\SKILL.md",
+    "size": 15349,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "SO"
+  },
+  {
+    "id": "video",
+    "name": "video",
+    "desc": "\"When the user wants to create, generate, or produce video content using AI tools or programmatic frameworks. Also use when the user mentions 'video production,' 'AI video,' 'Remotion,' 'Hyperframes,' 'HeyGen,' 'Synthesia,' 'Veo,' 'Sora,' 'Runway,' 'Kling,' 'Seedance,' 'Hailuo,' 'MiniMax,' 'Pika,' 'Hunyuan,' 'Wan,' 'video generation,' 'AI avatar,' 'talking head video,' 'programmatic video,' 'video template,' 'explainer video,' 'product demo video,' 'video pipeline,' 'copy this edit,' 'match this video style,' 'reverse-engineer this video,' 'edit like this reference,' or 'make me a video.' Use this for video creation, generation, and production workflows. For video content strategy and what to post, see social. For paid video ad creative, see ad-creative.\"",
+    "path": "D:\\oil\\marketingskills\\skills\\video\\SKILL.md",
+    "size": 14738,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "VI"
+  },
+  {
+    "id": "ad-copy",
+    "name": "ad-copy",
+    "desc": "\"Write high-converting Meta (Facebook + Instagram) ad copy — primary text, headlines, descriptions, and UGC/video ad scripts. Use this skill whenever the user asks to write, rewrite, or brainstorm Meta ads, Facebook ads, Instagram ads, ad hooks, ad captions, ad primary text, UGC scripts, video ad scripts, talking head scripts, ad angles, ad variations, scroll-stopping hooks, or ad creative for social media. Also trigger for 'write me an ad', 'ADHD hook ad', 'in-feed VSL script', or any task involving creating paid social ad copy. Does NOT handle compliance review or non-ad copy types like landing pages, emails, or full VSLs.\"",
+    "path": "D:\\oil\\claude-code-copywriting-skills\\ad-copy\\SKILL.md",
+    "size": 22560,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "purple",
+    "initials": "AD"
+  },
+  {
+    "id": "compliance-checker",
+    "name": "compliance-checker",
+    "desc": "\"Check ad copy, landing pages, VSLs, and emails for platform compliance issues — Meta/Facebook, Google, TikTok, YouTube, and ClickBank. Use this skill whenever the user asks to check compliance, run a compliance audit, review copy for platform policy violations, check if copy will get banned or flagged, audit for Meta/Facebook ad policy, or scan for trigger words. Also trigger for 'is this compliant', 'will this get rejected', 'check for banned words', 'platform policy check', or any task involving reviewing direct response copy against advertising platform rules.\"",
+    "path": "D:\\oil\\claude-code-copywriting-skills\\compliance-checker\\SKILL.md",
+    "size": 17173,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "CO"
+  },
+  {
+    "id": "copychief",
+    "name": "copychief",
+    "desc": "\"Review and copychief sales copy, VSLs, emails, ads, and landing pages using direct response principles from top copywriters (Carlton, Halbert, Makepeace, Georgi, Schwartz, etc.). Use this skill whenever the user asks to review copy, copychief something, critique sales copy, improve a VSL, check an email sequence, review ad copy, audit a funnel, or anything involving evaluating and improving direct response marketing copy. Also trigger when the user shares a Google Doc or document and asks for feedback on sales or marketing material.\"",
+    "path": "D:\\oil\\claude-code-copywriting-skills\\copychief\\SKILL.md",
+    "size": 6539,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "green",
+    "initials": "CO"
+  },
+  {
+    "id": "direct-response-copy",
+    "name": "direct-response-copy",
+    "desc": "\"Write sales copy that converts — landing pages, VSLs, emails, headlines, CTAs, Meta ads, upsell sequences, and anything persuasive. Use this skill whenever the user asks to write, rewrite, punch up, or critique sales copy, direct response copy, VSLs, TSLs, email sequences, ad creative, headlines, CTAs, or landing pages. Also trigger for requests like 'write copy for my offer', 'improve my headline', 'write a subject line', 'help me sell X', or any task involving persuasive writing for commercial purposes. Applies the proven frameworks of Schwartz, Hopkins, Ogilvy, Halbert, Caples, Sugarman, and Collier.\"",
+    "path": "D:\\oil\\claude-code-copywriting-skills\\direct-response-copy\\SKILL.md",
+    "size": 22011,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "blue",
+    "initials": "DI"
+  },
+  {
+    "id": "landing-page-copy",
+    "name": "landing-page-copy",
+    "desc": "\"Write high-converting short-form landing page copy — bridge pages, pre-sell pages, and landers that sit between ads and VSLs/offers. Use this skill whenever the user asks to write, rewrite, or brainstorm landing page copy, lander copy, bridge page copy, pre-sell page copy, or any short-form page designed to drive clicks through to a VSL, video, or offer. Also trigger for 'write me a landing page', 'lander for my offer', 'bridge page copy', or any task involving creating a short page that warms traffic and drives clickthrough. Does NOT handle long-form sales pages, VSLs, or advertorials — use separate skills/approaches for those.\"",
+    "path": "D:\\oil\\claude-code-copywriting-skills\\landing-page-copy\\SKILL.md",
+    "size": 17997,
+    "createdAt": "Tue Sep 22 2026",
+    "avatarColor": "azure",
+    "initials": "LA"
+  }
+]

@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import { visualizer } from 'rollup-plugin-visualizer';
+// import { visualizer } from 'rollup-plugin-visualizer';
 import { renderShell, parseShellAttrs } from './src/v4/shell-render.js';
 import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
@@ -280,7 +280,7 @@ function shellInjectionPlugin() {
 // server doesn't read built artifacts.
 export default defineConfig(({ command }) => ({
   root: '.',
-  base: command === 'serve' ? '/' : (process.env.BASE_PATH ?? '/'),
+  base: command === 'serve' ? '/' : (process.env.BASE_PATH ?? './'),
   publicDir: 'public',
   plugins: [shellInjectionPlugin(), rootRedirectPlugin(), sitemapPlugin(), structuredDataPlugin()],
   logLevel: 'info',
@@ -294,16 +294,7 @@ export default defineConfig(({ command }) => ({
     sourcemap: process.env.NODE_ENV === 'production' ? 'hidden' : true,
     target: 'es2022',
     rollupOptions: {
-      plugins: [
-        // Bundle analyzer - generates stats.html file
-        visualizer({
-          filename: 'dist/stats.html',
-          open: false,
-          gzipSize: true,
-          brotliSize: true,
-          template: 'treemap' // 'treemap', 'sunburst', 'network'
-        })
-      ],
+      plugins: [],
       output: {
         // Function form required by Rolldown (Vite 8+). Matches by
         // node_modules path because rolldown doesn't resolve package names.

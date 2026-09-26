@@ -1,200 +1,196 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NUMM Material Master</title>
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<script type="module" src="/src/main-v4.js"></script>
-</head>
-<body data-shell="admin" data-page="orders" data-breadcrumb="Home > Orders">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUMM Material Master</title>
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module">import "/src/main-v4.js";</script>
+  </head>
+  <body data-shell="admin" data-page="orders" data-breadcrumb="Home > Orders">
+    <main class="main">
+      <div class="page-wrapper">
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <div class="page-pretitle">Agentic Ecosystem</div>
+              <h1 class="page-title">Available Skills</h1>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline">Export JSON</button>
+              <button class="btn btn-primary">+ Create Skill</button>
+            </div>
+          </div>
+        </div>
 
-<main class="main">
-<div class="page-wrapper">
+        <!-- Stat row -->
+        <div class="row col-3" style="margin-bottom: 16px">
+          <div class="card">
+            <div class="stat">
+              <div class="stat-icon teal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                  <line x1="3" y1="6" x2="21" y2="6" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">Total Skills</div>
+                <div class="stat-value-row"><span class="stat-value" id="stat-total-skills">-</span></div>
+                <div class="stat-subtext">Across all plugins</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div class="stat-icon green">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <line x1="12" y1="1" x2="12" y2="23" />
+                  <path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">.agents Skills</div>
+                <div class="stat-value-row"><span class="stat-value" id="stat-agents-skills">-</span></div>
+                <div class="stat-subtext">Project local</div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="stat">
+              <div class="stat-icon yellow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <circle cx="12" cy="12" r="10" />
+                  <polyline points="12 6 12 12 16 14" />
+                </svg>
+              </div>
+              <div class="stat-content">
+                <div class="stat-label">.gemini Skills</div>
+                <div class="stat-value-row"><span class="stat-value" id="stat-gemini-skills">-</span></div>
+                <div class="stat-subtext">Global / IDE level</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
-  <div class="page-header">
-    <div class="page-header-row">
-      <div>
-        <div class="page-pretitle">National Unified Material Master</div>
-        <h1 class="page-title">HITL Review</h1>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Installed Agent Skills</div>
+              <div class="card-subtitle">Tools and capabilities for the IDE</div>
+            </div>
+            <div class="card-options">
+              <label style="font-size: 11.5px; color: var(--text-muted); margin-right: 6px">Status</label>
+              <select class="form-control" style="width: 170px; height: 32px" aria-label="Filter by type">
+                <option>All Skills</option>
+                <option>.agents (Local)</option>
+                <option>.gemini (Global)</option>
+              </select>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table" data-datatable data-page-length="10" data-export="orders">
+                <thead>
+                  <tr>
+                    <th>Skill ID</th>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Size</th>
+                    <th>Created At</th>
+                    <th data-orderable="false"></th>
+                  </tr>
+                </thead>
+                <tbody id="orders-rows"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="page-actions">
-        <button class="btn btn-outline">Export CSV</button>
-        <button class="btn btn-primary">+ Run Auto-Mapper</button>
-      </div>
-    </div>
-  </div>
+    </main>
 
-  <!-- Stat row -->
-  <div class="row col-3" style="margin-bottom:16px">
-    <div class="card"><div class="stat"><div class="stat-icon teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div><div class="stat-content"><div class="stat-label">Total Review Items</div><div class="stat-value-row"><span class="stat-value">1,240</span><span class="stat-change up">12%</span></div><div class="stat-subtext">78 today</div></div></div></div>
-    <div class="card"><div class="stat"><div class="stat-icon green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><div class="stat-content"><div class="stat-label">Harmonization Value</div><div class="stat-value-row"><span class="stat-value">₹480Cr</span><span class="stat-change up">18%</span></div><div class="stat-subtext">Estimated Savings</div></div></div></div>
-    <div class="card"><div class="stat"><div class="stat-icon yellow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><div class="stat-content"><div class="stat-label">Pending Groq LPU Review</div><div class="stat-value-row"><span class="stat-value">18</span><span class="stat-change down">3%</span></div><div class="stat-subtext">5 awaiting payment</div></div></div></div>
-  </div>
+    <script type="module">
+      const colorMap = {
+        primary: 'var(--primary)',
+        azure: 'var(--azure)',
+        purple: 'var(--purple)',
+        yellow: 'var(--yellow)',
+        red: 'var(--red)',
+        green: 'var(--green)',
+        blue: 'var(--blue)'
+      };
 
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-title">HITL Queue Items</div>
-        <div class="card-subtitle">Pending mapping conflicts</div>
-      </div>
-      <div class="card-options">
-        <label style="font-size:11.5px;color:var(--text-muted);margin-right:6px">Status</label>
-        <select class="form-control" style="width:170px;height:32px" aria-label="Filter by status">
-          <option>All statuses</option>
-          <option>Paid</option>
-          <option>Processing</option>
-          <option>Pending Groq LPU Review</option>
-          <option>Cancelled</option>
-        </select>
-      </div>
-    </div>
-    <div class="card-body p-0">
-      <div class="table-responsive">
-        <table class="table" data-datatable data-page-length="10" data-export="orders">
-          <thead>
-            <tr>
-              <th>Order</th>
-              <th>Source CPSE</th>
-              <th>Items</th>
-              <th>Total</th>
-              <th>Status</th>
-              <th>Payment</th>
-              <th>Date</th>
-              <th data-orderable="false"></th>
-            </tr>
-          </thead>
-          <tbody id="orders-rows"></tbody>
-        </table>
-      </div>
-    </div>
-  </div>
+      const tbody = document.getElementById('orders-rows');
 
-</div>
-</main>
+      function formatBytes(bytes, decimals = 2) {
+        if (!+bytes) return '0 Bytes';
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return `${parseFloat((bytes / Math.pow(k, i)).toFixed(dm))} ${sizes[i]}`;
+      }
 
-<script type="module">
-// This page demonstrates the data-adapter pattern. By default it uses
-// a hardcoded SEED array — the standard "self-contained demo" mode.
-// Add `?api=1` to the URL to fetch from /api/orders instead. Run the
-// example backend in `examples/express-sqlite/` to see it in action.
-import { useApiMode, seedAdapter, httpAdapter } from '/src/v4/data-adapter.js';
+      function truncate(str, n) {
+        return str.length > n ? str.slice(0, n - 1) + '&hellip;' : str;
+      }
 
-const SEED = [
-  { id:'#BATCH-7841', customer:'IOCL · Mathura (R. Sharma)',      initials:'IO', avatarColor:'primary',  items:18, total:425000, status:'paid',       payment:'SAP RFC MM01',       createdAt:'Sep 24, 2026' },
-  { id:'#BATCH-7840', customer:'ONGC · Hazira (H. Singh)',        initials:'ON', avatarColor:'red',      items:12, total:310000, status:'processing', payment:'MoPNG MTIRF Loan',  createdAt:'Sep 24, 2026' },
-  { id:'#BATCH-7839', customer:'BPCL · Mumbai (V. Malhotra)',     initials:'BP', avatarColor:'yellow',   items:24, total:580000, status:'paid',       payment:'GeM Joint Tender',   createdAt:'Sep 23, 2026' },
-  { id:'#BATCH-7838', customer:'HPCL · Visakh (A. Deshmukh)',     initials:'HP', avatarColor:'azure',    items:8,  total:195000, status:'pending',    payment:'HITL Validation',   createdAt:'Sep 23, 2026' },
-  { id:'#BATCH-7837', customer:'GAIL · Vijaipur (R. Nair)',       initials:'GA', avatarColor:'green',    items:14, total:285000, status:'cancelled',  payment:'Safety Gate Block',  createdAt:'Sep 22, 2026' },
-  { id:'#BATCH-7836', customer:'OIL · Duliajan (B. Baruah)',      initials:'OI', avatarColor:'primary',  items:10, total:240000, status:'paid',       payment:'SAP RFC S/4HANA',    createdAt:'Sep 22, 2026' },
-  { id:'#BATCH-7835', customer:'NRL · Numaligarh (P. Saikia)',    initials:'NR', avatarColor:'purple',   items:6,  total:165000, status:'paid',       payment:'MoPNG MTIRF Loan',  createdAt:'Sep 21, 2026' },
-  { id:'#BATCH-7834', customer:'CPCL · Manali (R. Srivastava)',   initials:'CP', avatarColor:'blue',     items:9,  total:215000, status:'processing', payment:'GeM Pool Batch',     createdAt:'Sep 21, 2026' },
-  { id:'#BATCH-7833', customer:'MRPL · Mangalore (K. Hegde)',     initials:'MR', avatarColor:'yellow',   items:15, total:390000, status:'paid',       payment:'Oracle EBS Sync',    createdAt:'Sep 20, 2026' },
-  { id:'#BATCH-7832', customer:'MoPNG / EIL (P. Venkatraman)',    initials:'EI', avatarColor:'purple',   items:32, total:840000, status:'pending',    payment:'Joint Tender Batch', createdAt:'Sep 20, 2026' }
-];
-
-const colorMap = { primary:'var(--primary)', azure:'var(--azure)', purple:'var(--purple)', yellow:'var(--yellow)', red:'var(--red)', green:'var(--green)', blue:'var(--blue)' };
-const STATUS = { paid:'green', processing:'blue', pending:'yellow', cancelled:'red' };
-
-const adapter = useApiMode()
-  ? httpAdapter('/api/orders', { listKey: 'orders' })
-  : seedAdapter(SEED);
-
-const tbody = document.getElementById('orders-rows');
-
-function rowHtml(o) {
-  return `
+      function rowHtml(o) {
+        const shortDesc = o.desc && o.desc.length > 2 ? truncate(o.desc, 60) : 'No description provided';
+        return `
     <tr>
-      <td class="cell-mono"><a href="order_detail.html" style="color:var(--primary);font-weight:var(--font-weight-medium)">${o.id}</a></td>
-      <td><div class="cell-customer"><div class="cell-avatar" style="background:${colorMap[o.avatarColor] || 'var(--primary)'}">${o.initials}</div><span class="cell-strong">${o.customer}</span></div></td>
-      <td>${o.items}</td>
-      <td class="cell-strong">$${o.total}</td>
-      <td><span class="status status-${STATUS[o.status]}">${o.status[0].toUpperCase() + o.status.slice(1)}</span></td>
-      <td style="font-size:12px;color:var(--text-muted)">${o.payment}</td>
+      <td class="cell-mono"><a href="#" style="color:var(--primary);font-weight:var(--font-weight-medium)">${o.id}</a></td>
+      <td><div class="cell-customer"><div class="cell-avatar" style="background:${colorMap[o.avatarColor] || 'var(--primary)'}">${o.initials}</div><span class="cell-strong text-dark" style="cursor:pointer">${o.name}</span></div></td>
+      <td style="max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;" title="${o.desc}">${shortDesc}</td>
+      <td class="cell-strong">${formatBytes(o.size)}</td>
       <td>${o.createdAt}</td>
       <td><button class="card-opt-btn" aria-label="More"><svg viewBox="0 0 16 16" fill="currentColor"><circle cx="8" cy="3" r="1.2"/><circle cx="8" cy="8" r="1.2"/><circle cx="8" cy="13" r="1.2"/></svg></button></td>
     </tr>`;
-}
+      }
 
-// Loading state during fetch — emit 5 skeleton rows so the table looks "alive"
-// while the network request resolves. In seed mode this flashes briefly.
-function skeletonRows(n = 5) {
-  const cell = '<td><span class="skeleton skeleton-text" style="width:80%"></span></td>';
-  return Array.from({ length: n }, () => `<tr>${cell.repeat(8)}</tr>`).join('');
-}
+      function skeletonRows(n = 5) {
+        const cell = '<td><span class="skeleton skeleton-text" style="width:80%"></span></td>';
+        return Array.from({ length: n }, () => `<tr>${cell.repeat(6)}</tr>`).join('');
+      }
 
-async function load() {
-  tbody.innerHTML = skeletonRows();
-  try {
-    const orders = await adapter.list();
-    if (!orders.length) {
-      tbody.innerHTML = `<tr><td colspan="8" style="padding:40px;text-align:center;color:var(--text-muted)">No orders yet.</td></tr>`;
-      return;
-    }
-    tbody.innerHTML = orders.map(rowHtml).join('');
-  } catch (err) {
-    tbody.innerHTML = `
-      <tr><td colspan="8" style="padding:24px">
+      async function load() {
+        tbody.innerHTML = skeletonRows();
+        try {
+          const res = await fetch('skills_data.json');
+          if (!res.ok) throw new Error('Failed to fetch skills data');
+          const skills = await res.json();
+
+          document.getElementById('stat-total-skills').innerText = skills.length;
+          document.getElementById('stat-agents-skills').innerText = skills.filter(s =>
+            s.path.includes('.agents')
+          ).length;
+          document.getElementById('stat-gemini-skills').innerText = skills.filter(s =>
+            s.path.includes('.gemini')
+          ).length;
+
+          if (!skills.length) {
+            tbody.innerHTML = `<tr><td colspan="6" style="padding:40px;text-align:center;color:var(--text-muted)">No skills found.</td></tr>`;
+            return;
+          }
+          tbody.innerHTML = skills.map(rowHtml).join('');
+        } catch (err) {
+          tbody.innerHTML = `
+      <tr><td colspan="6" style="padding:24px">
         <div class="banner banner-danger">
           <svg class="banner-icon" width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M5 5l6 6M11 5l-6 6"/></svg>
-          <div class="banner-body"><strong>Failed to load orders.</strong> ${err.message || err}</div>
+          <div class="banner-body"><strong>Failed to load skills.</strong> ${err.message || err}</div>
           <div class="banner-actions"><button class="btn btn-outline btn-sm" id="orders-retry">Retry</button></div>
         </div>
       </td></tr>`;
-    document.getElementById('orders-retry')?.addEventListener('click', load);
-  }
-}
-load();
-</script>
-
-
-  <!-- Groq Suggestion Modal -->
-  <div id="groq-modal" class="card" style="display:none; position:fixed; right:20px; bottom:20px; width:400px; z-index:9999; box-shadow:0 4px 20px rgba(0,0,0,0.15);">
-    <div class="card-header" style="background:var(--primary); color:white;">
-      <div class="card-title" style="color:white;">Groq Taxonomy Suggestion</div>
-      <button onclick="document.getElementById('groq-modal').style.display='none'" style="background:none; border:none; color:white; cursor:pointer;">&times;</button>
-    </div>
-    <div class="card-body">
-      <div id="groq-content" style="font-size:13px; max-height:300px; overflow-y:auto; margin-bottom:10px;">Waiting for LPU Inference...</div>
-      <button class="btn btn-sm btn-primary" onclick="document.getElementById('groq-modal').style.display='none'; alert('Mapped!')">Accept Mapping</button>
-    </div>
-  </div>
-
-  <script>
-    window.askGroq = async function(itemDesc) {
-      document.getElementById('groq-modal').style.display = 'block';
-      document.getElementById('groq-content').innerHTML = `<i>Analyzing via Groq LPU...</i><br/><br/>Legacy Text: <b>${itemDesc}</b>`;
-      
-      try {
-        const res = await fetch('/api/groq-chat', {
-          method: 'POST',
-          headers: {'Content-Type': 'application/json'},
-          body: JSON.stringify({ message: `Suggest the correct Shell MESC and UNSPSC mapping for this legacy Oil & Gas equipment description: "${itemDesc}". Be brief.` })
-        });
-        const data = await res.json();
-        if(data.error) document.getElementById('groq-content').innerHTML = `<span class="badge-red">${data.error}</span>`;
-        else document.getElementById('groq-content').innerHTML = `<b>Recommended Mapping:</b><br><br>${data.reply.replace(/\n/g, '<br>')}`;
-      } catch(e) {
-        document.getElementById('groq-content').innerHTML = `<span class="badge-red">${e.message}</span>`;
+          document.getElementById('orders-retry')?.addEventListener('click', load);
+        }
       }
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-      setTimeout(() => {
-        document.querySelectorAll('td a.text-dark').forEach(link => {
-          const text = link.innerText;
-          const btn = document.createElement('button');
-          btn.innerHTML = '✨ Groq AI Review';
-          btn.className = 'btn btn-outline btn-sm ml-2';
-          btn.style.marginLeft = '10px';
-          btn.onclick = (e) => { e.preventDefault(); window.askGroq(text); };
-          link.parentNode.appendChild(btn);
-        });
-      }, 500);
-    });
-  </script>
-</body>
+      load();
+    </script>
+  </body>
 </html>

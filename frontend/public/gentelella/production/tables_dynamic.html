@@ -1,175 +1,183 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NUMM Material Master · Minted ONMC Codes</title>
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script type="module" src="/src/main-v4.js"></script>
-</head>
-<body data-shell="admin" data-page="tables-dynamic" data-breadcrumb="Home > Catalogs > Minted ONMC Codes">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUMM Material Master · Minted ONMC Codes</title>
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module">import "/src/main-v4.js";</script>
+  </head>
+  <body data-shell="admin" data-page="tables-dynamic" data-breadcrumb="Home > Catalogs > Minted ONMC Codes">
+    <main class="main">
+      <div class="page-wrapper">
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <div class="page-pretitle">National Unified Material Master · Catalogs</div>
+              <h1 class="page-title">Minted ONMC Codes &amp; HITL Triage Queue</h1>
+            </div>
+            <div class="page-actions">
+              <a href="tables.html" class="btn btn-outline">CVC Audit Chain</a>
+              <a href="/" class="btn btn-primary">Open Triage Cockpit</a>
+            </div>
+          </div>
+        </div>
 
-<main class="main">
-<div class="page-wrapper">
-
-  <div class="page-header">
-    <div class="page-header-row">
-      <div>
-        <div class="page-pretitle">National Unified Material Master · Catalogs</div>
-        <h1 class="page-title">Minted ONMC Codes &amp; HITL Triage Queue</h1>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">National Harmonization Catalog — Active Master Items</div>
+              <div class="card-subtitle">
+                AI-matched CPSE records cross-walked to ONMC, Shell MESC, and UNSPSC taxonomies.
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table" data-datatable data-page-length="25">
+              <thead>
+                <tr>
+                  <th>Canonical ONMC Code</th>
+                  <th>Source CPSE &amp; Plant</th>
+                  <th>Legacy ERP Description (Raw)</th>
+                  <th>Confidence %</th>
+                  <th>Category</th>
+                  <th>Rule Gate Status</th>
+                  <th>Processed Date</th>
+                </tr>
+              </thead>
+              <tbody id="orders-tbody"></tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="page-actions">
-        <a href="tables.html" class="btn btn-outline">CVC Audit Chain</a>
-        <a href="/" class="btn btn-primary">Open Triage Cockpit</a>
-      </div>
-    </div>
-  </div>
+    </main>
 
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-title">National Harmonization Catalog — Active Master Items</div>
-        <div class="card-subtitle">AI-matched CPSE records cross-walked to ONMC, Shell MESC, and UNSPSC taxonomies.</div>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table" data-datatable data-page-length="25">
-        <thead>
-          <tr>
-            <th>Canonical ONMC Code</th>
-            <th>Source CPSE &amp; Plant</th>
-            <th>Legacy ERP Description (Raw)</th>
-            <th>Confidence %</th>
-            <th>Category</th>
-            <th>Rule Gate Status</th>
-            <th>Processed Date</th>
-          </tr>
-        </thead>
-        <tbody id="orders-tbody"></tbody>
-      </table>
-    </div>
-  </div>
+    <script type="module">
+      const cpsePlants = [
+        ['IOCL', 'Mathura Refinery', 'primary'],
+        ['ONGC', 'Hazira Gas Plant', 'red'],
+        ['BPCL', 'Mumbai Refinery', 'yellow'],
+        ['HPCL', 'Visakh Refinery', 'azure'],
+        ['GAIL', 'Vijaipur Compressor', 'green'],
+        ['OIL', 'Duliajan Base', 'primary'],
+        ['NRL', 'Numaligarh Refinery', 'purple'],
+        ['CPCL', 'Manali Refinery', 'blue'],
+        ['MRPL', 'Mangalore Refinery', 'yellow']
+      ];
 
-</div>
-</main>
+      const catalogItems = [
+        {
+          onmc: 'ONMC-MECH-VLV-BAL-002-150-A105-9B2F',
+          raw: 'VLV BL FLGD 50MM NB 150# CS BODY A105 LEVER OP',
+          cat: 'Valves & Actuators',
+          conf: '94.8%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-MECH-VLV-GAT-004-300-WCB-4A1C',
+          raw: 'VALVE GATE 4IN 300LB FLG WCB ASTM A216',
+          cat: 'Valves & Actuators',
+          conf: '91.2%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-MECH-FLG-WNF-006-150-A105-8D3E',
+          raw: 'FLG WN 6" 150# RF CS ASTM A105 SCH40 B16.5',
+          cat: 'Piping & Flanges',
+          conf: '96.5%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-MECH-GSK-SPW-002-150-SS316-2F9A',
+          raw: 'GASKET SPWD 2IN 150LB SS316 GRAPHITE ASME B16.20',
+          cat: 'Gaskets & Fasteners',
+          conf: '88.4%',
+          status: ['HITL Review', 'yellow']
+        },
+        {
+          onmc: 'ONMC-MECH-PIP-SML-004-STD-A106-1C7B',
+          raw: 'PIPE SMLS 4IN STD WT ASTM A106 GR B BEVEL',
+          cat: 'Piping & Tubes',
+          conf: '97.0%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-INST-TRN-PRS-001-420MA-SS316-3A9F',
+          raw: 'XMITTER PRESS DIFF 4-20MA HART SMART LCD 316SS',
+          cat: 'Instrumentation',
+          conf: '84.6%',
+          status: ['HITL Review', 'yellow']
+        },
+        {
+          onmc: 'ONMC-MECH-VLV-GLB-003-600-A105-5E1D',
+          raw: 'GLOBE VALVE 3INCH 600# FORGED CS A105 HANDWHEEL',
+          cat: 'Valves & Actuators',
+          conf: '89.1%',
+          status: ['HITL Review', 'yellow']
+        },
+        {
+          onmc: 'ONMC-ELEC-MOT-EXP-050-415V-CAST-8F2B',
+          raw: 'MOTOR ELEC 50HP 415V 3PH 50HZ FLAMEPROOF EX D',
+          cat: 'Rotating Machinery',
+          conf: '93.7%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-MECH-FLG-BLD-008-300-A105-7A3C',
+          raw: 'BLIND FLANGE 8" CLASS 300 RF CS ASTM A105',
+          cat: 'Piping & Flanges',
+          conf: '95.2%',
+          status: ['Approved', 'green']
+        },
+        {
+          onmc: 'ONMC-MECH-VLV-CHK-002-800-A105-3B8F',
+          raw: 'CHECK VALVE 2" 800# SW FORGED STEEL A105 PISTON',
+          cat: 'Valves & Actuators',
+          conf: '73.4%',
+          status: ['HITL Review', 'yellow']
+        },
+        {
+          onmc: 'REJECT-PRESS-MISMATCH-4012',
+          raw: 'BALL VALVE 2IN 300LB FLGD WCB BODY (POTENTIAL PRESSURE DISCREPANCY)',
+          cat: 'Valves & Actuators',
+          conf: '64.1%',
+          status: ['Safety Blocked', 'red']
+        },
+        {
+          onmc: 'REJECT-ALLOY-SOUR-5091',
+          raw: 'PIPE 6IN SMLS SCH80 NACE MR0175 SOUR SERVICE',
+          cat: 'Piping & Tubes',
+          conf: '68.0%',
+          status: ['Safety Blocked', 'red']
+        }
+      ];
 
-<script type="module">
-const cpsePlants = [
-  ['IOCL', 'Mathura Refinery', 'primary'],
-  ['ONGC', 'Hazira Gas Plant', 'red'],
-  ['BPCL', 'Mumbai Refinery', 'yellow'],
-  ['HPCL', 'Visakh Refinery', 'azure'],
-  ['GAIL', 'Vijaipur Compressor', 'green'],
-  ['OIL',  'Duliajan Base', 'primary'],
-  ['NRL',  'Numaligarh Refinery', 'purple'],
-  ['CPCL', 'Manali Refinery', 'blue'],
-  ['MRPL', 'Mangalore Refinery', 'yellow']
-];
+      function rng(seed) {
+        let s = seed;
+        return () => {
+          s = (s * 9301 + 49297) % 233280;
+          return s / 233280;
+        };
+      }
+      const r = rng(42);
+      const rows = [];
 
-const catalogItems = [
-  {
-    onmc: 'ONMC-MECH-VLV-BAL-002-150-A105-9B2F',
-    raw: 'VLV BL FLGD 50MM NB 150# CS BODY A105 LEVER OP',
-    cat: 'Valves & Actuators',
-    conf: '94.8%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-MECH-VLV-GAT-004-300-WCB-4A1C',
-    raw: 'VALVE GATE 4IN 300LB FLG WCB ASTM A216',
-    cat: 'Valves & Actuators',
-    conf: '91.2%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-MECH-FLG-WNF-006-150-A105-8D3E',
-    raw: 'FLG WN 6" 150# RF CS ASTM A105 SCH40 B16.5',
-    cat: 'Piping & Flanges',
-    conf: '96.5%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-MECH-GSK-SPW-002-150-SS316-2F9A',
-    raw: 'GASKET SPWD 2IN 150LB SS316 GRAPHITE ASME B16.20',
-    cat: 'Gaskets & Fasteners',
-    conf: '88.4%',
-    status: ['HITL Review', 'yellow']
-  },
-  {
-    onmc: 'ONMC-MECH-PIP-SML-004-STD-A106-1C7B',
-    raw: 'PIPE SMLS 4IN STD WT ASTM A106 GR B BEVEL',
-    cat: 'Piping & Tubes',
-    conf: '97.0%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-INST-TRN-PRS-001-420MA-SS316-3A9F',
-    raw: 'XMITTER PRESS DIFF 4-20MA HART SMART LCD 316SS',
-    cat: 'Instrumentation',
-    conf: '84.6%',
-    status: ['HITL Review', 'yellow']
-  },
-  {
-    onmc: 'ONMC-MECH-VLV-GLB-003-600-A105-5E1D',
-    raw: 'GLOBE VALVE 3INCH 600# FORGED CS A105 HANDWHEEL',
-    cat: 'Valves & Actuators',
-    conf: '89.1%',
-    status: ['HITL Review', 'yellow']
-  },
-  {
-    onmc: 'ONMC-ELEC-MOT-EXP-050-415V-CAST-8F2B',
-    raw: 'MOTOR ELEC 50HP 415V 3PH 50HZ FLAMEPROOF EX D',
-    cat: 'Rotating Machinery',
-    conf: '93.7%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-MECH-FLG-BLD-008-300-A105-7A3C',
-    raw: 'BLIND FLANGE 8" CLASS 300 RF CS ASTM A105',
-    cat: 'Piping & Flanges',
-    conf: '95.2%',
-    status: ['Approved', 'green']
-  },
-  {
-    onmc: 'ONMC-MECH-VLV-CHK-002-800-A105-3B8F',
-    raw: 'CHECK VALVE 2" 800# SW FORGED STEEL A105 PISTON',
-    cat: 'Valves & Actuators',
-    conf: '73.4%',
-    status: ['HITL Review', 'yellow']
-  },
-  {
-    onmc: 'REJECT-PRESS-MISMATCH-4012',
-    raw: 'BALL VALVE 2IN 300LB FLGD WCB BODY (POTENTIAL PRESSURE DISCREPANCY)',
-    cat: 'Valves & Actuators',
-    conf: '64.1%',
-    status: ['Safety Blocked', 'red']
-  },
-  {
-    onmc: 'REJECT-ALLOY-SOUR-5091',
-    raw: 'PIPE 6IN SMLS SCH80 NACE MR0175 SOUR SERVICE',
-    cat: 'Piping & Tubes',
-    conf: '68.0%',
-    status: ['Safety Blocked', 'red']
-  }
-];
+      for (let i = 0; i < 40; i++) {
+        const item = catalogItems[i % catalogItems.length];
+        const cpse = cpsePlants[Math.floor(r() * cpsePlants.length)];
+        const day = 10 + (i % 15);
 
-function rng(seed) { let s = seed; return () => { s = (s * 9301 + 49297) % 233280; return s / 233280; }; }
-const r = rng(42);
-const rows = [];
-
-for (let i = 0; i < 40; i++) {
-  const item = catalogItems[i % catalogItems.length];
-  const cpse = cpsePlants[Math.floor(r() * cpsePlants.length)];
-  const day = 10 + (i % 15);
-  
-  rows.push(`<tr>
+        rows.push(`<tr>
     <td class="cell-mono" style="font-weight:700;font-size:11px">${item.onmc}</td>
     <td>
       <div class="cell-customer">
-        <div class="cell-avatar" style="background:var(--${cpse[2]})">${cpse[0].substring(0,2)}</div>
+        <div class="cell-avatar" style="background:var(--${cpse[2]})">${cpse[0].substring(0, 2)}</div>
         <span class="cell-strong">${cpse[0]} · ${cpse[1]}</span>
       </div>
     </td>
@@ -179,9 +187,8 @@ for (let i = 0; i < 40; i++) {
     <td><span class="status status-${item.status[1]}">${item.status[0]}</span></td>
     <td style="font-size:12px;color:var(--text-muted)">Sep ${day}, 2026</td>
   </tr>`);
-}
-document.getElementById('orders-tbody').innerHTML = rows.join('');
-</script>
-
-</body>
+      }
+      document.getElementById('orders-tbody').innerHTML = rows.join('');
+    </script>
+  </body>
 </html>

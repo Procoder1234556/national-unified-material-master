@@ -1,159 +1,178 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NUMM Material Master · Surplus Stock Catalog</title>
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script type="module" src="/src/main-v4.js"></script>
-</head>
-<body data-shell="admin" data-page="pages" data-breadcrumb="Home > Ecosystem Sharing > Surplus Stock Listing">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUMM Material Master · Surplus Stock Catalog</title>
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module">import "/src/main-v4.js";</script>
+  </head>
+  <body data-shell="admin" data-page="pages" data-breadcrumb="Home > Ecosystem Sharing > Surplus Stock Listing">
+    <main class="main">
+      <div class="page-wrapper">
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <div class="page-pretitle">National Unified Material Master · Search Before Buy</div>
+              <h1 class="page-title">Inter-CPSE Surplus Stock Inventory</h1>
+            </div>
+            <div class="page-actions">
+              <a href="tables.html" class="btn btn-outline">View CVC Audit Trail</a>
+              <a href="/" class="btn btn-primary">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M4 8h8M8 4v8" />
+                </svg>
+                Launch Search Before Buy
+              </a>
+            </div>
+          </div>
+        </div>
 
-<main class="main">
-<div class="page-wrapper">
+        <!-- Filter bar -->
+        <div class="card" style="margin-bottom: 16px">
+          <div
+            class="card-body"
+            style="display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 12px 16px"
+          >
+            <span style="font-size: 12px; color: var(--text-muted); font-weight: var(--font-weight-medium)"
+              >Filter:</span
+            >
+            <span class="chip chip-primary active"
+              >Valves &amp; Actuators<button type="button" class="chip-close" aria-label="Remove Valves">
+                ×
+              </button></span
+            >
+            <span class="chip">Piping &amp; Flanges</span>
+            <span class="chip">Gaskets &amp; Fasteners</span>
+            <span class="chip">Instrumentation</span>
+            <span class="chip">Motors &amp; Rotating</span>
+            <span class="chip chip-yellow active"
+              >ONGC Surplus<button type="button" class="chip-close" aria-label="Remove ONGC">×</button></span
+            >
+            <span class="chip chip-green active"
+              >IOCL Surplus<button type="button" class="chip-close" aria-label="Remove IOCL">×</button></span
+            >
+            <span style="margin-left: auto; font-size: 12px; color: var(--text-muted)"
+              >4,210 Active National Spares</span
+            >
+            <select class="form-control" style="width: 160px; height: 32px" aria-label="Sort orders">
+              <option>Sort: Nearest Plant</option>
+              <option>Sort: Highest Stock</option>
+              <option>Sort: Unit Value ↓</option>
+              <option>Sort: ONMC Code</option>
+            </select>
+          </div>
+        </div>
 
-  <div class="page-header">
-    <div class="page-header-row">
-      <div>
-        <div class="page-pretitle">National Unified Material Master · Search Before Buy</div>
-        <h1 class="page-title">Inter-CPSE Surplus Stock Inventory</h1>
+        <div class="row col-3" id="products-grid"></div>
       </div>
-      <div class="page-actions">
-        <a href="tables.html" class="btn btn-outline">View CVC Audit Trail</a>
-        <a href="/" class="btn btn-primary">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 8h8M8 4v8"/></svg>
-          Launch Search Before Buy
-        </a>
-      </div>
-    </div>
-  </div>
+    </main>
 
-  <!-- Filter bar -->
-  <div class="card" style="margin-bottom:16px">
-    <div class="card-body" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;padding:12px 16px">
-      <span style="font-size:12px;color:var(--text-muted);font-weight:var(--font-weight-medium)">Filter:</span>
-      <span class="chip chip-primary active">Valves &amp; Actuators<button type="button" class="chip-close" aria-label="Remove Valves">×</button></span>
-      <span class="chip">Piping &amp; Flanges</span>
-      <span class="chip">Gaskets &amp; Fasteners</span>
-      <span class="chip">Instrumentation</span>
-      <span class="chip">Motors &amp; Rotating</span>
-      <span class="chip chip-yellow active">ONGC Surplus<button type="button" class="chip-close" aria-label="Remove ONGC">×</button></span>
-      <span class="chip chip-green active">IOCL Surplus<button type="button" class="chip-close" aria-label="Remove IOCL">×</button></span>
-      <span style="margin-left:auto;font-size:12px;color:var(--text-muted)">4,210 Active National Spares</span>
-      <select class="form-control" style="width:160px;height:32px" aria-label="Sort orders">
-        <option>Sort: Nearest Plant</option>
-        <option>Sort: Highest Stock</option>
-        <option>Sort: Unit Value ↓</option>
-        <option>Sort: ONMC Code</option>
-      </select>
-    </div>
-  </div>
+    <script type="module">
+      import { PRODUCT_IMAGES } from '/src/v4/product-images.js';
 
-  <div class="row col-3" id="products-grid"></div>
+      const products = [
+        [
+          '2" CL150 Flanged Ball Valve ASTM A105',
+          'Valves & Actuators · ONGC Hazira Plant',
+          '₹28,500',
+          '₹34,000 (New Requisition)',
+          '14 in Surplus',
+          'green',
+          'ONMC-MECH-VLV-BAL-002-150-A105-9B2F · MESC 74.16.01.015.1',
+          'valve_ball'
+        ],
+        [
+          '4" CL300 Cast Steel Gate Valve WCB',
+          'Valves & Actuators · IOCL Mathura Refinery',
+          '₹42,000',
+          '₹51,000 (New Requisition)',
+          '8 in Surplus',
+          'blue',
+          'ONMC-MECH-VLV-GAT-004-300-WCB-4A1C · MESC 74.12.03.020.1',
+          'valve_gate'
+        ],
+        [
+          '6" CL150 Weld Neck Flange RF A105',
+          'Piping & Flanges · BPCL Mumbai Refinery',
+          '₹14,500',
+          '₹18,200 (New Requisition)',
+          '24 in Surplus',
+          'yellow',
+          'ONMC-MECH-FLG-WNF-006-150-A105-8D3E · MESC 76.22.11.025.1',
+          'flange_wnf'
+        ],
+        [
+          '2" CL150 Spiral Wound Gasket SS316L',
+          'Gaskets & Seals · HPCL Visakh Refinery',
+          '₹1,200',
+          '₹1,650 (New Requisition)',
+          '150 in Surplus',
+          'green',
+          'ONMC-MECH-GSK-SPW-002-150-SS316-2F9A · MESC 76.44.02.015.1',
+          'gasket_spw'
+        ],
+        [
+          '4" Sch 40 Seamless Line Pipe ASTM A106 Gr B',
+          'Piping & Tubes · GAIL Vijaipur Compressor Plant',
+          '₹18,500/m',
+          '₹22,000/m (New Requisition)',
+          '320 m Surplus',
+          'primary',
+          'ONMC-MECH-PIP-SML-004-STD-A106-1C7B · MESC 74.00.01.020.1',
+          'pipe_sml'
+        ],
+        [
+          'Smart Pressure Transmitter 4-20mA HART',
+          'Instrumentation · OIL Duliajan Field HQ',
+          '₹65,000',
+          '₹82,000 (New Requisition)',
+          '6 in Surplus',
+          'purple',
+          'ONMC-INST-TRN-PRS-001-420MA-SS316-3A9F · UNSPSC 41112401',
+          'transmitter'
+        ],
+        [
+          '3" CL600 Globe Valve Forged Carbon Steel',
+          'Valves & Actuators · NRL Numaligarh Refinery',
+          '₹36,000',
+          '₹44,000 (New Requisition)',
+          '5 in Surplus',
+          'blue',
+          'ONMC-MECH-VLV-GLB-003-600-A105-5E1D · MESC 74.14.02.015.1',
+          'valve_glb'
+        ],
+        [
+          '50 HP Explosion-Proof Motor 415V Flameproof',
+          'Rotating Equipment · CPCL Manali Refinery',
+          '₹1,85,000',
+          '₹2,20,000 (New Requisition)',
+          '3 in Surplus',
+          'red',
+          'ONMC-ELEC-MOT-EXP-050-415V-CAST-8F2B · UNSPSC 26101100',
+          'motor_exp'
+        ],
+        [
+          '8" CL300 Blind Flange Raised Face A105',
+          'Piping & Flanges · MRPL Mangalore Refinery',
+          '₹16,800',
+          '₹21,500 (New Requisition)',
+          '12 in Surplus',
+          'yellow',
+          'ONMC-MECH-FLG-BLD-008-300-A105-7A3C · MESC 76.24.11.020.1',
+          'flange_bld'
+        ]
+      ];
 
-</div>
-</main>
-
-<script type="module">
-import { PRODUCT_IMAGES } from '/src/v4/product-images.js';
-
-const products = [
-  [
-    '2" CL150 Flanged Ball Valve ASTM A105',
-    'Valves & Actuators · ONGC Hazira Plant',
-    '₹28,500',
-    '₹34,000 (New Requisition)',
-    '14 in Surplus',
-    'green',
-    'ONMC-MECH-VLV-BAL-002-150-A105-9B2F · MESC 74.16.01.015.1',
-    'valve_ball'
-  ],
-  [
-    '4" CL300 Cast Steel Gate Valve WCB',
-    'Valves & Actuators · IOCL Mathura Refinery',
-    '₹42,000',
-    '₹51,000 (New Requisition)',
-    '8 in Surplus',
-    'blue',
-    'ONMC-MECH-VLV-GAT-004-300-WCB-4A1C · MESC 74.12.03.020.1',
-    'valve_gate'
-  ],
-  [
-    '6" CL150 Weld Neck Flange RF A105',
-    'Piping & Flanges · BPCL Mumbai Refinery',
-    '₹14,500',
-    '₹18,200 (New Requisition)',
-    '24 in Surplus',
-    'yellow',
-    'ONMC-MECH-FLG-WNF-006-150-A105-8D3E · MESC 76.22.11.025.1',
-    'flange_wnf'
-  ],
-  [
-    '2" CL150 Spiral Wound Gasket SS316L',
-    'Gaskets & Seals · HPCL Visakh Refinery',
-    '₹1,200',
-    '₹1,650 (New Requisition)',
-    '150 in Surplus',
-    'green',
-    'ONMC-MECH-GSK-SPW-002-150-SS316-2F9A · MESC 76.44.02.015.1',
-    'gasket_spw'
-  ],
-  [
-    '4" Sch 40 Seamless Line Pipe ASTM A106 Gr B',
-    'Piping & Tubes · GAIL Vijaipur Compressor Plant',
-    '₹18,500/m',
-    '₹22,000/m (New Requisition)',
-    '320 m Surplus',
-    'primary',
-    'ONMC-MECH-PIP-SML-004-STD-A106-1C7B · MESC 74.00.01.020.1',
-    'pipe_sml'
-  ],
-  [
-    'Smart Pressure Transmitter 4-20mA HART',
-    'Instrumentation · OIL Duliajan Field HQ',
-    '₹65,000',
-    '₹82,000 (New Requisition)',
-    '6 in Surplus',
-    'purple',
-    'ONMC-INST-TRN-PRS-001-420MA-SS316-3A9F · UNSPSC 41112401',
-    'transmitter'
-  ],
-  [
-    '3" CL600 Globe Valve Forged Carbon Steel',
-    'Valves & Actuators · NRL Numaligarh Refinery',
-    '₹36,000',
-    '₹44,000 (New Requisition)',
-    '5 in Surplus',
-    'blue',
-    'ONMC-MECH-VLV-GLB-003-600-A105-5E1D · MESC 74.14.02.015.1',
-    'valve_glb'
-  ],
-  [
-    '50 HP Explosion-Proof Motor 415V Flameproof',
-    'Rotating Equipment · CPCL Manali Refinery',
-    '₹1,85,000',
-    '₹2,20,000 (New Requisition)',
-    '3 in Surplus',
-    'red',
-    'ONMC-ELEC-MOT-EXP-050-415V-CAST-8F2B · UNSPSC 26101100',
-    'motor_exp'
-  ],
-  [
-    '8" CL300 Blind Flange Raised Face A105',
-    'Piping & Flanges · MRPL Mangalore Refinery',
-    '₹16,800',
-    '₹21,500 (New Requisition)',
-    '12 in Surplus',
-    'yellow',
-    'ONMC-MECH-FLG-BLD-008-300-A105-7A3C · MESC 76.24.11.020.1',
-    'flange_bld'
-  ]
-];
-
-document.getElementById('products-grid').innerHTML = products.map(([name, cat, price, oldPrice, badge, badgeCls, spec, slug]) => `
+      document.getElementById('products-grid').innerHTML = products
+        .map(
+          ([name, cat, price, oldPrice, badge, badgeCls, spec, slug]) => `
   <a class="product-card" href="product_detail.html" style="text-decoration:none;color:inherit">
     <div class="product-thumb">
       ${badge ? `<span class="product-badge"><span class="chip chip-${badgeCls}">${badge}</span></span>` : ''}
@@ -169,8 +188,9 @@ document.getElementById('products-grid').innerHTML = products.map(([name, cat, p
       <div class="spec" style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-muted);margin-top:6px;word-break:break-all">${spec}</div>
     </div>
   </a>
-`).join('');
-</script>
-
-</body>
+`
+        )
+        .join('');
+    </script>
+  </body>
 </html>

@@ -1,176 +1,232 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NUMM Material Master · CVC Audit Trail</title>
-<link rel="icon" href="../images/favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<script type="module" src="/src/main-v4.js"></script>
-</head>
-<body data-shell="admin" data-page="tables" data-breadcrumb="Home > Compliance > CVC Audit Trail">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NUMM Material Master · CVC Audit Trail</title>
+    <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module">import "/src/main-v4.js";</script>
+  </head>
+  <body data-shell="admin" data-page="tables" data-breadcrumb="Home > Compliance > CVC Audit Trail">
+    <main class="main">
+      <div class="page-wrapper">
+        <div class="page-header">
+          <div class="page-header-row">
+            <div>
+              <div class="page-pretitle">National Unified Material Master · Sovereign Compliance</div>
+              <h1 class="page-title">CVC Cryptographic Audit Trail</h1>
+            </div>
+            <div class="page-actions">
+              <button class="btn btn-outline" onclick="window.print()">Export Dossier</button>
+              <button class="btn btn-primary">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M8 2v12M2 8h12" />
+                </svg>
+                Verify SHA-256 Chain
+              </button>
+            </div>
+          </div>
+        </div>
 
-<main class="main">
-<div class="page-wrapper">
-
-  <div class="page-header">
-    <div class="page-header-row">
-      <div>
-        <div class="page-pretitle">National Unified Material Master · Sovereign Compliance</div>
-        <h1 class="page-title">CVC Cryptographic Audit Trail</h1>
+        <div class="card">
+          <div class="card-header">
+            <div>
+              <div class="card-title">Central Vigilance Commission (CVC) Audit Trail &amp; Decision Ledger</div>
+              <div class="card-subtitle">
+                Append-only FIPS 180-4 SHA-256 cryptographic verification chain. Every catalog merge, master code mint,
+                and inter-CPSE transfer is permanently sealed.
+              </div>
+            </div>
+          </div>
+          <div class="table-responsive">
+            <table class="table" data-datatable data-page-length="10" data-selectable data-export="cvc_audit_ledger">
+              <thead>
+                <tr>
+                  <th data-orderable="false" style="width: 32px">
+                    <input type="checkbox" style="margin: 0" aria-label="Select all rows" />
+                  </th>
+                  <th>Block #</th>
+                  <th>Timestamp (UTC)</th>
+                  <th>Auditing Officer</th>
+                  <th>CPSE Enterprise &amp; Plant</th>
+                  <th>Action Event</th>
+                  <th>Entity / Material Code</th>
+                  <th>SHA-256 Hash Digest</th>
+                  <th>Audit Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00128</td>
+                  <td>2026-09-24 10:14:22</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #0d533a">RS</div>
+                      <span class="cell-strong">Rameshwar Sharma</span>
+                    </div>
+                  </td>
+                  <td>IOCL (Mathura Refinery)</td>
+                  <td><span class="chip chip-green">MINT_ONMC</span></td>
+                  <td class="cell-mono">ONMC-MECH-VLV-BAL-002-150-A105-9B2F</td>
+                  <td class="cell-mono" style="font-size: 11px">1e5b8d234857b280...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00127</td>
+                  <td>2026-09-24 09:48:10</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #9b121e">HS</div>
+                      <span class="cell-strong">Harpreet Singh</span>
+                    </div>
+                  </td>
+                  <td>ONGC (Hazira Gas Plant)</td>
+                  <td><span class="chip chip-azure">INTER_CPSE_TRANSFER</span></td>
+                  <td class="cell-mono">MTIRF/2026/04/001</td>
+                  <td class="cell-mono" style="font-size: 11px">d7a8fbb307d78094...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00126</td>
+                  <td>2026-09-24 08:30:15</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #593c32">PV</div>
+                      <span class="cell-strong">Priya Venkatraman</span>
+                    </div>
+                  </td>
+                  <td>MoPNG / EIL Central Cell</td>
+                  <td><span class="chip chip-purple">POOLED_DEMAND_BATCH</span></td>
+                  <td class="cell-mono">BATCH-DEMAND-2026-Q2-01</td>
+                  <td class="cell-mono" style="font-size: 11px">c9b3e18a09f82417...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00125</td>
+                  <td>2026-09-23 16:55:04</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #0d533a">SK</div>
+                      <span class="cell-strong">S. K. Gupta</span>
+                    </div>
+                  </td>
+                  <td>IOCL (Refineries HQ)</td>
+                  <td><span class="chip chip-green">APPROVE_MATCH</span></td>
+                  <td class="cell-mono">MAP-IOCL-VLV-001</td>
+                  <td class="cell-mono" style="font-size: 11px">4a1c8f9b2d3e5670...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00124</td>
+                  <td>2026-09-23 15:22:40</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #9b121e">AM</div>
+                      <span class="cell-strong">A. K. Mehta</span>
+                    </div>
+                  </td>
+                  <td>ONGC (Western Onshore Asset)</td>
+                  <td><span class="chip chip-azure">MTIRF_APPROVAL</span></td>
+                  <td class="cell-mono">REQ-ONGC-2026-0891</td>
+                  <td class="cell-mono" style="font-size: 11px">8b2f9a1c3d4e5f60...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00123</td>
+                  <td>2026-09-23 14:10:19</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #5f978e">VM</div>
+                      <span class="cell-strong">Vikram Malhotra</span>
+                    </div>
+                  </td>
+                  <td>BPCL (Mumbai Refinery)</td>
+                  <td><span class="chip chip-yellow">INVENTORY_SURPLUS_PUB</span></td>
+                  <td class="cell-mono">ONMC-MECH-FLG-WNF-006-300-A105-8D3E</td>
+                  <td class="cell-mono" style="font-size: 11px">2f9a8b1c4d3e5678...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00122</td>
+                  <td>2026-09-23 11:45:00</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #a5d7c9">AD</div>
+                      <span class="cell-strong">Ananya Deshmukh</span>
+                    </div>
+                  </td>
+                  <td>HPCL (Visakh Refinery)</td>
+                  <td><span class="chip">CATALOG_INGESTION</span></td>
+                  <td class="cell-mono">JOB-HPCL-INGEST-402</td>
+                  <td class="cell-mono" style="font-size: 11px">9d3e8b2f1a4c5670...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00121</td>
+                  <td>2026-09-22 17:02:18</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #e94344">RN</div>
+                      <span class="cell-strong">Rajeev Nair</span>
+                    </div>
+                  </td>
+                  <td>GAIL (Vijaipur Plant)</td>
+                  <td><span class="chip chip-red">RULE_GATE_REJECT</span></td>
+                  <td class="cell-mono">RAW-GAIL-PIPE-9921 (Pressure mismatch)</td>
+                  <td class="cell-mono" style="font-size: 11px">7a3c8d1e2b4f5690...</td>
+                  <td><span class="status status-red">Safety Blocked</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00120</td>
+                  <td>2026-09-22 14:18:33</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #5f978e">BB</div>
+                      <span class="cell-strong">Bhaben Baruah</span>
+                    </div>
+                  </td>
+                  <td>OIL (Duliajan Field HQs)</td>
+                  <td><span class="chip chip-green">HARMONIZATION_TRIAGE</span></td>
+                  <td class="cell-mono">ONMC-MECH-VLV-GLB-002-600-A105-5E1D</td>
+                  <td class="cell-mono" style="font-size: 11px">3b8f1c2d4e5a6789...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" style="margin: 0" aria-label="Select row" /></td>
+                  <td class="cell-mono">#00119</td>
+                  <td>2026-09-22 10:05:12</td>
+                  <td>
+                    <div class="cell-customer">
+                      <div class="cell-avatar" style="background: #593c32">PS</div>
+                      <span class="cell-strong">Pranjal Saikia</span>
+                    </div>
+                  </td>
+                  <td>NRL (Numaligarh Refinery)</td>
+                  <td><span class="chip chip-azure">SURPLUS_TRANSFER_DISPATCH</span></td>
+                  <td class="cell-mono">MTIRF/2026/04/004</td>
+                  <td class="cell-mono" style="font-size: 11px">5e1d8a2b3c4f6789...</td>
+                  <td><span class="status status-green">Verified</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
-      <div class="page-actions">
-        <button class="btn btn-outline" onclick="window.print()">Export Dossier</button>
-        <button class="btn btn-primary">
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 2v12M2 8h12"/></svg>
-          Verify SHA-256 Chain
-        </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-header">
-      <div>
-        <div class="card-title">Central Vigilance Commission (CVC) Audit Trail &amp; Decision Ledger</div>
-        <div class="card-subtitle">Append-only FIPS 180-4 SHA-256 cryptographic verification chain. Every catalog merge, master code mint, and inter-CPSE transfer is permanently sealed.</div>
-      </div>
-    </div>
-    <div class="table-responsive">
-      <table class="table" data-datatable data-page-length="10" data-selectable data-export="cvc_audit_ledger">
-        <thead>
-          <tr>
-            <th data-orderable="false" style="width:32px"><input type="checkbox" style="margin:0" aria-label="Select all rows"></th>
-            <th>Block #</th>
-            <th>Timestamp (UTC)</th>
-            <th>Auditing Officer</th>
-            <th>CPSE Enterprise &amp; Plant</th>
-            <th>Action Event</th>
-            <th>Entity / Material Code</th>
-            <th>SHA-256 Hash Digest</th>
-            <th>Audit Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00128</td>
-            <td>2026-09-24 10:14:22</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#0D533A">RS</div><span class="cell-strong">Rameshwar Sharma</span></div></td>
-            <td>IOCL (Mathura Refinery)</td>
-            <td><span class="chip chip-green">MINT_ONMC</span></td>
-            <td class="cell-mono">ONMC-MECH-VLV-BAL-002-150-A105-9B2F</td>
-            <td class="cell-mono" style="font-size:11px">1e5b8d234857b280...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00127</td>
-            <td>2026-09-24 09:48:10</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#9B121E">HS</div><span class="cell-strong">Harpreet Singh</span></div></td>
-            <td>ONGC (Hazira Gas Plant)</td>
-            <td><span class="chip chip-azure">INTER_CPSE_TRANSFER</span></td>
-            <td class="cell-mono">MTIRF/2026/04/001</td>
-            <td class="cell-mono" style="font-size:11px">d7a8fbb307d78094...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00126</td>
-            <td>2026-09-24 08:30:15</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#593C32">PV</div><span class="cell-strong">Priya Venkatraman</span></div></td>
-            <td>MoPNG / EIL Central Cell</td>
-            <td><span class="chip chip-purple">POOLED_DEMAND_BATCH</span></td>
-            <td class="cell-mono">BATCH-DEMAND-2026-Q2-01</td>
-            <td class="cell-mono" style="font-size:11px">c9b3e18a09f82417...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00125</td>
-            <td>2026-09-23 16:55:04</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#0D533A">SK</div><span class="cell-strong">S. K. Gupta</span></div></td>
-            <td>IOCL (Refineries HQ)</td>
-            <td><span class="chip chip-green">APPROVE_MATCH</span></td>
-            <td class="cell-mono">MAP-IOCL-VLV-001</td>
-            <td class="cell-mono" style="font-size:11px">4a1c8f9b2d3e5670...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00124</td>
-            <td>2026-09-23 15:22:40</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#9B121E">AM</div><span class="cell-strong">A. K. Mehta</span></div></td>
-            <td>ONGC (Western Onshore Asset)</td>
-            <td><span class="chip chip-azure">MTIRF_APPROVAL</span></td>
-            <td class="cell-mono">REQ-ONGC-2026-0891</td>
-            <td class="cell-mono" style="font-size:11px">8b2f9a1c3d4e5f60...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00123</td>
-            <td>2026-09-23 14:10:19</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#5F978E">VM</div><span class="cell-strong">Vikram Malhotra</span></div></td>
-            <td>BPCL (Mumbai Refinery)</td>
-            <td><span class="chip chip-yellow">INVENTORY_SURPLUS_PUB</span></td>
-            <td class="cell-mono">ONMC-MECH-FLG-WNF-006-300-A105-8D3E</td>
-            <td class="cell-mono" style="font-size:11px">2f9a8b1c4d3e5678...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00122</td>
-            <td>2026-09-23 11:45:00</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#A5D7C9">AD</div><span class="cell-strong">Ananya Deshmukh</span></div></td>
-            <td>HPCL (Visakh Refinery)</td>
-            <td><span class="chip">CATALOG_INGESTION</span></td>
-            <td class="cell-mono">JOB-HPCL-INGEST-402</td>
-            <td class="cell-mono" style="font-size:11px">9d3e8b2f1a4c5670...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00121</td>
-            <td>2026-09-22 17:02:18</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#E94344">RN</div><span class="cell-strong">Rajeev Nair</span></div></td>
-            <td>GAIL (Vijaipur Plant)</td>
-            <td><span class="chip chip-red">RULE_GATE_REJECT</span></td>
-            <td class="cell-mono">RAW-GAIL-PIPE-9921 (Pressure mismatch)</td>
-            <td class="cell-mono" style="font-size:11px">7a3c8d1e2b4f5690...</td>
-            <td><span class="status status-red">Safety Blocked</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00120</td>
-            <td>2026-09-22 14:18:33</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#5F978E">BB</div><span class="cell-strong">Bhaben Baruah</span></div></td>
-            <td>OIL (Duliajan Field HQs)</td>
-            <td><span class="chip chip-green">HARMONIZATION_TRIAGE</span></td>
-            <td class="cell-mono">ONMC-MECH-VLV-GLB-002-600-A105-5E1D</td>
-            <td class="cell-mono" style="font-size:11px">3b8f1c2d4e5a6789...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-          <tr>
-            <td><input type="checkbox" style="margin:0" aria-label="Select row"></td>
-            <td class="cell-mono">#00119</td>
-            <td>2026-09-22 10:05:12</td>
-            <td><div class="cell-customer"><div class="cell-avatar" style="background:#593C32">PS</div><span class="cell-strong">Pranjal Saikia</span></div></td>
-            <td>NRL (Numaligarh Refinery)</td>
-            <td><span class="chip chip-azure">SURPLUS_TRANSFER_DISPATCH</span></td>
-            <td class="cell-mono">MTIRF/2026/04/004</td>
-            <td class="cell-mono" style="font-size:11px">5e1d8a2b3c4f6789...</td>
-            <td><span class="status status-green">Verified</span></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-
-</div>
-</main>
-
-</body>
+    </main>
+  </body>
 </html>
