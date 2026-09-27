@@ -39,8 +39,8 @@ function baseOption(t) {
 
 function dashboardNetwork(echarts, el, t) {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const sessions = [420, 580, 510, 720, 680, 790, 752];
-  const pageviews = [320, 460, 410, 580, 540, 660, 620];
+  const harmonizedRecords = [420, 580, 510, 720, 680, 790, 752];
+  const safetyGateBlocks = [32, 46, 41, 58, 54, 66, 62];
   const chart = echarts.init(el);
   chart.setOption({
     ...baseOption(t),
@@ -67,13 +67,13 @@ function dashboardNetwork(echarts, el, t) {
     },
     series: [
       {
-        name: 'Sessions',
+        name: 'Harmonized records',
         type: 'line',
         smooth: true,
         symbol: 'circle',
         symbolSize: 5,
         showSymbol: false,
-        data: sessions,
+        data: harmonizedRecords,
         lineStyle: { color: t.primary, width: 2 },
         itemStyle: { color: t.primary, borderColor: t.bgSurface, borderWidth: 2 },
         areaStyle: {
@@ -84,11 +84,11 @@ function dashboardNetwork(echarts, el, t) {
         }
       },
       {
-        name: 'Page views',
+        name: 'Safety-gate blocks',
         type: 'line',
         smooth: true,
         showSymbol: false,
-        data: pageviews,
+        data: safetyGateBlocks,
         lineStyle: { color: t.azure, width: 1.5, type: 'dashed' },
         itemStyle: { color: t.azure }
       }
@@ -275,11 +275,11 @@ function donut(echarts, el, t, segments, _totalLabel) {
 
 const deviceUsage = (echarts, el, t) =>
   donut(echarts, el, t, [
-    ['iOS', 30, 'primary'],
-    ['Android', 25, 'azure'],
-    ['Desktop', 20, 'yellow'],
-    ['Tablet', 15, 'purple'],
-    ['Other', 10, 'red']
+    ['ONGC', 30, 'primary'],
+    ['IOCL', 25, 'azure'],
+    ['BPCL', 20, 'yellow'],
+    ['HPCL', 15, 'purple'],
+    ['Other CPSEs', 10, 'red']
   ]);
 
 const browsers = (echarts, el, t) =>
