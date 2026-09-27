@@ -109,7 +109,7 @@ Raw CPSE Description: "VLV BL FLGD 50MM NB 150# CS A105"
 ### Minute 2: Introducing NUMM & ONMC
 
 - "We built the **National Unified Material Master (NUMM)** powered by the **One Nation, One Material Code (ONMC)** architecture."
-- "Unlike generic AI tools that hallucinate, NUMM pairs high-dimensional vector embeddings with deterministic engineering rule gating. If two valves have different pressure ratings—say Class 150 versus Class 300—our safety gate **guarantees 0.0% false matches**, preventing catastrophic refinery accidents."
+- "Unlike generic AI tools that make an opaque recommendation, NUMM combines lexical and deterministic semantic similarity with engineering rule gating. A Class 150 valve is never treated as equivalent to a Class 300 valve: the safety gate blocks that comparison before a steward can approve it."
 
 ### Minute 3: Live System Demonstration
 
@@ -124,5 +124,5 @@ Raw CPSE Description: "VLV BL FLGD 50MM NB 150# CS A105"
 
 ### Minute 5: Feasibility, Security & Regulatory Compliance
 
-- "NUMM is completely sovereign, containerized, and runs air-gapped on NIC MeghRaj Cloud. Every single match decision is cryptographically signed with an append-only SHA-256 audit chain compliant with Central Vigilance Commission (CVC) and GeM Rule 149 GFR mandates."
+- "NUMM is designed for sovereign, air-gapped deployment. This SIH build runs locally with an append-only SHA-256 audit chain; production rollout would add the required CVC, security, and legal controls around the same workflow."
 - "With NUMM, India's public sector energy ecosystem saves over ₹4,000 Crore annually. One Nation, One Material Code. Thank you."

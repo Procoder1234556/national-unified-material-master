@@ -451,29 +451,29 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <div className="flex justify-center items-center gap-8 flex-wrap">
               <div className="w-24 h-24 bg-white rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[-3deg] hover:rotate-0 transition-transform">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/2885/2885417.png"
-                  alt="Icon 1"
+                  src="/images/pipeline-valves.jpg"
+                  alt="Pipeline valve"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-[var(--opti-lime)] rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[5deg] hover:rotate-0 transition-transform">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/2885/2885412.png"
-                  alt="Icon 2"
+                  src="/images/refinery-pumps.jpg"
+                  alt="Refinery pump"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-pink-200 rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[-5deg] hover:rotate-0 transition-transform">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/2885/2885391.png"
-                  alt="Icon 3"
+                  src="/images/industrial-piping.jpg"
+                  alt="Industrial piping"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-white rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[3deg] hover:rotate-0 transition-transform">
                 <img
-                  src="https://cdn-icons-png.flaticon.com/512/2885/2885429.png"
-                  alt="Icon 4"
+                  src="/images/pipeline-inspection.jpg"
+                  alt="Pipeline inspection"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>

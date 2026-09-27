@@ -1,8 +1,8 @@
 // ponytail: API base + Bearer JWT session for MeghRaj demo personas.
 // Upgrade path: refresh-token rotation + NIC SSO redirect.
 
-// VITE_API_BASE_URL is baked in at build time by Vite (set in render.yaml / .env).
-// Runtime fallback: detect onrender.com → point at backend service.
+// Same-origin by default: Vite (development) and Nginx (production) proxy /api
+// to FastAPI. An explicit local override remains available for integration tests.
 function resolveApiBase(): string {
   if (typeof window !== "undefined") {
     const override =
@@ -10,18 +10,7 @@ function resolveApiBase(): string {
       localStorage.getItem("NUMM_API_BASE");
     if (override) return override;
   }
-  if (import.meta.env.VITE_API_BASE_URL)
-    return import.meta.env.VITE_API_BASE_URL;
-  if (typeof window === "undefined") return "http://127.0.0.1:8000";
-  const h = window.location.hostname;
-  if (h === "localhost" || h === "127.0.0.1") {
-    // Local dev: Vite proxies /api to backend, or direct to backend port 8000
-    return "http://127.0.0.1:8000";
-  }
-  if (h.includes("onrender.com") || h.includes("vercel.app")) {
-    return "https://numm-backend.onrender.com";
-  }
-  return "https://numm-backend.onrender.com"; // default production
+  return "";
 }
 
 export const API_BASE = resolveApiBase().replace(/\/$/, "");
@@ -46,7 +35,7 @@ type PersonaRow = {
   description: string;
 };
 
-// Resilient fallback personas for air-gapped demo or Render cold-start scenarios
+// Resilient fallback personas for an air-gapped SIH demo.
 const FALLBACK_PERSONAS: PersonaRow[] = [
   {
     role: "STEWARD",
@@ -130,7 +119,7 @@ export async function loadDemoPersonas(): Promise<PersonaRow[]> {
     }
   } catch (err) {
     console.warn(
-      "Could not fetch remote demo-tokens, engaging fallback personas:",
+      "Could not fetch demo tokens; using offline demo personas:",
       err
     );
   }

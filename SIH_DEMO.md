@@ -52,27 +52,46 @@ Framing for jury: _“These are deliberate deep-module seams (ARCHITECTURE.md). 
 
 ---
 
-## How to run for jury (laptop)
+## Jury-ready laptop checklist
 
-```bash
-# Terminal 1 — API (SQLite, auto-seed)
-cd backend
-# or from repo root with your usual uvicorn entry
-uvicorn backend.app.main:app --host 0.0.0.0 --port 8001
+Do this once before the presentation, while internet is available:
 
-# Terminal 2 — UI
-cd frontend
-npm run dev
+```powershell
+python -m pip install -r config/requirements.txt
+corepack enable
+pnpm --dir frontend install --frozen-lockfile
+python verify_poc_and_tests.py
+pnpm --dir frontend build
 ```
 
-1. Open landing → **Enter dashboard**.
-2. Role = **STEWARD** → Steward Queue → Approve safe match / Mint conflict.
-3. **Search Before Buy** → `2 inch 150# flanged ball valve CS A105`.
-4. **Surplus** → Generate + Approve MTIRF (note “Simulated SAP”).
-5. **Security Vault** → Verify chain (AUDITOR role for verify/export).
-6. **Architecture** → Point to SIH Demo Mode panel.
+For the live demo, NUMM needs no network, Docker, cloud account, SAP client, or API key. Keep two terminals open and confirm `http://127.0.0.1:8000/health` reports `healthy` before the jury arrives.
+
+## How to run for jury (laptop)
+
+```powershell
+# Terminal 1 — API (SQLite, auto-seed)
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+
+# Terminal 2 — UI
+pnpm --dir frontend dev
+```
+
+Open `http://127.0.0.1:5173`, then follow this reliable five-minute route:
+
+1. **Enter dashboard** and say this is a live local deployment; no hosted services are in the path.
+2. Choose **STEWARD** → **Steward Queue**. Approve a safe match, then show the pressure-class conflict is blocked before minting.
+3. Open **Search Before Buy** and use `2 inch 150# flanged ball valve CS A105` to show the cross-CPSE reuse opportunity.
+4. Open **Surplus**. Generate and approve an MTIRF; explicitly label its SAP number as simulated.
+5. Switch to **AUDITOR** → **Security Vault** → verify/export the SHA-256 chain.
+6. Open **System Architecture** and close with the live-versus-simulated integration panel.
 
 No NIC account. No SAP client. No internet required after deps installed.
+
+### Fast recovery
+
+- If the UI shows fallback personas or empty API data, ensure the API is running on **port 8000**, then refresh the browser.
+- If you need a clean demo state, stop the API, delete only `numm_dev.db`, and restart it; SQLite will auto-seed the judge dataset.
+- Do not use the production Docker compose stack during judging; the SQLite path is the tested, zero-Docker SIH path.
 
 ---
 

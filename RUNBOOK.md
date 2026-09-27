@@ -94,9 +94,8 @@ docker save numm-frontend:2.2.0 | gzip > numm-frontend-2.2.0.tar.gz
 docker save pgvector/pgvector:pg16 | gzip > pgvector-16.tar.gz
 docker save redis:7-alpine | gzip > redis-7-alpine.tar.gz
 
-# 2. Pre-cache HuggingFace BGE weights
-python -c "from sentence_transformers import SentenceTransformer; SentenceTransformer('BAAI/bge-large-en-v1.5')"
-tar -czf bge-model-cache.tar.gz -C ~/.cache/huggingface/hub .
+# 2. NUMM's supported default uses its deterministic offline matcher.
+# No hosted model download or model-cache artifact is required.
 ```
 
 ### 3.2 Loading in Air-Gapped Environment

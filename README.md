@@ -1,77 +1,135 @@
-# National Unified Material Master (NUMM) Framework
+# National Unified Material Master (NUMM)
 
-### AI-Driven Standardization and Harmonization of Material Codes Across CPSEs
+NUMM is an offline-first reference implementation for **One Nation, One Material Code (ONMC)**. It helps CPSE material stewards normalize catalog descriptions, reject unsafe matches, mint canonical codes, find transferable stock, and preserve a tamper-evident audit trail.
 
-**Problem Statement**: SIH 26099 (Smart India Hackathon 2026)  
-**Sponsoring Organization**: Ministry of Petroleum & Natural Gas (MoPNG), Government of India  
-**Standard**: One Nation, One Material Code (ONMC)
+It is built for Smart India Hackathon 2026 problem **SIH 26099**. The repository runs on a laptop without cloud credentials, SAP access, or hosted AI services.
 
----
+## What is live
 
-## Executive Overview
+- Catalog ingestion, abbreviation expansion, attribute extraction, and deterministic safety gates.
+- ONMC minting with MESC, UNSPSC, and GeM crosswalk fields.
+- Steward review, Search Before Buy, surplus transfer (MTIRF), pooled demand, and audit verification.
+- Five local demo personas and simulated MeghRaj/SAP/GeM seams for the SIH presentation.
 
-India's Central Public Sector Enterprises (CPSEs)—including **IOCL, ONGC, BPCL, HPCL, GAIL, OIL, EIL, NRL, MRPL, and CPCL**—manage over **₹3.5 Lakh Crore ($42B USD)** in annual procurements across 4.2+ million decentralized SAP and Oracle catalog line items. Due to decades of plant-specific shorthand and unstructured free-text descriptions, identical physical parts are cataloged under thousands of conflicting internal codes, creating over **₹4,200 Crore in annual economic drag** from redundant safety stock, lost volume discounts, and plant downtime.
+## Architecture
 
-The **National Unified Material Master (NUMM)** is an AI-powered enterprise catalog harmonization and collaborative procurement engine. It introduces the sovereign **One Nation, One Material Code (ONMC)** standard, bi-directionally cross-walked to **Shell MESC** 10-digit codes (`XX.XX.XX.XXX.X`), **UNSPSC** 8-digit codes, and **Government e-Marketplace (GeM)** categories. By combining dense semantic vector search (`BAAI/bge-large-en-v1.5`) with deterministic engineering rule gating (ASME B16.5, ASME B16.34, API 6D), NUMM achieves sub-50ms search latencies and guarantees **0.0% false-positive safety mismatches**.
+The standard demo path is deliberately small and self-contained:
 
----
+```text
+React + Vite  ── /api (same origin) ──>  FastAPI + SQLite
+                                             │
+                                  deterministic embeddings + RapidFuzz
+                                             │
+                               ASME/API safety gate + SHA-256 audit chain
+```
 
-## Canonical Documentation Index
+Vite proxies `/api` to FastAPI during development. The production Nginx configuration performs the same proxy, so the browser never needs a hosted backend URL or an API key. The semantic matcher uses an offline deterministic projection by default. A BGE model may be pre-provisioned locally only when an operator explicitly enables it; NUMM never downloads a model at runtime.
 
-All core system specifications are maintained directly in the project root directory:
+## Quick start
 
-| Document                                                              | Purpose & Description                                                                                                                                                                                        | Focus Area           |
-| --------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------- |
-| **[`PRD.md`](file:///d:/oil/PRD.md)**                                 | **Product Requirements Document**: Comprehensive business requirements, quantified economic impact, user personas, P0/P1/P2 feature specifications, and out-of-scope boundaries.                             | Product & Business   |
-| **[`CONTEXT.md`](file:///d:/oil/CONTEXT.md)**                         | **Domain Model & Ubiquitous Language**: Standardized glossary, bounded contexts, and non-negotiable physical domain invariants (_from `.agents/skills/domain-modeling`_).                                    | Domain Architecture  |
-| **[`ARCHITECTURE.md`](file:///d:/oil/ARCHITECTURE.md)**               | **Deep Modules & Seam Design**: High-leverage interfaces, deep implementations, seams, and external adapters (_from `.agents/skills/codebase-design`_).                                                      | System Architecture  |
-| **[`TECH_STACK.md`](file:///d:/oil/TECH_STACK.md)**                   | **Technology Stack Blueprint**: React 19 + Astryx UI + StyleX, Python 3.11 + FastAPI, PostgreSQL 16 + `pgvector` HNSW, Redis 7 + ARQ, and BGE embeddings.                                                    | Engineering Stack    |
-| **[`BACKEND_STRUCTURE.md`](file:///d:/oil/BACKEND_STRUCTURE.md)**     | **Backend Architecture & Database Schema**: Production PostgreSQL 16 DDL, HNSW cosine index tuning, Pydantic v2 schemas, and FastAPI REST endpoints.                                                         | Database & API       |
-| **[`FRONTEND_GUIDELINES.md`](file:///d:/oil/FRONTEND_GUIDELINES.md)** | **Frontend Design System**: Astryx + StyleX design tokens, headless TanStack Table v8, and keyboard-first data steward triage matrix (<kbd>J</kbd>, <kbd>K</kbd>, <kbd>A</kbd>, <kbd>R</kbd>, <kbd>E</kbd>). | User Experience      |
-| **[`DESIGN.md`](file:///d:/oil/DESIGN.md)**                           | **Aesthetic & Layout Specification**: Humanto-inspired warm sovereign industrial theme (`#E94344` terracotta, `#9B121E` crimson, `#5F978E` petroleum sage) with sticky split layout.                         | Visual Design        |
-| **[`APP_FLOW.md`](file:///d:/oil/APP_FLOW.md)**                       | **Application Flow & Navigation**: Complete sequence diagrams, page transitions, state machines, and edge-case protocols for all 5 core user journeys.                                                       | Flow & UX            |
-| **[`IMPLEMENTATION_PLAN.md`](file:///d:/oil/IMPLEMENTATION_PLAN.md)** | **Six-Phase Delivery Sequence**: Phased build plan from container foundation to pilot rollout with automated verification gates.                                                                             | Project Execution    |
-| **[`SIH_DEMO.md`](SIH_DEMO.md)**                                      | **SIH evaluation mode**: What works offline without MeghRaj/SAP; judge FAQ; 5-minute demo path. Simulated SSO + SAP seams are intentional.                                                                   | Hackathon Pitch      |
-| **[`POC.md`](file:///d:/oil/POC.md)**                                 | **Proof of Concept & Demo Script**: Rapid AI engine specification, 30-item multi-CPSE benchmark dataset, and 5-minute hackathon live pitch script.                                                           | Verification & Pitch |
-| **[`TEST_CASES.md`](file:///d:/oil/TEST_CASES.md)**                   | **PR Test Matrix & Loop Engineering**: Exhaustive verification tests across PR 1 through PR 8 with physical safety convergence criteria.                                                                     | Quality & Testing    |
+### Prerequisites
 
----
+- Python 3.11+
+- Node.js 20+ with Corepack-enabled pnpm
 
-## Quickstart & Verification
+### 1. Install the local dependencies
 
-### SIH laptop demo (no MeghRaj, no SAP, no Docker required)
+```powershell
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+python -m pip install -r config/requirements.txt
+corepack enable
+pnpm --dir frontend install --frozen-lockfile
+```
 
-See **[`SIH_DEMO.md`](SIH_DEMO.md)**. Default backend uses SQLite + auto-seed. Role switcher issues **simulated MeghRaj JWTs**. MTIRF approve emits **simulated SAP VL01N/ME21N** IDs. Full product path runs offline for jury evaluation.
+### 2. Start the API
 
-### 1. Run Automated Loop Engineering Test Runner
+```powershell
+python -m uvicorn backend.app.main:app --host 127.0.0.1 --port 8000
+```
 
-Verify the normalization, attribute extraction, physical safety gating, and ONMC minting engine:
+The API auto-seeds SQLite at `numm_dev.db`. Verify it at `http://127.0.0.1:8000/health` or inspect the API at `http://127.0.0.1:8000/docs`.
+
+### 3. Start the frontend
+
+In a second terminal:
+
+```powershell
+pnpm --dir frontend dev
+```
+
+Open `http://127.0.0.1:5173`. Choose **Enter dashboard**, then use the role switcher to exercise the steward, procurement, plant, auditor, and administrator flows.
+
+## Verification
+
+Run these before sharing a build:
 
 ```powershell
 python verify_poc_and_tests.py
+python -m ruff check backend
+pnpm --dir frontend build
 ```
 
-### 2. Launch Local Database & Cache Infrastructure
-
-Provision PostgreSQL 16 with `pgvector` and Redis 7:
+To exercise the containerized production topology (PostgreSQL + pgvector, Redis, FastAPI, and Nginx), run:
 
 ```powershell
-docker compose up -d
+docker compose -f docker-compose.prod.yml up --build
 ```
 
-### 3. Start Backend Development Server
+For an SIH jury walkthrough, use [SIH_DEMO.md](SIH_DEMO.md). It identifies exactly which integrations are simulated and which product flows are live.
 
-Run the FastAPI async ASGI application:
+## Configuration
 
-```powershell
-uvicorn app.main:app --reload --port 8000
+The default configuration needs no `.env` file. Useful local settings are:
+
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `USE_SQLITE` | `true` | Uses the zero-setup local database. Set `false` only for the PostgreSQL deployment. |
+| `SQLITE_DB_PATH` | `./numm_dev.db` | Local SQLite database location. |
+| `NUMM_USE_LOCAL_BGE` | unset | Set to `true` only after pre-provisioning BGE and its Python package in the local environment; otherwise the deterministic offline matcher is used. |
+| Browser `NUMM_API_BASE` local-storage key | unset | Optional explicit integration-test target. Normal development and production use same-origin `/api`. |
+
+Do not put secrets in frontend variables. This project has no Groq, Firecrawl, Render, or other hosted runtime dependency.
+
+## Deployment modes
+
+| Mode | Storage | Network requirement | Intended use |
+| --- | --- | --- | --- |
+| Laptop demo | SQLite | None after dependencies are installed | SIH presentation and development |
+| Self-hosted production | PostgreSQL/pgvector + Redis | Your managed infrastructure | CPSE/NIC deployment |
+| Air-gapped deployment | Pre-built images and local packages | None | Restricted refinery or PSU environment |
+
+The production deployment guide is [RUNBOOK.md](RUNBOOK.md). Real MeghRaj SSO, SAP RFC/BAPI, and GeM APIs are production adapters; they are not present in the demo build.
+
+## Documentation map
+
+| Document | Use it for |
+| --- | --- |
+| [PRD.md](PRD.md) | Problem, users, scope, and priorities |
+| [CONTEXT.md](CONTEXT.md) | Domain language and invariants |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | Module boundaries and integration seams |
+| [TECH_STACK.md](TECH_STACK.md) | Technology choices and production target |
+| [BACKEND_STRUCTURE.md](BACKEND_STRUCTURE.md) | API, data model, and migrations |
+| [FRONTEND_GUIDELINES.md](FRONTEND_GUIDELINES.md) | UI system and interaction patterns |
+| [APP_FLOW.md](APP_FLOW.md) | User journeys and state transitions |
+| [DESIGN.md](DESIGN.md) | Visual system and layouts |
+| [POC.md](POC.md) | Demo data and pitch script |
+| [TEST_CASES.md](TEST_CASES.md) | Acceptance and regression coverage |
+| [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) | Phased delivery plan |
+
+## Repository layout
+
+```text
+backend/      FastAPI API, services, schemas, database seed, and migrations
+frontend/     React application, Vite configuration, and Nginx reverse proxy
+config/       Minimal Python dependency set for the supported runtime
+evals/        Benchmark evaluation scripts
+tests/        Automated tests
 ```
 
-### 4. Start Frontend Development Server
+## Security notes
 
-Launch the React 19 + Astryx + StyleX single-page application:
-
-```powershell
-pnpm install
-pnpm dev
-```
+- The demo tokens and SAP document numbers are intentionally simulated; they are not a production identity or ERP integration.
+- The audit chain is an application-level SHA-256 integrity control. Production deployment still requires operational controls, backups, access management, and an independently reviewed key-management design.
+- Use environment-managed secrets for self-hosted database and Redis credentials. Never commit secrets or vendor API keys.

@@ -29,10 +29,6 @@ class Settings(BaseSettings):
         "http://127.0.0.1:8001",
         "http://localhost:80",
         "http://127.0.0.1:80",
-        # Production
-        "https://numm-frontend.onrender.com",
-        "https://numm-backend.onrender.com",
-        "https://national-unified-material-master.vercel.app",
     ]
 
     # SQLite fallback file

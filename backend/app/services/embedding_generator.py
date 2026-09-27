@@ -10,8 +10,8 @@ from typing import List
 class EmbeddingGenerator:
     """
     Generates 1024-dimensional dense vector embeddings for material descriptions.
-    Integrates BAAI/bge-large-en-v1.5 via sentence-transformers when available,
-    with an air-gapped deterministic semantic hash projection fallback.
+    Uses a locally provisioned BGE model when available, with an air-gapped
+    deterministic semantic hash projection fallback.
     """
 
     DIMENSION = 1024
@@ -32,22 +32,15 @@ class EmbeddingGenerator:
         try:
             import os
 
-            # On Render cloud or unless explicitly enabled, use instant deterministic semantic projection
-            if os.environ.get("RENDER") or os.environ.get("NUMM_DOWNLOAD_BGE", "").lower() not in ("1", "true"):
+            # Never download a model at runtime. An operator may pre-provision it
+            # in the local Hugging Face cache for higher-fidelity embeddings.
+            if os.environ.get("NUMM_USE_LOCAL_BGE", "").lower() not in ("1", "true"):
                 self._model = None
                 return
 
             from sentence_transformers import SentenceTransformer
 
-            # 1. Attempt to load from local cache without triggering network download
-            try:
-                self._model = SentenceTransformer(self.model_name, local_files_only=True)
-                return
-            except Exception:
-                pass
-
-            # 2. Online download if permitted
-            self._model = SentenceTransformer(self.model_name)
+            self._model = SentenceTransformer(self.model_name, local_files_only=True)
         except Exception as exc:
             warnings.warn(
                 f"Dense vector model '{self.model_name}' could not be loaded ({exc}). "

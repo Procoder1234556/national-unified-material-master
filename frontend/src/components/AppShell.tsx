@@ -128,7 +128,6 @@ export const AppShell: React.FC<AppShellProps> = ({
       <style
         dangerouslySetInnerHTML={{
           __html: `
-        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
         * { box-sizing: border-box; }
         .hide-scrollbar::-webkit-scrollbar { display: none; }
       `,

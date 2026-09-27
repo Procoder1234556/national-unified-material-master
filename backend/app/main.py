@@ -15,11 +15,11 @@ app = FastAPI(
     redoc_url="/redoc",
 )
 
-# CORS middleware for React frontend (supports localhost, Render, Vercel, and custom enterprise domains)
+# CORS middleware for standalone local development. Production is same-origin
+# behind Nginx, so it does not rely on a permissive cross-origin policy.
 app.add_middleware(
     CORSMiddleware,
     allow_origins=settings.CORS_ORIGINS,
-    allow_origin_regex=r"^https?://.*",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

@@ -33,11 +33,6 @@ export const App: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get("view") === "dashboard" || params.has("tab"))
       return "dashboard";
-    if (
-      typeof document !== "undefined" &&
-      document.referrer.includes("gentelella")
-    )
-      return "dashboard";
     return "landing";
   };
 
