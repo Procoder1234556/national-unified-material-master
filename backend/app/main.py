@@ -58,5 +58,18 @@ async def startup_event():
         try:
             async with engine.begin() as conn:
                 await conn.execute(text("SELECT 1"))
+                if settings.SEED_DEMO_DATA:
+                    # Render free instances do not run pre-deploy commands.  The
+                    # explicit demo switch keeps the bootstrap scoped to the SIH
+                    # environment while still provisioning a fresh Postgres DB.
+                    await conn.execute(text("CREATE EXTENSION IF NOT EXISTS vector"))
+                    from backend.app.models.models import Base
+
+                    await conn.run_sync(Base.metadata.create_all)
         except Exception as e:
             raise RuntimeError(f"Failed to connect to Postgres. Required for production: {e}")
+
+        if settings.SEED_DEMO_DATA:
+            from backend.app.db.seed import seed_data
+
+            await seed_data()
