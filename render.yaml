@@ -7,7 +7,6 @@ services:
     plan: starter
     region: singapore
     healthCheckPath: /api/v1/health
-    preDeployCommand: alembic -c backend/alembic.ini upgrade head
     initialDeployHook: python -m backend.app.db.seed_demo
     autoDeployTrigger: commit
     envVars:
