@@ -47,12 +47,10 @@ async def startup_event():
     if settings.USE_SQLITE:
         from backend.app.db.seed import seed_data
 
-        await seed_data()
+        await seed_data(reset=True)
     else:
-        if not settings.POSTGRES_PASSWORD:
-            raise RuntimeError(
-                "POSTGRES_PASSWORD is not set. Cannot run in production mode with missing database credentials."
-            )
+        if not settings.POSTGRES_PASSWORD and not settings.DATABASE_URL:
+            raise RuntimeError("DATABASE_URL or POSTGRES_PASSWORD must be set for a production database connection.")
         from sqlalchemy import text
 
         from backend.app.db.session import engine

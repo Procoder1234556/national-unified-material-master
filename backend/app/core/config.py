@@ -1,5 +1,7 @@
 # ponytail: Direct pydantic-settings config with automatic SQLite fallback for zero-Docker SIH demo.
 # Upgrade path: add Vault / AWS Secrets Manager provider.
+from typing import Optional
+
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -18,6 +20,13 @@ class Settings(BaseSettings):
     POSTGRES_SERVER: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "numm_master"
+    # Render exposes a single connection string. Keep the split settings above
+    # for Docker Compose and on-premise installs, but prefer this when present.
+    DATABASE_URL: Optional[str] = None
+
+    # An explicit, one-time demo-data switch used by the Render initial deploy
+    # hook. It never drops or replaces existing records.
+    SEED_DEMO_DATA: bool = False
 
     CORS_ORIGINS: list[str] = [
         "http://localhost:3000",
@@ -44,12 +53,20 @@ class Settings(BaseSettings):
     def async_database_url(self) -> str:
         if self.USE_SQLITE:
             return f"sqlite+aiosqlite:///{self.SQLITE_DB_PATH}"
+        if self.DATABASE_URL:
+            return self.DATABASE_URL.replace("postgres://", "postgresql+asyncpg://", 1).replace(
+                "postgresql://", "postgresql+asyncpg://", 1
+            )
         return f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     @property
     def sync_database_url(self) -> str:
         if self.USE_SQLITE:
             return f"sqlite:///{self.SQLITE_DB_PATH}"
+        if self.DATABASE_URL:
+            return self.DATABASE_URL.replace("postgres://", "postgresql+psycopg2://", 1).replace(
+                "postgresql://", "postgresql+psycopg2://", 1
+            )
         return f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     @property

@@ -4,7 +4,6 @@ import uuid
 from sqlalchemy import select
 
 from backend.app.api.v1.endpoints.ingest import _process_items_async
-from backend.app.core.config import settings
 from backend.app.db.session import AsyncSessionLocal, engine
 from backend.app.models.models import Base, UnifiedMasterCode
 from backend.app.schemas.ingest import RawMaterialIn
@@ -264,15 +263,23 @@ SEEDS = [
 ]
 
 
-async def seed_data():
-    if not settings.USE_SQLITE:
-        return
+async def seed_data(reset: bool = False):
+    """Load the reproducible SIH demo corpus without overwriting live data.
 
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.drop_all)
-        await conn.run_sync(Base.metadata.create_all)
+    SQLite development starts from a clean fixture. Render/Postgres calls this
+    function after Alembic has migrated the schema and it exits when data is
+    already present, making deploy retries safe.
+    """
+    if reset:
+        async with engine.begin() as conn:
+            await conn.run_sync(Base.metadata.drop_all)
+            await conn.run_sync(Base.metadata.create_all)
 
     async with AsyncSessionLocal() as session:
+        existing_master = (await session.execute(select(UnifiedMasterCode.id).limit(1))).scalar_one_or_none()
+        if existing_master is not None:
+            return
+
         # Create UnifiedMasterCodes
         for s in SEEDS:
             umc = UnifiedMasterCode(
