@@ -1,8 +1,9 @@
 // ponytail: API base + Bearer JWT session for MeghRaj demo personas.
 // Upgrade path: refresh-token rotation + NIC SSO redirect.
 
-// Same-origin by default: Vite (development) and Nginx (production) proxy /api
-// to FastAPI. An explicit local override remains available for integration tests.
+// Same-origin by default: Vite (development) and Vercel proxy /api to FastAPI.
+// Render's static site supplies VITE_API_BASE_URL at build time because a CDN
+// static site cannot proxy API requests.
 function resolveApiBase(): string {
   if (typeof window !== "undefined") {
     const override =
@@ -10,7 +11,7 @@ function resolveApiBase(): string {
       localStorage.getItem("NUMM_API_BASE");
     if (override) return override;
   }
-  return "";
+  return import.meta.env.VITE_API_BASE_URL || "";
 }
 
 export const API_BASE = resolveApiBase().replace(/\/$/, "");
