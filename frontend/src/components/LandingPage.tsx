@@ -157,13 +157,132 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         .delay-200 { transition-delay: 200ms; }
         .delay-300 { transition-delay: 300ms; }
 
+        /* Persistent path back into the operational product. */
+        .floating-cta {
+          position: fixed;
+          right: 24px;
+          bottom: 24px;
+          z-index: 60;
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          max-width: calc(100vw - 48px);
+          padding: 10px 10px 10px 16px;
+          border: 2px solid var(--opti-dark);
+          border-radius: 999px;
+          background: rgba(18, 40, 28, 0.96);
+          box-shadow: 5px 6px 0 var(--opti-lime), 0 12px 28px rgba(18, 40, 28, 0.24);
+          color: #ffffff;
+          backdrop-filter: blur(10px);
+        }
+        .floating-cta-copy {
+          min-width: 0;
+        }
+        .floating-cta-copy span {
+          display: block;
+          font-size: 11px;
+          font-weight: 700;
+          line-height: 1.2;
+          color: var(--opti-lime);
+        }
+        .floating-cta-copy strong {
+          display: block;
+          font-size: 13px;
+          line-height: 1.25;
+          white-space: nowrap;
+        }
+        .floating-cta-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 7px;
+          flex-shrink: 0;
+          min-height: 40px;
+          padding: 0 15px;
+          border: 0;
+          border-radius: 999px;
+          background: var(--opti-lime);
+          color: var(--opti-dark);
+          font-size: 13px;
+          font-weight: 800;
+          cursor: pointer;
+          transition: transform 160ms ease, background-color 160ms ease;
+        }
+        .floating-cta-button:hover { transform: translateY(-2px); }
+        .floating-cta-button:active { transform: translateY(0); }
+
+        @media (max-width: 639px) {
+          .landing-nav {
+            padding: 12px 14px;
+            align-items: flex-start;
+          }
+          .landing-brand {
+            font-size: 1.15rem;
+            padding: 5px 12px;
+          }
+          .landing-dashboard-link {
+            padding: 8px 12px;
+            font-size: 0.75rem;
+            white-space: nowrap;
+          }
+          .landing-hero {
+            height: 640px;
+          }
+          .landing-hero-title {
+            font-size: clamp(2.65rem, 13vw, 4.5rem);
+            line-height: 0.9;
+            margin-top: 8.5rem;
+          }
+          .landing-hero-copy {
+            padding: 0 22px 42px;
+          }
+          .landing-hero-copy p {
+            font-size: 0.875rem;
+            line-height: 1.45;
+          }
+          .landing-section {
+            padding-left: 16px;
+            padding-right: 16px;
+          }
+          .landing-zigzag {
+            gap: 28px;
+          }
+          .landing-zigzag-image {
+            height: 220px;
+          }
+          .landing-contact-card {
+            border-radius: 24px;
+          }
+          .landing-contact-copy {
+            padding: 28px 22px;
+          }
+          .landing-wordmark {
+            font-size: 5.25rem;
+            line-height: 0.8;
+          }
+          .floating-cta {
+            right: 16px;
+            bottom: 16px;
+            width: calc(100% - 32px);
+            justify-content: space-between;
+            padding-left: 14px;
+          }
+          .floating-cta-copy strong { font-size: 12px; }
+          .floating-cta-button { padding: 0 13px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .marquee-container { animation: none; width: 100%; }
+          .reveal-on-scroll { opacity: 1; transform: none; transition: none; }
+          .floating-cta-button { transition: none; }
+        }
+
       `}</style>
 
       <div className="min-h-screen overflow-x-hidden selection:bg-[var(--opti-lime)] selection:text-black">
         {/* NAV */}
-        <nav className="absolute top-0 w-full z-50 px-6 py-4 flex justify-between items-center">
+        <nav className="landing-nav absolute top-0 w-full z-50 px-6 py-4 flex justify-between items-center">
           <div className="flex items-center gap-10">
-            <div className="font-black text-2xl tracking-tighter text-[var(--opti-dark)] drop-shadow-md bg-white/80 px-4 py-1 rounded-full">
+            <div className="landing-brand font-black text-2xl tracking-tighter text-[var(--opti-dark)] drop-shadow-md bg-white/80 px-4 py-1 rounded-full">
               NUMM
             </div>
             <div className="hidden md:flex gap-6 text-sm font-bold text-[var(--opti-dark)] bg-white/80 px-6 py-2 rounded-full drop-shadow-md">
@@ -187,7 +306,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </span>
             <a
               href="/gentelella/dist/production/index.html"
-              className="bg-[var(--opti-lime)] text-[var(--opti-dark)] px-5 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform inline-block"
+              className="landing-dashboard-link bg-[var(--opti-lime)] text-[var(--opti-dark)] px-5 py-2 rounded-full font-bold text-sm hover:scale-105 transition-transform inline-block"
             >
               Open Dashboard
             </a>
@@ -195,19 +314,19 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </nav>
 
         {/* 1. HERO - Petroleum & Energy Sector */}
-        <header className="relative w-full h-[700px] flex flex-col justify-between overflow-hidden">
+        <header className="landing-hero relative w-full h-[700px] flex flex-col justify-between overflow-hidden">
           <img
             src={openverseMedia.refinery.src}
             alt={openverseMedia.refinery.alt}
             referrerPolicy="no-referrer"
-            className="absolute inset-0 w-full h-full object-cover object-top"
+            className="absolute inset-0 w-full h-full object-cover object-center md:object-top"
           />
           {/* Subtle vignette for text readability */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60"></div>
 
           {/* Top Centered Headline */}
           <div className="relative z-10 w-full text-center mt-32 px-6 reveal-on-scroll">
-            <h1 className="text-6xl md:text-[100px] leading-[0.9]">
+            <h1 className="landing-hero-title text-5xl sm:text-6xl md:text-[100px] leading-[0.9]">
               <span className="text-3d">
                 One master code.
                 <span className="text-3d-shadow">One master code.</span>
@@ -221,7 +340,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           {/* Bottom Centered Content */}
-          <div className="relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 flex flex-col items-center text-center reveal-on-scroll delay-200">
+          <div className="landing-hero-copy relative z-10 w-full max-w-7xl mx-auto px-6 pb-24 flex flex-col items-center text-center reveal-on-scroll delay-200">
             <div className="max-w-md">
               <p className="text-white font-bold text-sm md:text-base mb-6 leading-relaxed drop-shadow-lg">
                 NUMM harmonizes 4.2 million material lines across India's
@@ -332,7 +451,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         </section>
 
         {/* 4. 3-COLUMN TOOLS GRID (Mining Images) */}
-        <section className="py-20 px-6 bg-[var(--opti-light-green)]/30">
+        <section className="landing-section py-20 px-6 bg-[var(--opti-light-green)]/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-5xl md:text-6xl leading-[0.9]">
@@ -544,7 +663,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </h2>
           </div>
 
-          <div className="max-w-5xl mx-auto space-y-24">
+          <div className="landing-zigzag max-w-5xl mx-auto space-y-24">
             <div className="flex flex-col md:flex-row items-center gap-12 group reveal-on-scroll">
               <div className="flex-1 bg-[var(--opti-light-green)] rounded-[24px] p-8 border border-gray-100">
                 <h3 className="font-black text-2xl text-[var(--opti-dark)] tracking-tight mb-4">
@@ -562,7 +681,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   src={openverseMedia.refinery.src}
                   alt={openverseMedia.refinery.alt}
                   referrerPolicy="no-referrer"
-                  className="rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
+                  className="landing-zigzag-image rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
             </div>
@@ -583,7 +702,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   src={openverseMedia.drillingPlatform.src}
                   alt={openverseMedia.drillingPlatform.alt}
                   referrerPolicy="no-referrer"
-                  className="rounded-2xl border-4 border-black -rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
+                  className="landing-zigzag-image rounded-2xl border-4 border-black -rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
             </div>
@@ -604,7 +723,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   src={openverseMedia.excavator.src}
                   alt={openverseMedia.excavator.alt}
                   referrerPolicy="no-referrer"
-                  className="rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
+                  className="landing-zigzag-image rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
             </div>
@@ -722,7 +841,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* 10. FORM CARD */}
         <section className="py-24 px-6 bg-white">
-          <div className="max-w-5xl mx-auto bg-[var(--opti-dark)] rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-2xl">
+          <div className="landing-contact-card max-w-5xl mx-auto bg-[var(--opti-dark)] rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-2xl">
             <div className="w-full md:w-1/2 h-64 md:h-auto">
               <img
                 src={openverseMedia.excavator.src}
@@ -731,7 +850,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
               />
             </div>
-            <div className="w-full md:w-1/2 p-12">
+            <div className="landing-contact-copy w-full md:w-1/2 p-12">
               <h3 className="font-black text-3xl text-white mb-8 tracking-tight">
                 Let's grow
               </h3>
@@ -879,7 +998,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           </div>
 
           <div className="w-full flex justify-center pb-8 border-t border-[var(--opti-dark)]/10 pt-8 reveal-on-scroll delay-200">
-            <h1 className="text-[120px] md:text-[200px] lg:text-[280px] leading-none text-center select-none">
+            <h1 className="landing-wordmark text-[120px] md:text-[200px] lg:text-[280px] leading-none text-center select-none">
               <span
                 className="text-3d text-[var(--opti-lime)] drop-shadow-xl"
                 style={{ WebkitTextStroke: "4px var(--opti-dark)" }}
@@ -899,6 +1018,34 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             </h1>
           </div>
         </footer>
+
+        <aside className="floating-cta" aria-label="Open the NUMM dashboard">
+          <div className="floating-cta-copy">
+            <span>NUMM workspace</span>
+            <strong>Find a material match</strong>
+          </div>
+          <button
+            type="button"
+            className="floating-cta-button"
+            onClick={() => onEnterDashboard?.("search")}
+          >
+            Search inventory
+            <svg
+              aria-hidden="true"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <circle cx="11" cy="11" r="6" />
+              <path d="m16 16 4 4" />
+            </svg>
+          </button>
+        </aside>
       </div>
     </>
   );
