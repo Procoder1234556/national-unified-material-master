@@ -313,14 +313,38 @@ function bindThemeToggle() {
 // Demo data. A server-rendered host supplies its own through the shell config
 // island; without one these are what the static template shows.
 const DEMO_NOTIFICATIONS = [
-  { kind: 'info', from: 'Stripe', text: 'Payment of $499.00 received', time: '2m', unread: true },
-  { kind: 'task', from: 'GitHub', text: 'PR #248 ready for review', time: '14m', unread: true },
-  { kind: 'alert', from: 'Linear', text: 'GEN-128 marked as urgent', time: '1h', unread: true },
-  { kind: 'info', from: 'Vercel', text: 'Deployment succeeded in 28s', time: '3h', unread: false },
   {
     kind: 'info',
-    from: 'Notion',
-    text: 'You were mentioned in Q2 OKRs',
+    from: 'Harmonization engine',
+    text: '2,418 material records completed validation',
+    time: '2m',
+    unread: true
+  },
+  {
+    kind: 'task',
+    from: 'Stewardship queue',
+    text: '186 records are ready for human review',
+    time: '14m',
+    unread: true
+  },
+  {
+    kind: 'alert',
+    from: 'Safety gate',
+    text: 'Three metallurgy conflicts require attention',
+    time: '1h',
+    unread: true
+  },
+  {
+    kind: 'info',
+    from: 'Catalog sync',
+    text: 'ONGC plant master import completed',
+    time: '3h',
+    unread: false
+  },
+  {
+    kind: 'info',
+    from: 'CVC audit trail',
+    text: 'Monthly evidence pack is ready for review',
     time: 'Yesterday',
     unread: false
   }
@@ -328,33 +352,33 @@ const DEMO_NOTIFICATIONS = [
 
 const DEMO_MESSAGES = [
   {
-    from: 'Sarah K.',
-    text: 'Can you take a look at the design?',
-    initials: 'SK',
+    from: 'Priya S.',
+    text: 'Please review the ONGC valve-code matches.',
+    initials: 'PS',
     color: 'var(--primary)',
     time: '4m',
     unread: true
   },
   {
-    from: 'Michael R.',
-    text: 'Lunch tomorrow at noon?',
-    initials: 'MR',
+    from: 'Ravi M.',
+    text: 'The BPCL legacy-code import is ready.',
+    initials: 'RM',
     color: 'var(--blue)',
     time: '32m',
     unread: true
   },
   {
-    from: 'Emily W.',
-    text: 'Sprint retro notes posted',
-    initials: 'EW',
+    from: 'Anita K.',
+    text: 'The review queue handoff is complete.',
+    initials: 'AK',
     color: 'var(--purple)',
     time: '2h',
     unread: false
   },
   {
-    from: 'Diego R.',
-    text: 'Customer feedback summary ready',
-    initials: 'DR',
+    from: 'Arun V.',
+    text: 'Surplus-stock evidence has been verified.',
+    initials: 'AV',
     color: 'var(--yellow)',
     time: 'Mon',
     unread: false
