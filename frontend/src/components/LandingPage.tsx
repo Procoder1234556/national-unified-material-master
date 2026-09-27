@@ -1,5 +1,45 @@
 import React, { useEffect } from "react";
 
+// CC BY 2.0 imagery discovered through Openverse. Keep the credit block in the
+// footer with these records whenever an image is changed or removed.
+const openverseMedia = {
+  refinery: {
+    src: "https://live.staticflickr.com/8167/7128715613_fd585ea214_b.jpg",
+    alt: "Oil refinery infrastructure at dusk",
+    title: "Oil refinery 2",
+    creator: "Mikael Moiner",
+    sourceUrl: "https://www.flickr.com/photos/43917849@N08/7128715613",
+  },
+  drillingPlatform: {
+    src: "https://live.staticflickr.com/1499/25964631650_a77a03b29c_b.jpg",
+    alt: "Offshore oil drilling platform",
+    title: "Oil drilling platform off California central coast, Pacific Ocean",
+    creator: "Brian Altmeyer",
+    sourceUrl: "https://www.flickr.com/photos/78819544@N07/25964631650",
+  },
+  openPitMine: {
+    src: "https://live.staticflickr.com/7309/12226736574_7f53bec873_b.jpg",
+    alt: "Open-pit mine in Jharia",
+    title: "Open pit mine in Jharia",
+    creator: "international accountability project",
+    sourceUrl: "https://www.flickr.com/photos/48669112@N06/12226736574",
+  },
+  excavator: {
+    src: "https://live.staticflickr.com/184/455141840_c857f90606_b.jpg",
+    alt: "Excavator operating in an open-pit mine",
+    title: "Excavator - Open Pit Mining",
+    creator: "ReneS",
+    sourceUrl: "https://www.flickr.com/photos/63504485@N00/455141840",
+  },
+  refineryChannel: {
+    src: "https://live.staticflickr.com/88/266021597_db7789363b.jpg",
+    alt: "Oil refinery beside a shipping channel",
+    title: "Oil Refineries: Sulfur is in the air",
+    creator: "RonAlmog",
+    sourceUrl: "https://www.flickr.com/photos/55288032@N00/266021597",
+  },
+} as const;
+
 export interface LandingPageProps {
   onEnterDashboard?: (targetTab?: string, targetRole?: string) => void;
 }
@@ -156,10 +196,10 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
         {/* 1. HERO - Petroleum & Energy Sector */}
         <header className="relative w-full h-[700px] flex flex-col justify-between overflow-hidden">
-          {/* Background image of a modern petroleum refinery at dusk (Pixabay) */}
           <img
-            src="/images/hero-refinery.jpg"
-            alt="Petroleum refinery installation"
+            src={openverseMedia.refinery.src}
+            alt={openverseMedia.refinery.alt}
+            referrerPolicy="no-referrer"
             className="absolute inset-0 w-full h-full object-cover object-top"
           />
           {/* Subtle vignette for text readability */}
@@ -312,8 +352,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
-                    src="/images/refinery-plant.jpg"
-                    alt="Oil refinery piping"
+                    src={openverseMedia.refineryChannel.src}
+                    alt={openverseMedia.refineryChannel.alt}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -339,8 +380,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll delay-100">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
-                    src="/images/pipeline-valves.jpg"
-                    alt="Industrial valve assembly"
+                    src={openverseMedia.excavator.src}
+                    alt={openverseMedia.excavator.alt}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -366,8 +408,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="bg-[var(--opti-light-green)] rounded-[24px] p-6 flex flex-col hover:shadow-lg transition-shadow reveal-on-scroll delay-200">
                 <div className="bg-white rounded-xl h-48 mb-6 overflow-hidden shadow-sm border border-gray-200 relative group">
                   <img
-                    src="/images/industrial-piping.jpg"
-                    alt="Industrial high pressure piping"
+                    src={openverseMedia.openPitMine.src}
+                    alt={openverseMedia.openPitMine.alt}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -451,29 +494,33 @@ export const LandingPage: React.FC<LandingPageProps> = ({
             <div className="flex justify-center items-center gap-8 flex-wrap">
               <div className="w-24 h-24 bg-white rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[-3deg] hover:rotate-0 transition-transform">
                 <img
-                  src="/images/pipeline-valves.jpg"
-                  alt="Pipeline valve"
+                  src={openverseMedia.refineryChannel.src}
+                  alt={openverseMedia.refineryChannel.alt}
+                  referrerPolicy="no-referrer"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-[var(--opti-lime)] rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[5deg] hover:rotate-0 transition-transform">
                 <img
-                  src="/images/refinery-pumps.jpg"
-                  alt="Refinery pump"
+                  src={openverseMedia.drillingPlatform.src}
+                  alt={openverseMedia.drillingPlatform.alt}
+                  referrerPolicy="no-referrer"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-pink-200 rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[-5deg] hover:rotate-0 transition-transform">
                 <img
-                  src="/images/industrial-piping.jpg"
-                  alt="Industrial piping"
+                  src={openverseMedia.openPitMine.src}
+                  alt={openverseMedia.openPitMine.alt}
+                  referrerPolicy="no-referrer"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
               <div className="w-24 h-24 bg-white rounded-[20px] shadow-sm flex items-center justify-center border-2 border-black rotate-[3deg] hover:rotate-0 transition-transform">
                 <img
-                  src="/images/pipeline-inspection.jpg"
-                  alt="Pipeline inspection"
+                  src={openverseMedia.excavator.src}
+                  alt={openverseMedia.excavator.alt}
+                  referrerPolicy="no-referrer"
                   className="w-12 h-12 object-contain opacity-80"
                 />
               </div>
@@ -512,8 +559,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
               <div className="flex-1 flex justify-center">
                 <img
-                  src="/images/refinery-pumps.jpg"
-                  alt="Petroleum refinery installation"
+                  src={openverseMedia.refinery.src}
+                  alt={openverseMedia.refinery.alt}
+                  referrerPolicy="no-referrer"
                   className="rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
@@ -532,8 +580,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
               <div className="flex-1 flex justify-center">
                 <img
-                  src="/images/datacenter-cloud.jpg"
-                  alt="Secure cloud server infrastructure"
+                  src={openverseMedia.drillingPlatform.src}
+                  alt={openverseMedia.drillingPlatform.alt}
+                  referrerPolicy="no-referrer"
                   className="rounded-2xl border-4 border-black -rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
@@ -552,8 +601,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               </div>
               <div className="flex-1 flex justify-center">
                 <img
-                  src="/images/pipeline-inspection.jpg"
-                  alt="Industrial valve assembly"
+                  src={openverseMedia.excavator.src}
+                  alt={openverseMedia.excavator.alt}
+                  referrerPolicy="no-referrer"
                   className="rounded-2xl border-4 border-black rotate-2 group-hover:rotate-0 transition-transform shadow-lg w-full max-w-[400px] h-[300px] object-cover"
                 />
               </div>
@@ -572,8 +622,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row reveal-on-scroll">
                 <div className="w-full md:w-2/5 h-48 md:h-auto">
                   <img
-                    src="/images/iocl-refinery.jpg"
-                    alt="IOCL Refinery"
+                    src={openverseMedia.refineryChannel.src}
+                    alt={openverseMedia.refineryChannel.alt}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -595,8 +646,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
               <div className="bg-white rounded-[24px] overflow-hidden shadow-sm flex flex-col md:flex-row reveal-on-scroll delay-200">
                 <div className="w-full md:w-2/5 h-48 md:h-auto bg-[var(--opti-dark)]">
                   <img
-                    src="/images/ongc-platform.jpg"
-                    alt="ONGC Hazira"
+                    src={openverseMedia.drillingPlatform.src}
+                    alt={openverseMedia.drillingPlatform.alt}
+                    referrerPolicy="no-referrer"
                     className="w-full h-full object-cover mix-blend-luminosity opacity-70"
                   />
                 </div>
@@ -621,8 +673,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         {/* 9. SECOND HERO: Mining Sunset */}
         <section className="relative w-full py-40 overflow-hidden flex items-center justify-center">
           <img
-            src="/images/oil-port-sunset.jpg"
-            alt="Petroleum marine terminal at sunset"
+            src={openverseMedia.openPitMine.src}
+            alt={openverseMedia.openPitMine.alt}
+            referrerPolicy="no-referrer"
             className="absolute inset-0 w-full h-full object-cover opacity-90"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
@@ -672,8 +725,9 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="max-w-5xl mx-auto bg-[var(--opti-dark)] rounded-[32px] overflow-hidden flex flex-col md:flex-row shadow-2xl">
             <div className="w-full md:w-1/2 h-64 md:h-auto">
               <img
-                src="/images/mro-machinery.jpg"
-                alt="Industrial MRO mechanical parts"
+                src={openverseMedia.excavator.src}
+                alt={openverseMedia.excavator.alt}
+                referrerPolicy="no-referrer"
                 className="w-full h-full object-cover opacity-80 mix-blend-luminosity"
               />
             </div>
@@ -792,6 +846,36 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                 className="w-full border-b-2 border-[var(--opti-dark)] bg-transparent outline-none py-2 mb-4 font-medium text-[var(--opti-dark)] placeholder:text-gray-500"
               />
             </div>
+          </div>
+
+          <div className="max-w-7xl mx-auto border-t border-[var(--opti-dark)]/10 pt-6 pb-2 text-xs text-[var(--opti-dark)]/80">
+            <p className="font-bold mb-2">Oil and mining imagery credits</p>
+            <p className="leading-relaxed">
+              Images are sourced via{" "}
+              <a
+                href="https://openverse.org/"
+                target="_blank"
+                rel="noreferrer"
+                className="underline hover:text-[var(--opti-dark)]"
+              >
+                Openverse
+              </a>{" "}
+              and licensed under CC BY 2.0:{" "}
+              {Object.values(openverseMedia).map((media, index) => (
+                <React.Fragment key={media.sourceUrl}>
+                  {index > 0 && " · "}
+                  <a
+                    href={media.sourceUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="underline hover:text-[var(--opti-dark)]"
+                  >
+                    {media.title} — {media.creator}
+                  </a>
+                </React.Fragment>
+              ))}
+              .
+            </p>
           </div>
 
           <div className="w-full flex justify-center pb-8 border-t border-[var(--opti-dark)]/10 pt-8 reveal-on-scroll delay-200">
