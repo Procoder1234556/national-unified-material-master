@@ -8,6 +8,8 @@ import {
   FileSpreadsheet,
   CheckCircle2,
   Database,
+  Plus,
+  AlertCircle,
 } from "lucide-react";
 import { apiFetch } from "../api";
 
@@ -82,10 +84,32 @@ export const CatalogIngestionView: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [activeStage, setActiveStage] = useState<number>(0);
   const [summary, setSummary] = useState<IngestionSummary | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [isManualEntryOpen, setIsManualEntryOpen] = useState(false);
+  const [manualItem, setManualItem] = useState({
+    source_item_code: "",
+    plant_code: "1001",
+    plant_location: "",
+    raw_description: "",
+    unit_price: "",
+    stock_quantity: "1",
+  });
 
-  const triggerIngestion = async (items = SAMPLE_CPSE_BATCH) => {
+  const getApiError = async (res: Response, fallback: string) => {
+    try {
+      const data = await res.json();
+      return data.detail || data.message || fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
+  const triggerIngestion = async (
+    items = SAMPLE_CPSE_BATCH
+  ): Promise<boolean> => {
     setLoading(true);
     setSummary(null);
+    setError(null);
     setActiveStage(1);
 
     // Simulate multi-stage pipeline transition for visual feedback
@@ -103,11 +127,21 @@ export const CatalogIngestionView: React.FC = () => {
         }),
       });
 
+      if (!res.ok)
+        throw new Error(await getApiError(res, "Catalog import failed."));
       const data = await res.json();
       setSummary(data);
       setActiveStage(5);
+      return true;
     } catch (e) {
       console.error("Ingestion failed", e);
+      setError(
+        e instanceof Error
+          ? e.message
+          : "Catalog import failed. Please try again."
+      );
+      setActiveStage(0);
+      return false;
     } finally {
       clearTimeout(stageTimer1);
       clearTimeout(stageTimer2);
@@ -123,6 +157,7 @@ export const CatalogIngestionView: React.FC = () => {
 
     setLoading(true);
     setSummary(null);
+    setError(null);
     setActiveStage(1);
 
     const formData = new FormData();
@@ -132,7 +167,12 @@ export const CatalogIngestionView: React.FC = () => {
       method: "POST",
       body: formData,
     })
-      .then((res) => res.json())
+      .then(async (res) => {
+        if (!res.ok) {
+          throw new Error(await getApiError(res, "File import failed."));
+        }
+        return res.json();
+      })
       .then((data) => {
         setSummary(data);
         setActiveStage(5);
@@ -140,8 +180,52 @@ export const CatalogIngestionView: React.FC = () => {
       })
       .catch((err) => {
         console.error("File upload failed", err);
+        setError(
+          err instanceof Error
+            ? err.message
+            : "File import failed. Please try again."
+        );
+        setActiveStage(0);
         setLoading(false);
       });
+    e.target.value = "";
+  };
+
+  const handleManualSubmit = async (
+    event: React.FormEvent<HTMLFormElement>
+  ) => {
+    event.preventDefault();
+    if (
+      !manualItem.raw_description.trim() ||
+      !manualItem.plant_location.trim()
+    ) {
+      setError(
+        "Add a material description and plant location before importing."
+      );
+      return;
+    }
+    const imported = await triggerIngestion([
+      {
+        source_item_code:
+          manualItem.source_item_code.trim() || `MANUAL-${Date.now()}`,
+        plant_code: manualItem.plant_code.trim() || "1001",
+        plant_location: manualItem.plant_location.trim(),
+        raw_description: manualItem.raw_description.trim(),
+        unit_price: Number(manualItem.unit_price) || 0,
+        stock_quantity: Number(manualItem.stock_quantity) || 1,
+      },
+    ]);
+    if (imported) {
+      setIsManualEntryOpen(false);
+      setManualItem({
+        source_item_code: "",
+        plant_code: "1001",
+        plant_location: "",
+        raw_description: "",
+        unit_price: "",
+        stock_quantity: "1",
+      });
+    }
   };
 
   const pipelineStages = [
@@ -174,6 +258,45 @@ export const CatalogIngestionView: React.FC = () => {
       num: 6,
       label: "ONMC Mapping",
       desc: "Cluster merging & sovereign code attribution",
+    },
+  ];
+
+  const manualFields: Array<{
+    field: keyof typeof manualItem;
+    label: string;
+    type: "text" | "number";
+    required: boolean;
+  }> = [
+    {
+      field: "source_item_code",
+      label: "Source item code",
+      type: "text",
+      required: false,
+    },
+    { field: "plant_code", label: "Plant code", type: "text", required: false },
+    {
+      field: "plant_location",
+      label: "Plant location",
+      type: "text",
+      required: true,
+    },
+    {
+      field: "raw_description",
+      label: "Material description",
+      type: "text",
+      required: true,
+    },
+    {
+      field: "unit_price",
+      label: "Unit price (INR)",
+      type: "number",
+      required: false,
+    },
+    {
+      field: "stock_quantity",
+      label: "Stock quantity",
+      type: "number",
+      required: false,
     },
   ];
 
@@ -223,8 +346,8 @@ export const CatalogIngestionView: React.FC = () => {
             <div
               style={{ fontSize: rawTokens.textXs, color: rawTokens.textMuted }}
             >
-              Upload unstructured CPSE procurement catalog dumps (.csv / .xlsx /
-              SAP MAKTX extract)
+              Import CSV or JSON CPSE catalog exports, including SAP MAKTX
+              extracts.
             </div>
           </div>
         </div>
@@ -304,6 +427,32 @@ export const CatalogIngestionView: React.FC = () => {
               : "Run Pipeline on Sample CPSE Batch"}
           </button>
 
+          <button
+            type="button"
+            onClick={() => {
+              setError(null);
+              setIsManualEntryOpen((open) => !open);
+            }}
+            disabled={loading}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              backgroundColor: rawTokens.surfaceCard,
+              color: rawTokens.textPrimary,
+              border: `1px solid ${rawTokens.borderStrong}`,
+              borderRadius: rawTokens.radiusMd,
+              padding: "8px 18px",
+              fontSize: rawTokens.textXs,
+              fontWeight: 700,
+              cursor: loading ? "not-allowed" : "pointer",
+              opacity: loading ? 0.7 : 1,
+            }}
+          >
+            <Plus size={14} color={rawTokens.colorAction} />
+            Add catalog item
+          </button>
+
           <label
             style={{
               display: "inline-flex",
@@ -320,7 +469,7 @@ export const CatalogIngestionView: React.FC = () => {
             }}
           >
             <FileSpreadsheet size={14} color={rawTokens.colorAction} />
-            Upload Custom Catalog CSV
+            Upload CSV or JSON catalog
             <input
               type="file"
               accept=".csv,.json"
@@ -329,6 +478,112 @@ export const CatalogIngestionView: React.FC = () => {
             />
           </label>
         </div>
+
+        {error && (
+          <div
+            role="alert"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "8px",
+              marginTop: "14px",
+              padding: "10px 12px",
+              backgroundColor: "rgba(233, 67, 68, 0.08)",
+              border: "1px solid rgba(233, 67, 68, 0.3)",
+              borderRadius: rawTokens.radiusMd,
+              color: "#9B121E",
+              fontSize: rawTokens.textXs,
+              fontWeight: 600,
+            }}
+          >
+            <AlertCircle size={16} />
+            {error}
+          </div>
+        )}
+
+        {isManualEntryOpen && (
+          <form
+            onSubmit={handleManualSubmit}
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
+              gap: "10px",
+              marginTop: "16px",
+              paddingTop: "16px",
+              borderTop: `1px solid ${rawTokens.borderSubtle}`,
+            }}
+          >
+            {manualFields.map(({ field, label, type, required }) => (
+              <label
+                key={field}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "5px",
+                  fontSize: "11px",
+                  fontWeight: 700,
+                  color: rawTokens.textSecondary,
+                }}
+              >
+                {label}
+                {required ? " *" : ""}
+                <input
+                  required={Boolean(required)}
+                  type={type}
+                  min={type === "number" ? 0 : undefined}
+                  value={manualItem[field as keyof typeof manualItem]}
+                  onChange={(e) =>
+                    setManualItem((item) => ({
+                      ...item,
+                      [field]: e.target.value,
+                    }))
+                  }
+                  style={{
+                    padding: "8px 10px",
+                    border: `1px solid ${rawTokens.borderStrong}`,
+                    borderRadius: rawTokens.radiusSm,
+                    color: rawTokens.textPrimary,
+                    fontSize: rawTokens.textXs,
+                  }}
+                />
+              </label>
+            ))}
+            <div style={{ display: "flex", alignItems: "end", gap: "8px" }}>
+              <button
+                type="submit"
+                disabled={loading}
+                style={{
+                  backgroundColor: rawTokens.colorAction,
+                  color: "#fff",
+                  border: 0,
+                  borderRadius: rawTokens.radiusMd,
+                  padding: "9px 14px",
+                  fontSize: rawTokens.textXs,
+                  fontWeight: 700,
+                  cursor: loading ? "not-allowed" : "pointer",
+                }}
+              >
+                Import item
+              </button>
+              <button
+                type="button"
+                onClick={() => setIsManualEntryOpen(false)}
+                style={{
+                  backgroundColor: "transparent",
+                  color: rawTokens.textSecondary,
+                  border: `1px solid ${rawTokens.borderStrong}`,
+                  borderRadius: rawTokens.radiusMd,
+                  padding: "8px 12px",
+                  fontSize: rawTokens.textXs,
+                  fontWeight: 700,
+                  cursor: "pointer",
+                }}
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        )}
       </div>
 
       {/* Pipeline 5-Stage Stepper */}
@@ -355,7 +610,7 @@ export const CatalogIngestionView: React.FC = () => {
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(5, 1fr)",
+            gridTemplateColumns: "repeat(auto-fit, minmax(170px, 1fr))",
             gap: "12px",
           }}
         >

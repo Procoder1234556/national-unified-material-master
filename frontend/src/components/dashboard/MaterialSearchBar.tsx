@@ -3,7 +3,14 @@
 
 import React, { useState } from "react";
 import { rawTokens } from "../../tokens.stylex";
-import { Search, Plus, Maximize2, Download, RotateCw, X } from "lucide-react";
+import {
+  Search,
+  ClipboardCheck,
+  Maximize2,
+  Download,
+  RotateCw,
+  X,
+} from "lucide-react";
 
 export interface MaterialSearchBarProps {
   onSearch: (query: string) => void;
@@ -18,6 +25,7 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
 }) => {
   const [query, setQuery] = useState("2 inch 150# flanged ball valve A105");
   const [activeChip, setActiveChip] = useState<string | null>("BALL VALVE");
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -34,6 +42,44 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
 
   const handleClearChip = () => {
     setActiveChip(null);
+  };
+
+  const handleFullscreen = async () => {
+    try {
+      if (document.fullscreenElement) {
+        await document.exitFullscreen();
+        setIsFullscreen(false);
+      } else {
+        await document.documentElement.requestFullscreen();
+        setIsFullscreen(true);
+      }
+    } catch {
+      // Fullscreen can be disabled by an embedded browser. The control remains
+      // harmless in that environment instead of interrupting the user.
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    }
+  };
+
+  const handleExport = () => {
+    const rows = [
+      ["query", "active_filter", "exported_at"],
+      [
+        query.trim() || "All materials",
+        activeChip || "None",
+        new Date().toISOString(),
+      ],
+    ];
+    const csv = rows
+      .map((row) =>
+        row.map((value) => `"${value.replace(/"/g, '""')}"`).join(",")
+      )
+      .join("\n");
+    const url = URL.createObjectURL(new Blob([csv], { type: "text/csv" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = "numm-material-search.csv";
+    anchor.click();
+    URL.revokeObjectURL(url);
   };
 
   return (
@@ -146,6 +192,7 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
         {/* Compare button */}
         <button
           onClick={onOpenCompare}
+          title="Open the review queue to compare candidate material matches"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -160,8 +207,12 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
             cursor: "pointer",
           }}
         >
-          <Plus size={13} color={rawTokens.colorAction} strokeWidth={2.4} />
-          Compare
+          <ClipboardCheck
+            size={13}
+            color={rawTokens.colorAction}
+            strokeWidth={2.4}
+          />
+          Review queue
         </button>
 
         {/* Small icon actions */}
@@ -174,7 +225,9 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
           }}
         >
           <button
-            title="Expand Fullscreen"
+            onClick={handleFullscreen}
+            title={isFullscreen ? "Exit fullscreen" : "Expand fullscreen"}
+            aria-label={isFullscreen ? "Exit fullscreen" : "Expand fullscreen"}
             style={{
               padding: "5px",
               background: "none",
@@ -189,7 +242,9 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
             <Maximize2 size={13} />
           </button>
           <button
-            title="Export CSV / JSON"
+            onClick={handleExport}
+            title="Export current search as CSV"
+            aria-label="Export current search as CSV"
             style={{
               padding: "5px",
               background: "none",
@@ -206,6 +261,7 @@ export const MaterialSearchBar: React.FC<MaterialSearchBarProps> = ({
           <button
             onClick={onRefresh}
             title="Refresh Ingestion Index"
+            aria-label="Refresh ingestion index"
             style={{
               padding: "5px",
               background: "none",

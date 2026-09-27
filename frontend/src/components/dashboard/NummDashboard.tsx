@@ -19,7 +19,7 @@ import { NationalMasterSummary } from "./NationalMasterSummary";
 import { KeyboardShortcutsModal } from "./KeyboardShortcutsModal";
 import { QuickSearchModal } from "./QuickSearchModal";
 import { rawTokens } from "../../tokens.stylex";
-import { UserCheck, ArrowUpRight } from "lucide-react";
+import { UserCheck, ArrowUpRight, Plus } from "lucide-react";
 import { apiFetch } from "../../api";
 
 export interface NummDashboardProps {
@@ -525,27 +525,55 @@ export const NummDashboard: React.FC<NummDashboardProps> = ({
           </div>
         </div>
 
-        <button
-          onClick={() => onNavigateView(currentPersona.actionTarget)}
+        <div
           style={{
-            display: "inline-flex",
+            display: "flex",
             alignItems: "center",
-            gap: "6px",
-            padding: "8px 16px",
-            borderRadius: "8px",
-            backgroundColor: currentPersona.badgeColor,
-            color: "#FFFFFF",
-            fontSize: "12px",
-            fontWeight: 700,
-            border: "none",
-            cursor: "pointer",
-            boxShadow: `0 2px 6px ${currentPersona.badgeColor}40`,
-            transition: "all 0.15s ease",
+            gap: "8px",
+            flexWrap: "wrap",
           }}
         >
-          <span>{currentPersona.actionLabel}</span>
-          <ArrowUpRight size={14} />
-        </button>
+          <button
+            onClick={() => onNavigateView("ingest")}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 14px",
+              borderRadius: "8px",
+              backgroundColor: "#FFFFFF",
+              color: rawTokens.textPrimary,
+              fontSize: "12px",
+              fontWeight: 700,
+              border: `1px solid ${rawTokens.borderStrong}`,
+              cursor: "pointer",
+            }}
+          >
+            <Plus size={14} color={rawTokens.colorAction} />
+            Add catalog item
+          </button>
+          <button
+            onClick={() => onNavigateView(currentPersona.actionTarget)}
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "6px",
+              padding: "8px 16px",
+              borderRadius: "8px",
+              backgroundColor: currentPersona.badgeColor,
+              color: "#FFFFFF",
+              fontSize: "12px",
+              fontWeight: 700,
+              border: "none",
+              cursor: "pointer",
+              boxShadow: `0 2px 6px ${currentPersona.badgeColor}40`,
+              transition: "all 0.15s ease",
+            }}
+          >
+            <span>{currentPersona.actionLabel}</span>
+            <ArrowUpRight size={14} />
+          </button>
+        </div>
       </div>
 
       {/* 1. Global Material Search bar */}

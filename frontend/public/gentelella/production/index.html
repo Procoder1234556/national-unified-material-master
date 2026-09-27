@@ -23,18 +23,19 @@
               <h1 class="page-title">Dashboard</h1>
             </div>
             <div class="page-actions">
-              <button class="btn btn-outline">
+              <button class="btn btn-outline" type="button" data-dashboard-import>
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M8 2v12M2 8h12" />
                 </svg>
                 Import Codes
               </button>
-              <button class="btn btn-primary">
+              <button class="btn btn-primary" type="button" data-dashboard-run aria-describedby="dashboard-run-status">
                 <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
                   <path d="M4 8h8M8 4v8" />
                 </svg>
                 Run Harmonization
               </button>
+              <span id="dashboard-run-status" class="dashboard-run-status" role="status" aria-live="polite"></span>
             </div>
           </div>
         </div>
@@ -364,7 +365,7 @@
                 <div class="card-title">Recent Pending HITL Review</div>
                 <div class="card-subtitle">Latest 5 transactions</div>
               </div>
-              <button class="btn btn-outline btn-sm">View All →</button>
+              <a class="btn btn-outline btn-sm" href="orders.html">View all reviews</a>
             </div>
             <div class="card-body p-0">
               <div class="table-responsive">
