@@ -67,17 +67,6 @@ export const AppShell: React.FC<AppShellProps> = ({
   children,
   stewardPendingCount = 84,
 }) => {
-  const navItems = [
-    { id: "overview", label: "Overview" },
-    { id: "steward", label: "Steward Queue" },
-    { id: "search", label: "Search Before Buy" },
-    { id: "surplus", label: "Surplus" },
-    { id: "demand", label: "Pooled Demand" },
-    { id: "ingest", label: "Ingestion" },
-    { id: "security", label: "Security Vault" },
-    { id: "system", label: "Architecture" },
-  ];
-
   const leftNav = [
     { id: "overview" as NavTabId, label: "Overview", icon: Home },
     { id: "steward" as NavTabId, label: "Steward Queue", icon: FileCheck2 },
@@ -256,7 +245,9 @@ export const AppShell: React.FC<AppShellProps> = ({
               display: "flex",
               flexDirection: "column",
               gap: "32px",
-              maxWidth: "100%",
+              width: "100%",
+              maxWidth: "1440px",
+              margin: "0 auto",
             }}
           >
             {/* Header */}
@@ -441,45 +432,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               </div>
             </div>
 
-            {/* Tabs */}
-            <div
-              style={{
-                display: "flex",
-                gap: "8px",
-                overflowX: "auto",
-                paddingBottom: "8px",
-              }}
-              className="hide-scrollbar"
-            >
-              {navItems.map((tab) => (
-                <div
-                  key={tab.id}
-                  id={`nav-tab-${tab.id}`}
-                  data-tab={tab.id}
-                  onClick={() => onSelectTab(tab.id as NavTabId)}
-                  style={{
-                    padding: "12px 20px",
-                    borderRadius: "100px",
-                    backgroundColor:
-                      activeTab === tab.id ? "#111315" : "transparent",
-                    color: activeTab === tab.id ? "white" : "#6B7280",
-                    fontWeight: 500,
-                    fontSize: "14px",
-                    whiteSpace: "nowrap",
-                    cursor: "pointer",
-                  }}
-                >
-                  {tab.label}{" "}
-                  {tab.id === "steward" && (
-                    <span style={{ marginLeft: "6px", opacity: 0.8 }}>
-                      ({stewardPendingCount})
-                    </span>
-                  )}
-                </div>
-              ))}
-            </div>
-
-            {/* Children rendered below tabs */}
+            {/* The left rail is the single dashboard navigation surface. */}
             <div style={{ flex: 1, display: "flex", flexDirection: "column" }}>
               {children}
             </div>

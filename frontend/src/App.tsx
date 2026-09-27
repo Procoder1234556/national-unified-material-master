@@ -280,7 +280,7 @@ export const App: React.FC = () => {
           onSelectRole={(role) => setActiveRole(role as UserRole)}
           onNavigateView={(view, q) => {
             if (q) setSearchQuery(q);
-            setActiveTab(view as NavTabId);
+            handleSelectTab(view as NavTabId);
           }}
           onShowAudit={handleShowAudit}
           onInspectONMC={handleOpenDetailDrawer}
@@ -295,7 +295,7 @@ export const App: React.FC = () => {
           onQueueCountChange={setStewardPendingCount}
           onNavigateToSearch={(q) => {
             setSearchQuery(q);
-            setActiveTab("search");
+            handleSelectTab("search");
           }}
           onShowAuditMessage={handleShowAudit}
           onInspectONMC={handleOpenDetailDrawer}
@@ -640,10 +640,10 @@ export const App: React.FC = () => {
       <CommandPalette
         isOpen={isCommandOpen}
         onClose={() => setIsCommandOpen(false)}
-        onNavigate={(tabId) => setActiveTab(tabId as NavTabId)}
+        onNavigate={(tabId) => handleSelectTab(tabId as NavTabId)}
         onSearchQuery={(q) => {
           setSearchQuery(q);
-          setActiveTab("search");
+          handleSelectTab("search");
         }}
         onOpenKeyboardHelp={() => setIsHelpOpen(true)}
       />
