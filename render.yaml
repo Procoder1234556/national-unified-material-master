@@ -31,7 +31,6 @@ services:
   - type: web
     name: numm-frontend
     runtime: static
-    region: singapore
     buildCommand: corepack enable && pnpm --dir frontend install --frozen-lockfile && pnpm --dir frontend build
     staticPublishPath: frontend/dist
     autoDeployTrigger: commit
